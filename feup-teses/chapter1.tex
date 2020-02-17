@@ -1,0 +1,29 @@
+\chapter{Introduction} \label{chap:intro}
+
+
+\section{Context and Motivation} \label{sec:context}
+
+This research work falls under the scope of activities developed by the Center of Robotics and Autonomous Systems of INESC TEC. It is integrated in the GROW project which focuses on exploring the use of AUVs as data mules for long duration missions.
+
+Today, the deep blue ocean still represents a relevant topic of research in the scientific community as it constantly rises new unexplained mysteries. Up to now, only 15\% of the entire ocean floor is mapped based on collected data [\hyperref[eq:spd-sound]{1}]. As such, it seems essential to create efficient research tools to improve the discovery of information.
+
+%________________________________________
+
+Robotic autonomous underwater vehicles (AUVs) are great means for diverse applications in underwater exploration using variable resource requirements and duration, such as monitoring structures installed in shallow waters or exploring the deep ocean floor for scientific purposes. Particularly in long-term missions, the AUV is usually deployed using a docking system and it navigates underwater until the end of the mission, when it returns to the base station. Until this moment, the data that is being collected is typically not accessible by any processing system or researchers. 
+
+A method that is used to resolve this problem is employing additional mule AUVs, whose goal is to travel near the survey AUV, collect its data during the mission's duration and return in a relatively short time period. This allows the data to be periodically processed during the mission, which facilitates the definition of future courses for the mission, such as shortening its duration or sending additional commands. In the mentioned localization system, high accuracy is key, as it avoids high energy consumption, saves up time in the global process, which is already slow, and avoids missing the AUV's underwater localization.
+
+The described process can only be achieved if the mule AUV is able to locate the other AUV and draw near it. For that reason, a USBL (Ultra Short Base-Line) system will be implemented using an array of four hydrophones as acoustic receiver. This allows to explore the difference among times of arrival of an acoustic signal to many hydrohones, allowing the calculation of the angle of arrival of the acoustic signal and thus the direction that the mule AUV should navigate. Additionaly, using a synchronized transmission from the AUV being located, the mule AUV can also determine the distance to the acoustic source located in the survey AUV and thus its relative position to the mule AUV.
+
+
+%_______________________________________________
+
+This dissertation intends to continue the work developed previously [\hyperref[eq:spd-sound]{2}], in which a platform was created to acquire and process data from four hydrophones. The system to be implemented is carefully explained in the present document.
+ 
+%based on the determination of the time of arrival to each hydrophone. This is achieved by integrating correlation processes (already implemented in previous dissertations) and subsequent refinement of the difference in time of arrival between each pair of hydrophones, using the phase analysis of the received signals.
+%Four hydrophones will be placed in the body of the Autonomous Underwater Vehicle in order to determine the relative position in real time of an acoustic source connected to another AUV. This method allows for the data to be fed to the navigation and control systems in order ensure the approximation of the two vehicles.
+
+
+\section{Objectives} \label{sec:objective}
+
+The work aims to implement a system capable of determining the angle of arrival of known encoded acoustic signal and study processes to correct errors resulting from the deformation of propagation direction of the acoustic waves. In order to achieve that, it is intended to implement and validate a digital signal processing system for FPGA technology, which determines the difference between the times of arrival of an encoded acoustic signal to four hydrophones. In the end, the system will be implemented and validated experimentally with field tests.

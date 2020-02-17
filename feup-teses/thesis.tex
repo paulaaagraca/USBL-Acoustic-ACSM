@@ -1,0 +1,148 @@
+%% FEUP THESIS STYLE for LaTeX2e
+%% how to use feupteses (English version)
+%%
+%% FEUP, JCL & JCF, 31 July 2012
+%%
+%% PLEASE send improvements to jlopes at fe.up.pt and to jcf at fe.up.pt
+%%
+
+%%========================================
+%% Commands: pdflatex tese
+%%           bibtex tese
+%%           makeindex tese (only if creating an index)
+%%           pdflatex tese
+%% Alternative:
+%%          latexmk -pdf tese.tex
+%%========================================
+
+\documentclass[11pt,a4paper,twoside,openright]{report}
+
+%% For iso-8859-1 (latin1), comment next line and uncomment the second line
+\usepackage[utf8]{inputenc}
+
+%\usepackage[latin1]{inputenc}
+
+%% English version
+
+%% MIEIC options
+%\usepackage[mieic]{feupteses}
+%\usepackage[mieic,juri]{feupteses}
+%\usepackage[mieic,final]{feupteses}
+%\usepackage[mieic,final,onpaper]{feupteses}
+
+%% MIEEC options
+%\usepackage[mieec]{feupteses}
+%\usepackage[mieec,juri]{feupteses}
+%\usepackage[mieec,final]{feupteses}
+
+%% For other degrees
+\usepackage{feupteses} % you must define the degree bellow
+\usepackage{multirow}
+
+%% Additional options for feupteses.sty: 
+%% - onpaper: links are not shown (for paper versions)
+%% - backrefs: include back references from bibliography to citation place
+
+%% Uncomment to create an index (at the end of the document)
+%\makeindex
+
+%% Path to the figures directory
+%% TIP: use folder ``figures'' to keep all your figures
+\graphicspath{{figures/}}
+
+%%----------------------------------------
+%% TIP: if you want to define more macros, use an external file to keep them
+\include{mymacros}
+%%----------------------------------------
+
+%%========================================
+%% Start of document
+%%========================================
+\begin{document}
+
+%%----------------------------------------
+%% Information about the work
+%%----------------------------------------
+\title{Relative acoustic localization with USBL (Ultra Short BaseLine)}
+\author{Paula Alexandra Agra Graça}
+
+%% Comment next line if not necessary for degree
+\degree{Master in Electrical and Computers Engineering}
+
+%% Uncomment next line for date of submission
+\thesisdate{February 7, 2020}
+
+%% Comment next line copyright text if not used
+\copyrightnotice{Paula Alexandra Agra Graça, 2020}
+
+\supervisor{Supervisor}{Prof. Dr. Jos\'{e} Carlos Alves}
+\supervisor{Co-supervisor}{Dr. Bruno Ferreira}
+
+
+%% Uncomment committee stuff in the final version if used
+%\committeetext{Approved by \ldots:}
+%\committeemember{President}{Name of the President}
+%\committeemember{Referee}{Name of the Referee}
+%\committeemember{Referee}{Name of the Referee}
+
+%% Uncomment signature line in the final on paper version if used
+%\signature
+
+%% Specify cover logo (in folder ``figures'')
+\logo{uporto-feup.pdf}
+
+%% Uncomment next line for additional text below the author's name (front page)
+%\additionalfronttext{Preparação da Dissertação}
+
+%%----------------------------------------
+%% Preliminary materials
+%%----------------------------------------
+
+% remove unnecessary \include{} commands
+\begin{Prolog}
+  \include{abstract} % the abstract
+%  \include{acknows}  % the acknowledgments
+%  \include{quote}    % initial quotation if desired
+  \cleardoublepage
+  \pdfbookmark[0]{Table of Contents}{contents}
+  \tableofcontents
+  \cleardoublepage
+  \pdfbookmark[0]{List of Figures}{figures}
+  \listoffigures
+  \cleardoublepage
+  \pdfbookmark[0]{List of Tables}{tables}
+  \listoftables
+  \include{abbrevs}  % the list of abbreviations used
+\end{Prolog}
+
+%%----------------------------------------
+%% Body
+%%----------------------------------------
+\StartBody
+
+%% TIP: use a separate file for each chapter
+\include{chapter1} 
+\include{chapter2}
+\include{chapter3}
+\include{chapter4}
+\include{chapter5}
+
+%% comment next 2 commands if numbered appendices are not used
+\appendix
+%\include{appendix1} 
+
+%%----------------------------------------
+%% Final materials
+%%----------------------------------------
+
+%% Bibliography
+%% Comment the next command if BibTeX file not used
+%% bibliography is in ``myrefs.bib''
+\PrintBib{myrefs}
+
+%% Index
+%% Uncomment next command if index is required
+%% don't forget to run ``makeindex thesis'' command
+%\PrintIndex
+
+\end{document}

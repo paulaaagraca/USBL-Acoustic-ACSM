@@ -1,0 +1,613 @@
+%% FEUP THESIS STYLE for LaTeX2e
+%% FEUP, JCL & JCF,  Mon Oct  2 16:35:08 2017
+%%
+%% PLEASE send improvements to jlopes at fe.up.pt and to jcf at fe.up.pt
+%%
+
+\NeedsTeXFormat{LaTeX2e}
+\def \filename {feupteses.sty}
+\def \filedate {2017/10/02}
+\def \fileversion {1.1.2}
+\ProvidesPackage {feupteses}[\filedate\space\fileversion\space]
+\typeout {Document Style `FEUP Teses' \fileversion\space <\filedate>}
+
+%% Option for Portuguese
+\newif\if@portugues
+\@portuguesfalse
+\DeclareOption{portugues}{\@portuguestrue}
+
+%% Option mieec
+\newif\if@mieec
+\@mieecfalse
+\DeclareOption{mieec}{\@mieectrue}
+
+%% Option mieic
+\newif\if@mieic
+\@mieicfalse
+\DeclareOption{mieic}{\@mieictrue}
+
+%% Option miem
+\newif\if@miem
+\@miemfalse
+\DeclareOption{miem}{\@miemtrue}
+
+%% Option mesw
+\newif\if@mesw
+\@meswfalse
+\DeclareOption{mesw}{\@meswtrue}
+
+%% Option juri
+\newif\if@juri
+\@jurifalse
+\DeclareOption{juri}{\@juritrue}
+
+%% Option final
+\newif\if@final
+\@finalfalse
+\DeclareOption{final}{\@finaltrue}
+
+%% Option backrefs
+\newif\if@backrefs
+\@backrefsfalse
+\DeclareOption{backrefs}{\@backrefstrue}
+
+%% Option for print on paper
+\newif\if@onpaper
+\@onpaperfalse
+\DeclareOption{onpaper}{\@onpapertrue}
+
+%% Option for numeric references (citation order)
+\newif\if@numericrefs
+\@numericrefsfalse
+%\DeclareOption{numericrefs}{\@numericrefstrue}
+
+%% Option for alpha references
+\newif\if@alpharefs
+\@alpharefsfalse
+%\DeclareOption{alpharefs}{\@alpharefstrue}
+
+%% Internal option: page headers are centered
+\newif\if@headerscentered
+\@headerscenteredfalse
+
+%% Internal option: use watermark for first page
+\newif\if@watermark
+\@watermarkfalse
+
+%% Internal option: committeepage
+\newif\if@committeepage
+\@committeepagefalse
+
+%% Internal option: provisional
+\newif\if@provisional
+\@provisionalfalse
+
+%% Internal: uselineno
+\newif\if@uselineno
+\@uselinenofalse
+
+\ProcessOptions\relax
+
+%% Process internal options
+
+\if@final
+  \relax
+\else
+   \if@juri
+     \relax
+   \else
+     \@provisionaltrue
+    \fi
+\fi
+
+\if@juri
+  \if@mieic
+    \@watermarktrue
+    \@uselinenotrue
+  \fi
+  \if@mesw
+    \@watermarktrue
+    \@uselinenotrue
+  \fi
+\fi
+
+\if@mieec
+  \relax
+\else
+  \@committeepagetrue
+\fi
+
+\if@mieic
+%  \@headerscenteredtrue
+  \@numericrefstrue
+  \@alpharefsfalse
+\fi
+
+\if@mieec
+  \@numericrefstrue
+  \@alpharefsfalse
+\fi
+
+\if@miem
+  \@numericrefstrue
+  \@alpharefsfalse
+\fi
+
+\if@mesw
+  \@numericrefstrue
+  \@alpharefsfalse
+\fi
+
+%% Make sure that report has been loaded
+\@ifundefined{chapter}{\@latexerr{The `feupteses' option should be used
+with the `report' document style}{}}{}
+
+\RequirePackage{ifpdf}
+\ifpdf
+  \relax
+\else
+  \@latexerr{The 'feupteses' package may only be used with
+    pdflatex}{Please process this file with pdflatex.}
+\fi
+
+%% Disallow page breaks at hyphens (this will give some underfull vbox's,
+%% so an alternative is to use \brokenpenalty=100 and manually search
+%% for and fix such page breaks)
+\brokenpenalty=9000
+%\brokenpenalty=10000
+
+%% Ensure correct font encoding
+\RequirePackage[T1]{fontenc}
+
+\if@portugues
+  \RequirePackage[portuges]{babel}
+  \RequirePackage{indentfirst}
+\else
+  \RequirePackage[english]{babel}
+\fi
+
+%% Global layout of the document
+
+%% geometry package
+\RequirePackage[outer=25mm,inner=35mm,vmargin=20mm,includehead,includefoot,headheight=15pt]{geometry}
+
+%% avoid widows and orphans
+\clubpenalty=6000
+\widowpenalty=6000
+
+\RequirePackage{mathptmx}	   % font times
+\RequirePackage[scaled]{couriers}  % font courier
+\RequirePackage[scaled]{helvet}    % font helvetica
+\RequirePackage[pdftex]{graphicx}
+\RequirePackage{url}
+\RequirePackage{setspace}
+\RequirePackage{makeidx}
+\RequirePackage[tableposition=top]{caption}
+\RequirePackage[pagewise,switch*]{lineno}
+\modulolinenumbers[2]
+\if@watermark
+\RequirePackage[firstpage]{draftwatermark}
+\fi
+
+\if@numericrefs
+  \newcommand{\citet}{\cite}
+  \newcommand{\citep}{\cite}
+\else
+  \if@alpharefs 
+     \newcommand{\citet}{\cite}
+     \newcommand{\citep}{\cite}
+  \else
+     \RequirePackage[round]{natbib}
+  \fi
+\fi
+
+%% Watermark
+\if@watermark
+  \SetWatermarkFontSize{72pt}
+  \if@portugues
+     \SetWatermarkText{Para Aprecia\c{c}\~{a}o por J\'{u}ri}
+   \else
+     \SetWatermarkText{For Jury Evaluation}
+   \fi
+\fi
+
+%% Define all the pieces that go on the title page and the committeepage.
+% \title and \author already exist
+\gdef\@school{Faculdade de Engenharia da Universidade do Porto}
+\def\school#1{\gdef\@school{#1}}
+
+\def\logo#1{\gdef\@logo{#1}}
+
+\gdef\@thesisdate{\today}
+\def\thesisdate#1{\gdef\@thesisdate{#1}}
+
+%% If you are getting two degrees, use \and between the names.
+\gdef\@degree{Put Your Degree here!}
+\def\degree#1{\gdef\@degree{#1}}
+
+\gdef\@provisionaltext{\@empty}
+\def\additionalfronttext#1{\gdef\@provisionaltext{#1}}
+
+%% Members of the committee (viva)
+\newbox\@vivatext 
+
+%% add initial text
+\def\committeetext#1{%
+  \setbox\@vivatext\vbox
+  {\Large\noindent #1
+  \par\vskip 0.5\baselineskip}}
+
+%% since there can be more than one member of the committee,
+%% the user makes multiple calls to \committeemember
+%% Usage: \committeemember{role}{name}{title}
+
+%% add a member
+\def\committeemember#1#2{%
+  \setbox\@vivatext\vbox
+  {\unvbox\@vivatext
+  \vskip 0.5\baselineskip%
+  \par%
+  {\noindent\large #1: #2}}}
+
+%% add a line for signature
+\def\signature{%
+  \setbox\@vivatext\vbox
+  {\unvbox\@vivatext
+  \vskip 2\baselineskip%
+  {\hfill \rule{0.75\linewidth}{0.2mm}}
+  \vskip 2\baselineskip}}
+
+%% since there can be more than one supervisor,
+%% the user makes multiple calls to \supervisor
+%% Usage: \supervisor{role}{name}{title}
+
+\newbox\@supervisorstext 
+
+\def\supervisor#1#2{%
+  \setbox\@supervisorstext\vbox%
+  {\unvbox\@supervisorstext
+  \vskip 0.5\baselineskip%
+  \par%
+  \center{\noindent\large #1: #2}}}
+
+%% Working version
+\if@provisional
+ \if@mieec
+    \if@portugues
+       \additionalfronttext{Vers\~{a}o de trabalho}
+    \else
+       \additionalfronttext{Working version}
+    \fi
+ \fi
+\fi
+
+\if@provisional
+ \if@mieic
+    \if@portugues
+       \additionalfronttext{Vers\~{a}o de trabalho}
+    \else
+       \additionalfronttext{Working version}
+    \fi
+ \fi
+ \if@mesw
+    \if@portugues
+       \additionalfronttext{Vers\~{a}o de trabalho}
+    \else
+       \additionalfronttext{Working version}
+    \fi
+ \fi
+\fi
+
+%% For Jury Evaluation
+\if@juri
+  \if@mieec
+    \if@portugues
+      \additionalfronttext{Para Aprecia\c{c}\~{a}o por J\'{u}ri}
+    \else
+      \additionalfronttext{For Jury Evaluation}
+    \fi
+  \fi
+\fi
+
+%% For final version
+\if@final
+ \additionalfronttext{}
+\fi
+
+%% Copyrights
+
+%% define a permissions to go with copyright
+\gdef\@permission{\null}
+\def\permission#1{\gdef\@permission{#1}}
+
+%% define a copyrightnotice variable and initialize it
+\gdef\@copyrightnotice{}
+\def\copyrightnotice#1{\gdef\@copyrightnotice{\copyright\ #1\par\@permission}}
+
+%% Front pages
+\def\maketitle{%
+\newbox\@crestbox
+
+%% TITLE page
+\begin{titlepage}
+{\vspace{-15mm}\Large\bf \textsc{\@school}}
+
+\vspace*{20mm}%
+{\def\baselinestretch{1.2}\Huge\bf \@title \par}
+\vskip 10mm%
+{\Large\bf \@author}%
+\if@watermark
+\relax
+\else
+\vskip 10mm%
+{\Large\textsc \@provisionaltext}
+\fi
+\vfill\vfill
+\hbox to \textwidth{%
+  \setbox\@crestbox=\vbox{\includegraphics[width=72mm]{\@logo}}%
+\box\@crestbox%
+}
+\vfill%
+{\large \@degree}%
+\vskip 2mm
+\unvbox\@supervisorstext
+\vskip 10mm
+\@thesisdate
+\end{titlepage}%
+
+%% copyright page
+\ifx\@copyrightnotice\@empty
+  \relax
+\else
+  \vspace*{\fill}
+  \par
+  \begin{center}
+    \@copyrightnotice
+  \end{center}
+\fi
+\clearpage
+} % maketitle
+
+%% SECOND page
+\def\committeepage{%
+\cleardoublepage
+\thispagestyle{empty}
+ \begin{center}%
+ \null\vskip 12mm
+ {\LARGE\bf \@title}\\[16mm]
+ {\Large\bf \@author}\\[16mm]
+ {\Large \@degree}%
+ \end{center}
+ \vspace*{\fill}
+ \if@mieec
+   \begin{center}
+   {\Large\textnormal{\@school}}
+   \\[1.5\baselineskip]
+   {\textnormal{\Large\@thesisdate}}
+   \end{center}
+ \else
+   \unvbox\@supervisorstext
+   \vspace*{\fill}
+   \unvbox\@vivatext
+   \@thesisdate
+ \fi
+}
+
+%% If the titlepage environment, the paragraph skip is infinitely
+%% stretchable, so if you leave a blank line between lines that you
+%% want space between, the space will stretch so that the title page
+%% fills up the entire page. 
+\def\titlepage{\cleardoublepage\centering
+  \thispagestyle{empty}
+  \parindent 0pt \parskip 10pt plus 1fil minus 1fil
+  \def\baselinestretch{1}\@normalsize\vbox to \vsize\bgroup\vbox to 9in\bgroup}
+%% The \kern0pt pushes any depth into the height.  Thanks to Richard Stone.
+\def\endtitlepage{\par\kern 0pt\egroup\vss\egroup\clearpage}
+
+%% Headers and footers
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+
+%% Remember chapter title
+\renewcommand{\chaptermark}[1] %
+             {\markboth{#1}{#1}}
+
+%% Section number and title
+\renewcommand{\sectionmark}[1] %
+             {\markright{{\ifnum \c@secnumdepth >\z@ \thesection\ \fi #1}}}
+
+\if@twoside
+  \lhead[\fancyplain{}{\rm\thepage}]{\fancyplain{}{\sl\rightmark}}
+  \chead{}
+  \rhead[\fancyplain{}{\sl\leftmark}]{\fancyplain{}{\rm\thepage}}
+  \lfoot{}
+  \cfoot{\fancyplain{\rm\thepage}{}}
+  \rfoot{}
+\else
+  \lhead{\fancyplain{}{\sl\ifodd\c@page\rightmark\else\leftmark\fi}}
+  \chead{}
+  \rhead[]{\fancyplain{}{\rm\thepage}}
+  \lfoot{}
+  \cfoot{\fancyplain{\rm\thepage}{}}
+  \rfoot{}
+\fi
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.5pt}
+
+% \if@headerscenteredtrue
+%   \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+%   \fancyhead{} % clear all header fields
+%   \fancyhead[C]{\leftmark}
+%   \fancyfoot{} % clear all footer fields
+%   \fancyfoot[C]{\thepage}
+%   \fancyfoot[RO,LE]{}
+% \fi
+
+%% changes to report.sty
+\lineskip 1pt
+\normallineskip 1pt
+\onehalfspacing	% one and a half line spacing
+\setcounter{secnumdepth}{3}      % to number subsubsections
+\setcounter{tocdepth}{2}         % sets the depth of sectional units listed in the toc
+\setcounter{topnumber}{1}        % maximum number of floats at top of page
+\renewcommand{\topfraction}{0.8} % maximum fraction of the page occupied by floats
+
+%% Fix pagenumbering so that it works even when the \pagenumbering command
+%% is in a file that has not been \include-d
+\def\c@pagenumbering{arabic}
+\def\@pagenumbering#1{\gdef\thepage{\csname @#1\endcsname \c@page}
+  \gdef\c@pagenumbering{#1}}
+
+\def\pagenumbering#1{\global\c@page\@ne \@pagenumbering{#1}}
+
+%% Hyperrefs
+\RequirePackage[pdftex,pdfpagelabels,bookmarks,hyperindex,hyperfigures]{hyperref}
+
+\if@backrefs
+  \RequirePackage[hyperpageref]{backref}
+  \renewcommand*{\backref}[1]{}
+  \if@portugues
+    \renewcommand*{\backrefalt}[4]{%
+      \ifcase #1 %
+      \or
+      {\footnotesize Citado na p\'{a}gina #2.}%
+      \else
+      {\footnotesize Citado nas p\'{a}ginas #2.}%
+      \fi
+    }
+    \renewcommand*{\backreftwosep}{ e~}
+    \renewcommand*{\backreflastsep}{ e~}
+  \else
+    \renewcommand*{\backrefalt}[4]{%
+      \ifcase #1 %
+      \or
+      {\footnotesize Cited on page #2.}%
+      \else
+      {\footnotesize Cited on pages #2.}%
+      \fi
+    }
+  \fi
+\fi
+
+\if@onpaper 
+  \hypersetup{%
+    plainpages=false, 
+    pdfpagelayout=SinglePage,
+    bookmarksopen=false,
+    bookmarksnumbered=true,
+    breaklinks=true,
+    linktocpage,
+    colorlinks=false,
+    pdfborder=0 0 0
+  }
+\else
+  \hypersetup{%
+    plainpages=false, 
+    pdfpagelayout=SinglePage,
+    bookmarksopen=false,
+    bookmarksnumbered=true,
+    breaklinks=true,
+    linktocpage,
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue,
+    anchorcolor=green
+  }
+\fi
+
+%% Some more internal commands
+\newcommand{\Activate@lineno}{\if@uselineno\linenumbers\switchlinenumbers*\fi}
+\newcommand{\@StartPrelim}{\cleardoublepage\setcounter{page}{1}\pagestyle{fancy}}
+
+%% External commands
+\newcommand{\StartBody}{\cleardoublepage\pagenumbering{arabic}\setcounter{page}{1}\pagestyle{fancy}\Activate@lineno}
+
+\newenvironment{Prolog}{\maketitle\if@committeepage\committeepage\fi\@StartPrelim\begin{singlespace}}{\end{singlespace}}
+
+%%% Known degrees (always in Portuguese)
+%\if@mieic
+%  \degree{Mestrado Integrado em Engenharia Inform\'{a}tica e Computa\c{c}\~{a}o}
+%\fi
+%
+%\if@mieec
+%  \degree{Mestrado Integrado em Engenharia Eletrot\'{e}cnica e de Computadores}
+%\fi
+%
+%\if@miem
+%  \degree{Mestrado Integrado em Engenharia Mec\^{a}nica}
+%\fi
+%
+%\if@mesw
+%  \degree{Mestrado em Engenharia de Software}
+%\fi
+
+%% Some language-dependent definitions
+\if@portugues
+  \RequirePackage{indentfirst}
+
+  \newcommand{\@StartDoc}{%
+    \renewcommand{\appendixname}{Anexo}%
+    \setcounter{page}{-3}%
+    \pagestyle{empty}
+    \pdfbookmark[0]{P\'{a}gina de Rosto}{init}}
+
+  \newcommand{\PrintBib}[1]{%
+    \renewcommand{\bibname}{Refer\^{e}ncias}%
+    \if@numericrefs%
+      \bibliographystyle{plain-pt}%
+    \else%
+      \if@alpharefs%
+        \bibliographystyle{alpha-pt}%
+      \else%
+        \bibliographystyle{plainnat-pt}%
+      \fi%
+    \fi%
+    \cleardoublepage%
+    \phantomsection%
+    \addcontentsline{toc}{chapter}{Refer\^{e}ncias}%
+    \begin{singlespace}\bibliography{#1}\end{singlespace}}
+
+  \newcommand{\PrintIndex}{%
+    \cleardoublepage%
+    \phantomsection
+    \renewcommand{\indexname}{\'{I}ndice Remissivo}%
+    \addcontentsline{toc}{chapter}{\'{I}ndice Remissivo}%
+    \begin{singlespace}\printindex\end{singlespace}}
+
+\else
+
+  \newcommand{\@StartDoc}{%
+    \setcounter{page}{-3}%
+    \pagestyle{empty}
+    \pdfbookmark[0]{Front Page}{init}}
+
+  \newcommand{\PrintBib}[1]{%
+    \renewcommand{\bibname}{References}%
+    \if@numericrefs%
+      \bibliographystyle{plain}%
+    \else%
+      \if@alpharefs%
+        \bibliographystyle{alpha}%
+      \else%
+        \bibliographystyle{plainnat}%
+      \fi%
+    \fi%
+    \cleardoublepage%
+    \phantomsection%
+    \addcontentsline{toc}{chapter}{References}%
+    \begin{singlespace}\bibliography{#1}\end{singlespace}}
+
+  \newcommand{\PrintIndex}{%
+    \cleardoublepage%
+    \phantomsection%
+    \addcontentsline{toc}{chapter}{Index}%
+    \begin{singlespace}\printindex\end{singlespace}}
+
+\fi % Some language-dependent definitions
+
+\AtBeginDocument{\@StartDoc}
+
+\endinput
