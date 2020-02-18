@@ -1,0 +1,15 @@
+D:/usr/jca/GoogleFEUP/FEUP/Aulas/2019-2020/ProjetoSistemasDigitais-1920/Labs/Lab3/src/verilog-tb/winddirectionXY.v {1 {vlog -work work -vopt -stats=none D:/usr/jca/GoogleFEUP/FEUP/Aulas/2019-2020/ProjetoSistemasDigitais-1920/Labs/Lab3/src/verilog-tb/winddirectionXY.v
+QuestaSim-64 vlog 10.4c Compiler 2015.07 Jul 20 2015
+-- Compiling module winddirectionXY
+
+Top level modules:
+	winddirectionXY
+
+} {} {}} D:/usr/jca/GoogleFEUP/FEUP/Aulas/2019-2020/ProjetoSistemasDigitais-1920/Labs/Lab3/src/verilog-tb/winddir_tb.v {1 {vlog -work work -vopt -stats=none D:/usr/jca/GoogleFEUP/FEUP/Aulas/2019-2020/ProjetoSistemasDigitais-1920/Labs/Lab3/src/verilog-tb/winddir_tb.v
+QuestaSim-64 vlog 10.4c Compiler 2015.07 Jul 20 2015
+-- Compiling module winddir_tb
+
+Top level modules:
+	winddir_tb
+
+} {} {}}
