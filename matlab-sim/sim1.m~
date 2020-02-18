@@ -1,0 +1,33 @@
+%
+f_op = 24400;  % operation frequency (Hz) 
+T_op = 1/f_op; % operation period (s) 
+fs = 1000000;  % sampling frequency 
+t = 0:1/fs:0.1;
+tp = 0:1/(fs/2.5):0.1;
+
+% peaks
+time1 = sin(2*pi*f_op*t);
+for i = 1:size(time1)
+    if time1() < 0
+        time
+    end
+end
+
+
+ping1 = sin(2*pi*f_op*t);
+%ping2 = sin (2*pi*f_op*t - 100*pi/180);
+
+
+% set to 1 to add noise to the signal
+addnoise = 0;
+WNSNR = 40;   % SNR in dB
+
+if ( addnoise )
+  ping1 = awgn( ping1, WNSNR );  
+  ping2 = awgn( ping2, WNSNR );
+end
+
+figure(1)
+plot (ping1,'b')
+hold on 
+plot (time1,'g')
