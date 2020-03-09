@@ -1,0 +1,57 @@
+C:/Users/User/Documents/proj1/my_final_submission/src/verilog-tb/tb_rec2pol.v {1 {vlog -work work -vopt -stats=none C:/Users/User/Documents/proj1/my_final_submission/src/verilog-tb/tb_rec2pol.v
+QuestaSim-64 vlog 10.6a Compiler 2017.03 Mar 16 2017
+-- Compiling module tb_rec2pol
+
+Top level modules:
+	tb_rec2pol
+
+} {} {}} C:/Users/User/Documents/proj1/src/verilog-IPs/ITERCOUNTER.v {1 {vlog -work work -vopt -stats=none C:/Users/User/Documents/proj1/src/verilog-IPs/ITERCOUNTER.v
+QuestaSim-64 vlog 10.6a Compiler 2017.03 Mar 16 2017
+-- Compiling module ITERCOUNTER
+
+Top level modules:
+	ITERCOUNTER
+
+} {} {}} C:/Users/User/Documents/proj1/src/verilog-rtl/top_cordic.v {1 {vlog -work work -vopt -stats=none C:/Users/User/Documents/proj1/src/verilog-rtl/top_cordic.v
+QuestaSim-64 vlog 10.6a Compiler 2017.03 Mar 16 2017
+-- Compiling module top_cordic
+
+Top level modules:
+	top_cordic
+
+} {} {}} C:/Users/User/Documents/proj1/src/verilog-rtl/hilbert.v {1 {vlog -work work -vopt -stats=none C:/Users/User/Documents/proj1/src/verilog-rtl/hilbert.v
+QuestaSim-64 vlog 10.6a Compiler 2017.03 Mar 16 2017
+-- Compiling module hilbert
+
+Top level modules:
+	hilbert
+
+} {} {}} C:/Users/User/Documents/proj1/src/verilog-IPs/ATAN_ROM.v {1 {vlog -work work -vopt -stats=none C:/Users/User/Documents/proj1/src/verilog-IPs/ATAN_ROM.v
+QuestaSim-64 vlog 10.6a Compiler 2017.03 Mar 16 2017
+-- Compiling module ATAN_ROM
+
+Top level modules:
+	ATAN_ROM
+
+} {} {}} C:/Users/User/Documents/proj1/src/verilog-rtl/rec2pol_all.v {1 {vlog -work work -vopt -stats=none C:/Users/User/Documents/proj1/src/verilog-rtl/rec2pol_all.v
+QuestaSim-64 vlog 10.6a Compiler 2017.03 Mar 16 2017
+-- Compiling module rec2pol_all
+
+Top level modules:
+	rec2pol_all
+
+} {} {}} C:/Users/User/Documents/proj1/src/verilog-rtl/rec2pol_control.v {1 {vlog -work work -vopt -stats=none C:/Users/User/Documents/proj1/src/verilog-rtl/rec2pol_control.v
+QuestaSim-64 vlog 10.6a Compiler 2017.03 Mar 16 2017
+-- Compiling module rec2pol_control
+
+Top level modules:
+	rec2pol_control
+
+} {} {}} C:/Users/User/Documents/proj1/src/verilog-rtl/rec2pol.v {1 {vlog -work work -vopt -stats=none C:/Users/User/Documents/proj1/src/verilog-rtl/rec2pol.v
+QuestaSim-64 vlog 10.6a Compiler 2017.03 Mar 16 2017
+-- Compiling module rec2pol
+
+Top level modules:
+	rec2pol
+
+} {} {}}

@@ -1,0 +1,49 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dD:/usr/jca/GoogleFEUP/FEUP/Aulas/2019-2020/ProjetoSistemasDigitais-1920/Labs/Lab1/sim
+vwinddir_tb
+Z0 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+31
+!i10b 1
+!s100 =N>WkkO>LeAXX:S5W^`;X2
+I>RcYGMll2AU;8?S?Y0zkE3
+Z1 dD:/usr/jca/GoogleFEUP/FEUP/Aulas/2019-2020/ProjetoSistemasDigitais-1920/Labs/Lab3/sim
+w1576148170
+8D:/usr/jca/GoogleFEUP/FEUP/Aulas/2019-2020/ProjetoSistemasDigitais-1920/Labs/Lab3/src/verilog-tb/winddir_tb.v
+FD:/usr/jca/GoogleFEUP/FEUP/Aulas/2019-2020/ProjetoSistemasDigitais-1920/Labs/Lab3/src/verilog-tb/winddir_tb.v
+L0 17
+Z2 OL;L;10.4c;61
+Z3 !s108 1576167145.000000
+!s107 D:/usr/jca/GoogleFEUP/FEUP/Aulas/2019-2020/ProjetoSistemasDigitais-1920/Labs/Lab3/src/verilog-tb/winddir_tb.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/usr/jca/GoogleFEUP/FEUP/Aulas/2019-2020/ProjetoSistemasDigitais-1920/Labs/Lab3/src/verilog-tb/winddir_tb.v|
+!i113 0
+Z4 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vwinddirectionXY
+R0
+r1
+!s85 0
+31
+!i10b 1
+!s100 7UPmDMjOG]`<Jg^nmQ1?30
+I[e4^dH`Qd<E81Sm_MQoJZ1
+R1
+w1576148171
+8D:/usr/jca/GoogleFEUP/FEUP/Aulas/2019-2020/ProjetoSistemasDigitais-1920/Labs/Lab3/src/verilog-tb/winddirectionXY.v
+FD:/usr/jca/GoogleFEUP/FEUP/Aulas/2019-2020/ProjetoSistemasDigitais-1920/Labs/Lab3/src/verilog-tb/winddirectionXY.v
+L0 19
+R2
+R3
+!s107 D:/usr/jca/GoogleFEUP/FEUP/Aulas/2019-2020/ProjetoSistemasDigitais-1920/Labs/Lab3/src/verilog-tb/winddirectionXY.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/usr/jca/GoogleFEUP/FEUP/Aulas/2019-2020/ProjetoSistemasDigitais-1920/Labs/Lab3/src/verilog-tb/winddirectionXY.v|
+!i113 0
+R4
+nwinddirection@x@y

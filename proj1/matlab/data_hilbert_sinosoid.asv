@@ -1,0 +1,11 @@
+f_op = 24400;  % operation frequency (Hz) 
+T_op = 1/f_op; % operation period (s) 
+fs = 1000000;  % sampling frequency 
+tp = 0:(1/fs):0.0001;
+
+ping1 = (2^15 - 1)*sin(2*pi*f_op*tp);
+
+integer16
+
+figure 
+plot(ping1)
