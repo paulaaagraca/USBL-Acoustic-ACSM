@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "/home/ise/EDAtools/proj_v2/impl/proj/tb_all_phase_isim_beh.exe" -prj "/home/ise/EDAtools/proj_v2/impl/proj/tb_all_phase_beh.prj" "work.tb_all_phase" "work.glbl" 

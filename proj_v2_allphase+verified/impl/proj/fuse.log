@@ -1,0 +1,43 @@
+Running: /opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/fuse -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -lib secureip -o /home/ise/EDAtools/proj_v2/impl/proj/tb_all_phase_isim_beh.exe -prj /home/ise/EDAtools/proj_v2/impl/proj/tb_all_phase_beh.prj work.tb_all_phase work.glbl 
+ISim P.20160913 (signature 0xfbc00daa)
+Number of CPUs detected in this system: 1
+Turning on mult-threading, number of parallel sub-compilation jobs: 0 
+Determining compilation order of HDL files
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/impl/proj/../../src/verilog-rtl/MODSCALE_16.v" into library work
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/impl/proj/../../src/verilog-rtl/ITERCOUNTER_16.v" into library work
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/impl/proj/../../src/verilog-rtl/ATAN_ROM_16.v" into library work
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/impl/proj/../../src/verilog-rtl/cordic_control.v" into library work
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/impl/proj/../../src/verilog-rtl/cordic_calc.v" into library work
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/impl/proj/../../src/verilog-rtl/hilbert_chain.v" into library work
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/impl/proj/../../src/verilog-rtl/cordic.v" into library work
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/impl/proj/../../src/verilog-rtl/top_cordic.v" into library work
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/impl/proj/../../src/verilog-rtl/phasemean.v" into library work
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/impl/proj/../../src/verilog-rtl/phasediff.v" into library work
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/impl/proj/../../src/verilog-rtl/hilbert.v" into library work
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/impl/proj/../../src/verilog-rtl/all_phase.v" into library work
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/impl/proj/../../src/verilog-tb/tb_all_phase.v" into library work
+Analyzing Verilog file "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
+Starting static elaboration
+Completed static elaboration
+Fuse Memory Usage: 95196 KB
+Fuse CPU Usage: 920 ms
+Compiling module hilbert_chain
+Compiling module hilbert
+Compiling module ATAN_ROM_16
+Compiling module ITERCOUNTER_16
+Compiling module MODSCALE_16
+Compiling module cordic_calc
+Compiling module cordic_control
+Compiling module cordic
+Compiling module top_cordic
+Compiling module phasediff
+Compiling module phasemean
+Compiling module all_phase
+Compiling module tb_all_phase
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Compiled 14 Verilog Units
+Built simulation executable /home/ise/EDAtools/proj_v2/impl/proj/tb_all_phase_isim_beh.exe
+Fuse Memory Usage: 98672 KB
+Fuse CPU Usage: 1030 ms
+GCC CPU Usage: 850 ms

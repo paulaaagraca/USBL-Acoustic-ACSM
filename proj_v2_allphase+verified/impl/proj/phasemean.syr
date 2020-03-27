@@ -1,0 +1,492 @@
+Release 14.7 - xst P.20160913 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.03 secs
+ 
+--> 
+Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.03 secs
+ 
+--> 
+Reading design: phasemean.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "phasemean.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "phasemean"
+Output Format                      : NGC
+Target Device                      : xc6slx45t-3-fgg484
+
+---- Source Options
+Top Module Name                    : phasemean
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Power Reduction                    : NO
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" into library work
+Parsing module <phasemean>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating module <phasemean>.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 73: Result of 32-bit expression is truncated to fit in 13-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 114: Result of 36-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 127: Result of 36-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 140: Result of 36-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 152: Result of 36-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 165: Result of 36-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 178: Result of 36-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 205: Result of 13-bit expression is truncated to fit in 11-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 212: Result of 13-bit expression is truncated to fit in 11-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 216: Result of 32-bit expression is truncated to fit in 11-bit target.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <phasemean>.
+    Related source file is "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v".
+        IDLE = 3'b000
+        ADD1 = 3'b001
+        ADD2 = 3'b010
+        ADD3 = 3'b011
+        ADD4 = 3'b100
+        ADD5 = 3'b101
+        ADD6 = 3'b110
+        accum_size = 36
+    Found 1-bit register for signal <rdy_update>.
+    Found 1-bit register for signal <updating_out>.
+    Found 36-bit register for signal <add_samples_1>.
+    Found 36-bit register for signal <add_samples_2>.
+    Found 36-bit register for signal <add_samples_3>.
+    Found 36-bit register for signal <add_samples_4>.
+    Found 36-bit register for signal <add_samples_5>.
+    Found 36-bit register for signal <add_samples_6>.
+    Found 16-bit register for signal <phaseout_1>.
+    Found 16-bit register for signal <phaseout_2>.
+    Found 16-bit register for signal <phaseout_3>.
+    Found 16-bit register for signal <phaseout_4>.
+    Found 16-bit register for signal <phaseout_5>.
+    Found 16-bit register for signal <phaseout_6>.
+    Found 11-bit register for signal <cnt_samples>.
+    Found 3-bit register for signal <state>.
+    Found finite state machine <FSM_0> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 7                                              |
+    | Transitions        | 8                                              |
+    | Inputs             | 1                                              |
+    | Outputs            | 3                                              |
+    | Clock              | clock (rising_edge)                            |
+    | Reset              | reset (positive)                               |
+    | Reset type         | synchronous                                    |
+    | Reset State        | 000                                            |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 36-bit adder for signal <add_samples_1[35]_in_sampl_1[15]_add_4_OUT> created at line 119.
+    Found 36-bit adder for signal <add_samples_2[35]_in_sampl_2[15]_add_8_OUT> created at line 132.
+    Found 36-bit adder for signal <add_samples_3[35]_in_sampl_3[15]_add_12_OUT> created at line 144.
+    Found 36-bit adder for signal <add_samples_4[35]_in_sampl_4[15]_add_16_OUT> created at line 157.
+    Found 36-bit adder for signal <add_samples_5[35]_in_sampl_5[15]_add_20_OUT> created at line 170.
+    Found 36-bit adder for signal <add_samples_6[35]_in_sampl_6[15]_add_24_OUT> created at line 183.
+    Found 11-bit subtractor for signal <GND_1_o_GND_1_o_sub_74_OUT<10:0>> created at line 216.
+    Found 32-bit shifter logical left for signal <n0108> created at line 73
+    Found 36-bit shifter arithmetic right for signal <n0110> created at line 114
+    Found 36-bit shifter arithmetic right for signal <n0114> created at line 127
+    Found 36-bit shifter arithmetic right for signal <n0118> created at line 140
+    Found 36-bit shifter arithmetic right for signal <n0122> created at line 152
+    Found 36-bit shifter arithmetic right for signal <n0126> created at line 165
+    Found 36-bit shifter arithmetic right for signal <n0130> created at line 178
+    Summary:
+	inferred   7 Adder/Subtractor(s).
+	inferred 325 D-type flip-flop(s).
+	inferred  10 Multiplexer(s).
+	inferred   7 Combinational logic shifter(s).
+	inferred   1 Finite State Machine(s).
+Unit <phasemean> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 7
+ 11-bit subtractor                                     : 1
+ 36-bit adder                                          : 6
+# Registers                                            : 15
+ 1-bit register                                        : 2
+ 11-bit register                                       : 1
+ 16-bit register                                       : 6
+ 36-bit register                                       : 6
+# Multiplexers                                         : 10
+ 1-bit 2-to-1 multiplexer                              : 1
+ 11-bit 2-to-1 multiplexer                             : 2
+ 32-bit 2-to-1 multiplexer                             : 1
+ 36-bit 2-to-1 multiplexer                             : 6
+# Logic shifters                                       : 7
+ 32-bit shifter logical left                           : 1
+ 36-bit shifter arithmetic right                       : 6
+# FSMs                                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <phasemean>.
+The following registers are absorbed into accumulator <add_samples_1>: 1 register on signal <add_samples_1>.
+The following registers are absorbed into accumulator <add_samples_3>: 1 register on signal <add_samples_3>.
+The following registers are absorbed into accumulator <add_samples_2>: 1 register on signal <add_samples_2>.
+The following registers are absorbed into accumulator <add_samples_4>: 1 register on signal <add_samples_4>.
+The following registers are absorbed into accumulator <add_samples_5>: 1 register on signal <add_samples_5>.
+The following registers are absorbed into accumulator <add_samples_6>: 1 register on signal <add_samples_6>.
+Unit <phasemean> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 1
+ 11-bit subtractor                                     : 1
+# Accumulators                                         : 6
+ 36-bit up accumulator                                 : 6
+# Registers                                            : 109
+ Flip-Flops                                            : 109
+# Multiplexers                                         : 10
+ 1-bit 2-to-1 multiplexer                              : 1
+ 11-bit 2-to-1 multiplexer                             : 2
+ 32-bit 2-to-1 multiplexer                             : 1
+ 36-bit 2-to-1 multiplexer                             : 6
+# Logic shifters                                       : 7
+ 32-bit shifter logical left                           : 1
+ 36-bit shifter arithmetic right                       : 6
+# FSMs                                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <FSM_0> on signal <state[1:3]> with user encoding.
+-------------------
+ State | Encoding
+-------------------
+ 000   | 000
+ 001   | 001
+ 010   | 010
+ 011   | 011
+ 100   | 100
+ 101   | 101
+ 110   | 110
+-------------------
+
+Optimizing unit <phasemean> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block phasemean, actual ratio is 3.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 328
+ Flip-Flops                                            : 328
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : phasemean.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 1444
+#      GND                         : 1
+#      INV                         : 1
+#      LUT1                        : 1
+#      LUT2                        : 225
+#      LUT3                        : 60
+#      LUT4                        : 48
+#      LUT5                        : 125
+#      LUT6                        : 476
+#      MUXCY                       : 218
+#      MUXF7                       : 72
+#      VCC                         : 1
+#      XORCY                       : 216
+# FlipFlops/Latches                : 328
+#      FDE                         : 11
+#      FDR                         : 5
+#      FDRE                        : 312
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 204
+#      IBUF                        : 108
+#      OBUF                        : 96
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx45tfgg484-3 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:             328  out of  54576     0%  
+ Number of Slice LUTs:                  936  out of  27288     3%  
+    Number used as Logic:               936  out of  27288     3%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:    936
+   Number with an unused Flip Flop:     608  out of    936    64%  
+   Number with an unused LUT:             0  out of    936     0%  
+   Number of fully used LUT-FF pairs:   328  out of    936    35%  
+   Number of unique control sets:        15
+
+IO Utilization: 
+ Number of IOs:                         205
+ Number of bonded IOBs:                 205  out of    296    69%  
+
+Specific Feature Utilization:
+ Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+clock                              | BUFGP                  | 328   |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -3
+
+   Minimum period: 4.470ns (Maximum Frequency: 223.721MHz)
+   Minimum input arrival time before clock: 7.863ns
+   Maximum output required time after clock: 3.597ns
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clock'
+  Clock period: 4.470ns (frequency: 223.721MHz)
+  Total number of paths / destination ports: 13043 / 857
+-------------------------------------------------------------------------
+Delay:               4.470ns (Levels of Logic = 4)
+  Source:            cnt_samples_3 (FF)
+  Destination:       cnt_samples_10 (FF)
+  Source Clock:      clock rising
+  Destination Clock: clock rising
+
+  Data Path: cnt_samples_3 to cnt_samples_10
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q              6   0.447   1.089  cnt_samples_3 (cnt_samples_3)
+     LUT5:I0->O            5   0.203   0.715  Mmux_cnt_samples[10]_N[10]_mux_76_OUT711 (Mmux_cnt_samples[10]_N[10]_mux_76_OUT71)
+     LUT4:I3->O            2   0.205   0.721  Msub_GND_1_o_GND_1_o_sub_74_OUT<10:0>_cy<7>11 (Msub_GND_1_o_GND_1_o_sub_74_OUT<10:0>_cy<7>)
+     LUT6:I4->O            1   0.203   0.580  Mmux_cnt_samples[10]_N[10]_mux_76_OUT2_SW0 (N108)
+     LUT6:I5->O            1   0.205   0.000  Mmux_cnt_samples[10]_N[10]_mux_76_OUT2 (cnt_samples[10]_N[10]_mux_76_OUT<10>)
+     FDE:D                     0.102          cnt_samples_10
+    ----------------------------------------
+    Total                      4.470ns (1.365ns logic, 3.105ns route)
+                                       (30.5% logic, 69.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clock'
+  Total number of paths / destination ports: 9211 / 653
+-------------------------------------------------------------------------
+Offset:              7.863ns (Levels of Logic = 6)
+  Source:            K<5> (PAD)
+  Destination:       cnt_samples_6 (FF)
+  Destination Clock: clock rising
+
+  Data Path: K<5> to cnt_samples_6
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            83   1.222   2.110  K_5_IBUF (K_5_IBUF)
+     LUT5:I0->O          104   0.203   2.116  Mmux_cnt_samples[10]_N[10]_mux_76_OUT931 (Mmux__n0319123)
+     LUT6:I3->O            1   0.205   0.000  GND_1_o_GND_1_o_equal_26_o<10>_SW4_F (N394)
+     MUXF7:I0->O           1   0.131   0.684  GND_1_o_GND_1_o_equal_26_o<10>_SW4 (N339)
+     LUT6:I4->O            1   0.203   0.684  Mmux_cnt_samples[10]_N[10]_mux_76_OUT8_SW0 (N88)
+     LUT6:I4->O            1   0.203   0.000  Mmux_cnt_samples[10]_N[10]_mux_76_OUT8 (cnt_samples[10]_N[10]_mux_76_OUT<6>)
+     FDE:D                     0.102          cnt_samples_6
+    ----------------------------------------
+    Total                      7.863ns (2.269ns logic, 5.594ns route)
+                                       (28.9% logic, 71.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clock'
+  Total number of paths / destination ports: 96 / 96
+-------------------------------------------------------------------------
+Offset:              3.597ns (Levels of Logic = 1)
+  Source:            phaseout_1_15 (FF)
+  Destination:       phaseout_1<15> (PAD)
+  Source Clock:      clock rising
+
+  Data Path: phaseout_1_15 to phaseout_1<15>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q             1   0.447   0.579  phaseout_1_15 (phaseout_1_15)
+     OBUF:I->O                 2.571          phaseout_1_15_OBUF (phaseout_1<15>)
+    ----------------------------------------
+    Total                      3.597ns (3.018ns logic, 0.579ns route)
+                                       (83.9% logic, 16.1% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock clock
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clock          |    4.470|         |         |         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 22.00 secs
+Total CPU time to Xst completion: 20.31 secs
+ 
+--> 
+
+
+Total memory usage is 418756 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   10 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

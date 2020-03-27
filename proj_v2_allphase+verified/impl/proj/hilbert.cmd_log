@@ -1,0 +1,1 @@
+xst -intstyle ise -ifn "/home/ise/EDAtools/proj_v2/impl/proj/hilbert.xst" -ofn "/home/ise/EDAtools/proj_v2/impl/proj/hilbert.syr" 

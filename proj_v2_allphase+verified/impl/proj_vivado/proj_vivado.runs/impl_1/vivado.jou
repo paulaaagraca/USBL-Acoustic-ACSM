@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.2 (64-bit)
+# SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
+# IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
+# Start of session at: Mon Mar 23 16:12:22 2020
+# Process ID: 10536
+# Current directory: C:/EDAtools/proj_v2/impl/proj_vivado/proj_vivado.runs/impl_1
+# Command line: vivado.exe -log tb_all_phase.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source tb_all_phase.tcl -notrace
+# Log file: C:/EDAtools/proj_v2/impl/proj_vivado/proj_vivado.runs/impl_1/tb_all_phase.vdi
+# Journal file: C:/EDAtools/proj_v2/impl/proj_vivado/proj_vivado.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source tb_all_phase.tcl -notrace

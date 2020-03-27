@@ -1,0 +1,37 @@
+ISim log file
+Running: /home/ise/EDAtools/proj_v2/impl/proj/tb_all_phase_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb /home/ise/EDAtools/proj_v2/impl/proj/tb_all_phase_isim_beh.wdb 
+ISim P.20160913 (signature 0xfbc00daa)
+----------------------------------------------------------------------
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 1000 ns
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+# run all
+Stopped at time : 95721 ns :  in File "/home/ise/EDAtools/proj_v2/src/verilog-tb/tb_all_phase.v" Line 478 
+# run all
+Stopped at time : 6853396 ns : File "/home/ise/EDAtools/proj_v2/src/verilog-rtl/cordic_calc.v" Line 78
+# run 1.00s
+Stopped at time : 13149556 ns : File "/home/ise/EDAtools/proj_v2/src/verilog-tb/tb_all_phase.v" Line 53
+# restart
+# run 1.00s
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+Stopped at time : 95721 ns :  in File "/home/ise/EDAtools/proj_v2/src/verilog-tb/tb_all_phase.v" Line 478 
+# restart
+# run 1.00s
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+Stopped at time : 95721 ns :  in File "/home/ise/EDAtools/proj_v2/src/verilog-tb/tb_all_phase.v" Line 478 
+# restart
+# run 1.00s
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+Stopped at time : 95721 ns :  in File "/home/ise/EDAtools/proj_v2/src/verilog-tb/tb_all_phase.v" Line 478 
+# exit 0

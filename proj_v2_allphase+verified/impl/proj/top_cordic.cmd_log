@@ -1,0 +1,2 @@
+xst -intstyle ise -ifn "/home/ise/EDAtools/proj_v2/impl/proj/top_cordic.xst" -ofn "/home/ise/EDAtools/proj_v2/impl/proj/top_cordic.syr" 
+xst -intstyle ise -ifn "/home/ise/EDAtools/proj_v2/impl/proj/top_cordic.xst" -ofn "/home/ise/EDAtools/proj_v2/impl/proj/top_cordic.syr" 

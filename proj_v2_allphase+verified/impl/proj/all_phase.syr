@@ -1,0 +1,1074 @@
+Release 14.7 - xst P.20160913 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.04 secs
+ 
+--> 
+Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.04 secs
+ 
+--> 
+Reading design: all_phase.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "all_phase.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "all_phase"
+Output Format                      : NGC
+Target Device                      : xc6slx45t-3-fgg484
+
+---- Source Options
+Top Module Name                    : all_phase
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Power Reduction                    : NO
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/src/verilog-rtl/MODSCALE_16.v" into library work
+Parsing module <MODSCALE_16>.
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/src/verilog-rtl/ITERCOUNTER_16.v" into library work
+Parsing module <ITERCOUNTER_16>.
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/src/verilog-rtl/ATAN_ROM_16.v" into library work
+Parsing module <ATAN_ROM_16>.
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/src/verilog-rtl/cordic_control.v" into library work
+Parsing module <cordic_control>.
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/src/verilog-rtl/cordic_calc.v" into library work
+Parsing module <cordic_calc>.
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/src/verilog-rtl/hilbert_chain.v" into library work
+Parsing module <hilbert_chain>.
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/src/verilog-rtl/cordic.v" into library work
+Parsing module <cordic>.
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/src/verilog-rtl/top_cordic.v" into library work
+Parsing module <top_cordic>.
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" into library work
+Parsing module <phasemean>.
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasediff.v" into library work
+Parsing module <phasediff>.
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/src/verilog-rtl/hilbert.v" into library work
+Parsing module <hilbert>.
+Analyzing Verilog file "/home/ise/EDAtools/proj_v2/src/verilog-rtl/all_phase.v" into library work
+Parsing module <all_phase>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating module <all_phase>.
+
+Elaborating module <hilbert>.
+
+Elaborating module <hilbert_chain>.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/hilbert.v" Line 142: Result of 38-bit expression is truncated to fit in 28-bit target.
+
+Elaborating module <top_cordic>.
+
+Elaborating module <cordic>.
+
+Elaborating module <cordic_calc>.
+
+Elaborating module <ATAN_ROM_16>.
+Reading initialization file \"../../simdata/atanLUTd16.hex\".
+
+Elaborating module <ITERCOUNTER_16>.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/ITERCOUNTER_16.v" Line 52: Result of 5-bit expression is truncated to fit in 4-bit target.
+
+Elaborating module <MODSCALE_16>.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/MODSCALE_16.v" Line 38: Result of 19-bit expression is truncated to fit in 16-bit target.
+
+Elaborating module <cordic_control>.
+WARNING:HDLCompiler:1127 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/top_cordic.v" Line 76: Assignment to mod ignored, since the identifier is never used
+
+Elaborating module <phasediff>.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasediff.v" Line 91: Result of 32-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasediff.v" Line 101: Result of 32-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasediff.v" Line 111: Result of 32-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasediff.v" Line 121: Result of 32-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasediff.v" Line 131: Result of 32-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasediff.v" Line 140: Result of 32-bit expression is truncated to fit in 16-bit target.
+
+Elaborating module <phasemean>.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 73: Result of 32-bit expression is truncated to fit in 13-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 114: Result of 36-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 127: Result of 36-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 140: Result of 36-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 152: Result of 36-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 165: Result of 36-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 178: Result of 36-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 205: Result of 13-bit expression is truncated to fit in 11-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 212: Result of 13-bit expression is truncated to fit in 11-bit target.
+WARNING:HDLCompiler:413 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v" Line 216: Result of 32-bit expression is truncated to fit in 11-bit target.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <all_phase>.
+    Related source file is "/home/ise/EDAtools/proj_v2/src/verilog-rtl/all_phase.v".
+    Summary:
+	no macro.
+Unit <all_phase> synthesized.
+
+Synthesizing Unit <hilbert>.
+    Related source file is "/home/ise/EDAtools/proj_v2/src/verilog-rtl/hilbert.v".
+        ha = 11'b00011110101
+        hb = 11'b01010000001
+        order_hf = 8
+        IDLE = 4'b0000
+        RUN1 = 4'b0001
+        RUN2 = 4'b0010
+        RUN3 = 4'b0011
+        RUN4 = 4'b0100
+    Found 5-bit register for signal <cnt_in>.
+    Found 4-bit register for signal <state>.
+    Found 16-bit register for signal <im1>.
+    Found 16-bit register for signal <im2>.
+    Found 16-bit register for signal <im3>.
+    Found 16-bit register for signal <im4>.
+    Found 1-bit register for signal <en_calc0>.
+    Found finite state machine <FSM_0> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 5                                              |
+    | Transitions        | 10                                             |
+    | Inputs             | 2                                              |
+    | Outputs            | 5                                              |
+    | Clock              | clock (rising_edge)                            |
+    | Reset              | reset (positive)                               |
+    | Reset type         | synchronous                                    |
+    | Reset State        | 0000                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 38-bit subtractor for signal <im[27]_GND_2_o_sub_21_OUT> created at line 142.
+    Found 5-bit subtractor for signal <cnt_in[4]_GND_2_o_sub_33_OUT> created at line 218.
+    Found 38-bit adder for signal <im[27]_GND_2_o_add_19_OUT> created at line 142.
+    Found 16-bit adder for signal <addsub[25]_GND_2_o_add_35_OUT> created at line 221.
+    Found 16x11-bit multiplier for signal <mult> created at line 137.
+    Found 16-bit 3-to-1 multiplexer for signal <_n0209> created at line 126.
+    Found 28-bit 3-to-1 multiplexer for signal <_n0212> created at line 129.
+    Found 5-bit comparator greater for signal <cnt_in[4]_GND_2_o_LessThan_15_o> created at line 135
+    Found 5-bit comparator greater for signal <GND_2_o_cnt_in[4]_LessThan_16_o> created at line 135
+    Found 5-bit comparator greater for signal <addsub_sel> created at line 140
+    Summary:
+	inferred   1 Multiplier(s).
+	inferred   3 Adder/Subtractor(s).
+	inferred  70 D-type flip-flop(s).
+	inferred   3 Comparator(s).
+	inferred  14 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <hilbert> synthesized.
+
+Synthesizing Unit <hilbert_chain>.
+    Related source file is "/home/ise/EDAtools/proj_v2/src/verilog-rtl/hilbert_chain.v".
+        ha = 11'b00011110101
+        hb = 11'b01010000001
+        order_hf = 8
+    Found 144-bit register for signal <n0012[143:0]>.
+    Found 16-bit register for signal <re>.
+    Summary:
+	inferred 160 D-type flip-flop(s).
+Unit <hilbert_chain> synthesized.
+
+Synthesizing Unit <top_cordic>.
+    Related source file is "/home/ise/EDAtools/proj_v2/src/verilog-rtl/top_cordic.v".
+        IDLE = 4'b0000
+        RUN_CORDIC = 4'b0001
+INFO:Xst:3210 - "/home/ise/EDAtools/proj_v2/src/verilog-rtl/top_cordic.v" line 68: Output port <mod> of the instance <cordic_1> is unconnected or connected to loadless signal.
+    Found 3-bit register for signal <sel_in>.
+    Found 16-bit register for signal <phase1>.
+    Found 16-bit register for signal <phase2>.
+    Found 16-bit register for signal <phase3>.
+    Found 16-bit register for signal <phase4>.
+    Found 1-bit register for signal <state>.
+    Found 3-bit adder for signal <sel_in[2]_GND_5_o_add_18_OUT> created at line 119.
+    Found 16-bit 4-to-1 multiplexer for signal <_n0106> created at line 54.
+    Found 16-bit 4-to-1 multiplexer for signal <_n0108> created at line 54.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  68 D-type flip-flop(s).
+	inferred   4 Multiplexer(s).
+Unit <top_cordic> synthesized.
+
+Synthesizing Unit <cordic>.
+    Related source file is "/home/ise/EDAtools/proj_v2/src/verilog-rtl/cordic.v".
+    Summary:
+	no macro.
+Unit <cordic> synthesized.
+
+Synthesizing Unit <cordic_calc>.
+    Related source file is "/home/ise/EDAtools/proj_v2/src/verilog-rtl/cordic_calc.v".
+    Found 18-bit register for signal <yr>.
+    Found 19-bit register for signal <zr>.
+    Found 16-bit register for signal <xini>.
+    Found 16-bit register for signal <yini>.
+    Found 18-bit register for signal <xr>.
+    Found 18-bit subtractor for signal <x[15]_unary_minus_2_OUT> created at line 82.
+    Found 18-bit subtractor for signal <xr[17]_yr[17]_sub_7_OUT> created at line 90.
+    Found 18-bit subtractor for signal <yr[17]_xr[17]_sub_10_OUT> created at line 91.
+    Found 19-bit subtractor for signal <zr[18]_GND_7_o_sub_15_OUT> created at line 92.
+    Found 19-bit subtractor for signal <PWR_9_o_zr[18]_sub_37_OUT> created at line 114.
+    Found 19-bit subtractor for signal <GND_7_o_zr[18]_sub_38_OUT> created at line 114.
+    Found 18-bit adder for signal <xr[17]_yr[17]_add_4_OUT> created at line 90.
+    Found 18-bit adder for signal <yr[17]_xr[17]_add_11_OUT> created at line 91.
+    Found 19-bit adder for signal <zr[18]_GND_7_o_add_13_OUT> created at line 92.
+    Found 18-bit shifter arithmetic right for signal <n0088> created at line 90
+    Found 18-bit shifter arithmetic right for signal <n0091> created at line 91
+    Summary:
+	inferred   4 Adder/Subtractor(s).
+	inferred  87 D-type flip-flop(s).
+	inferred   9 Multiplexer(s).
+	inferred   2 Combinational logic shifter(s).
+Unit <cordic_calc> synthesized.
+
+Synthesizing Unit <ATAN_ROM_16>.
+    Related source file is "/home/ise/EDAtools/proj_v2/src/verilog-rtl/ATAN_ROM_16.v".
+        ROMSIZE = 16
+        ATANLUT_FILENAME = "../../simdata/atanLUTd16.hex"
+WARNING:Xst:2999 - Signal 'atanLUT', unconnected in block 'ATAN_ROM_16', is tied to its initial value.
+    Found 16x16-bit single-port Read Only RAM <Mram_atanLUT> for signal <atanLUT>.
+    Summary:
+	inferred   1 RAM(s).
+Unit <ATAN_ROM_16> synthesized.
+
+Synthesizing Unit <ITERCOUNTER_16>.
+    Related source file is "/home/ise/EDAtools/proj_v2/src/verilog-rtl/ITERCOUNTER_16.v".
+    Found 4-bit register for signal <count>.
+    Found 4-bit adder for signal <count[3]_GND_9_o_add_1_OUT> created at line 52.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   4 D-type flip-flop(s).
+	inferred   1 Multiplexer(s).
+Unit <ITERCOUNTER_16> synthesized.
+
+Synthesizing Unit <MODSCALE_16>.
+    Related source file is "/home/ise/EDAtools/proj_v2/src/verilog-rtl/MODSCALE_16.v".
+        CORDIC_SCALE_FACTOR = 32'b00000000000000000000001001101110
+    Found 18x11-bit multiplier for signal <n0002> created at line 38.
+    Summary:
+	inferred   1 Multiplier(s).
+Unit <MODSCALE_16> synthesized.
+
+Synthesizing Unit <cordic_control>.
+    Related source file is "/home/ise/EDAtools/proj_v2/src/verilog-rtl/cordic_control.v".
+        ST_IDLE = 1'b0
+        ST_RUN = 1'b1
+    Found 1-bit register for signal <state>.
+    Found 5-bit register for signal <counter>.
+    Found 5-bit adder for signal <counter[4]_GND_13_o_add_2_OUT> created at line 54.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   6 D-type flip-flop(s).
+	inferred   1 Multiplexer(s).
+Unit <cordic_control> synthesized.
+
+Synthesizing Unit <phasediff>.
+    Related source file is "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasediff.v".
+        IDLE = 4'b0000
+        DIF12 = 4'b0001
+        DIF13 = 4'b0010
+        DIF14 = 4'b0011
+        DIF23 = 4'b0100
+        DIF24 = 4'b0101
+        DIF34 = 4'b0110
+    Found 1-bit register for signal <run_state>.
+    Found 16-bit register for signal <ang1>.
+    Found 16-bit register for signal <ang2>.
+    Found 16-bit register for signal <angle1>.
+    Found 16-bit register for signal <angle2>.
+    Found 16-bit register for signal <angle3>.
+    Found 16-bit register for signal <angle4>.
+    Found 16-bit register for signal <angle5>.
+    Found 16-bit register for signal <angle6>.
+    Found 4-bit register for signal <state>.
+    Found finite state machine <FSM_1> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 7                                              |
+    | Transitions        | 14                                             |
+    | Inputs             | 2                                              |
+    | Outputs            | 10                                             |
+    | Clock              | clock (rising_edge)                            |
+    | Reset              | reset (positive)                               |
+    | Reset type         | synchronous                                    |
+    | Reset State        | 0000                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 16-bit subtractor for signal <diff<15:0>> created at line 47.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred 129 D-type flip-flop(s).
+	inferred   9 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <phasediff> synthesized.
+
+Synthesizing Unit <phasemean>.
+    Related source file is "/home/ise/EDAtools/proj_v2/src/verilog-rtl/phasemean.v".
+        IDLE = 3'b000
+        ADD1 = 3'b001
+        ADD2 = 3'b010
+        ADD3 = 3'b011
+        ADD4 = 3'b100
+        ADD5 = 3'b101
+        ADD6 = 3'b110
+        accum_size = 36
+    Found 1-bit register for signal <rdy_update>.
+    Found 1-bit register for signal <updating_out>.
+    Found 36-bit register for signal <add_samples_1>.
+    Found 36-bit register for signal <add_samples_2>.
+    Found 36-bit register for signal <add_samples_3>.
+    Found 36-bit register for signal <add_samples_4>.
+    Found 36-bit register for signal <add_samples_5>.
+    Found 36-bit register for signal <add_samples_6>.
+    Found 16-bit register for signal <phaseout_1>.
+    Found 16-bit register for signal <phaseout_2>.
+    Found 16-bit register for signal <phaseout_3>.
+    Found 16-bit register for signal <phaseout_4>.
+    Found 16-bit register for signal <phaseout_5>.
+    Found 16-bit register for signal <phaseout_6>.
+    Found 11-bit register for signal <cnt_samples>.
+    Found 3-bit register for signal <state>.
+    Found finite state machine <FSM_2> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 7                                              |
+    | Transitions        | 8                                              |
+    | Inputs             | 1                                              |
+    | Outputs            | 3                                              |
+    | Clock              | clock (rising_edge)                            |
+    | Reset              | reset (positive)                               |
+    | Reset type         | synchronous                                    |
+    | Reset State        | 000                                            |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 36-bit adder for signal <add_samples_1[35]_in_sampl_1[15]_add_4_OUT> created at line 119.
+    Found 36-bit adder for signal <add_samples_2[35]_in_sampl_2[15]_add_8_OUT> created at line 132.
+    Found 36-bit adder for signal <add_samples_3[35]_in_sampl_3[15]_add_12_OUT> created at line 144.
+    Found 36-bit adder for signal <add_samples_4[35]_in_sampl_4[15]_add_16_OUT> created at line 157.
+    Found 36-bit adder for signal <add_samples_5[35]_in_sampl_5[15]_add_20_OUT> created at line 170.
+    Found 36-bit adder for signal <add_samples_6[35]_in_sampl_6[15]_add_24_OUT> created at line 183.
+    Found 11-bit subtractor for signal <GND_15_o_GND_15_o_sub_74_OUT<10:0>> created at line 216.
+    Found 32-bit shifter logical left for signal <n0108> created at line 73
+    Found 36-bit shifter arithmetic right for signal <n0110> created at line 114
+    Found 36-bit shifter arithmetic right for signal <n0114> created at line 127
+    Found 36-bit shifter arithmetic right for signal <n0118> created at line 140
+    Found 36-bit shifter arithmetic right for signal <n0122> created at line 152
+    Found 36-bit shifter arithmetic right for signal <n0126> created at line 165
+    Found 36-bit shifter arithmetic right for signal <n0130> created at line 178
+    Summary:
+	inferred   7 Adder/Subtractor(s).
+	inferred 325 D-type flip-flop(s).
+	inferred  16 Multiplexer(s).
+	inferred   7 Combinational logic shifter(s).
+	inferred   1 Finite State Machine(s).
+Unit <phasemean> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 1
+ 16x16-bit single-port Read Only RAM                   : 1
+# Multipliers                                          : 2
+ 16x11-bit multiplier                                  : 1
+ 18x11-bit multiplier                                  : 1
+# Adders/Subtractors                                   : 18
+ 11-bit subtractor                                     : 1
+ 16-bit adder                                          : 1
+ 16-bit subtractor                                     : 1
+ 18-bit addsub                                         : 2
+ 19-bit addsub                                         : 1
+ 19-bit subtractor                                     : 1
+ 3-bit adder                                           : 1
+ 36-bit adder                                          : 6
+ 38-bit addsub                                         : 1
+ 4-bit adder                                           : 1
+ 5-bit adder                                           : 1
+ 5-bit subtractor                                      : 1
+# Registers                                            : 52
+ 1-bit register                                        : 6
+ 11-bit register                                       : 1
+ 144-bit register                                      : 4
+ 16-bit register                                       : 28
+ 18-bit register                                       : 2
+ 19-bit register                                       : 1
+ 3-bit register                                        : 1
+ 36-bit register                                       : 6
+ 4-bit register                                        : 1
+ 5-bit register                                        : 2
+# Comparators                                          : 3
+ 5-bit comparator greater                              : 3
+# Multiplexers                                         : 54
+ 1-bit 2-to-1 multiplexer                              : 5
+ 11-bit 2-to-1 multiplexer                             : 2
+ 16-bit 2-to-1 multiplexer                             : 13
+ 16-bit 3-to-1 multiplexer                             : 1
+ 16-bit 4-to-1 multiplexer                             : 2
+ 18-bit 2-to-1 multiplexer                             : 5
+ 19-bit 2-to-1 multiplexer                             : 3
+ 28-bit 2-to-1 multiplexer                             : 1
+ 28-bit 3-to-1 multiplexer                             : 1
+ 3-bit 2-to-1 multiplexer                              : 2
+ 32-bit 2-to-1 multiplexer                             : 1
+ 36-bit 2-to-1 multiplexer                             : 12
+ 4-bit 2-to-1 multiplexer                              : 1
+ 5-bit 2-to-1 multiplexer                              : 5
+# Logic shifters                                       : 9
+ 18-bit shifter arithmetic right                       : 2
+ 32-bit shifter logical left                           : 1
+ 36-bit shifter arithmetic right                       : 6
+# FSMs                                                 : 3
+
+=========================================================================
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+WARNING:Xst:1290 - Hierarchical block <MODSCALE_1> is unconnected in block <cordic_calc_1>.
+   It will be removed from the design.
+WARNING:Xst:2677 - Node <xini_0> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <xini_1> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <xini_2> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <xini_3> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <xini_4> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <xini_5> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <xini_6> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <xini_7> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <xini_8> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <xini_9> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <xini_10> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <xini_11> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <xini_12> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <xini_13> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <xini_14> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_0> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_1> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_2> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_3> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_4> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_5> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_6> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_7> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_8> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_9> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_10> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_11> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_12> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_13> of sequential type is unconnected in block <cordic_calc_1>.
+WARNING:Xst:2677 - Node <yini_14> of sequential type is unconnected in block <cordic_calc_1>.
+
+Synthesizing (advanced) Unit <ATAN_ROM_16>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_atanLUT> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 16-word x 16-bit                    |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <addr>          |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <ATAN_ROM_16> synthesized (advanced).
+
+Synthesizing (advanced) Unit <ITERCOUNTER_16>.
+The following registers are absorbed into counter <count>: 1 register on signal <count>.
+Unit <ITERCOUNTER_16> synthesized (advanced).
+
+Synthesizing (advanced) Unit <cordic_calc>.
+The following registers are absorbed into accumulator <yr>: 1 register on signal <yr>.
+The following registers are absorbed into accumulator <zr>: 1 register on signal <zr>.
+	Adder/Subtractor <Mmux_xr[17]_x[15]_mux_16_OUT_rs> in block <cordic_calc> and  <MODSCALE_1/Mmult_n0002> in block <cordic_calc> are combined into a MULT with pre-adder <MODSCALE_1/Mmult_n00021>.
+	The following registers are also absorbed by the MULT with pre-adder: <xr> in block <cordic_calc>.
+Unit <cordic_calc> synthesized (advanced).
+
+Synthesizing (advanced) Unit <cordic_control>.
+The following registers are absorbed into counter <counter>: 1 register on signal <counter>.
+Unit <cordic_control> synthesized (advanced).
+
+Synthesizing (advanced) Unit <phasemean>.
+The following registers are absorbed into accumulator <add_samples_1>: 1 register on signal <add_samples_1>.
+The following registers are absorbed into accumulator <add_samples_3>: 1 register on signal <add_samples_3>.
+The following registers are absorbed into accumulator <add_samples_2>: 1 register on signal <add_samples_2>.
+The following registers are absorbed into accumulator <add_samples_4>: 1 register on signal <add_samples_4>.
+The following registers are absorbed into accumulator <add_samples_5>: 1 register on signal <add_samples_5>.
+The following registers are absorbed into accumulator <add_samples_6>: 1 register on signal <add_samples_6>.
+Unit <phasemean> synthesized (advanced).
+WARNING:Xst:2677 - Node <xini_0> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <xini_1> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <xini_2> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <xini_3> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <xini_4> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <xini_5> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <xini_6> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <xini_7> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <xini_8> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <xini_9> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <xini_10> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <xini_11> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <xini_12> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <xini_13> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <xini_14> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_0> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_1> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_2> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_3> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_4> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_5> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_6> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_7> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_8> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_9> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_10> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_11> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_12> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_13> of sequential type is unconnected in block <cordic_calc>.
+WARNING:Xst:2677 - Node <yini_14> of sequential type is unconnected in block <cordic_calc>.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 1
+ 16x16-bit single-port distributed Read Only RAM       : 1
+# MACs                                                 : 1
+ 11x18-to-29-bit Mult with pre-adder                   : 1
+# Multipliers                                          : 1
+ 16x11-bit multiplier                                  : 1
+# Adders/Subtractors                                   : 8
+ 11-bit subtractor                                     : 1
+ 16-bit adder                                          : 1
+ 16-bit subtractor                                     : 1
+ 18-bit addsub                                         : 1
+ 19-bit subtractor                                     : 1
+ 3-bit adder                                           : 1
+ 38-bit addsub                                         : 1
+ 5-bit subtractor                                      : 1
+# Counters                                             : 2
+ 4-bit up counter                                      : 1
+ 5-bit up counter                                      : 1
+# Accumulators                                         : 8
+ 18-bit updown loadable accumulator                    : 1
+ 19-bit updown loadable accumulator                    : 1
+ 36-bit up loadable accumulator                        : 6
+# Registers                                            : 1037
+ Flip-Flops                                            : 1037
+# Comparators                                          : 3
+ 5-bit comparator greater                              : 3
+# Multiplexers                                         : 60
+ 1-bit 2-to-1 multiplexer                              : 22
+ 11-bit 2-to-1 multiplexer                             : 2
+ 16-bit 2-to-1 multiplexer                             : 13
+ 16-bit 3-to-1 multiplexer                             : 1
+ 16-bit 4-to-1 multiplexer                             : 2
+ 18-bit 2-to-1 multiplexer                             : 3
+ 19-bit 2-to-1 multiplexer                             : 2
+ 28-bit 2-to-1 multiplexer                             : 1
+ 28-bit 3-to-1 multiplexer                             : 1
+ 3-bit 2-to-1 multiplexer                              : 2
+ 32-bit 2-to-1 multiplexer                             : 1
+ 36-bit 2-to-1 multiplexer                             : 6
+ 5-bit 2-to-1 multiplexer                              : 4
+# Logic shifters                                       : 9
+ 18-bit shifter arithmetic right                       : 2
+ 32-bit shifter logical left                           : 1
+ 36-bit shifter arithmetic right                       : 6
+# FSMs                                                 : 3
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <hilbert_uut/FSM_0> on signal <state[1:3]> with sequential encoding.
+-------------------
+ State | Encoding
+-------------------
+ 0000  | 000
+ 0001  | 001
+ 0010  | 010
+ 0011  | 011
+ 0100  | 100
+-------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <phasediff_uut/FSM_1> on signal <state[1:3]> with sequential encoding.
+-------------------
+ State | Encoding
+-------------------
+ 0000  | 000
+ 0001  | 001
+ 0010  | 010
+ 0011  | 011
+ 0100  | 100
+ 0101  | 101
+ 0110  | 110
+-------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <phasemean_uut/FSM_2> on signal <state[1:3]> with user encoding.
+-------------------
+ State | Encoding
+-------------------
+ 000   | 000
+ 001   | 001
+ 010   | 010
+ 011   | 011
+ 100   | 100
+ 101   | 101
+ 110   | 110
+-------------------
+WARNING:Xst:2677 - Node <add_samples_2_19> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_20> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_21> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_22> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_23> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_24> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_25> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_26> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_27> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_28> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_29> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_30> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_31> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_32> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_33> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_34> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_2_35> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_19> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_20> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_21> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_22> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_23> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_24> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_25> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_26> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_27> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_28> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_29> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_30> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_31> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_32> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_33> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_34> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_1_35> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_19> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_20> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_21> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_22> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_23> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_24> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_25> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_26> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_27> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_28> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_29> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_30> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_31> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_32> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_33> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_34> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_3_35> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_19> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_20> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_21> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_22> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_23> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_24> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_25> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_26> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_27> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_28> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_29> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_30> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_31> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_32> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_33> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_34> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_6_35> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_19> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_20> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_21> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_22> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_23> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_24> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_25> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_26> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_27> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_28> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_29> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_30> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_31> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_32> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_33> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_34> of sequential type is unconnected in block <phasemean>.
+WARNING:Xst:2677 - Node <add_samples_4_35> of sequential type is unconnected in block <phasemean>.
+
+Optimizing unit <all_phase> ...
+
+Optimizing unit <hilbert> ...
+
+Optimizing unit <hilbert_chain> ...
+
+Optimizing unit <top_cordic> ...
+
+Optimizing unit <cordic_calc> ...
+
+Optimizing unit <cordic_control> ...
+WARNING:Xst:1710 - FF/Latch <counter_4> (without init value) has a constant value of 0 in block <cordic_control>. This FF/Latch will be trimmed during the optimization process.
+
+Optimizing unit <phasediff> ...
+
+Optimizing unit <phasemean> ...
+WARNING:Xst:2677 - Node <cordic_uut/cordic_1/cordic_calc_1/MODSCALE_1/Mmult_n00021> of sequential type is unconnected in block <all_phase>.
+WARNING:Xst:1710 - FF/Latch <hilbert_uut/cnt_in_4> (without init value) has a constant value of 0 in block <all_phase>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <phasemean_uut/cnt_samples_10> (without init value) has a constant value of 0 in block <all_phase>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <phasemean_uut/cnt_samples_9> (without init value) has a constant value of 0 in block <all_phase>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <phasemean_uut/cnt_samples_8> (without init value) has a constant value of 0 in block <all_phase>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <phasemean_uut/cnt_samples_7> (without init value) has a constant value of 0 in block <all_phase>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <phasemean_uut/cnt_samples_6> (without init value) has a constant value of 0 in block <all_phase>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <phasemean_uut/cnt_samples_5> (without init value) has a constant value of 0 in block <all_phase>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <phasemean_uut/cnt_samples_4> (without init value) has a constant value of 0 in block <all_phase>. This FF/Latch will be trimmed during the optimization process.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block all_phase, actual ratio is 7.
+FlipFlop hilbert_uut/state_FSM_FFd1 has been replicated 1 time(s)
+FlipFlop hilbert_uut/state_FSM_FFd2 has been replicated 2 time(s)
+FlipFlop hilbert_uut/state_FSM_FFd3 has been replicated 2 time(s)
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 1219
+ Flip-Flops                                            : 1219
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : all_phase.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 1946
+#      GND                         : 1
+#      INV                         : 15
+#      LUT1                        : 15
+#      LUT2                        : 719
+#      LUT3                        : 219
+#      LUT4                        : 140
+#      LUT5                        : 106
+#      LUT6                        : 218
+#      MUXCY                       : 257
+#      MUXF7                       : 4
+#      VCC                         : 1
+#      XORCY                       : 251
+# FlipFlops/Latches                : 1219
+#      FDE                         : 580
+#      FDR                         : 20
+#      FDRE                        : 617
+#      FDSE                        : 2
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 162
+#      IBUF                        : 66
+#      OBUF                        : 96
+# DSPs                             : 1
+#      DSP48A1                     : 1
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx45tfgg484-3 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:            1219  out of  54576     2%  
+ Number of Slice LUTs:                 1432  out of  27288     5%  
+    Number used as Logic:              1432  out of  27288     5%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:   1701
+   Number with an unused Flip Flop:     482  out of   1701    28%  
+   Number with an unused LUT:           269  out of   1701    15%  
+   Number of fully used LUT-FF pairs:   950  out of   1701    55%  
+   Number of unique control sets:        37
+
+IO Utilization: 
+ Number of IOs:                         163
+ Number of bonded IOBs:                 163  out of    296    55%  
+
+Specific Feature Utilization:
+ Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
+ Number of DSP48A1s:                      1  out of     58     1%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+clock                              | BUFGP                  | 1219  |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -3
+
+   Minimum period: 10.329ns (Maximum Frequency: 96.816MHz)
+   Minimum input arrival time before clock: 8.175ns
+   Maximum output required time after clock: 3.597ns
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clock'
+  Clock period: 10.329ns (frequency: 96.816MHz)
+  Total number of paths / destination ports: 2133530 / 2351
+-------------------------------------------------------------------------
+Delay:               10.329ns (Levels of Logic = 33)
+  Source:            hilbert_uut/state_FSM_FFd3_1 (FF)
+  Destination:       hilbert_uut/im4_15 (FF)
+  Source Clock:      clock rising
+  Destination Clock: clock rising
+
+  Data Path: hilbert_uut/state_FSM_FFd3_1 to hilbert_uut/im4_15
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q             16   0.447   1.109  hilbert_uut/state_FSM_FFd3_1 (hilbert_uut/state_FSM_FFd3_1)
+     LUT5:I3->O            1   0.203   0.580  hilbert_uut/Mmux_xf71 (hilbert_uut/Mmux_xf7)
+     LUT6:I5->O            3   0.205   0.650  hilbert_uut/Mmux_xf72 (hilbert_uut/xf<15>)
+     DSP48A1:B15->M0       1   3.364   0.580  hilbert_uut/Mmult_mult (hilbert_uut/mult<0>)
+     LUT4:I3->O            1   0.205   0.000  hilbert_uut/Maddsub_n0088_lut<0> (hilbert_uut/Maddsub_n0088_lut<0>)
+     MUXCY:S->O            1   0.172   0.000  hilbert_uut/Maddsub_n0088_cy<0> (hilbert_uut/Maddsub_n0088_cy<0>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Maddsub_n0088_cy<1> (hilbert_uut/Maddsub_n0088_cy<1>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Maddsub_n0088_cy<2> (hilbert_uut/Maddsub_n0088_cy<2>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Maddsub_n0088_cy<3> (hilbert_uut/Maddsub_n0088_cy<3>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Maddsub_n0088_cy<4> (hilbert_uut/Maddsub_n0088_cy<4>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Maddsub_n0088_cy<5> (hilbert_uut/Maddsub_n0088_cy<5>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Maddsub_n0088_cy<6> (hilbert_uut/Maddsub_n0088_cy<6>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Maddsub_n0088_cy<7> (hilbert_uut/Maddsub_n0088_cy<7>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Maddsub_n0088_cy<8> (hilbert_uut/Maddsub_n0088_cy<8>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Maddsub_n0088_cy<9> (hilbert_uut/Maddsub_n0088_cy<9>)
+     XORCY:CI->O           1   0.180   0.684  hilbert_uut/Maddsub_n0088_xor<10> (hilbert_uut/n0088<10>)
+     LUT2:I0->O            1   0.203   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_lut<0> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_lut<0>)
+     MUXCY:S->O            1   0.172   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<0> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<0>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<1> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<1>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<2> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<2>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<3> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<3>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<4> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<4>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<5> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<5>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<6> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<6>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<7> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<7>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<8> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<8>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<9> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<9>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<10> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<10>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<11> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<11>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<12> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<12>)
+     MUXCY:CI->O           1   0.019   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<13> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<13>)
+     MUXCY:CI->O           0   0.019   0.000  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<14> (hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_cy<14>)
+     XORCY:CI->O           3   0.180   0.651  hilbert_uut/Madd_addsub[25]_GND_2_o_add_35_OUT_xor<15> (hilbert_uut/addsub[25]_GND_2_o_add_35_OUT<15>)
+     LUT2:I1->O            1   0.205   0.000  hilbert_uut/Mmux__n022571 (hilbert_uut/_n0225<15>)
+     FDRE:D                    0.102          hilbert_uut/im1_15
+    ----------------------------------------
+    Total                     10.329ns (6.075ns logic, 4.254ns route)
+                                       (58.8% logic, 41.2% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clock'
+  Total number of paths / destination ports: 4280 / 2160
+-------------------------------------------------------------------------
+Offset:              8.175ns (Levels of Logic = 10)
+  Source:            enable (PAD)
+  Destination:       cordic_uut/cordic_1/cordic_calc_1/xr_17 (FF)
+  Destination Clock: clock rising
+
+  Data Path: enable to cordic_uut/cordic_1/cordic_calc_1/xr_17
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O           193   1.222   2.047  enable_IBUF (enable_IBUF)
+     LUT5:I4->O           91   0.205   2.046  cordic_uut/start_cordic1 (cordic_uut/start_cordic)
+     LUT3:I0->O            6   0.205   0.849  cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_B531 (cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_B53)
+     LUT6:I4->O            1   0.203   0.684  cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_B51 (cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_rs_B<13>)
+     LUT6:I4->O            1   0.203   0.000  cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_rs_lut<13> (cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_rs_lut<13>)
+     MUXCY:S->O            1   0.172   0.000  cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_rs_cy<13> (cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_rs_cy<13>)
+     MUXCY:CI->O           1   0.019   0.000  cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_rs_cy<14> (cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_rs_cy<14>)
+     MUXCY:CI->O           1   0.019   0.000  cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_rs_cy<15> (cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_rs_cy<15>)
+     MUXCY:CI->O           0   0.019   0.000  cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_rs_cy<16> (cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_rs_cy<16>)
+     XORCY:CI->O           1   0.180   0.000  cordic_uut/cordic_1/cordic_calc_1/Mmux_xr[17]_x[15]_mux_16_OUT_rs_xor<17> (cordic_uut/cordic_1/cordic_calc_1/xr[17]_x[15]_mux_16_OUT<17>)
+     FDRE:D                    0.102          cordic_uut/cordic_1/cordic_calc_1/xr_17
+    ----------------------------------------
+    Total                      8.175ns (2.549ns logic, 5.626ns route)
+                                       (31.2% logic, 68.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clock'
+  Total number of paths / destination ports: 96 / 96
+-------------------------------------------------------------------------
+Offset:              3.597ns (Levels of Logic = 1)
+  Source:            phasemean_uut/phaseout_1_15 (FF)
+  Destination:       diff_phase_1<15> (PAD)
+  Source Clock:      clock rising
+
+  Data Path: phasemean_uut/phaseout_1_15 to diff_phase_1<15>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q             1   0.447   0.579  phasemean_uut/phaseout_1_15 (phasemean_uut/phaseout_1_15)
+     OBUF:I->O                 2.571          diff_phase_1_15_OBUF (diff_phase_1<15>)
+    ----------------------------------------
+    Total                      3.597ns (3.018ns logic, 0.579ns route)
+                                       (83.9% logic, 16.1% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock clock
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clock          |   10.329|         |         |         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 20.00 secs
+Total CPU time to Xst completion: 17.01 secs
+ 
+--> 
+
+
+Total memory usage is 396616 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :  177 (   0 filtered)
+Number of infos    :    3 (   0 filtered)
+

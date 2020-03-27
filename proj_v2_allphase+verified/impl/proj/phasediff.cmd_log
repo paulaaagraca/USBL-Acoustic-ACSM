@@ -1,0 +1,1 @@
+xst -intstyle ise -ifn "/home/ise/EDAtools/proj_v2/impl/proj/phasediff.xst" -ofn "/home/ise/EDAtools/proj_v2/impl/proj/phasediff.syr" 

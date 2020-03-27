@@ -1,0 +1,28 @@
+Command line:
+   tb_phasemean_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  36013
+
+Fri Mar 20 23:42:42 2020
+
+
+ Elaboration Time: 0.04 sec
+
+ Current Memory Usage: 198.595 Meg
+
+ Total Signals          : 30
+ Total Nets             : 231
+ Total Signal Drivers   : 22
+ Total Blocks           : 3
+ Total Primitive Blocks : 2
+ Total Processes        : 29
+ Total Traceable Variables  : 52
+ Total Scalar Nets and Variables : 801
+
+ Total Simulation Time: 23.86 sec
+
+ Current Memory Usage: 276.193 Meg
+
+Fri Mar 20 23:45:27 2020
+

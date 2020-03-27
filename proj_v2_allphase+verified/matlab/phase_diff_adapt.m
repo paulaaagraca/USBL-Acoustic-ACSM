@@ -1,0 +1,12 @@
+    Fs = 100000;
+    hilbert_filter_order_phase = 8;
+    n_msg = 2^3;
+    
+    vec = [0 18 10 11 12 13 14 15 16];
+    vec = vec';
+    %d = designfilt('hilbertfir','FilterOrder', hilbert_filter_order_phase, 'TransitionWidth',0.1*Fs,'SampleRate',Fs); 
+    %coef = round(d.Coefficients * 2^(10)) / 2^(10);
+    coef = [0 -245 0 -641 0 641 0 245 0]
+    im = coef * vec
+    
+  %  imr= round(im/2^10)

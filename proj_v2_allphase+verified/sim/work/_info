@@ -1,0 +1,389 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/EDAtools/proj_v2/sim
+T_opt
+!s110 1585276127
+VoWj2BcFcdX0d[4E3M[^EE3
+04 12 4 work tb_all_phase fast 0
+=20-40b076475e5a-5e7d64df-75-28d4
+Z1 o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+Z3 OL;O;10.6a;65
+T_opt1
+!s110 1585184120
+V6[1nciSNKiB1zP68PRCA13
+04 10 4 work tb_hilbert fast 0
+=1-40b076475e5a-5e7bfd78-9d-1c48
+R1
+R2
+n@_opt1
+R3
+R0
+vall_phase
+Z4 !s110 1585276122
+!i10b 1
+!s100 <n;QGe?n68UJKe5Ye^Q4O0
+I2@[`KRCjX<<8]UQG9:eR91
+Z5 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1585276065
+8C:/EDAtools/proj_v2/src/verilog-rtl/all_phase.v
+FC:/EDAtools/proj_v2/src/verilog-rtl/all_phase.v
+L0 15
+Z6 OL;L;10.6a;65
+r1
+!s85 0
+31
+Z7 !s108 1585276122.000000
+!s107 C:/EDAtools/proj_v2/src/verilog-rtl/all_phase.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-rtl/all_phase.v|
+!i113 0
+Z8 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+vATAN_ROM_16
+R4
+!i10b 1
+!s100 J=fHDTlU=<FVe67gXkRU[1
+I<Gb6?I>LTEN0>PKO3h_Ii3
+R5
+R0
+w1585072863
+8C:/EDAtools/proj_v2/src/verilog-rtl/ATAN_ROM_16.v
+FC:/EDAtools/proj_v2/src/verilog-rtl/ATAN_ROM_16.v
+L0 34
+R6
+r1
+!s85 0
+31
+R7
+!s107 C:/EDAtools/proj_v2/src/verilog-rtl/ATAN_ROM_16.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-rtl/ATAN_ROM_16.v|
+!i113 0
+R8
+R2
+n@a@t@a@n_@r@o@m_16
+vcordic
+Z9 !s110 1585276123
+!i10b 1
+!s100 bZ]ha]f5kCib3XRe<hYXY2
+I57Uhn4ejJIP[8SZ7?l3FI3
+R5
+R0
+w1583863496
+8C:/EDAtools/proj_v2/src/verilog-rtl/cordic.v
+FC:/EDAtools/proj_v2/src/verilog-rtl/cordic.v
+Z10 L0 25
+R6
+r1
+!s85 0
+31
+R7
+!s107 C:/EDAtools/proj_v2/src/verilog-rtl/cordic.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-rtl/cordic.v|
+!i113 0
+R8
+R2
+vcordic_calc
+R9
+!i10b 1
+!s100 5j8C3oEcZW1T=USSkM9ni2
+IQgjo@UeII5;_P08@knJ2`1
+R5
+R0
+w1585248374
+8C:/EDAtools/proj_v2/src/verilog-rtl/cordic_calc.v
+FC:/EDAtools/proj_v2/src/verilog-rtl/cordic_calc.v
+R10
+R6
+r1
+!s85 0
+31
+Z11 !s108 1585276123.000000
+!s107 C:/EDAtools/proj_v2/src/verilog-rtl/cordic_calc.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-rtl/cordic_calc.v|
+!i113 0
+R8
+R2
+vcordic_control
+R9
+!i10b 1
+!s100 `9PE_AnAlE4QE9dKL>MHh2
+I<O1h`4HC8ZHZgc:BG8SkY0
+R5
+R0
+w1583863124
+8C:/EDAtools/proj_v2/src/verilog-rtl/cordic_control.v
+FC:/EDAtools/proj_v2/src/verilog-rtl/cordic_control.v
+L0 19
+R6
+r1
+!s85 0
+31
+R11
+!s107 C:/EDAtools/proj_v2/src/verilog-rtl/cordic_control.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-rtl/cordic_control.v|
+!i113 0
+R8
+R2
+vhilbert
+R9
+!i10b 1
+!s100 NegD]PD<d97;=J[=oEnTW2
+IKJ:<>kX<34HS0LHnDch[n0
+R5
+R0
+w1585259085
+8C:/EDAtools/proj_v2/src/verilog-rtl/hilbert.v
+FC:/EDAtools/proj_v2/src/verilog-rtl/hilbert.v
+L0 33
+R6
+r1
+!s85 0
+31
+R11
+!s107 C:/EDAtools/proj_v2/src/verilog-rtl/hilbert.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-rtl/hilbert.v|
+!i113 0
+R8
+R2
+vhilbert_chain
+R9
+!i10b 1
+!s100 CMIcLX^_g;eUI1GCZh@iD2
+I=MB>27RJIkY56U76L3:;S1
+R5
+R0
+w1583767367
+8C:/EDAtools/proj_v2/src/verilog-rtl/hilbert_chain.v
+FC:/EDAtools/proj_v2/src/verilog-rtl/hilbert_chain.v
+L0 13
+R6
+r1
+!s85 0
+31
+R11
+!s107 C:/EDAtools/proj_v2/src/verilog-rtl/hilbert_chain.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-rtl/hilbert_chain.v|
+!i113 0
+R8
+R2
+vITERCOUNTER_16
+R9
+!i10b 1
+!s100 fSX<ORaIUcUkN0i6Qk56_0
+I^dUgaFX<o80bS2YT^WH2Q0
+R5
+R0
+Z12 w1583754218
+8C:/EDAtools/proj_v2/src/verilog-rtl/ITERCOUNTER_16.v
+FC:/EDAtools/proj_v2/src/verilog-rtl/ITERCOUNTER_16.v
+L0 28
+R6
+r1
+!s85 0
+31
+R11
+!s107 C:/EDAtools/proj_v2/src/verilog-rtl/ITERCOUNTER_16.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-rtl/ITERCOUNTER_16.v|
+!i113 0
+R8
+R2
+n@i@t@e@r@c@o@u@n@t@e@r_16
+vMODSCALE_16
+R9
+!i10b 1
+!s100 CNm=5oV^[f5=X5;hezJTO0
+IKBXEZbXm3?Uj;SPRZOmW?2
+R5
+R0
+R12
+8C:/EDAtools/proj_v2/src/verilog-rtl/MODSCALE_16.v
+FC:/EDAtools/proj_v2/src/verilog-rtl/MODSCALE_16.v
+L0 29
+R6
+r1
+!s85 0
+31
+R11
+!s107 C:/EDAtools/proj_v2/src/verilog-rtl/MODSCALE_16.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-rtl/MODSCALE_16.v|
+!i113 0
+R8
+R2
+n@m@o@d@s@c@a@l@e_16
+vphasediff
+R9
+!i10b 1
+!s100 ek;Q=MJMDKMg<BPaD1SPh3
+If4[][cYRZ@DFn?XFeZZ6a0
+R5
+R0
+w1585273631
+8C:/EDAtools/proj_v2/src/verilog-rtl/phasediff.v
+FC:/EDAtools/proj_v2/src/verilog-rtl/phasediff.v
+Z13 L0 17
+R6
+r1
+!s85 0
+31
+R11
+!s107 C:/EDAtools/proj_v2/src/verilog-rtl/phasediff.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-rtl/phasediff.v|
+!i113 0
+R8
+R2
+vphasemean
+R9
+!i10b 1
+!s100 zYzg]iT2aH^Qc26e9Y5]^3
+IlX5PhS:n^V]nKY^mgZI702
+R5
+R0
+w1584708721
+8C:/EDAtools/proj_v2/src/verilog-rtl/phasemean.v
+FC:/EDAtools/proj_v2/src/verilog-rtl/phasemean.v
+L0 27
+R6
+r1
+!s85 0
+31
+R11
+!s107 C:/EDAtools/proj_v2/src/verilog-rtl/phasemean.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-rtl/phasemean.v|
+!i113 0
+R8
+R2
+vtb_all_phase
+Z14 !s110 1585276124
+!i10b 1
+!s100 L2BnDnEAM=R]zbi;AWNK:2
+Ifn[`I1ODlGJ9z[3[L9lWU2
+R5
+R0
+w1585276119
+8C:/EDAtools/proj_v2/src/verilog-tb/tb_all_phase_dataset1.v
+FC:/EDAtools/proj_v2/src/verilog-tb/tb_all_phase_dataset1.v
+Z15 L0 12
+R6
+r1
+!s85 0
+31
+Z16 !s108 1585276124.000000
+!s107 C:/EDAtools/proj_v2/src/verilog-tb/tb_all_phase_dataset1.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-tb/tb_all_phase_dataset1.v|
+!i113 0
+R8
+R2
+vtb_hilbert
+R14
+!i10b 1
+!s100 Z1Sji77FX64=ll_O^e98]3
+IzzPB[GTaO4U`38X2oSf]h2
+R5
+R0
+w1585186052
+8C:/EDAtools/proj_v2/src/verilog-tb/tb_hilbert.v
+FC:/EDAtools/proj_v2/src/verilog-tb/tb_hilbert.v
+L0 7
+R6
+r1
+!s85 0
+31
+R16
+!s107 C:/EDAtools/proj_v2/src/verilog-tb/tb_hilbert.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-tb/tb_hilbert.v|
+!i113 0
+R8
+R2
+vtb_phasediff
+R14
+!i10b 1
+!s100 WH5zijZz<^>1XfcT83CC:2
+I<T;LRENMLeRUHYT?VWj7W0
+R5
+R0
+w1584550943
+8C:/EDAtools/proj_v2/src/verilog-tb/tb_phasediff.v
+FC:/EDAtools/proj_v2/src/verilog-tb/tb_phasediff.v
+R15
+R6
+r1
+!s85 0
+31
+R16
+!s107 C:/EDAtools/proj_v2/src/verilog-tb/tb_phasediff.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-tb/tb_phasediff.v|
+!i113 0
+R8
+R2
+vtb_phasemean
+R14
+!i10b 1
+!s100 CGbLS0Y4jRLeJBS@[4TO32
+Ih`8ASkfHco6:IZk8[409^3
+R5
+R0
+w1584554670
+8C:/EDAtools/proj_v2/src/verilog-tb/tb_phasemean.v
+FC:/EDAtools/proj_v2/src/verilog-tb/tb_phasemean.v
+R15
+R6
+r1
+!s85 0
+31
+R16
+!s107 C:/EDAtools/proj_v2/src/verilog-tb/tb_phasemean.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-tb/tb_phasemean.v|
+!i113 0
+R8
+R2
+vtb_top_cordic
+R14
+!i10b 1
+!s100 =z4BW[nkoIhd?zMjMo4ki1
+INd];j26cfV=0BJI8O[eGN2
+R5
+R0
+w1584550981
+8C:/EDAtools/proj_v2/src/verilog-tb/tb_top_cordic.v
+FC:/EDAtools/proj_v2/src/verilog-tb/tb_top_cordic.v
+R15
+R6
+r1
+!s85 0
+31
+R16
+!s107 C:/EDAtools/proj_v2/src/verilog-tb/tb_top_cordic.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-tb/tb_top_cordic.v|
+!i113 0
+R8
+R2
+vtop_cordic
+R9
+!i10b 1
+!s100 IoAObD0`mA58WfhijOU][2
+I;Fd6oCA_?ca[f0LQeg=nl1
+R5
+R0
+w1585269857
+8C:/EDAtools/proj_v2/src/verilog-rtl/top_cordic.v
+FC:/EDAtools/proj_v2/src/verilog-rtl/top_cordic.v
+R13
+R6
+r1
+!s85 0
+31
+R11
+!s107 C:/EDAtools/proj_v2/src/verilog-rtl/top_cordic.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/EDAtools/proj_v2/src/verilog-rtl/top_cordic.v|
+!i113 0
+R8
+R2
