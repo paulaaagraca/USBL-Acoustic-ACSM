@@ -1,0 +1,195 @@
+%function [dist, timediff] = difftime(source, h1, h2, h3, h4, auv)
+%------------------------------------------------------------------------
+% Function: calculates distance between acoustic source and the AUV and
+% the time differences between hydrophones.
+% Inputs 
+%   source - vector; [x, y, z] coordinates of acoustic source
+%   h1     - vector; [x, y, z] coordinates of hydrophone 1
+%   h2     - vector; [x, y, z] coordinates of hydrophone 2
+%   h3     - vector; [x, y, z] coordinates of hydrophone 3
+%   h4     - vector; [x, y, z] coordinates of hydrophone 4
+%   auv    - vector; [x, y, z] coordinates of AUV's center of mass
+% Output
+%   dist     - double; distance between the acoustic source and the AUV
+%   timediff - vector; time difference between hydrophones
+%------------------------------------------------------------------------
+
+%if no inputs are given
+%if nargin<1 
+    source = [10 10 10];
+    h1 = [ 1 1 1];
+    h2 = [ 1 1 -1];
+    h3 = [ 1 -1 -1];
+    h4 = [ 2 0 0];
+    auv = [0 0 0];
+%if AUV's center of mass is not given
+%elseif nargin < 6 
+%    auv = [0 0 0];
+%end
+
+% equal 1 to plot positions of objects in 3D space
+plot = 0;
+prints = 1;
+f = 125000000;  % operation frequency - Hz
+c_sound = 1500; % avg sound speed - m/s
+w_leng = c_sound/f; %wavelength - m
+
+if prints == 1
+    fprintf('___________\nInit data:\nSource (%3.3f,%3.3f,%3.3f)\n', source(1), source(2), source(3));
+    %fprintf('AUV (%3.3f,%3.3f,%3.3f)\n', auv(1), auv(2), auv(3));
+    fprintf('H1 (%3.3f,%3.3f,%3.3f) \t\t H2 (%3.3f,%3.3f,%3.3f)\n', h1(1), h1(2), h1(3), h2(1), h2(2), h2(3));
+    fprintf('H3 (%3.3f,%3.3f,%3.3f) \t H4 (%3.3f,%3.3f,%3.3f)\n', h3(1), h3(2), h3(3), h4(1), h4(2), h4(3));
+end
+
+%______________plot 3D space__________________________________
+
+if plot==1
+    % plot acoustic source location
+    scatter3(source(1),source(2),source(3),40,'r','filled')
+    hold on
+    % plot auv's center of mass location
+    scatter3(auv(1),auv(2),auv(3),40,'g','filled')
+    hold on
+    % gather x,y and z coordinates of hydrophones
+    X = [h1(1), h2(2), h3(1), h4(1)]; 
+    Y = [h1(2), h2(2), h3(2), h4(2)]; 
+    Z = [h1(3), h2(3), h3(3), h4(3)]; 
+    % plot hydrophones location
+    scatter3(X,Y,Z,40,'b','filled')
+    legend('Source','AUV','Hydrophones')
+    hold on
+end
+
+%___________angles calculation (azimuth and elevation)______________
+
+%calculate shift between acoustic source and AUV
+x_init_ang = source(1) - auv(1);
+y_init_ang = source(2) - auv(2);
+z_init_ang = source(3) - auv(3);
+
+%distance between acoustic source and AUV
+dist = sqrt((x_init_ang)^2 + (y_init_ang)^2 + (z_init_ang)^2);
+%atan2(imag,re) - four quadrant inverse tangent
+azimuth_rad = atan2(y_init_ang,x_init_ang);
+elevation_rad = atan2(z_init_ang,y_init_ang);
+azimuth_deg = azimuth_rad*180/pi;
+elevation_deg = elevation_rad*180/pi;
+
+if prints == 1
+    fprintf('**Angles** Azimuth = %3.6f deg \t Elevation = %3.6f deg\n', azimuth_deg,elevation_deg);
+end
+%_____________Hydrophones related calculations___________________________________
+
+% distance between source and hydrophones
+dist_h1 = sqrt((source(1) - h1(1))^2 + (source(2) - h1(2))^2 + (source(3) - h1(3))^2);
+dist_h2 = sqrt((source(1) - h2(1))^2 + (source(2) - h2(2))^2 + (source(3) - h2(3))^2);
+dist_h3 = sqrt((source(1) - h3(1))^2 + (source(2) - h3(2))^2 + (source(3) - h3(3))^2);
+dist_h4 = sqrt((source(1) - h4(1))^2 + (source(2) - h4(2))^2 + (source(3) - h4(3))^2);
+
+%sort from closer to further hydrophone to the source
+dist_h_vec = [dist_h1,dist_h2,dist_h3,dist_h4];
+[B,K] = sort(dist_h_vec);
+
+if prints == 1
+fprintf('Hydrophones from closer to further: %d %d %d %d\n', K);
+end
+
+%considering a plain source wave (source is sufficiently far)
+%3D distance between hydrophones
+d12 = sqrt((h1(1)-h2(1))^2 + (h1(2)-h2(2))^2 + (h1(3)-h2(3))^2);
+d13 = sqrt((h1(1)-h3(1))^2 + (h1(2)-h3(2))^2 + (h1(3)-h3(3))^2);
+d14 = sqrt((h1(1)-h4(1))^2 + (h1(2)-h4(2))^2 + (h1(3)-h4(3))^2);
+d23 = sqrt((h2(1)-h3(1))^2 + ((h2(2)-h3(2)))^2 + (h2(3)-h3(3))^2);
+d24 = sqrt((h2(1)-h4(1))^2 + ((h2(2)-h4(2)))^2 + (h2(3)-h4(3))^2);
+d34 = sqrt((h3(1)-h4(1))^2 + ((h3(2)-h4(2)))^2 + (h3(3)-h4(3))^2);
+
+%distance the wave travels to h2 after it hits h1
+%2D (xz) distance between hydrophones
+
+slope14 = (h4(1)-h1(1))/(h4(3)-h1(3));
+
+
+
+dt12_el = abs(cos(elevation_rad)*d12);
+n_w12=(dt12_el/1500)/w_leng;
+%time difference between h1 and h2
+t12_az = dt12_el/c_sound;
+
+dt12_az = abs(cos(azimuth_deg)*d12);
+t12_az = dt12_az/c_sound;
+
+%distance the wave travels to h3 after it hits h1
+dt13 = abs(cos(elevation_rad)*d13);
+n_w13=(dt13/1500)/w_leng;
+%time difference between h1 and h3
+t13 = dt13/c_sound;
+
+%distance the wave travels to h4 after it hits h1
+dt14= abs(cos(elevation_rad)*d14);
+n_w14=(dt14/1500)/w_leng;
+%time difference between h1 and h4
+t14 = dt14/c_sound;
+
+%distance the wave travels to h3 after it hits h2
+dt23 = abs(cos(elevation_rad)*d23);
+n_w23=(dt23/1500)/w_leng;
+%time difference between h2 and h3
+t23 = dt23/c_sound;
+
+%distance the wave travels to h3 after it hits h2
+dt24 = abs(cos(elevation_rad)*d24);
+n_w24=(dt24/1500)/w_leng;
+%time difference between h2 and h4
+t24 = dt24/c_sound;
+
+%distance the wave travels to h4 after it hits h3
+dt34 = abs(cos(elevation_rad)*d34);
+n_w34=(dt34/1500)/w_leng;
+%time difference between h3 and h4
+t34 = dt34/c_sound;
+
+%timediff = [t12, t13, t14, t23, t24, t34];
+
+%angleofarrival(h1, h2, h3, h4, timediff);
+
+% %1 . . .
+% if K(1) == 1 
+%     % 1 2 . .
+%     if K(2) == 2
+%         totaldiff_a = timediff(1);
+%         % 1 2 3 4
+%         if K(3) == 3
+%             totaldiff_b = totaldiff_a + timediff(4);
+%         % 1 2 4 3 
+%         elseif K(3) == 4
+%             totaldiff_b = totaldiff_a + timediff(5);
+%         end
+%         totaldiff_c = totaldiff_b + timediff(6); % t34
+%     % 1 3 . .     
+%     elseif K(2) == 3
+%         totaldiff_a = timediff(2);
+%         % 1 3 2 4
+%         if K(3) == 2
+%             totaldiff_b = totaldiff_a + timediff(4);
+%         % 1 3 4 2
+%         elseif K(3) == 4
+%             totaldiff_b = totaldiff_a + timediff(6);
+%         end
+%         totaldiff_c = totaldiff_b + timediff(5); %t24
+%     % 1 4 . .    
+%     elseif K(2) == 4
+%         totaldiff_a = timediff(3);
+%          % 1 4 2 3
+%         if K(3) == 2
+%             totaldiff_b = totaldiff_a + timediff(5);
+%         % 1 4 3 2
+%         elseif K(3) == 3
+%             totaldiff_b = totaldiff_a + timediff(6);
+%         end
+%         totaldiff_c = totaldiff_b + timediff(4); %t23
+%     end
+% elseif K(1) == 2
+% end
+
+%___________________________________________________________
+%end

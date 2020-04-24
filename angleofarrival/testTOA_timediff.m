@@ -18,12 +18,12 @@ t0 = 0;
 
 % Sensors' configuration [r1 r2 r3 r4];
 % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
-ri = [0.3   0      0      0;
-      0     0.05    -0.05   0;
-      0     0      0      0.3];
+ri = [0.6   0      0      0;
+      0     0.3    -0.3   0;
+      0     0      0      0.4];
 
 % Target's position     
-%s = [-4065 30 478]';
+%s = [50 30 20]';
 
 % USBL's position
 a = [0 0 0]';
@@ -56,30 +56,35 @@ tdoa = [ti(1)-ti(2);
 
 %define reference hydrophone
 Tref = t0 + norm( s - (ri(:,ref_H) - a ) ) / cs; % + rand()/100/cs
+%Tref = 10^6/cs; % + rand()/100/cs
 
 %define time diff to add to each hydrophone in relation to Tref of 
 %reference hydrophone ref_H
 tdoa_abs = abs(tdoa);
 T=[Tref Tref Tref Tref];
 for k=1:6
+    %hydrophone pairs [1 ref_H] [ref_H 1]
     if (hydro_comb(1,k) == ref_H || hydro_comb(1,k) == 1)
         if (hydro_comb(2,k) == ref_H || hydro_comb(2,k) == 1)
             T(1) = T(1)+tdoa_abs(k);
         end 
     end
-        
+    
+    %hydrophone pairs [2 ref_H] [ref_H 2]
     if (hydro_comb(1,k) == ref_H || hydro_comb(1,k) == 2)
         if (hydro_comb(2,k) == ref_H || hydro_comb(2,k) == 2)
             T(2) = T(2)+tdoa_abs(k);
         end
     end
-        
+    
+    %hydrophone pairs [3 ref_H] [ref_H 3]
     if (hydro_comb(1,k) == ref_H || hydro_comb(1,k) == 3)
         if (hydro_comb(2,k) == ref_H || hydro_comb(2,k) == 3)
             T(3) = T(3)+tdoa_abs(k);
         end
     end
  
+    %hydrophone pairs [4 ref_H] [ref_H 4]
     if (hydro_comb(1,k) == ref_H || hydro_comb(1,k) == 4)
         if (hydro_comb(2,k) == ref_H || hydro_comb(2,k) == 4)
             T(4) = T(4)+tdoa_abs(k);
@@ -98,7 +103,9 @@ Y = [cs^2*(T(1))^2 + ri(:,1)'*ri(:,1);
 X =(A'*A)^(-1)*A'*Y;
 R = X(2:4);
 
+%convert cartesian coordinates to spherical
 [azimuth,elevation,r] = cart2sph(R(1),R(2),R(3));
+%convert radians to degrees
 azimuth = azimuth*180/pi;
 elevation = elevation*180/pi;
 
