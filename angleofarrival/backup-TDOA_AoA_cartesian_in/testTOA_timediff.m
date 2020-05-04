@@ -18,9 +18,9 @@ t0 = 0;
 
 % Sensors' configuration [r1 r2 r3 r4];
 % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
-ri = [0.2   0      0      0;
+ri = [3   0      0      0;
       0     0.2    -0.2   0;
-      0     0      0      2];
+      0     0      0      0.2];
 
 % Target's position     
 %s = [-40 -40 0]';
@@ -101,7 +101,7 @@ Y = [cs^2*(T(1))^2 - ri(:,1)'*ri(:,1);
      cs^2*(T(4))^2 - ri(:,4)'*ri(:,4)];
       
 X =(A'*A)^(-1)*A'*Y;
-R = X(2:4);
+R = X(2:4)
 
 %convert cartesian coordinates to spherical
 [azimuth,elevation,r] = cart2sph(R(1),R(2),R(3));

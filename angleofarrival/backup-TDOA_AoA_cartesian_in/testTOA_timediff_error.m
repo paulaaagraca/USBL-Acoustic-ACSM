@@ -9,13 +9,13 @@
 %--------------------------------------------------------------------------
 clear
 %---test options---------------
-    d_10=0;                     % use coordinates in range [10,100]
+    d_10=1;                     % use coordinates in range [10,100]
     d_100=0;                    % use coordinates in range [100,10^3]
     d_1000=0;                   % use coordinates in range [10^4,10^5]
-    d_all=1;                    % use all previous coordinates
-    plot_position_cloud = 1;    % plot positions of source
+    d_all=0;                    % use all previous coordinates
+    plot_position_cloud = 0;    % plot positions of source
     plot_error_cartesian = 1;   % plot error in cartesian coordinates
-    plot_error_spherical = 1;   % plot error in spherical coordinates
+    plot_error_spherical = 0;   % plot error in spherical coordinates
 %-------------------------------
 
 %init error variales

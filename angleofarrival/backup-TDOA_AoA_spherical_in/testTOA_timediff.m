@@ -9,6 +9,8 @@ function [R,a,azimuth,elevation,r] = testTOA_timediff(s) %[R]
 %   - azimuth:   estimated angle of azimuth (degrees) from AUV to source
 %   - elevation: estimated angle of elevation (degrees) from AUV to source
 %   - r:         estimated norm (meters) from AUV to source
+%
+%   Note: when elevation is 90/-90 deg, azimuth value has no meaning
 %--------------------------------------------------------------------------
 % Sound speed
 cs = 1500;
@@ -18,12 +20,12 @@ t0 = 0;
 
 % Sensors' configuration [r1 r2 r3 r4];
 % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
-ri = [0.6   0      0      0;
-      0     0.3    -0.3   0;
-      0     0      0      0.4];
+ri = [0.2   0      0      0;
+      0     0.2    -0.2   0;
+      0     0      0      2];
 
 % Target's position     
-%s = [50 30 20]';
+%s = [-40 -40 0]';
 
 % USBL's position
 a = [0 0 0]';
@@ -42,7 +44,7 @@ hydro_comb = [1 1 1 2 2 3;
 % Times of arrival for TDOA calculation
 ti = zeros(4,1);
 for i=1:4
-    ti(i) = t0 + norm( s - (ri(:,i) - a ) ) / cs; % + rand()/100/cs
+    ti(i) = t0 + norm( s - (a - ri(:,i) ) ) / cs; % + rand()/100/cs
 end
 tdoa = [ti(1)-ti(2);
         ti(1)-ti(3);
@@ -55,7 +57,7 @@ tdoa = [ti(1)-ti(2);
 [ref_H, equidist_H] = closer_hydro(tdoa);
 
 %define reference hydrophone
-Tref = t0 + norm( s - (ri(:,ref_H) - a ) ) / cs; % + rand()/100/cs
+Tref = t0 + norm( s - (a - ri(:,ref_H) ) ) / cs; % + rand()/100/cs
 %Tref = 10^6/cs; % + rand()/100/cs
 
 %define time diff to add to each hydrophone in relation to Tref of 
@@ -94,11 +96,11 @@ end
 
 
 % Solution
-A = [ones(4,1), -2*ri'];
-Y = [cs^2*(T(1))^2 + ri(:,1)'*ri(:,1);
-     cs^2*(T(2))^2 + ri(:,2)'*ri(:,2);
-     cs^2*(T(3))^2 + ri(:,3)'*ri(:,3);
-     cs^2*(T(4))^2 + ri(:,4)'*ri(:,4)];
+A = [ones(4,1), +2*ri'];
+Y = [cs^2*(T(1))^2 - ri(:,1)'*ri(:,1);
+     cs^2*(T(2))^2 - ri(:,2)'*ri(:,2);
+     cs^2*(T(3))^2 - ri(:,3)'*ri(:,3);
+     cs^2*(T(4))^2 - ri(:,4)'*ri(:,4)];
       
 X =(A'*A)^(-1)*A'*Y;
 R = X(2:4);
