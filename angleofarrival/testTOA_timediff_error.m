@@ -27,6 +27,12 @@ error_elevation = zeros();
 error_norm = zeros();
 s = zeros(3,1);
 
+% hydrophones configuration [r1 r2 r3 r4];
+% r1 -> front; r2 -> left; r3 -> right; r4 -> top;
+ri = [0.2   0      0      0;
+      0     0.2    -0.2   0;
+      0     0      0      2];
+
 
 % define range of azimuth
 t_azimuth_deg = -180:10:180;
@@ -71,7 +77,7 @@ end
 %compute error for i different samples
 for i=1:n_samples
     
-    [R,a,azimuth,elevation,norm] = testTOA_timediff(s(:,i));
+    [R,a,azimuth,elevation,norm] = testTOA_timediff(s(:,i), ri, 0);
     %calculate real cartesian coordinates
     real_r = s(:,i)-a;
     %calculate real spherical coordinates
