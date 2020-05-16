@@ -1,0 +1,141 @@
+\begin{thebibliography}{10}
+
+\bibitem{trilat}
+S.~M. S. Islam H.~Wang A.~P.~Pandian, T.~Senjyu.
+\newblock Weighted trilateratiton and centroid combined indoor localization in
+  wifi based sensor network.
+\newblock In {\em Proceeding of the International Conference on Computer
+  Networks, Big Data and IoT (ICCBI - 2018)}, pages 163--166, jul 2019.
+
+\bibitem{thesis-joao}
+J.~M. F.~Magalh\ {a}es.
+\newblock Improving time of arrival estimation using encoded acoustic signals.
+\newblock Master's thesis, Faculty of Engineering of the University of Porto,
+  Porto, jul 2018.
+
+\bibitem{crosscorr}
+A.~R.~Mohanty B.~M. R.~Bharathi.
+\newblock Underwater sound source localization by emd-based maximum likelihood
+  method.
+\newblock {\em Acoustics Australia}, 46(2):193--203, 2018.
+
+\bibitem{afonso-thesis}
+A.~M. Bonito.
+\newblock Acoustic system for ground truth underwater positioning in deec’s
+  test tank.
+\newblock Master's thesis, Faculty of Engineering of the University of Porto,
+  Porto, jul 2019.
+
+\bibitem{pathloss}
+G.~S. B.~Rao D.~E.~Chaitanya, C. V.~Sridevi.
+\newblock Path loss analysis of underwater communication systems.
+\newblock In {\em IEEE Technology Students' Symposium}, pages 65--70. 2011.
+
+\bibitem{usbl-new}
+C.~Zheng W.~Huang D.~Sun, J.~Ding.
+\newblock An underwater acoustic positioning algorithm for compact arrays with
+  arbitrary configuration.
+\newblock {\em IEEE Journal of Selected Topics in Signal Processing},
+  13(1):120--130, mar 2019.
+
+\bibitem{ocean-acoust}
+M.~B. Porter H.~Schmidt F.~B.~Jensen, W. A.~Kuperman.
+\newblock Fundamentals of ocean acoustics.
+\newblock In {\em Computational Ocean Acoustics}, pages 3--17. Springer Science
+  \& Business Media, second edition, 2011.
+
+\bibitem{wirelesscomm}
+S.~Gezici.
+\newblock A survey on wireless position estimation.
+\newblock {\em Wireless Personal Communications}, 44(3):263–282, 2008.
+\newblock Springer Science \& Business Media.
+
+\bibitem{evologics3}
+EvoLogics GmbH.
+\newblock 18/34 communication and positioning devices, 2018.
+\newblock [Online]. Available: https://evologics.de/acoustic-modem/18-34
+  [Accessed Jan. 26, 2020].
+
+\bibitem{evologics4}
+EvoLogics GmbH.
+\newblock S2c r 12/24 usbl communication and positioning device, 2018.
+\newblock [Online]. Available:
+  https://evologics.de/acoustic-modem/12-24/usbl-serie [Accessed Jan. 26,
+  2020].
+
+\bibitem{evologics2}
+EvoLogics GmbH.
+\newblock S2c technology, 2018.
+\newblock [Online]. Available: https://evologics.de/s2c-technology [Accessed
+  Jan. 26, 2020].
+
+\bibitem{evologics1}
+EvoLogics GmbH.
+\newblock Underwater usbl positioning systems, 2018.
+\newblock [Online] Available: https://evologics.de/usbl. [Accessed Jan. 26,
+  2020].
+
+\bibitem{survey-tech-chall}
+W.~K. G. Seah M.~Waldmeyer H.~P.~Tan, R.~Diamant.
+\newblock A survey of techniques and challenges in underwater localization.
+\newblock {\em Ocean Engineering}, 38(1):1663--1676, 2011.
+
+\bibitem{triangalgo}
+C.~Couto J.S.~Esteves, A.~Carvalho.
+\newblock Generalized geometric triangulation algorithm for mobile robot
+  absolute self-localization.
+\newblock In {\em 2003 IEEE International Symposium on Industrial Electronics},
+  volume~1, pages 346--351, Rio de Janeiro, Brazil, 2003.
+
+\bibitem{lblsblusbl}
+A.~I.~Mashoshinc. K.~G.~Kebkala.
+\newblock Auv acoustic positioning methods.
+\newblock {\em Gyroscopy and Navigation}, 8(1):80--89, sep 2017.
+
+\bibitem{deeperblue}
+J.~Liang.
+\newblock Fifteen percent of ocean floor now mapped, Jun 2019.
+\newblock [Online] Available:
+  https://www.deeperblue.com/fifteen-percent-of-ocean-floor-now-mapped/.
+  [Accessed Oct. 28, 2019].
+
+\bibitem{arch_localiz}
+S.~Oktug M.~Erol-Kantarci, H. T.~Mouftah.
+\newblock A survey of architectures and localization techniques for underwater
+  acoustic sensor networks.
+\newblock {\em IEEE Communications Surveys \& Tutorials}, 13(3):487--502, 2011.
+
+\bibitem{commchan}
+J.~Preisig M.~Stojanovic.
+\newblock Underwater acoustic communication channels: Propagation models and
+  statistical characterization.
+\newblock {\em IEEE Communications Magazine}, 47(1):84--89, 2009.
+
+\bibitem{hipap_hardw}
+Kongsberg Maritime.
+\newblock Hipap - high precision acoustic positioning, 2016.
+\newblock [Online]. Available:
+  https://www.kongsberg.com/maritime/products/Acoustics-Positioning-and-Communication/acoustic-positioning-systems/hipap-models/
+  [Accessed May 2, 2020].
+
+\bibitem{sonardyne1}
+Sonardyne.
+\newblock Micro-ranger 2 shallow water usbl system, 2020.
+\newblock [Online]. Available:
+  https://www.sonardyne.com/product/micro-ranger-2-shallow-water-usbl-system/
+  [Accessed Feb. 3, 2020].
+
+\bibitem{suvey-loc}
+Y.~S. Choo H. V.~Ee V.~Chandrasekhar, W. KG~Seah.
+\newblock Localization in underwater sensor networks: survey and challenges.
+\newblock In {\em WUWNet '06: Proceedings of the 1st ACM international workshop
+  on Underwater networks}, pages 33--40, 2006.
+
+\bibitem{sbl}
+M.~Zhu X. Li L.~Zhang X.~You, Y.~Wu.
+\newblock Low complexity short baseline localization algorithm based on taylor
+  expansion.
+\newblock In {\em 2019 IEEE International Conference on Signal Processing,
+  Communications and Computing}, pages 1--5. IEEE, 2019.
+
+\end{thebibliography}

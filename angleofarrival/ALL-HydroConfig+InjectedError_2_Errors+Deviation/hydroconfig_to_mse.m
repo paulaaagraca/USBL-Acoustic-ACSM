@@ -1,26 +1,51 @@
 function [mse_config,deviation_azimuth_config,deviation_elevation_config] = ...
-    hydroconfig_to_mse(ri, max_dev, source_pos_single, accum_samples)  %add/remove ri as input if necessary
+    hydroconfig_to_mse(ri, max_dev, source_pos_single, accum_samples)
 %--------------------------------------------------------------------------
-% Function: Given the positions of a set of 4 hydrophones, it is calculated
-% the Mean Squared Error regarding the azimuth and elevation
+% Description: Given the positions of a set of 4 hydrophones, it is
+% calculated the Mean Squared Error and deviation regarding the azimuth 
+% and elevation.
+%   - A single configuration will be tested for various acoutic source's
+%     azimuth and elevation values. It will be returned only 3 error
+%     metrics
+%   - For each source position, there are a number of accumulated samples  
+%     witch will help evaluate the sensibility of the system to injected
+%     errors
+%--------------------------------------------------------------------------
+% Inputs:
+%   - ri:___hydrophone configuration being tested
+%   - max_dev:___maximum injected error in time difference of arrival
+%   - source_pos_single:___if equal to  1, estimated source positions can
+%     be plotted
+%   - accum_samples:___number of estimated positions which will be
+%     accumulated for a certain original source position
+%
+% Outputs:
+%   - mse_config:___Mean Squared Error of the input configuration
+%   - deviation_azimuth_config:___Azimuth Standard Deviation of the input
+%     configuration
+%   - deviation_elevation_config:___Elevation Standard Deviation of the
+%     input configurations
+%--------------------------------------------------------------------------
+% Author : Paula Graça (paula.graca@fe.up.pt), April 2020
 %--------------------------------------------------------------------------
 
-%----TEST OPTIONS----------------------------------------------------------
+%----test options----------------------------------------------------------
 % test for single source position
-plot_vectors = 0;   %plot estimated vectors for 1 source position (defined in execution loop)
-index_sourcepos = 1;    %index of source position for which is plotted estimated diff values
+plot_vectors = 0;     %plot estimated vectors for 1 source position 
+                      %(defined in execution loop)
+index_sourcepos = 1;  %index of source position for which is plotted estimated diff values
 
 %other plots
 plot_position_cloud = 0;    % plot positions of source
 plot_error3d_azimuth = 0;   % plot error of azimuth per azimuth and elevation
 plot_error3d_elevation = 0; % plot error of azimuth per azimuth and elevation
-
 %--------------------------------------------------------------------------
 
 %init error variales
 error_azimuth = zeros();
 error_elevation = zeros();
 s = zeros(3,1);
+spherical = zeros(3,1);
 R_accum = zeros(3,1);
 
 % maximum deviation of injected error in time differences
@@ -33,37 +58,42 @@ R_accum = zeros(3,1);
 %      0     0      0      2];
     
 % define range of azimuth
-t_azimuth_deg = -180:10:179;
-t_azimuth_rad = t_azimuth_deg * (pi/180);
+t_azimuth_deg = -180:10:179;                 % azimuth values in degrees
+t_azimuth_rad = t_azimuth_deg * (pi/180);    % azimuth values in radians
 
 % define range of elevation
-t_elevation_deg = -80:10:80;
-t_elevation_rad = t_elevation_deg *(pi/180);
+t_elevation_deg = -80:10:80;                 % elevation values in degrees
+t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 
 % save sizes of azimuth and elevation matrix 
-[rownum,n_samples_azimuth] = size(t_azimuth_rad); %number of samples to compute
-[rownum,n_samples_elevation] = size(t_elevation_rad); %number of samples to compute
+[rownum,n_samples_azimuth] = size(t_azimuth_rad);     %number of azimuth_positions
+[rownum,n_samples_elevation] = size(t_elevation_rad); %number of elevation_positions
 
+%--------------------------------------------------------------------------
+norm = [10000]; % norm values to be tested (row)
+count = 1;     % size of vector s +1 
+count_sph = 1; % size of vector spherical +1
 
-%----- generate all source positions ----------------------------------
-% all norm values to be tested
-norm = [1000];   
-count = 1;     % size(s)+1 
-count_sph = 1; % size(spherical)+1
+[rownum,n_samples_norm] = size(norm); %number of norm values to compute
 
-[rownum,n_samples_norm] = size(norm); %number of samples to compute
-
-
+%Loops: for each norm value      (in 'norm'), 
+%       for each elevation value (in 't_elevation_rad'/'t_elevation_deg'),
+%       for all azimuth values   (in 't_azimuth_rad'/'t_azimuth_deg')
+%           save all combination of [azimuth; elevation; norm] in:
+%               - cartesian coordinates in 's' 
+%               - spherical coordinates in 'spherical'
 for n = 1:n_samples_norm
     for i = 1:n_samples_elevation
         for k = 1:n_samples_azimuth
 
             % convert spherical to cartesian coordinates
             [x, y, z] = sph2cart(t_azimuth_rad(k), t_elevation_rad(i), norm(n));
-            s(:,count) = [x,y,z]';
+            
+            % accumulate cartesian coordinates in matrix's collumns
+            s(:,count) = [x,y,z]'; 
             count = count+1;
 
-            % matrix of spherical coordinates (in collumns)
+            % accumulate spherical coordinates in matrix's collumns
             spherical(:,count_sph) = [t_azimuth_deg(k),t_elevation_deg(i), norm(n)]';
             count_sph = count_sph + 1;
 
@@ -73,16 +103,10 @@ end
 
 %testing a single source position
 %s=[-100;100;50];
-    
-maxpos_azimuth=0;
-maxneg_azimuth=0;
-maxpos_elevation=0;
-maxneg_elevation=0;
 
+%--------------------------------------------------------------------------
 
 [rownum,n_samples] = size(s); %number of samples to compute
-
-count_error_samples = 1;
 
 %accum_samples = 1;
 %compute error for i different samples

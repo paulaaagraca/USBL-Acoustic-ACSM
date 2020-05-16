@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.19)  13 FEB 2020 18:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.19)  13 MAY 2020 15:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -196,27 +196,22 @@ Package: lineno 2005/11/02 line numbers on paragraphs v4.41
 \bframesep=\dimen125
 \bframebox=\box27
 LaTeX Info: Redefining \\ on input line 3056.
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/natbib/natbib.sty
-Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip43
-\bibsep=\skip44
-LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count103
 )
 \@vivatext=\box28
 \@supervisorstext=\box29
+
 (/usr/local/texlive/2019/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
 s
-\f@nch@headwidth=\skip45
-\f@nch@O@elh=\skip46
-\f@nch@O@erh=\skip47
-\f@nch@O@olh=\skip48
-\f@nch@O@orh=\skip49
-\f@nch@O@elf=\skip50
-\f@nch@O@erf=\skip51
-\f@nch@O@olf=\skip52
-\f@nch@O@orf=\skip53
+\f@nch@headwidth=\skip43
+\f@nch@O@elh=\skip44
+\f@nch@O@erh=\skip45
+\f@nch@O@olh=\skip46
+\f@nch@O@orh=\skip47
+\f@nch@O@elf=\skip48
+\f@nch@O@erf=\skip49
+\f@nch@O@olf=\skip50
+\f@nch@O@orf=\skip51
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2018/11/30 v6.88e Hypertext links for LaTeX
@@ -267,15 +262,15 @@ Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
 \@linkdim=\dimen126
-\Hy@linkcounter=\count104
-\Hy@pagecounter=\count105
+\Hy@linkcounter=\count103
+\Hy@pagecounter=\count104
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2018/11/30 v6.88e Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-\Hy@SavedSpaceFactor=\count106
+\Hy@SavedSpaceFactor=\count105
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
@@ -291,10 +286,10 @@ Package hyperref Info: Plain pages OFF on input line 4534.
 Package hyperref Info: Backreferencing OFF on input line 4539.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4772.
-\c@Hy@tempcnt=\count107
+\c@Hy@tempcnt=\count106
 LaTeX Info: Redefining \url on input line 5125.
 \XeTeXLinkMargin=\dimen127
-\Fld@menulength=\count108
+\Fld@menulength=\count107
 \Field@Width=\dimen128
 \Fld@charsize=\dimen129
 Package hyperref Info: Hyper figures ON on input line 6378.
@@ -306,23 +301,23 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6405.
 Package hyperref Info: PDF/A mode OFF on input line 6410.
 LaTeX Info: Redefining \ref on input line 6450.
 LaTeX Info: Redefining \pageref on input line 6454.
-\Hy@abspage=\count109
-\c@Item=\count110
-\c@Hfootnote=\count111
+\Hy@abspage=\count108
+\c@Item=\count109
+\c@Hfootnote=\count110
 )
 Package hyperref Info: Driver: hpdftex.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2018/11/30 v6.88e Hyperref driver for pdfTeX
-\Fld@listcount=\count112
-\c@bookmark@seq@number=\count113
+\Fld@listcount=\count111
+\c@bookmark@seq@number=\count112
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
-\Hy@SectionHShift=\skip54
+\Hy@SectionHShift=\skip52
 )
 Package hyperref Info: Option `plainpages' set `false' on input line 518.
 Package hyperref Info: Option `bookmarksopen' set `false' on input line 518.
@@ -334,16 +329,16 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 518.
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2019/01/01 v2.4 Span multiple rows of a table
-\multirow@colwidth=\skip55
-\multirow@cntb=\count114
-\multirow@dima=\skip56
+\multirow@colwidth=\skip53
+\multirow@cntb=\count113
+\multirow@dima=\skip54
 \bigstrutjot=\dimen130
 )
 \@input{mymacros.aux}
 \openout2 = `mymacros.aux'.
 
 (./mymacros.tex) (./thesis.aux (./abstract.aux) (./abbrevs.aux) (./chapter1.aux
-) (./chapter2.aux) (./chapter3.aux) (./chapter4.aux) (./chapter5.aux))
+) (./chapter2.aux) (./chapter3.aux) (./chapter4.aux))
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
@@ -402,16 +397,16 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 \big@size=\dimen131
 (/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count115
+\scratchcounter=\count114
 \scratchdimen=\dimen132
 \scratchbox=\box30
-\nofMPsegments=\count116
-\nofMParguments=\count117
+\nofMPsegments=\count115
+\nofMParguments=\count116
 \everyMPshowfont=\toks19
-\MPscratchCnt=\count118
+\MPscratchCnt=\count117
 \MPscratchDim=\dimen133
-\MPnumerator=\count119
-\makeMPintoPDFobject=\count120
+\MPnumerator=\count118
+\makeMPintoPDFobject=\count119
 \everyMPtoPDFconversion=\toks20
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -451,7 +446,7 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count121
+\c@section@level=\count120
 )
 LaTeX Info: Redefining \ref on input line 61.
 LaTeX Info: Redefining \pageref on input line 61.
@@ -491,18 +486,12 @@ LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
  [-2
 
 ]
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 102.
- [-1
-
-
-]
-[0
-
-]
 \openout2 = `abstract.aux'.
 
- (./abstract.tex [1
+
+(./abstract.tex [1
+
+
 
 
 ] [2
@@ -619,7 +608,7 @@ l.23 A
 
 
 ]
-<figures/sound-profile.png, id=289, 412.54124pt x 394.47375pt>
+<figures/sound-profile.png, id=282, 412.54124pt x 394.47375pt>
 File: figures/sound-profile.png Graphic file (type png)
 <use figures/sound-profile.png>
 Package pdftex.def Info: figures/sound-profile.png  used on input line 27.
@@ -630,7 +619,7 @@ been already used, duplicate ignored
                    \relax 
 l.42 
       [4 <./figures/sound-profile.png>]
-<figures/multipath.png, id=299, 564.1075pt x 256.96pt>
+<figures/multipath.png, id=294, 564.1075pt x 256.96pt>
 File: figures/multipath.png Graphic file (type png)
 <use figures/multipath.png>
 Package pdftex.def Info: figures/multipath.png  used on input line 45.
@@ -643,8 +632,13 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.73 
-      [5 <./figures/multipath.png>]pdfTeX warning (ext4): destination with the 
-same identifier (name{page.6}) has been already used, duplicate ignored
+      [5 <./figures/multipath.png>]
+
+LaTeX Warning: Hyper reference `r:ocean-acoust' on page 6 undefined on input li
+ne 98.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.6}) has 
+been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.104 
@@ -659,12 +653,12 @@ fier (name{page.8}) has been already used, duplicate ignored
                    \relax 
 l.169 
        [8]
-<figures/triangulation.png, id=351, 306.14375pt x 242.9075pt>
+<figures/triangulation.png, id=352, 306.14375pt x 242.9075pt>
 File: figures/triangulation.png Graphic file (type png)
 <use figures/triangulation.png>
 Package pdftex.def Info: figures/triangulation.png  used on input line 191.
 (pdftex.def)             Requested size: 170.71393pt x 135.44905pt.
-<figures/geotriang.png, id=352, 530.98375pt x 392.46625pt>
+<figures/geotriang.png, id=353, 530.98375pt x 392.46625pt>
 File: figures/geotriang.png Graphic file (type png)
 <use figures/geotriang.png>
 Package pdftex.def Info: figures/geotriang.png  used on input line 204.
@@ -687,11 +681,16 @@ y used, duplicate ignored
 l.245 	\item F
               inal refinement of the measurement in order to improve accuracy.
 [11]
-<figures/lblsblusbl.png, id=381, 1164.35pt x 872.25874pt>
+<figures/lblsblusbl.png, id=386, 1164.35pt x 872.25874pt>
 File: figures/lblsblusbl.png Graphic file (type png)
 <use figures/lblsblusbl.png>
 Package pdftex.def Info: figures/lblsblusbl.png  used on input line 263.
 (pdftex.def)             Requested size: 426.79135pt x 319.72272pt.
+
+
+LaTeX Warning: Hyper reference `r:survey-tech-chall' on page 12 undefined on in
+put line 270.
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.12}) has
  been already used, duplicate ignored
 <to be read again> 
@@ -701,7 +700,7 @@ l.282
 Underfull \vbox (badness 1242) has occurred while \output is active []
 
  [14]
-<figures/usbl-config.png, id=413, 447.6725pt x 419.5675pt>
+<figures/usbl-config.png, id=419, 447.6725pt x 419.5675pt>
 File: figures/usbl-config.png Graphic file (type png)
 <use figures/usbl-config.png>
 Package pdftex.def Info: figures/usbl-config.png  used on input line 315.
@@ -727,7 +726,7 @@ Overfull \hbox (4.54181pt too wide) in paragraph at lines 346--369
 
  (./chapter3.tex
 Chapter 3.
-<figures/proposed-solution.png, id=432, 1000.73875pt x 594.22pt>
+<figures/proposed-solution.png, id=445, 1000.73875pt x 594.22pt>
 File: figures/proposed-solution.png Graphic file (type png)
 <use figures/proposed-solution.png>
 Package pdftex.def Info: figures/proposed-solution.png  used on input line 25.
@@ -740,7 +739,7 @@ Underfull \vbox (badness 3088) has occurred while \output is active []
 
 
 ]
-<figures/geohydro.png, id=439, 594.22pt x 400.49625pt>
+<figures/geohydro.png, id=453, 594.22pt x 400.49625pt>
 File: figures/geohydro.png Graphic file (type png)
 <use figures/geohydro.png>
 Package pdftex.def Info: figures/geohydro.png  used on input line 37.
@@ -749,7 +748,7 @@ Package pdftex.def Info: figures/geohydro.png  used on input line 37.
 Underfull \vbox (badness 2744) has occurred while \output is active []
 
  [18 <./figures/proposed-solution.png> <./figures/geohydro.png>]
-<figures/phase-diff.png, id=449, 2666.96375pt x 1090.0725pt>
+<figures/phase-diff.png, id=463, 2666.96375pt x 1090.0725pt>
 File: figures/phase-diff.png Graphic file (type png)
 <use figures/phase-diff.png>
 Package pdftex.def Info: figures/phase-diff.png  used on input line 53.
@@ -764,7 +763,7 @@ Overfull \hbox (85.35696pt too wide) in paragraph at lines 53--54
 
  (./chapter4.tex
 Chapter 4.
-<figures/timeline.png, id=461, 695.59875pt x 282.05376pt>
+<figures/timeline.png, id=475, 695.59875pt x 282.05376pt>
 File: figures/timeline.png Graphic file (type png)
 <use figures/timeline.png>
 Package pdftex.def Info: figures/timeline.png  used on input line 21.
@@ -778,44 +777,40 @@ Overfull \hbox (42.68173pt too wide) in paragraph at lines 21--22
 
 
 
-]) [22 <./figures/timeline.png>]
-\openout2 = `chapter5.aux'.
-
- (./chapter5.tex
-Chapter 5.
-
-Underfull \vbox (badness 1009) has occurred while \output is active []
-
- [23
+]) [22 <./figures/timeline.png>] (./thesis.bbl [23
 
 
 
 ]
-Overfull \hbox (6.5112pt too wide) in paragraph at lines 61--63
-[]\T1/ptm/m/n/10.95 [16] Sonar-dyne. "MICRO-RANGER 2 SHAL-LOW WA-TER USBL SYS-T
-EM," \T1/ptm/m/it/10.95 sonar-dyne.com\T1/ptm/m/n/10.95 ,
+Underfull \hbox (badness 2096) in paragraph at lines 115--120
+[]\T1/ptm/m/n/10.95 Kongsberg Mar-itime.  Hipap - high pre-ci-sion acous-tic po
+-si-tion-ing, 2016.  [On-
  []
 
-) [24]
-No file thesis.bbl.
+)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 148.
+ [24]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 148.
-(./thesis.aux (./abstract.aux) (./abbrevs.aux) (./chapter1.aux) (./chapter2.aux
-) (./chapter3.aux) (./chapter4.aux) (./chapter5.aux))
+ (./thesis.aux (./abstract.aux) (./abbrevs.aux) (./chapter1.aux)
+(./chapter2.aux) (./chapter3.aux) (./chapter4.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 148.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 148.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 68133A9A2AD944F2C4FA01C26B003B41;2295.
+(rerunfilecheck)             Checksum: 46A7DAD9646375FB21F3DFB4B9335366;2295.
+
+
+LaTeX Warning: There were undefined references.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 148.
  ) 
 Here is how much of TeX's memory you used:
- 8691 strings out of 492616
- 129783 string characters out of 6129480
- 239258 words of memory out of 5000000
- 12281 multiletter control sequences out of 15000+600000
- 69284 words of font info for 85 fonts, out of 8000000 for 9000
+ 8400 strings out of 492616
+ 126403 string characters out of 6129480
+ 233103 words of memory out of 5000000
+ 11978 multiletter control sequences out of 15000+600000
+ 65915 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,12n,45p,836b,463s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,12n,45p,836b,486s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -827,10 +822,10 @@ s/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/ut
 mr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
 
-Output written on thesis.pdf (40 pages, 658950 bytes).
+Output written on thesis.pdf (38 pages, 658915 bytes).
 PDF statistics:
- 545 PDF objects out of 1000 (max. 8388607)
- 466 compressed objects within 5 object streams
- 108 named destinations out of 1000 (max. 500000)
+ 565 PDF objects out of 1000 (max. 8388607)
+ 488 compressed objects within 5 object streams
+ 129 named destinations out of 1000 (max. 500000)
  320 words of extra memory for PDF output out of 10000 (max. 10000000)
 
