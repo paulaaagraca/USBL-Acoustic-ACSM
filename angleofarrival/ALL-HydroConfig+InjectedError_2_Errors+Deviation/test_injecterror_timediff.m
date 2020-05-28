@@ -12,7 +12,7 @@
 clear
 
 %------options-------------------------------------------------------------
-source_pos_single = 1;  %plot single position of source with injected error
+source_pos_single = 0;  %plot single position of source with injected error
 plot_mse_deviation = 1; %plot deviation and MSE plots
 plot_Hconfig = 0;       %plot single hydrophone configuration
 %------parameters----------------------------------------------------------
@@ -31,7 +31,7 @@ n_slide_samples = 10;  % number of samples to slide on axis
 n_error_test = 1;   %init counter for max_dev cycle
 
 % Loop: runs algorithm for various injected errors 
-for max_dev=0.5e-6    %0.1e-6:0.1e-6:5e-6
+for max_dev=0.5e-6 %0.1e-6:0.1e-6:0.5e-6
     
     %--Loop: positive slide of r1 in x axis------------------------------
     for i = 1 : n_slide_samples

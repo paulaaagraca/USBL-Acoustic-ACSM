@@ -65,7 +65,7 @@ tdoa = [ti(1)-ti(2);
         ti(3)-ti(4)];
     
 %lower precision
-%tdoa = round(tdoa*10^8)/10^8;
+%tdoa = round(tdoa*10^7)/10^7;
     
 %--------------------------------------------------------------------------
 % From this point on, it is considered that the source position is unknown
@@ -170,6 +170,7 @@ azimuth = azimuth*180/pi;
 elevation = elevation*180/pi;
 
 %--------------------------------------------------------------------------
+
 % unit vector of estimated position
 R_unit = R/r;
 

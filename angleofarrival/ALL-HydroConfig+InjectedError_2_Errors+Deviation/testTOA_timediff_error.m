@@ -11,7 +11,7 @@
 clear
 
 %---test options-----------------------------------------------------------
-plot_position_cloud = 1;    % plot 3D source positions
+plot_position_cloud = 0;    % plot 3D source positions
 plot_error_cartesian = 1;   % plot error in cartesian coordinates
 plot_error_spherical = 1;   % plot error in spherical coordinates
 plot_error3d_azimuth = 1;   % plot error of azimuth per azimuth(x) and elevation(y)
@@ -38,7 +38,7 @@ t_azimuth_deg = -180:10:179;                 % azimuth values in degrees
 t_azimuth_rad = t_azimuth_deg * (pi/180);    % azimuth values in radians
 
 % define range of elevation
-t_elevation_deg = -85:10:85;                 % elevation values in degrees
+t_elevation_deg = -80:10:80;                 % elevation values in degrees
 t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 
 % save sizes of azimuth and elevation matrix 
