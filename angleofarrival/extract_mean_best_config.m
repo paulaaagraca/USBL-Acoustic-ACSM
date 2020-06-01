@@ -1,4 +1,24 @@
 function [sets_config] = extract_mean_best_config(test_matrix,index_view)
+%--------------------------------------------------------------------------
+% Description: Given a matrix of the best configuration in each gen_test
+% round, it returns a matrix with the best configurations (with non
+% repeated elements) and the number of times each appeared in the tests.
+% Additionally, it adds a 1 or 0 to each configuration depending if all 
+% hydrophones have direct view to the source position.
+%--------------------------------------------------------------------------
+% Input - test_matrix : 
+%       - index_view:    hydrophones positions [r1 r2 r3 r4]
+%
+% Outputs  
+%   - sets_config: matrix in wich each collumn vector represents:
+%       - 4 indexes of the used hydrophones (from matrix ri)
+%       - number of times that the configuration appeared within the best
+%       configurations
+%       - 1 meaning that all hydrophones have direct view to the source
+%       position or 0 if they do not
+%--------------------------------------------------------------------------
+% Author : Paula Graça (paula.graca@fe.up.pt), May 2020
+%--------------------------------------------------------------------------
 
     [r,c_az] = size(test_matrix);
 

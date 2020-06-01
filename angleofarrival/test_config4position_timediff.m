@@ -6,46 +6,51 @@
 clear
 
 %----test options----------------------------------------------------------
-% test for single source position
+% for single source position
 plot_Hconfig = 0;
 plot_mse_deviation = 1;
+plot_dev_overlaid = 1;
 
-%--------------------------------------------------------------------------
-
-error_azimuth = zeros();
-error_elevation = zeros();
-%s = zeros(3,1);
-spherical = zeros(3,1);
+%-----parameters-----------------------------------------------------------
+accum_samples = 800;   %nº accumulated samples w/ random error for same position
 max_dev = 0.5e-6;      %max deviation of injected error in time differences
                        %0.5us => [-2.5º,2.5º]
-accum_samples = 500;    %nº accumulated samples w/ random error for same position
-gen_mse = 0;
-gen_dev_azimuth = 0;
-gen_dev_elevation = 0;
-accum_R = zeros(3,1);
+%--------------------------------------------------------------------------
 
+%initialize variables
+error_azimuth = zeros();   %azimuth error for all hydrophone configurations
+error_elevation = zeros(); %elevation error for all hydrophone configurations
+%s = zeros(3,1);           %source positions 
+%spherical = zeros(3,1);   %spherical values of source position
+gen_mse = 0;           %accumulate MSE of each hydrophone configuration
+gen_dev_azimuth = 0;   %accumulate azimuth deviation of each hydrophone configuration
+gen_dev_elevation = 0; %accumulate elevation deviation of each hydrophone configuration
+accum_R = zeros(3,1);  %accumulate R from each sample
 
-q=0.2;
-w=0.1; 
-e=sqrt(2)/2 * w;
+%--------------------------------------------------------------------------
+%Definition of hydrophone matrix
+
+q=0.2; %distance from origin to nose hydrophone
+w=0.1; %radius of hydrophone circle
+e=sqrt(2)/2 * w;  % distance from axis to intermediate hydrophones
 
 % hydrophones configuration [r1 r2 r3 r4 r5 r6 r7 r8 r9];
-% r1 -> front; circle: r2:top; r3:bottom; r4: r5: r6: r7: r8: r9:
+% r1 -> front; circle: r2:top; r3:bottom; r4:right; r5:left; 
+% r6:right-top; r7:righ-bottom; r8:left-top; r9:left-bottom;
 ri = [q   0   0    0    0    0   0    0    0;
       0   0   0    w    -w   e   e    -e   -e;
       0   w   -w   0    0    e   -e   e    -e];
-  
-%single position for test
-s=[1000;1000;1000];
+%-------------------------------------------------------------------------- 
 
+s=[100;0;0]; %single source position for test
 [rownum,n_samples] = size(s); %number of samples to compute
 
-cnt_comb =1;   
+cnt_comb =1; %initialize counter of all hydrophone combinations
 
-h1 = ri(:,1);  %h1 is always the one which gives the 3rd dimension
+h1 = ri(:,1); %h1 = nose hydrophone gives the 3rd dimension
 
 %Loop: observe variations of best hydro config due to injected error in TDOA
-for gen_test=1:20
+for gen_test=1:10
 
     min_dev_azimuth = 1000;
     min_dev_elevation = 1000;
@@ -150,7 +155,7 @@ for gen_test=1:20
     
     % -----------------------------------------------------------------
     % definition of hydrophones w/ direct view to the source position
-    [h_view] = hydro_direct_view(R, ri, w, q);
+    [h_view] = hydro_direct_view(mean_R, ri, w, q);
 
     % -----------------------------------------------------------------
     %define which configurations have direct view to the source position
@@ -183,13 +188,13 @@ for gen_test=1:20
     
     index_view = index_view(2:end);
     
-    %mean MSE error for each configuration
+    %accumulate MSE error of all configurations
     gen_mse = gen_mse + mse_config;
     
-    %mean azimuth deviation for each configuration
+    %accumulate azimuth deviation of all configurations
     gen_dev_azimuth = gen_dev_azimuth + deviation_azimuth;
     
-    %mean elevation deviation for each configuration
+    %accumulate elevation deviation of all configurations
     gen_dev_elevation = gen_dev_elevation + deviation_elevation;
     
     
@@ -217,26 +222,55 @@ for gen_test=1:20
 end
 
 % -----------------------------------------------------------------
+%mean MSE of each configuration
 mean_mse_per_config = gen_mse/col_hcomb;
-
+%mean azimuth deviation of each configuration
 mean_dev_azimuth_per_config = gen_dev_azimuth/col_hcomb;
-
+%mean elevation deviation of each configuration
 mean_dev_elevation_per_config = gen_dev_elevation/col_hcomb;
 
 mse_view = zeros(1);
 dev_azimuth_view = zeros(1);
 dev_elevation_view = zeros(1);
 
+%form matrixes with errors from config with view
 for i = 1:length(index_view)
-    ind = index_view(i);
+    
+    ind = index_view(i); %ind contains index of hydro configuration (out of 56)
+    
+    %accumulate mse values for index of configurations with view
     mse_view = [mse_view mean_mse_per_config(ind)];
+    %accumulate deviation in azimuth values for index of configurations with view
     dev_azimuth_view = [dev_azimuth_view mean_dev_azimuth_per_config(ind)];
+    %accumulate deviation in elevation values for index of configurations with view    
     dev_elevation_view = [dev_elevation_view mean_dev_elevation_per_config(ind)];
 end
 
+%remove first element of each array
 mse_view = mse_view(2:end);
 dev_azimuth_view = dev_azimuth_view(2:end);
 dev_elevation_view = dev_elevation_view(2:end);
+
+% -----------------------------------------------------------------
+%index and value of minimum MSE (configuration)
+[min_mse_view,ind_min_mse_view] = min(mse_view);
+%index and value of minimum azimuth deviation (configuration)
+[dev_az_mse_view,ind_dev_az_mse_view]=min(dev_azimuth_view);
+%index and value of minimum elevation deviation (configuration)
+[dev_el_mse_view,ind_dev_el_mse_view]=min(dev_elevation_view);
+
+ind_min_mse_view = index_view(ind_min_mse_view);
+ind_dev_az_mse_view = index_view(ind_dev_az_mse_view);
+ind_dev_el_mse_view = index_view(ind_dev_el_mse_view);
+% -----------------------------------------------------------------
+% mse of deviations 
+for i = 1:length(index_view)
+    %mse_both_dev(i) = sqrt(dev_azimuth_view(i)^2+dev_elevation_view(i)^2);
+    mse_both_dev(i) = mean([dev_azimuth_view(i) dev_elevation_view(i)]);
+end
+[min_both_dev,ind_min_both_dev] = min(mse_both_dev);
+ind_min_both_dev = index_view(ind_min_both_dev);
+
 
 %****************** PLOT OPTIONS ******************************************
 %plot MSE and deviation in azimuth and elevation for every configuration
@@ -246,7 +280,9 @@ if plot_mse_deviation == 1
     subplot(1,3,1)
     plot(mean_mse_per_config)
     hold on 
-    plot(index_view,mse_view,'o')  %'Marker','o','MarkerFaceColor','r'
+    plot(index_view,mse_view,'o')
+    hold on
+    plot(ind_min_mse_view,min_mse_view,'Marker','*','Color','g','MarkerSize',9)
     title('MSE');
     xlabel('Test Number');
     ylabel('MSE');
@@ -254,7 +290,9 @@ if plot_mse_deviation == 1
     subplot(1,3,2)
     plot(mean_dev_azimuth_per_config)
     hold on 
-    plot(index_view,dev_azimuth_view,'o')  %'Marker','o','MarkerFaceColor','r'
+    plot(index_view,dev_azimuth_view,'o')
+    hold on
+    plot(ind_dev_az_mse_view,dev_az_mse_view,'Marker','*','Color','g','MarkerSize',9)
     title('Azimuth deviation');
     xlabel('Test Number');
     ylabel('Azimuth Deviation (deg)');
@@ -262,12 +300,39 @@ if plot_mse_deviation == 1
     subplot(1,3,3)
     plot(mean_dev_elevation_per_config)
     hold on 
-    plot(index_view,dev_elevation_view,'o')  %'Marker','o','MarkerFaceColor','r'
+    plot(index_view,dev_elevation_view,'o')
+    hold on
+    plot(ind_dev_el_mse_view,dev_el_mse_view,'Marker','*','Color','g','MarkerSize',9)
     title('Elevation deviation');
     xlabel('Test Number');
     ylabel('Elevation Deviation (deg)');
 
 end
+
+if plot_dev_overlaid == 1
+    figure(9)
+
+    plot(mean_dev_azimuth_per_config,'Color','b','LineWidth',0.5)
+    hold on 
+    plot(index_view,dev_azimuth_view,'o')
+    hold on
+    plot(ind_dev_az_mse_view,dev_az_mse_view,'Marker','*','Color','g','MarkerSize',9)
+    hold on
+    plot(mean_dev_elevation_per_config, 'Color','m','LineWidth',0.5)
+    hold on 
+    plot(index_view,dev_elevation_view,'o')
+    hold on
+    plot(ind_dev_el_mse_view,dev_el_mse_view,'Marker','*','Color','g','MarkerSize',9)
+    hold on 
+    plot(ind_min_both_dev,min_both_dev,'Marker','d','MarkerFaceColor','c','MarkerEdgeColor','c','MarkerSize',7)
+    
+    legend('Dev Az', 'View Az', 'BestView Az','Dev El', 'View El', 'BestView El');
+    title('Deviation in Az and Elev');
+    xlabel('Test Number');
+    ylabel('Deviation (deg)');
+
+end
+
     
 %plot a specific hydrophone configuration
 if plot_Hconfig == 1
