@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.19)  20 MAY 2020 12:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.19)  8 JUN 2020 21:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -463,7 +463,7 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/sc' in size <14.4> not available
 (Font)              Font shape `T1/ptm/b/sc' tried instead on input line 102.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 102.
-<figures/uporto-feup.pdf, id=136, 338.26375pt x 126.4725pt>
+<figures/uporto-feup.pdf, id=124, 338.26375pt x 126.4725pt>
 File: figures/uporto-feup.pdf Graphic file (type pdf)
 <use figures/uporto-feup.pdf>
 Package pdftex.def Info: figures/uporto-feup.pdf  used on input line 102.
@@ -608,7 +608,7 @@ l.23 A
 
 
 ]
-<figures/sound-profile.png, id=282, 412.54124pt x 394.47375pt>
+<figures/sound-profile.png, id=259, 412.54124pt x 394.47375pt>
 File: figures/sound-profile.png Graphic file (type png)
 <use figures/sound-profile.png>
 Package pdftex.def Info: figures/sound-profile.png  used on input line 27.
@@ -619,7 +619,7 @@ been already used, duplicate ignored
                    \relax 
 l.42 
       [4 <./figures/sound-profile.png>]
-<figures/multipath.png, id=294, 564.1075pt x 256.96pt>
+<figures/multipath.png, id=271, 564.1075pt x 256.96pt>
 File: figures/multipath.png Graphic file (type png)
 <use figures/multipath.png>
 Package pdftex.def Info: figures/multipath.png  used on input line 45.
@@ -653,12 +653,12 @@ fier (name{page.8}) has been already used, duplicate ignored
                    \relax 
 l.169 
        [8]
-<figures/triangulation.png, id=352, 306.14375pt x 242.9075pt>
+<figures/triangulation.png, id=329, 306.14375pt x 242.9075pt>
 File: figures/triangulation.png Graphic file (type png)
 <use figures/triangulation.png>
 Package pdftex.def Info: figures/triangulation.png  used on input line 191.
 (pdftex.def)             Requested size: 170.71393pt x 135.44905pt.
-<figures/geotriang.png, id=353, 530.98375pt x 392.46625pt>
+<figures/geotriang.png, id=330, 530.98375pt x 392.46625pt>
 File: figures/geotriang.png Graphic file (type png)
 <use figures/geotriang.png>
 Package pdftex.def Info: figures/geotriang.png  used on input line 204.
@@ -681,7 +681,7 @@ y used, duplicate ignored
 l.245 	\item F
               inal refinement of the measurement in order to improve accuracy.
 [11]
-<figures/lblsblusbl.png, id=386, 1164.35pt x 872.25874pt>
+<figures/lblsblusbl.png, id=363, 1164.35pt x 872.25874pt>
 File: figures/lblsblusbl.png Graphic file (type png)
 <use figures/lblsblusbl.png>
 Package pdftex.def Info: figures/lblsblusbl.png  used on input line 263.
@@ -700,7 +700,7 @@ l.282
 Underfull \vbox (badness 1242) has occurred while \output is active []
 
  [14]
-<figures/usbl-config.png, id=419, 447.6725pt x 419.5675pt>
+<figures/usbl-config.png, id=396, 447.6725pt x 419.5675pt>
 File: figures/usbl-config.png Graphic file (type png)
 <use figures/usbl-config.png>
 Package pdftex.def Info: figures/usbl-config.png  used on input line 315.
@@ -726,60 +726,23 @@ Overfull \hbox (4.54181pt too wide) in paragraph at lines 346--369
 
  (./chapter3.tex
 Chapter 3.
-<figures/proposed-solution.png, id=445, 1000.73875pt x 594.22pt>
-File: figures/proposed-solution.png Graphic file (type png)
-<use figures/proposed-solution.png>
-Package pdftex.def Info: figures/proposed-solution.png  used on input line 25.
-(pdftex.def)             Requested size: 256.07741pt x 152.05452pt.
-
-Underfull \vbox (badness 3088) has occurred while \output is active []
-
- [17
+) [17
 
 
 
 ]
-<figures/geohydro.png, id=453, 594.22pt x 400.49625pt>
-File: figures/geohydro.png Graphic file (type png)
-<use figures/geohydro.png>
-Package pdftex.def Info: figures/geohydro.png  used on input line 37.
-(pdftex.def)             Requested size: 298.75264pt x 201.35985pt.
-
-Underfull \vbox (badness 2744) has occurred while \output is active []
-
- [18 <./figures/proposed-solution.png> <./figures/geohydro.png>]
-<figures/phase-diff.png, id=463, 2666.96375pt x 1090.0725pt>
-File: figures/phase-diff.png Graphic file (type png)
-<use figures/phase-diff.png>
-Package pdftex.def Info: figures/phase-diff.png  used on input line 53.
-(pdftex.def)             Requested size: 512.14832pt x 209.32813pt.
-
-Overfull \hbox (85.35696pt too wide) in paragraph at lines 53--54
- [][] 
- []
-
-[19 <./figures/phase-diff.png>]) [20]
 \openout2 = `chapter4.aux'.
 
- (./chapter4.tex
+ (./chapter4.tex [18
+
+
+
+]
 Chapter 4.
-<figures/timeline.png, id=475, 695.59875pt x 282.05376pt>
-File: figures/timeline.png Graphic file (type png)
-<use figures/timeline.png>
-Package pdftex.def Info: figures/timeline.png  used on input line 21.
-(pdftex.def)             Requested size: 469.47308pt x 190.36084pt.
-
-Overfull \hbox (42.68173pt too wide) in paragraph at lines 21--22
- [][] 
- []
-
-[21
+) [19] [20
 
 
-
-]) [22 <./figures/timeline.png>] (./thesis.bbl [23
-
-
+] (./thesis.bbl [21
 
 ]
 Underfull \hbox (badness 2096) in paragraph at lines 115--120
@@ -789,28 +752,34 @@ Underfull \hbox (badness 2096) in paragraph at lines 115--120
 
 )
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 148.
- [24]
+ [22]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 148.
  (./thesis.aux (./abstract.aux) (./abbrevs.aux) (./chapter1.aux)
 (./chapter2.aux) (./chapter3.aux) (./chapter4.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 148.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 148.
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 46A7DAD9646375FB21F3DFB4B9335366;2295.
 
+
+Package rerunfilecheck Warning: File `thesis.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `thesis.out':
+(rerunfilecheck)             Before: 101EF0008395CA2E5B63A2AB29607F85;2083
+(rerunfilecheck)             After:  B8A26F7901C3F0B82141B1F45C9C733F;2151.
 
 LaTeX Warning: There were undefined references.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 148.
  ) 
 Here is how much of TeX's memory you used:
- 8400 strings out of 492616
- 126403 string characters out of 6129480
- 233103 words of memory out of 5000000
- 11978 multiletter control sequences out of 15000+600000
+ 8358 strings out of 492616
+ 125641 string characters out of 6129480
+ 232750 words of memory out of 5000000
+ 11953 multiletter control sequences out of 15000+600000
  65915 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,12n,45p,836b,486s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,12n,45p,781b,486s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -822,10 +791,10 @@ s/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/ut
 mr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
 
-Output written on thesis.pdf (38 pages, 658916 bytes).
+Output written on thesis.pdf (36 pages, 284591 bytes).
 PDF statistics:
- 565 PDF objects out of 1000 (max. 8388607)
- 488 compressed objects within 5 object streams
- 129 named destinations out of 1000 (max. 500000)
- 320 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 512 PDF objects out of 1000 (max. 8388607)
+ 445 compressed objects within 5 object streams
+ 116 named destinations out of 1000 (max. 500000)
+ 276 words of extra memory for PDF output out of 10000 (max. 10000000)
 

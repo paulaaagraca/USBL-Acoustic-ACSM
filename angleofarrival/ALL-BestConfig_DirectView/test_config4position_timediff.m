@@ -272,7 +272,7 @@ end
 ind_min_both_dev = index_view(ind_min_both_dev);
 
 
-%****************** PLOT OPTIONS ******************************************
+%//////////////////_PLOT OPTIONS_//////////////////////////////////////////
 %plot MSE and deviation in azimuth and elevation for every configuration
 if plot_mse_deviation == 1
     figure(8)
@@ -332,7 +332,6 @@ if plot_dev_overlaid == 1
     ylabel('Deviation (deg)');
 
 end
-
     
 %plot a specific hydrophone configuration
 if plot_Hconfig == 1

@@ -63,7 +63,7 @@ tdoa = [ti(1)-ti(2);
         ti(2)-ti(3);
         ti(2)-ti(4);
         ti(3)-ti(4)];
-    
+
 %lower precision
 %tdoa = round(tdoa*10^8)/10^8;
     

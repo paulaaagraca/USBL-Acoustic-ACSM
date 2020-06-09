@@ -29,16 +29,16 @@ s = zeros(3,1);
 
 % hydrophones configuration [r1 r2 r3 r4];
 % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
-ri = [0.2   0      0      0;
-      0     0.2    -0.2   0;
-      0     0      0      2];
+ri = [0.02  0.02   0      0;
+      0     0      0.5    -0.5;
+      0.5   -0.5   0      0];
 
 % define range of azimuth
-t_azimuth_deg = -180:10:179;                 % azimuth values in degrees
+t_azimuth_deg = -45:1:45;                 % azimuth values in degrees
 t_azimuth_rad = t_azimuth_deg * (pi/180);    % azimuth values in radians
 
 % define range of elevation
-t_elevation_deg = -80:10:80;                 % elevation values in degrees
+t_elevation_deg = -60:1:60;                 % elevation values in degrees
 t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 
 % save sizes of azimuth and elevation matrix 
@@ -48,7 +48,7 @@ t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 
 %--------------------------------------------------------------------------
 
-norm = [10 100 1000]; % norm values to be tested (row)
+norm = [10]; % norm values to be tested (row)
 
 count = 1;     % size of vector s +1
 count_sph = 1; % size of vector spherical +1
