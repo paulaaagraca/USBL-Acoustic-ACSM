@@ -1,14 +1,40 @@
-\chapter{Proposed System} \label{chap:proposed_sys}
+\chapter{Research Problem} \label{chap:problem}
 
-This chapter is dedicated to the presentation and overall explanation of the developed system. highlighting its capabilities, the used methodologies and overall design strategies. 
-The system will be presented in two distinct sections. The first component is the HDL module, which falls into the spectrum of hardware design and requires insight on hardware development and good practices. The second section relies on software development to complement the functionality of the mentioned module, so that is possible to deliver the desired result.
+This chapter intends to clarify the problem addressed by the present dissertation. 
+%The contents explained in the \nameref{chap:sota} chapter were used as initial knowledge basis.
 
-\section{HDL Module Design}
+\section{Problem Statement}
 
-The system which is proposed to be implemented in this research work has as input 4 signals which are received by each hydrophone of the array, and outputs an average phase difference between all combinations of pairs of hydrophones. 
+As previously mentioned in chapter \ref{chap:intro}, it is considered a scenario where an AUV is taking part on a long-term underwater mission. When it is in course, the moving survey AUV periodically sends known signals to the surface with a pinger, so it can be identified. The mule AUV, which is provided with a three dimensional array of hydrophones, receives the signal and estimates the position of the other AUV to navigate near it. The described communication system is illustrated in figure \ref{fig:auv_scene}. 
 
-\begin{enumerate}
-	\item 
-\end{enumerate}
+%___________________________________________
 
+This partial system was developed in previous dissertations and research work, which can be better understood in \cite{afonso-thesis}. Briefly, the system consists on a transducer of four hydrophones forming a 3D array deployed on the mule AUV. This array will receive the same signal wave front. The system then calculates the cross-correlation between the received and expected signals, which is a BPSK modulated binary sequence. The cross-correlation peak indicates the distance between AUVs and it is calculated with timing resolution corresponding to 1 sampling period of the acquired signal, which in the developed systems corresponds approximately to 6mm (with a sampling frequency of 244kHz).
+
+
+Due to the limitations in dimension of the AUV that will integrate this system, the hydrophones have to be placed within short distance from each other, in the range of a few centimeters between them. For this reason, the time resolution obtained by using only the cross-correlation, corresponding to a maximum distance accuracy of approximately 6mm, will not be enough for the calculation of the angle of arrival of the sound wave. Thus, the objective of this work is to refine this measurement by additionally calculating the phase differences of the arriving signals to each hydrophone. 
+
+
+\section{Hypothesis and Research Questions}
+
+This dissertation intends to give response to a core hypothesis which serves as fundamental investigation purpose and defines the success of its implementation. This hypothesis can be stated as:
+
+\textit{"Implementing a system that utilizes the phase differences between the arriving signals to an array of hydrophones, increases the accuracy of the time of arrival determination of the current system, which consequently improves the angle of arrival estimation."}
+
+
+Attending the proposed hypothesis, the topics that are intended to be explored and discussed by this thesis's work can be summarized in the following research questions:
+
+%Research Questions
+\begin{itemize}
+	\item \textbf{RQ1: }\textit{How should a system be implemented so it is capable of calculating phase differences between arriving signals at four different sensors and, simultaneously, is compatible with the available space in the FPGA?}
+	
+	\item \textbf{RQ2: }\textit{What is the magnitude of the error achieved by the complete system, consisting of the section capable of calculating the phase differences of the arriving signal added to the previously implemented section which performs the correlation calculations?}
+	
+	\item \textbf{RQ4: }\textit{What is the magnitude of the error which is result of the estimation of the angle of arrival?}
+	
+	\item \textbf{RQ5: }\textit{What processes can be implemented to improve the accuracy of the implemented localization method and similar systems?}
+	
+\end{itemize}
+
+Upon having the mentioned research questions answered, it is intended to proceed on a further investigation on methodologies and processes that correct errors in the localization system estimation, which are resultant from many underwater intrinsic challenges such as multipathing. This final step is interrelated to the proposed system, as it consists in a complementary study to improve it.
 

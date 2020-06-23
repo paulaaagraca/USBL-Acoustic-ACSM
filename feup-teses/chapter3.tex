@@ -1,14 +1,35 @@
-\chapter{Problem Characterization} \label{chap:prob_statement}
+\chapter{State of the Art} \label{chap:sota}
 
-This chapter intends to clarify the problem addressed by the present dissertation. The contents explained in the \nameref{chap:sota} chapter were used as initial knowledge basis.
+\section{Optimal sensor configuration methods}
 
-\section{Problem Statement}
+When evaluating the performance of a localization system which integrates a multiple sensor configuration, it is essential to resort to widely used methodologies to prove its validity and accuracy.
 
-As previously mentioned, it is considered a scenario where an AUV is taking part on a long-term underwater mission. In practical terms, the moving survey AUV sends known signals periodically to the surface with a pinger and the mule AUV, with an array of hydrophones, receives the signal and estimates the position of the other AUV to navigate near it.
+\subsection{Crámer-Rao lower bound}	\label{sec:cramer}
 
-%___________________________________________
+In this thesis, a conducted study is based on the Crámer-Rao lower bound, which is generally used to generate a \textit{so-called uncertainty ellipse} \cite{bishop-cramer-rao} that represents the spatial variance distribution of the estimated position. The overall desired result is to find the minimum variance value that is related to the chosen configuration geometry, which indicates that it is the optimal solution for estimating a certain position. This method utilizes the Fisher Information matrix (FIM), whose components translate characteristics of the observation vector.
 
-This partial system was developed in previous dissertations and research work, which can be better understood in \cite{afonso-thesis}. Briefly, the system consists on a transducer of four hydrophones forming a 3D array deployed on the mule AUV. All components of this array will receive the same signal wave front. The system then calculates the cross-correlation between the received and expected signals, which is a BPSK modulated binary sequence. The cross-correlation peak indicates the distance between AUVs and it is calculated with timing resolution corresponding to 1 sampling period of the acquired signal, which in the developed systems corresponds approximately to 6mm (with a sampling frequency of 244kHz).
+In order to avoid loss of generality, it is considered a set of N sensors and a settled position for the target, the acoustic source, defined by $s_{t}$ = [$x_{s_{t}}$, $y_{s_{t}}$, $z_{s_{t}}$]$^T$. In addition, the position of each sensor is defined as $r_{i}$ = [$x_{r_{i}}$, $y_{r_{i}}$, $z_{r_{i}}$] and, consequently, the measurement of distance between each sensor and the source is defined as d$_{i}$ = $|| s_{t} - r_{i} ||$.
 
+Thereafter, the observations vector will be formulated containing the observed times-of-arrival (TOA) of the signal from the acoustic source to each one of the hydrophones, considering their geometric position. These times contain a noise vector component, which can be approximated to to a Gaussian distribution $n_i \sim \mathcal{N}(\mu,\,\sigma^{2})$. The samples can be calculated through the expression \ref{eq:obs_vec}, where it is considered an initial time of arrival $t_0$. Additionally, c represents the sound speed underwater.
 
-Due to the limitations in dimension of the AUV that will integrate this system, the hydrophones will be placed within short distance from each other, in the range of a few centimeters between them. Due to this restriction, the time resolution obtained by using only the cross-correlation, corresponding to a maximum distance accuracy of approximately 6mm, will not be enough for a reliable estimation of the angle of arrival of the sound wave. Thus, the objective of this work is to refine this measurement by additionally calculating the phase differences of the arriving signals to each hydrophone. 
+{\large\[
+	t_i = t_0 + \frac{||d_i||}{c} + n_i
+	\label{eq:obs_vec}
+	\]}
+
+After having the observations matrix, it is established the condition to formulate the Fisher Information matrix, $I(d)$ , which results into equation \ref{eq:fisher}.
+
+{\large\[
+	I(d) = \nabla_{d}t(d)^T \; \Sigma^{-1} \; \nabla_{d}t(d)
+	\label{eq:fisher}
+	\]}
+
+$\nabla_{d}t(d)$ is the gradient matrix of the observations vector regarding $d_i$, whereas $\Sigma$ is the covariance matrix, in which the diagonal contains the standard deviation of the components of each noise vector, construed as $(\sigma_1^2 , \sigma_2^2 , ... , \sigma_N^2)$ .
+
+Thereby, all conditions are established to proceed to the actual calculation of the Fisher Information matrix. After formulated, it will indicate the quantity of information that a certain sensor configuration can give about a position in space. Hence the goal is to obtain the maximum achievable information. By calculating the determinant of FIM it is possible to deduce the minimum \textit{uncertainty ellipsoid} and therefore the configuration's best possible performance. Therefore, the optimal solution is given by the maximum output of the determinant of FIM.
+
+Additionally, it is possible to detail this information by calculating the actual size of the axis that compose the \textit{uncertainty ellipsoid}. This is achieved by calculating the square mean root of the eigenvalues of $I(d)$, which correspond to each axis size.
+
+Further explanation about the methods used in a deeper exploration of the Crámer-Rao lower bound can be consulted in \cite{bishop-cramer-rao}, which serves as guide to investigate other scenarios of application of this theorem. However, the mentioned concepts were all the necessary for the approach on this dissertation .
+
+This same process is adopted in this dissertation. All steps specifically taken for this study are declared in section \ref{sec:config-perf} of the present document.

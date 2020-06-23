@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.19)  20 JUN 2020 13:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.19)  15 JUN 2020 20:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**thesis.tex
-(./thesis.tex
+**tese.tex
+(./tese.tex
 LaTeX2e <2018-12-01>
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2018/09/03 v1.4i Standard LaTeX document class
@@ -28,102 +28,6 @@ Package: inputenc 2018/08/11 v1.3c Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
 )
-(/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2018/12/01 v2.17b AMS math features
-\@mathmargin=\skip43
-
-For additional information on amsmath, use the `?' option.
-(/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amstext.sty
-Package: amstext 2000/06/29 v2.01 AMS text
-
-(/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsgen.sty
-File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks16
-\ex@=\dimen103
-))
-(/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsbsy.sty
-Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen104
-)
-(/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsopn.sty
-Package: amsopn 2016/03/08 v2.02 operator names
-)
-\inf@bad=\count89
-LaTeX Info: Redefining \frac on input line 223.
-\uproot@=\count90
-\leftroot@=\count91
-LaTeX Info: Redefining \overline on input line 385.
-\classnum@=\count92
-\DOTSCASE@=\count93
-LaTeX Info: Redefining \ldots on input line 482.
-LaTeX Info: Redefining \dots on input line 485.
-LaTeX Info: Redefining \cdots on input line 606.
-\Mathstrutbox@=\box27
-\strutbox@=\box28
-\big@size=\dimen105
-LaTeX Font Info:    Redeclaring font encoding OML on input line 729.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
-\macc@depth=\count94
-\c@MaxMatrixCols=\count95
-\dotsspace@=\muskip10
-\c@parentequation=\count96
-\dspbrk@lvl=\count97
-\tag@help=\toks17
-\row@=\count98
-\column@=\count99
-\maxfields@=\count100
-\andhelp@=\toks18
-\eqnshift@=\dimen106
-\alignsep@=\dimen107
-\tagshift@=\dimen108
-\tagwidth@=\dimen109
-\totwidth@=\dimen110
-\lineht@=\dimen111
-\@envbody=\toks19
-\multlinegap=\skip44
-\multlinetaggap=\skip45
-\mathdisplay@stack=\toks20
-LaTeX Info: Redefining \[ on input line 2844.
-LaTeX Info: Redefining \] on input line 2845.
-)
-(/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/amssymb.sty
-Package: amssymb 2013/01/14 v3.01 AMS font symbols
-
-(/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/amsfonts.sty
-Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\symAMSa=\mathgroup4
-\symAMSb=\mathgroup5
-LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
-(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))
-(/usr/local/texlive/2019/texmf-dist/tex/latex/float/float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count101
-\float@exts=\toks21
-\float@box=\box29
-\@float@everytoks=\toks22
-\@floatcapt=\box30
-)
-(/usr/local/texlive/2019/texmf-dist/tex/latex/booktabs/booktabs.sty
-Package: booktabs 2016/04/27 v1.618033 publication quality tables
-\heavyrulewidth=\dimen112
-\lightrulewidth=\dimen113
-\cmidrulewidth=\dimen114
-\belowrulesep=\dimen115
-\belowbottomsep=\dimen116
-\aboverulesep=\dimen117
-\abovetopsep=\dimen118
-\cmidrulesep=\dimen119
-\cmidrulekern=\dimen120
-\defaultaddspace=\dimen121
-\@cmidla=\count102
-\@cmidlb=\count103
-\@aboverulesep=\dimen122
-\@belowrulesep=\dimen123
-\@thisruleclass=\count104
-\@lastruleclass=\count105
-\@thisrulewidth=\dimen124
-)
 (./feupteses.sty
 Package: feupteses 2017/10/02 1.1.2 
 
@@ -144,27 +48,28 @@ Package: babel 2019/05/04 3.31 The Babel package
 (/usr/local/texlive/2019/texmf-dist/tex/generic/babel/switch.def
 File: switch.def 2019/05/04 3.31 Babel switching mechanism
 )
-(/usr/local/texlive/2019/texmf-dist/tex/generic/babel-english/english.ldf
-Language: english 2017/06/06 v3.3r English support from the babel system
+(/usr/local/texlive/2019/texmf-dist/tex/generic/babel-portuges/portuges.ldf
+Language: portuges 2008/03/18 v1.2q Portuguese support from the babel system
 
 (/usr/local/texlive/2019/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2019/05/04 3.31 Babel common definitions
-\babel@savecnt=\count106
-\U@D=\dimen125
+\babel@savecnt=\count89
+\U@D=\dimen103
 
 (/usr/local/texlive/2019/texmf-dist/tex/generic/babel/txtbabel.def)
-\bbl@dirlevel=\count107
+\bbl@dirlevel=\count90
 )
-\l@canadian = a dialect from \language\l@american 
-\l@australian = a dialect from \language\l@british 
-\l@newzealand = a dialect from \language\l@british 
+Package babel Info: Making " an active character on input line 145.
 ))
+(/usr/local/texlive/2019/texmf-dist/tex/latex/tools/indentfirst.sty
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2018/04/16 v5.8 Page Geometry
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks23
+\KV@toks@=\toks16
 )
 (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
@@ -173,18 +78,18 @@ Package ifvtex Info: VTeX not detected.
 (/usr/local/texlive/2019/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count108
-\Gm@cntv=\count109
-\c@Gm@tempcnt=\count110
-\Gm@bindingoffset=\dimen126
-\Gm@wd@mp=\dimen127
-\Gm@odd@mp=\dimen128
-\Gm@even@mp=\dimen129
-\Gm@layoutwidth=\dimen130
-\Gm@layoutheight=\dimen131
-\Gm@layouthoffset=\dimen132
-\Gm@layoutvoffset=\dimen133
-\Gm@dimlist=\toks24
+\Gm@cnth=\count91
+\Gm@cntv=\count92
+\c@Gm@tempcnt=\count93
+\Gm@bindingoffset=\dimen104
+\Gm@wd@mp=\dimen105
+\Gm@odd@mp=\dimen106
+\Gm@even@mp=\dimen107
+\Gm@layoutwidth=\dimen108
+\Gm@layoutheight=\dimen109
+\Gm@layouthoffset=\dimen110
+\Gm@layoutvoffset=\dimen111
+\Gm@dimlist=\toks17
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/mathptmx.sty
 Package: mathptmx 2005/04/12 PSNFSS-v9.2a Times w/ Math, improved (SPQR, WaS) 
@@ -208,8 +113,8 @@ LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
 (Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
 (Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
-\symbold=\mathgroup6
-\symitalic=\mathgroup7
+\symbold=\mathgroup4
+\symitalic=\mathgroup5
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 34.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
 (Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
@@ -245,11 +150,11 @@ Package graphics Info: Driver file: pdftex.def on input line 99.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen134
-\Gin@req@width=\dimen135
+\Gin@req@height=\dimen112
+\Gin@req@width=\dimen113
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/url/url.sty
-\Urlmuskip=\muskip11
+\Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/setspace/setspace.sty
@@ -264,51 +169,55 @@ Package: caption 2018/10/06 v3.3-154 Customizing captions (AR)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2018/09/12 v1.8c caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 64.
-\captionmargin=\dimen136
-\captionmargin@=\dimen137
-\captionwidth=\dimen138
-\caption@tempdima=\dimen139
-\caption@indent=\dimen140
-\caption@parindent=\dimen141
-\caption@hangindent=\dimen142
+\captionmargin=\dimen114
+\captionmargin@=\dimen115
+\captionwidth=\dimen116
+\caption@tempdima=\dimen117
+\caption@indent=\dimen118
+\caption@parindent=\dimen119
+\caption@hangindent=\dimen120
 )
-\c@caption@flags=\count111
-\c@ContinuedFloat=\count112
-Package caption Info: float package is loaded.
+\c@caption@flags=\count94
+\c@ContinuedFloat=\count95
 )
 (./lineno.sty
 Package: lineno 2005/11/02 line numbers on paragraphs v4.41
-\linenopenalty=\count113
-\output=\toks25
-\linenoprevgraf=\count114
-\linenumbersep=\dimen143
-\linenumberwidth=\dimen144
-\c@linenumber=\count115
-\c@pagewiselinenumber=\count116
-\c@LN@truepage=\count117
-\c@internallinenumber=\count118
-\c@internallinenumbers=\count119
-\quotelinenumbersep=\dimen145
-\bframerule=\dimen146
-\bframesep=\dimen147
-\bframebox=\box31
+\linenopenalty=\count96
+\output=\toks18
+\linenoprevgraf=\count97
+\linenumbersep=\dimen121
+\linenumberwidth=\dimen122
+\c@linenumber=\count98
+\c@pagewiselinenumber=\count99
+\c@LN@truepage=\count100
+\c@internallinenumber=\count101
+\c@internallinenumbers=\count102
+\quotelinenumbersep=\dimen123
+\bframerule=\dimen124
+\bframesep=\dimen125
+\bframebox=\box27
 LaTeX Info: Redefining \\ on input line 3056.
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip43
+\bibsep=\skip44
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count103
 )
-\@vivatext=\box32
-\@supervisorstext=\box33
-
+\@vivatext=\box28
+\@supervisorstext=\box29
 (/usr/local/texlive/2019/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
 s
-\f@nch@headwidth=\skip46
-\f@nch@O@elh=\skip47
-\f@nch@O@erh=\skip48
-\f@nch@O@olh=\skip49
-\f@nch@O@orh=\skip50
-\f@nch@O@elf=\skip51
-\f@nch@O@erf=\skip52
-\f@nch@O@olf=\skip53
-\f@nch@O@orf=\skip54
+\f@nch@headwidth=\skip45
+\f@nch@O@elh=\skip46
+\f@nch@O@erh=\skip47
+\f@nch@O@olh=\skip48
+\f@nch@O@orh=\skip49
+\f@nch@O@elf=\skip50
+\f@nch@O@erf=\skip51
+\f@nch@O@olf=\skip52
+\f@nch@O@orf=\skip53
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2018/11/30 v6.88e Hypertext links for LaTeX
@@ -358,16 +267,16 @@ Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
-\@linkdim=\dimen148
-\Hy@linkcounter=\count120
-\Hy@pagecounter=\count121
+\@linkdim=\dimen126
+\Hy@linkcounter=\count104
+\Hy@pagecounter=\count105
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2018/11/30 v6.88e Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-\Hy@SavedSpaceFactor=\count122
+\Hy@SavedSpaceFactor=\count106
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
@@ -383,12 +292,12 @@ Package hyperref Info: Plain pages OFF on input line 4534.
 Package hyperref Info: Backreferencing OFF on input line 4539.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4772.
-\c@Hy@tempcnt=\count123
+\c@Hy@tempcnt=\count107
 LaTeX Info: Redefining \url on input line 5125.
-\XeTeXLinkMargin=\dimen149
-\Fld@menulength=\count124
-\Field@Width=\dimen150
-\Fld@charsize=\dimen151
+\XeTeXLinkMargin=\dimen127
+\Fld@menulength=\count108
+\Field@Width=\dimen128
+\Fld@charsize=\dimen129
 Package hyperref Info: Hyper figures ON on input line 6378.
 Package hyperref Info: Link nesting OFF on input line 6385.
 Package hyperref Info: Hyper index ON on input line 6388.
@@ -398,23 +307,23 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6405.
 Package hyperref Info: PDF/A mode OFF on input line 6410.
 LaTeX Info: Redefining \ref on input line 6450.
 LaTeX Info: Redefining \pageref on input line 6454.
-\Hy@abspage=\count125
-\c@Item=\count126
-\c@Hfootnote=\count127
+\Hy@abspage=\count109
+\c@Item=\count110
+\c@Hfootnote=\count111
 )
 Package hyperref Info: Driver: hpdftex.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2018/11/30 v6.88e Hyperref driver for pdfTeX
-\Fld@listcount=\count128
-\c@bookmark@seq@number=\count129
+\Fld@listcount=\count112
+\c@bookmark@seq@number=\count113
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
-\Hy@SectionHShift=\skip55
+\Hy@SectionHShift=\skip54
 )
 Package hyperref Info: Option `plainpages' set `false' on input line 518.
 Package hyperref Info: Option `bookmarksopen' set `false' on input line 518.
@@ -424,36 +333,29 @@ Package hyperref Info: Option `breaklinks' set `true' on input line 518.
 Package hyperref Info: Option `linktocpage' set `true' on input line 518.
 Package hyperref Info: Option `colorlinks' set `true' on input line 518.
 )
-(/usr/local/texlive/2019/texmf-dist/tex/latex/multirow/multirow.sty
-Package: multirow 2019/01/01 v2.4 Span multiple rows of a table
-\multirow@colwidth=\skip56
-\multirow@cntb=\count130
-\multirow@dima=\skip57
-\bigstrutjot=\dimen152
-)
 \@input{mymacros.aux}
 \openout2 = `mymacros.aux'.
 
-(./mymacros.tex) (./thesis.aux (./abstract.aux) (./abbrevs.aux) (./chapter1.aux
-) (./chapter2.aux) (./chapter3.aux) (./chapter4.aux) (./chapter5.aux)
-(./chapter6.aux) (./chapter7.aux))
-\openout1 = `thesis.aux'.
+(./mymacros.tex) (./tese.aux (./abstract.aux) (./acknows.aux) (./quote.aux)
+(./abbrevs.aux) (./chapter1.aux) (./chapter2.aux) (./chapter3.aux)
+(./chapter4.aux) (./chapter5.aux) (./chapter6.aux) (./appendix1.aux))
+\openout1 = `tese.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 67.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 61.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -492,19 +394,20 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+\big@size=\dimen130
 (/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count131
-\scratchdimen=\dimen153
-\scratchbox=\box34
-\nofMPsegments=\count132
-\nofMParguments=\count133
-\everyMPshowfont=\toks26
-\MPscratchCnt=\count134
-\MPscratchDim=\dimen154
-\MPnumerator=\count135
-\makeMPintoPDFobject=\count136
-\everyMPtoPDFconversion=\toks27
+\scratchcounter=\count114
+\scratchdimen=\dimen131
+\scratchbox=\box30
+\nofMPsegments=\count115
+\nofMParguments=\count116
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count117
+\MPscratchDim=\dimen132
+\MPnumerator=\count118
+\makeMPintoPDFobject=\count119
+\everyMPtoPDFconversion=\toks20
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -525,7 +428,7 @@ e
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\AtBeginShipoutBox=\box35
+\AtBeginShipoutBox=\box31
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
@@ -535,7 +438,7 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 147.
 )
-Package hyperref Info: Link coloring ON on input line 67.
+Package hyperref Info: Link coloring ON on input line 61.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -543,27 +446,27 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count137
+\c@section@level=\count120
 )
-LaTeX Info: Redefining \ref on input line 67.
-LaTeX Info: Redefining \pageref on input line 67.
-LaTeX Info: Redefining \nameref on input line 67.
+LaTeX Info: Redefining \ref on input line 61.
+LaTeX Info: Redefining \pageref on input line 61.
+LaTeX Info: Redefining \nameref on input line 61.
 
-(./thesis.out) (./thesis.out)
+(./tese.out) (./tese.out)
 \@outlinefile=\write3
-\openout3 = `thesis.out'.
+\openout3 = `tese.out'.
 
-\@crestbox=\box36
+\@crestbox=\box32
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 108.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 103.
 LaTeX Font Info:    Font shape `T1/ptm/bx/sc' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/sc' tried instead on input line 108.
+(Font)              Font shape `T1/ptm/b/sc' tried instead on input line 103.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 108.
-<figures/uporto-feup.pdf, id=200, 338.26375pt x 126.4725pt>
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 103.
+<figures/uporto-feup.pdf, id=160, 338.26375pt x 126.4725pt>
 File: figures/uporto-feup.pdf Graphic file (type pdf)
 <use figures/uporto-feup.pdf>
-Package pdftex.def Info: figures/uporto-feup.pdf  used on input line 108.
+Package pdftex.def Info: figures/uporto-feup.pdf  used on input line 103.
 (pdftex.def)             Requested size: 204.85983pt x 76.59618pt.
  [-3
 
@@ -572,31 +475,52 @@ Package pdftex.def Info: figures/uporto-feup.pdf  used on input line 108.
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./figur
 es/uporto-feup.pdf>]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 108.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 103.
 
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 108.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 103.
  [-2
+
+]
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 103.
+ [-1
+
+
+]
+[0
 
 ]
 \openout2 = `abstract.aux'.
 
-
-(./abstract.tex [1
-
-
+ (./abstract.tex [1
 
 
 ] [2
 
-]) [3] [4
+]) [3]
+\openout2 = `acknows.aux'.
+
+ (./acknows.tex [4
 
 
-] (./thesis.toc
+
+]) [5]
+\openout2 = `quote.aux'.
+
+ (./quote.tex [6
+
+
+
+])
+[7] [8
+
+
+] (./tese.toc
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 2.
 LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 3.
@@ -634,35 +558,35 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 3.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 3.
- [5
+ [9
 
 ])
 \tf@toc=\write4
-\openout4 = `thesis.toc'.
+\openout4 = `tese.toc'.
 
- [6]
-(./thesis.lof)
+ [10]
+(./tese.lof)
 \tf@lof=\write5
-\openout5 = `thesis.lof'.
+\openout5 = `tese.lof'.
 
- [7
+ [11
 
 
-] [8
+] [12
 
-] (./thesis.lot)
+] (./tese.lot)
 \tf@lot=\write6
-\openout6 = `thesis.lot'.
+\openout6 = `tese.lot'.
 
- [9
+ [13
 
 ]
 \openout2 = `abbrevs.aux'.
 
- (./abbrevs.tex [10
+ (./abbrevs.tex [14
 
 
-]) [11] [12
+]) [15] [16
 
 
 ]
@@ -670,9 +594,17 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 
 
 (./chapter1.tex
-Chapter 1.
+Cap\'{\i }tulo 1.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <20.74> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 1.
+
+Package natbib Warning: Citation `deeperblue' on page 1 undefined on input line
+ 6.
+
+
+Package natbib Warning: Citation `afonso-thesis' on page 1 undefined on input l
+ine 19.
+
 
 Underfull \vbox (badness 4266) has occurred while \output is active []
 
@@ -680,7 +612,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.19 
+l.20 
       [1
 
 
@@ -688,12 +620,16 @@ l.19
 s been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.130 \include{chapter1}
+l.126 \include{chapter1}
                          [2]
 \openout2 = `chapter2.aux'.
 
  (./chapter2.tex
-Chapter 2.
+Cap\'{\i }tulo 2.
+
+Package natbib Warning: Citation `survey-tech-chall' on page 3 undefined on inp
+ut line 9.
+
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 19.
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
@@ -707,22 +643,36 @@ l.23 A
 
 
 ]
-<figures/sound-profile.png, id=365, 412.54124pt x 394.47375pt>
+<figures/sound-profile.png, id=325, 412.54124pt x 394.47375pt>
 File: figures/sound-profile.png Graphic file (type png)
 <use figures/sound-profile.png>
 Package pdftex.def Info: figures/sound-profile.png  used on input line 27.
 (pdftex.def)             Requested size: 256.07741pt x 244.86613pt.
+
+
+Package natbib Warning: Citation `ocean-acoust' on page 4 undefined on input li
+ne 32.
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.42 
       [4 <./figures/sound-profile.png>]
-<figures/multipath.png, id=377, 564.1075pt x 256.96pt>
+<figures/multipath.png, id=335, 564.1075pt x 256.96pt>
 File: figures/multipath.png Graphic file (type png)
 <use figures/multipath.png>
 Package pdftex.def Info: figures/multipath.png  used on input line 45.
 (pdftex.def)             Requested size: 298.75264pt x 136.0862pt.
+
+
+Package natbib Warning: Citation `commchan' on page 5 undefined on input line 5
+6.
+
+
+Package natbib Warning: Citation `thesis-joao' on page 5 undefined on input lin
+e 65.
+
 
 Underfull \vbox (badness 3078) has occurred while \output is active []
 
@@ -731,209 +681,340 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.73 
-      [5 <./figures/multipath.png>]pdfTeX warning (ext4): destination with the 
-same identifier (name{page.6}) has been already used, duplicate ignored
+      [5 <./figures/multipath.png>]
+
+Package natbib Warning: Citation `pathloss' on page 6 undefined on input line 7
+4.
+
+
+Package natbib Warning: Citation `pathloss' on page 6 undefined on input line 7
+9.
+
+
+Package natbib Warning: Citation `commchan' on page 6 undefined on input line 8
+1.
+
+
+LaTeX Warning: Hyper reference `r:ocean-acoust' on page 6 undefined on input li
+ne 98.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.6}) has 
+been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.104 
        [6]
-Underfull \vbox (badness 1817) has occurred while \output is active []
+
+Package natbib Warning: Citation `wirelesscomm' on page 7 undefined on input li
+ne 111.
+
+
+Package natbib Warning: Citation `crosscorr' on page 7 undefined on input line 
+128.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.7}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.134 \end{eqnarray}
-                     [7]pdfTeX warning (ext4): destination with the same identi
-fier (name{page.8}) has been already used, duplicate ignored
+l.137 \begin{eqnarray}
+                       [7]
+
+Package natbib Warning: Citation `crosscorr' on page 8 undefined on input line 
+149.
+
+
+Package natbib Warning: Citation `crosscorr' on page 8 undefined on input line 
+155.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.8}) has 
+been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.169 
+l.171 
        [8]
-<figures/triangulation.png, id=434, 306.14375pt x 242.9075pt>
+
+Package natbib Warning: Citation `suvey-loc' on page 9 undefined on input line 
+180.
+
+<figures/triangulation.png, id=377, 306.14375pt x 242.9075pt>
 File: figures/triangulation.png Graphic file (type png)
 <use figures/triangulation.png>
 Package pdftex.def Info: figures/triangulation.png  used on input line 191.
 (pdftex.def)             Requested size: 170.71393pt x 135.44905pt.
-<figures/geotriang.png, id=435, 530.98375pt x 392.46625pt>
+<figures/geotriang.png, id=378, 530.98375pt x 392.46625pt>
 File: figures/geotriang.png Graphic file (type png)
 <use figures/geotriang.png>
 Package pdftex.def Info: figures/geotriang.png  used on input line 204.
 (pdftex.def)             Requested size: 213.39568pt x 157.72629pt.
+
+Package natbib Warning: Citation `triangalgo' on page 9 undefined on input line
+ 210.
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.9}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.207 \end{figure}
-                   [9]pdfTeX warning (ext4): destination with the same identifi
-er (name{page.10}) has been already used, duplicate ignored
+l.211 
+       [9]pdfTeX warning (ext4): destination with the same identifier (name{pag
+e.10}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.224 
-       [10 <./figures/triangulation.png> <./figures/geotriang.png>]pdfTeX warni
-ng (ext4): destination with the same identifier (name{page.11}) has been alread
-y used, duplicate ignored
+l.211 
+       [10 <./figures/triangulation.png> <./figures/geotriang.png>]
+
+Package natbib Warning: Citation `trilat' on page 11 undefined on input line 22
+3.
+
+
+Package natbib Warning: Citation `arch_localiz' on page 11 undefined on input l
+ine 234.
+
+
+Package natbib Warning: Citation `suvey-loc' on page 11 undefined on input line
+ 241.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.11}) has
+ been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.253 \end{eqnarray}
-                     [11]
-<figures/lblsblusbl.png, id=471, 1164.35pt x 872.25874pt>
+l.245 	\item F
+              inal refinement of the measurement in order to improve accuracy.
+[11]
+
+Package natbib Warning: Citation `arch_localiz' on page 12 undefined on input l
+ine 248.
+
+<figures/lblsblusbl.png, id=402, 1164.35pt x 872.25874pt>
 File: figures/lblsblusbl.png Graphic file (type png)
 <use figures/lblsblusbl.png>
 Package pdftex.def Info: figures/lblsblusbl.png  used on input line 263.
 (pdftex.def)             Requested size: 426.79135pt x 319.72272pt.
+
+LaTeX Warning: Hyper reference `r:survey-tech-chall' on page 12 undefined on in
+put line 270.
+
+
+Package natbib Warning: Citation `survey-tech-chall' on page 12 undefined on in
+put line 281.
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.12}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.275 
-       [12 <./figures/lblsblusbl.png>] [13]
-<figures/usbl-config.png, id=499, 447.6725pt x 419.5675pt>
+l.282 
+       [12]pdfTeX warning (ext4): destination with the same identifier (name{pa
+ge.13}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.282 
+       [13 <./figures/lblsblusbl.png>]
+
+Package natbib Warning: Citation `sbl' on page 14 undefined on input line 283.
+
+
+Package natbib Warning: Citation `lblsblusbl' on page 14 undefined on input lin
+e 294.
+
+
+Package natbib Warning: Citation `usbl-new' on page 14 undefined on input line 
+298.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.14}) has
+ been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.311 \end{eqnarray}
+                     [14]
+<figures/usbl-config.png, id=427, 447.6725pt x 419.5675pt>
 File: figures/usbl-config.png Graphic file (type png)
 <use figures/usbl-config.png>
 Package pdftex.def Info: figures/usbl-config.png  used on input line 315.
 (pdftex.def)             Requested size: 213.39568pt x 200.00085pt.
 
-Underfull \vbox (badness 3482) has occurred while \output is active []
 
- [14 <./figures/usbl-config.png>]
-Overfull \hbox (3.03284pt too wide) in paragraph at lines 357--357
-[]|\T1/ptm/m/n/10.95 Sonardyne|  
+Package natbib Warning: Citation `evologics1' on page 15 undefined on input lin
+e 332.
+
+
+Package natbib Warning: Citation `evologics2' on page 15 undefined on input lin
+e 332.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.15}) has
+ been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.333 \begin{itemize}
+                      [15 <./figures/usbl-config.png>]
+
+Package natbib Warning: Citation `evologics3' on page 16 undefined on input lin
+e 334.
+
+
+Package natbib Warning: Citation `evologics4' on page 16 undefined on input lin
+e 335.
+
+
+Package natbib Warning: Citation `sonardyne1' on page 16 undefined on input lin
+e 338.
+
+
+Package natbib Warning: Citation `hipap_hardw' on page 16 undefined on input li
+ne 342.
+
+! Undefined control sequence.
+<recently read> \multirow 
+                          
+l.353 		\multirow
+                 {2}{4em}{Evologics}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<recently read> \multirow 
+                          
+l.357 		\multirow
+                 {2}{4em}{Sonardyne}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<recently read> \multirow 
+                          
+l.361 		\multirow
+                 {2}{4em}{Applied Acoustics}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<recently read> \multirow 
+                          
+l.365 		\multirow
+                 {1}{4em}{Kongsberg}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (66.27666pt too wide) in paragraph at lines 346--369
+ [][] 
  []
 
-
-Overfull \hbox (3.668pt too wide) in paragraph at lines 365--365
-[]|\T1/ptm/m/n/10.95 Kongsberg|  
- []
-
-
-Overfull \hbox (4.54181pt too wide) in paragraph at lines 346--369
-[][] 
- []
-
-) [15] [16]
+)pdfTeX warning (ext4): destination with the same identifier (name{page.16}) ha
+s been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.127 \include{chapter2}
+                         [16]
 \openout2 = `chapter3.aux'.
 
  (./chapter3.tex
-Chapter 3.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 15.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 15.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 15.
-[17
+Cap\'{\i }tulo 3.
+) [17
 
 
 
-]) [18]
+]
 \openout2 = `chapter4.aux'.
 
- (./chapter4.tex
-Chapter 4.
-
-LaTeX Warning: Reference `fig:auv_scene' on page 19 undefined on input line 8.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [19
+ (./chapter4.tex [18
 
 
 
-])
-[20]
+]
+Cap\'{\i }tulo 4.
+) [19]
 \openout2 = `chapter5.aux'.
 
- (./chapter5.tex
-Chapter 5.
-
-Underfull \vbox (badness 1014) has occurred while \output is active []
-
- [21
+ (./chapter5.tex [20
 
 
 
 ]
-[22] [23]
-<figures/octant.png, id=587, 795.97375pt x 685.56125pt>
-File: figures/octant.png Graphic file (type png)
-<use figures/octant.png>
-Package pdftex.def Info: figures/octant.png  used on input line 121.
-(pdftex.def)             Requested size: 298.75264pt x 257.3045pt.
+Cap\'{\i }tulo 5.
 
-Underfull \vbox (badness 1472) has occurred while \output is active []
+Package natbib Warning: Citation `afonso-thesis' on page 21 undefined on input 
+line 11.
 
- [24 <./figures/octant.png>]) [25]
+) [21]
 \openout2 = `chapter6.aux'.
 
- (./chapter6.tex [26
+ (./chapter6.tex [22
 
 
 
 ]
-Chapter 6.
-) [27]
-\openout2 = `chapter7.aux'.
+Cap\'{\i }tulo 6.
+) [23]
+\openout2 = `appendix1.aux'.
 
- (./chapter7.tex [28
-
-
-
-]
-Chapter 7.
-) [29] [30
+ (./appendix1.tex [24
 
 
-] (./thesis.bbl [31
 
 ]
-Underfull \hbox (badness 2096) in paragraph at lines 109--114
-[]\T1/ptm/m/n/10.95 Kongsberg Mar-itime.  Hipap - high pre-ci-sion acous-tic po
--si-tion-ing, 2016.  [On-
- []
+Anexo A.
+LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <14.4> not available
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 7.
+LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <10.95> not available
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 9.
 
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 157.
- [32]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 157.
- (./thesis.aux (./abstract.aux) (./abbrevs.aux) (./chapter1.aux)
-(./chapter2.aux) (./chapter3.aux) (./chapter4.aux) (./chapter5.aux)
-(./chapter6.aux) (./chapter7.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 157.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 157.
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 6F921B6625096A54DC4E0908FE1EC2BE;3471.
+Package natbib Warning: Citation `kn:Lip08' on page 25 undefined on input line 
+17.
+
+[25]) [26]
+No file tese.bbl.
+
+Package natbib Warning: There were undefined citations.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 151.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 151.
+(./tese.aux (./abstract.aux) (./acknows.aux) (./quote.aux) (./abbrevs.aux)
+(./chapter1.aux) (./chapter2.aux) (./chapter3.aux) (./chapter4.aux)
+(./chapter5.aux) (./chapter6.aux) (./appendix1.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 151.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 151.
+Package rerunfilecheck Info: File `tese.out' has not changed.
+(rerunfilecheck)             Checksum: 919BD89440302935A76EA4C7AA17DA76;2740.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 157.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 151.
  ) 
 Here is how much of TeX's memory you used:
- 9466 strings out of 492616
- 138521 string characters out of 6129480
- 250296 words of memory out of 5000000
- 12944 multiletter control sequences out of 15000+600000
- 83403 words of font info for 128 fonts, out of 8000000 for 9000
+ 8675 strings out of 492616
+ 129254 string characters out of 6129480
+ 241136 words of memory out of 5000000
+ 12239 multiletter control sequences out of 15000+600000
+ 74820 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,16n,45p,781b,579s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,12n,45p,779b,592s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
 live/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texli
 ve/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
-e/2019/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/te
-xlive/2019/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/local/texlive/20
-19/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2019/texmf-di
-st/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2019/texmf-dist/fonts/ty
-pe1/urw/times/utmb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/ti
-mes/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmr8a
-.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (46 pages, 345835 bytes).
+e/2019/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2019/texm
+f-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2019/texmf-dist/font
+s/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/ur
+w/times/utmbi8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/u
+tmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+</usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on tese.pdf (46 pages, 293306 bytes).
 PDF statistics:
- 714 PDF objects out of 1000 (max. 8388607)
- 631 compressed objects within 7 object streams
- 163 named destinations out of 1000 (max. 500000)
- 433 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 545 PDF objects out of 1000 (max. 8388607)
+ 467 compressed objects within 5 object streams
+ 108 named destinations out of 1000 (max. 500000)
+ 348 words of extra memory for PDF output out of 10000 (max. 10000000)
 

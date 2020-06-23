@@ -1,4 +1,4 @@
-\chapter{State of the Art} \label{chap:sota}
+\chapter{Fundamentals} \label{chap:fundamentals}
 
 This chapter presents the fundamental concepts of underwater acoustics engineering for localization and positioning of aquatic autonomous vehicles.
 
@@ -95,7 +95,7 @@ There are two main types of techniques that are used to achieve such objective: 
 
 \subsection{Received Signal Strength Indicator}
 
-The Received Signal Strength Indicator (RSSI) method is based on the strength of the signal that reaches the target. It determines the distance between the target and the reference node by analyzing the received signal strength and comparing it with an underwater attenuation model which is range dependent [\hyperref[r:ocean-acoust]{3}]. 
+The Received Signal Strength Indicator (RSSI) method is based on the strength of the signal that reaches the target. It determines the distance between the target and the reference node by analyzing the received signal strength and comparing it with an underwater attenuation model which is range dependent \cite{ocean-acoust}. 
 
 Since the underwater acoustic channel suffers from multipath, time variance and high overall path loss, the RSSI technique is not adequate for underwater applications.
 
@@ -267,7 +267,7 @@ Positioning systems are used to track the underwater position of a vehicle or ot
 
 \subsection{Long Baseline (LBL)}
 
-Long Baseline systems use a positioning method with large distances between baseline stations, with range typically from 50m to more than 2000m  and usually similar to the distance between object and transponders [\hyperref[r:survey-tech-chall]{3}]. A typical LBL configuration is represented in figure a) \ref{fig:lblsblusbl}.
+Long Baseline systems use a positioning method with large distances between baseline stations, with range typically from 50m to more than 2000m  and usually similar to the distance between object and transponders \cite{crosscorr}. A typical LBL configuration is represented in figure a) \ref{fig:lblsblusbl}.
 
 The LBL method uses at least three transponder stations deployed usually on the sea floor, allowing to execute trilateration. Additionally, a transducer is integrated on the object to be tracked. 
 
@@ -323,7 +323,8 @@ This is a broadly used technique due to its convenient set up, which allows to h
 
 All the previously mentioned positioning techniques use a configuration in which the vehicle to be tracked has a single transducer and there is an external set of transponder to determine the positioning of the said object. However, there is the possibility to benefit from the inverse configuration in some applications. Therefore, there are also the iLBL, iSBL and iUSBL methods, which have the same operation principals as LBL, SBL and USBL, respectively.
 
-%________________________________________________________
+%_________________________________________________________
+
 
 \section{Commercial Solutions}
 
@@ -341,8 +342,7 @@ There are several commercial solutions for underwater positioning using the ultr
 
 \textit{Kongsberg} produces the HiPAP family of transducers \cite{hipap_hardw}, which can use the Cymbal acoustic protocol (PSK) or the frequency shift (FSK) modulation technique. Particularly the HiPAP 352 is the model with higher number of active transducers and is able to reaches 0.02m of range accuracy.
 
-\begin{table}[t]
-	\centering
+\begin{table}[!htbp] %use H to adjust
 	\begin{tabular}{|c|c|c c c|}
 		\hline
 		Company
@@ -370,8 +370,12 @@ There are several commercial solutions for underwater positioning using the ultr
 	\label{tab:solutions}
 \end{table}
 
+% http://www.teledynemarine.com/usbl-dat?ProductLineID=59
+% https://www.link-quest.com/html/tl10000.pdf
+% https://www.tritech.co.uk/product/usbl-tracking-system-micronnav
 
 %_________________________________________________________
+
 
 
 %\begin{eqnarray}

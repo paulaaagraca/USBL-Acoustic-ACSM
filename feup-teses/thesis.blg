@@ -7,76 +7,51 @@ A level-1 auxiliary file: chapter1.aux
 A level-1 auxiliary file: chapter2.aux
 A level-1 auxiliary file: chapter3.aux
 A level-1 auxiliary file: chapter4.aux
+A level-1 auxiliary file: chapter5.aux
+A level-1 auxiliary file: chapter6.aux
+A level-1 auxiliary file: chapter7.aux
 The style file: plain.bst
 Database file #1: myrefs.bib
-Too many commas in name 1 of "H. P. Tan, R. Diamant, W. K. G. Seah, M. Waldmeyer" for entry survey-tech-chall
-while executing---line 1049 of file plain.bst
-Too many commas in name 1 of "F. B. Jensen, W. A. Kuperman, M. B. Porter, H. Schmidt" for entry ocean-acoust
-while executing---line 1049 of file plain.bst
-Too many commas in name 1 of "V. Chandrasekhar, W. KG Seah, Y. S. Choo, H. V. Ee" for entry suvey-loc
-while executing---line 1049 of file plain.bst
-Too many commas in name 1 of "A. P. Pandian, T. Senjyu, S. M. S. Islam, H. Wang" for entry trilat
-while executing---line 1049 of file plain.bst
-Too many commas in name 1 of "X. You, Y. Wu, M. Zhu, X. Li, L. Zhang" for entry sbl
-while executing---line 1049 of file plain.bst
-Too many commas in name 1 of "X. You, Y. Wu, M. Zhu, X. Li, L. Zhang" for entry sbl
-while executing---line 1049 of file plain.bst
-Too many commas in name 1 of "D. Sun, J. Ding, C. Zheng, W. Huang" for entry usbl-new
-while executing---line 1049 of file plain.bst
-Too many commas in name 1 of "A. P. Pandian, T. Senjyu, S. M. S. Islam, H. Wang" for entry trilat
-while executing---line 1090 of file plain.bst
 Warning--empty publisher in pathloss
-Too many commas in name 1 of "D. Sun, J. Ding, C. Zheng, W. Huang" for entry usbl-new
-while executing---line 1090 of file plain.bst
-Too many commas in name 1 of "F. B. Jensen, W. A. Kuperman, M. B. Porter, H. Schmidt" for entry ocean-acoust
-while executing---line 1090 of file plain.bst
-Too many commas in name 1 of "H. P. Tan, R. Diamant, W. K. G. Seah, M. Waldmeyer" for entry survey-tech-chall
-while executing---line 1090 of file plain.bst
-Too many commas in name 1 of "V. Chandrasekhar, W. KG Seah, Y. S. Choo, H. V. Ee" for entry suvey-loc
-while executing---line 1090 of file plain.bst
-Too many commas in name 1 of "X. You, Y. Wu, M. Zhu, X. Li, L. Zhang" for entry sbl
-while executing---line 1090 of file plain.bst
-Too many commas in name 1 of "X. You, Y. Wu, M. Zhu, X. Li, L. Zhang" for entry sbl
-while executing---line 1090 of file plain.bst
-You've used 22 entries,
+You've used 24 entries,
             2118 wiz_defined-function locations,
-            622 strings with 7771 characters,
-and the built_in function-call counts, 6173 in all, are:
-= -- 618
-> -- 154
-< -- 7
-+ -- 70
-- -- 44
-* -- 333
-:= -- 990
-add.period$ -- 70
-call.type$ -- 22
-change.case$ -- 89
+            638 strings with 8323 characters,
+and the built_in function-call counts, 7947 in all, are:
+= -- 771
+> -- 352
+< -- 8
++ -- 144
+- -- 116
+* -- 519
+:= -- 1295
+add.period$ -- 77
+call.type$ -- 24
+change.case$ -- 131
 chr.to.int$ -- 0
-cite$ -- 23
-duplicate$ -- 270
-empty$ -- 599
-format.name$ -- 44
-if$ -- 1376
+cite$ -- 25
+duplicate$ -- 300
+empty$ -- 661
+format.name$ -- 116
+if$ -- 1719
 int.to.chr$ -- 0
-int.to.str$ -- 22
-missing$ -- 13
-newline$ -- 114
-num.names$ -- 44
-pop$ -- 121
+int.to.str$ -- 24
+missing$ -- 15
+newline$ -- 124
+num.names$ -- 48
+pop$ -- 164
 preamble$ -- 1
-purify$ -- 66
+purify$ -- 106
 quote$ -- 0
-skip$ -- 204
+skip$ -- 226
 stack$ -- 0
-substring$ -- 384
-swap$ -- 66
-text.length$ -- 7
+substring$ -- 435
+swap$ -- 74
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 88
+type$ -- 96
 warning$ -- 1
-while$ -- 63
-width$ -- 24
-write$ -- 246
-(There were 14 error messages)
+while$ -- 72
+width$ -- 26
+write$ -- 269
+(There was 1 warning)

@@ -1,1 +1,176 @@
-\chapter{Experiments on Localization Reliability and Improvement}
+\chapter{Proposed System} \label{chap:proposed_sys}
+
+This chapter is dedicated to the presentation and overall explanation of the developed system, highlighting its capabilities, the used methodologies and overall design strategies. 
+The system will be presented in two distinct sections. The first component is the HDL module, which falls into the spectrum of hardware design and requires insight on hardware development and good practices. The second section relies on software development to complement the functionality of the mentioned module, so that is possible to deliver the desired result.
+
+\section{HDL Module Design}
+
+The system which is proposed to be implemented in this research work has as input 4 signals which are received by each hydrophone of the array, and outputs an average phase difference between all combinations of pairs of hydrophones. 
+
+- ver regras basicas de hardware development
+- sustema sincrono, available clock cycles globais
+- hardware limitations
+- tamanho das entradas
+
+
+\begin{enumerate}
+	\item Hilbert Filter
+	\item Cordic
+	\item phasediff
+	\item phasemean
+\end{enumerate}
+
+\subsection{Hilbert Filter}
+- schematics
+- explicar design decisions
+- descrever flow do sinal no hardware
+
+\subsection{Cordic}
+\subsection{phasediff}
+\subsection{phasemean}
+
+\section{Angle of Arrival Calculation}
+
+- explicar ambiguidade de fase do sinal
+
+- explicar calculos de angulo de chegada (scipt + matematica) com base nas posições dos hydrophones e do angulo de chegada
+
+- por simulação, conclui que para distancias muito longe (quantizar) não faz diferença ter o TOA e basta os TDOA
+
+
+\section{Systematic analysis of geometric configurations performance} \label{sec:config-perf}
+
+One of the aspects that can be studied to improve the localization estimation is analyzing the best sensor configuration that could be used for a certain scenario. Therefore, it was used the Crámer-Rao lower bound method to do a systematic study on the performance of several hydrophone configurations to be applied in many situations. The study serves as decision method for sensor configurations both applied in an AUV or in a situation without a vehicle. 
+
+The fundamental thought process and mathematical notation used in \ref{sec:cramer} are applied in the study that will be explained next.
+
+\subsection{Analytic Approach}  
+
+Following the logical approach for the process, there are three essential steps that can be differentiated:
+
+\begin{enumerate}
+	
+	\item Formulate the observations vector
+	\item Calculate the Fisher Information Matrix (FIM)
+	\item Calculate the determinant of FIM and draw conclusions
+	
+\end{enumerate}
+
+In this thesis, the number of used hydrophones per estimation is four, so all calculations will be presented for this specific case.
+
+Firstly, the observations vector is formulated based on an initial time of arrival $t_0$, which is given by a synchrony mechanism integrated in the global communication system, and the time-of-arrival based on the vectors that connect the hydrophone positions, $r_i$, to the considered source, $s_t$. For a more realistic approach, it is also considered an added noise component that can be approximated to to a Gaussian distribution $n_i \sim \mathcal{N}(\mu,\,\sigma^{2})$. 
+
+The four observations vector are then formulated as expressed in \ref{eq:obs-my}.
+
+\begin{eqnarray}
+	t_1 = t_0 + \frac{s_t - r_1}{c} + n_i \\
+	t_2 = t_0 + \frac{s_t - r_2}{c} + n_i \\
+	t_3 = t_0 + \frac{s_t - r_3}{c} + n_i \\
+	t_4 = t_0 + \frac{s_t - r_4}{c} + n_i \\
+	\label{eq:obs-my}
+\end{eqnarray}
+
+Then, addressing the second step, all conditions are set to calculate the FIM,  $I(d) \in \mathbb{R}^{3x3}$. In order to do so, if it is considered d$_{i}$ = $|| s_{t} - r_{i} ||$ as the distance between each sensor and the source, the gradient of the observations vector can be expressed as shown in \ref{eq:grad_fisher}.
+
+\begin{eqnarray}
+	\nabla_{d}t(d) = \frac{1}{c} 
+	\begin{bmatrix}
+	\frac{d_1^T}{||d_1||} \\ 
+	\addlinespace
+	\frac{d_2^T}{||d_2||} \\
+	\vdots \\
+	\addlinespace
+	\frac{d_N^T}{||d_N||}
+	\end{bmatrix}
+	\label{eq:grad_fisher}
+\end{eqnarray}
+
+Additionally, the added noise component which is introduces to the calculations is present in the covariance matrix used in the FIM equation, which is represented as in \ref{eq:covariance}.
+
+\begin{eqnarray}
+& \Sigma = 
+\begin{bmatrix}
+\sigma_1^2 & 0 & 0 & 0 \\
+0 & \sigma_2^2 & 0 & 0 \\
+0 & 0  & \sigma_3^2  & 0 \\
+0 & 0 & 0 & \sigma_4^2 
+\end{bmatrix}
+\label{eq:covariance}
+\end{eqnarray}
+
+Overall, the conditions to obtain the FIM matrix are established and, after some mathematical formulation, it is expressed as \ref{eq:final-fisher}. This expression can be validated by a similar study made on TOA based optimal positioning \cite{cramer-bruno}.
+
+\begin{eqnarray}
+	I(d) = \frac{1}{c^2} 
+	\begin{bmatrix}
+	\sum_{n=1}^{N} \frac{d_i d_i^T}{||d_i||^2} \frac{1}{\sigma_i^2}\\
+	\end{bmatrix}
+	\label{eq:final-fisher}
+\end{eqnarray}
+
+The final step is to calculate the determinant and seek its relation to the volume of the \textit{uncertainty ellipsoid}. As mentioned before, in \ref{sec:cramer}, the determinant of the inverted Fisher Information matrix gives a deterministic value that represents the quantity of information that we can obtain and, therefore, the objective is to maximize it, by respecting the condition $argmax \; det(I(d)^{-1})$, and consequently minimizing the volume of the ellipsoid. 
+
+\subsection{Simulation Results}
+
+All the concepts and notions before mentioned were applied in a simulated series of scenarios, where it is attempted to take conclusions about optimal positioning of the sensors for performance improvement. As such, the conditions of the simulation as well as the results of the study are hereinafter explained.
+
+As mentioned before, the key to evaluate the performance when adopting this method is to analyze the determinant of the inverted FIM or, alternatively, the matrix's eigenvalues. In order to simplify the extraction of results in an initial inspection, instead of examining an ellipsoid, it is used a sphere which is a suitable approximation since the overall considered volume of uncertainty remains the same. 
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/octant}
+	\caption{Octant discrimination in 3D space}
+	\label{fig:octant}
+\end{figure}
+
+\subsubsection{Uncertainty Sphere}
+
+Firstly, it is necessary to choose a set of hydrophone configurations to be tested by the developed simulation environment. Therefore, considering the geometry of an AUV it was formulated a matrix containing nine hydrophones, from each are chosen four at a time to compose the configuration. Matrix \ref{eq:hydro-config} represent the nine hydrophones, where each column expresses the position of a sensor with the x position in the first row, y position in the second row and z position in the third row. The first hydrophone, in the first column, always integrates the configuration since it is the only one in a different plan.
+
+
+
+\begin{table}[!htbp] %use H to adjust
+	\begin{center}
+	\begin{tabular}{|c| c c c c c c c c c|}
+		\hline
+		
+		& r1 & r2 & r3 & r4	& r5 & r6 & r7 & r8	& r9 \\ \hline 
+		\multirow{1}{0.5em}{x} 
+		& q & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+		\hline 
+		\multirow{1}{0.5em}{y} 
+		& 0 & 0 & 0 & w & -w & e & e & -e & -e\\
+		\hline 
+		\multirow{1}{0.5em}{z} 
+		& 0 & w & -w & 0 & 0 & e & -e & e & -e \\
+		\hline 
+	\end{tabular}
+	\caption{Hydrophone geometric positions}
+	\label{tab:config-9h}
+\end{center}
+\end{table}
+
+
+
+\begin{eqnarray}
+& r = 
+\begin{bmatrix}
+q & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  \\
+0 & 0 & 0 & w & -w & e & e & -e & -e \\
+0 & w & -w & 0 & 0 & e & -e & e & -e \\
+\end{bmatrix}
+\label{eq:hydro-config}
+\end{eqnarray}
+
+The radius of the uncertainty sphere, represented by $ur$ is expressed as \ref{eq:det-sphere}, which translates the translation of the three ellipsoid axis into a single mean radius that originates a figure of the same volume.
+
+\begin{eqnarray}
+& ur = \sqrt[2]{\sqrt[3]{det(I(d)^{-1})}}
+\label{eq:det-sphere}
+\end{eqnarray}
+
+
+
+\subsubsection{Uncertainty Ellipsoid}
+
+\subsubsection{Conclusions}

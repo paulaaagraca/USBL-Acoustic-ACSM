@@ -31,7 +31,7 @@ function [mse_config,deviation_azimuth_config,deviation_elevation_config] = ...
 
 %----test options----------------------------------------------------------
 % test for single source position
-plot_vectors = 0;     %plot estimated vectors for 1 source position 
+plot_vectors = 1;     %plot estimated vectors for 1 source position 
                       %(defined in execution loop)
 index_sourcepos = 1;  %index of source position for which is plotted estimated diff values
 

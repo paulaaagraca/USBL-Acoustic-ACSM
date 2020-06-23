@@ -66,7 +66,9 @@ tdoa = [ti(1)-ti(2);
 
 %lower precision
 %tdoa = round(tdoa*10^8)/10^8;
-    
+% tdoai = tdoa * 1e6;
+% tdoaib = round(tdoai * 2^(1))/2^(1);
+% tdoa = tdoaib / 1e6;
 %--------------------------------------------------------------------------
 % From this point on, it is considered that the source position is unknown
 

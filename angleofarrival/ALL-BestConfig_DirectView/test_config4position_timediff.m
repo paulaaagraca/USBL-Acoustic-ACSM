@@ -42,7 +42,7 @@ ri = [q   0   0    0    0    0   0    0    0;
       0   w   -w   0    0    e   -e   e    -e];
 %-------------------------------------------------------------------------- 
 
-s=[100;0;0]; %single source position for test
+s=[1000;0;-100]; %single source position for test
 [rownum,n_samples] = size(s); %number of samples to compute
 
 cnt_comb =1; %initialize counter of all hydrophone combinations
@@ -122,7 +122,7 @@ for gen_test=1:10
                     %elevation error for a single source position
                     error_elevation(cnt_comb) = mean(error_i_elevation);
 
-                    
+                  
 
                     % Mean squared error (of a certain hydrophone configuration)
                     mse_config(cnt_comb) = sqrt(error_azimuth(cnt_comb)^2 + error_elevation(cnt_comb)^2);

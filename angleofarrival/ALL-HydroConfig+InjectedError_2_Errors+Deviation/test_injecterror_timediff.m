@@ -12,7 +12,7 @@
 clear
 
 %------options-------------------------------------------------------------
-source_pos_single = 0;  %plot single position of source with injected error
+source_pos_single = 1;  %plot single position of source with injected error
 plot_mse_deviation = 1; %plot deviation and MSE plots
 plot_Hconfig = 0;       %plot single hydrophone configuration
 %------parameters----------------------------------------------------------

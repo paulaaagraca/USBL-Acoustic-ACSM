@@ -1,0 +1,44 @@
+\babel@toc {portuges}{}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}Context and Motivation}{1}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}Objectives}{2}{section.1.2}% 
+\contentsline {section}{\numberline {1.3}Document Structure}{2}{section.1.3}% 
+\contentsline {chapter}{\numberline {2}Fundamentals}{3}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Underwater acoustic channel}{3}{section.2.1}% 
+\contentsline {subsection}{\numberline {2.1.1}Speed of sound}{4}{subsection.2.1.1}% 
+\contentsline {subsection}{\numberline {2.1.2}Multipath}{4}{subsection.2.1.2}% 
+\contentsline {subsection}{\numberline {2.1.3}Doppler Effect}{5}{subsection.2.1.3}% 
+\contentsline {subsection}{\numberline {2.1.4}Attenuation and signal-to-noise ratio}{6}{subsection.2.1.4}% 
+\contentsline {section}{\numberline {2.2}Range estimation for underwater localization}{6}{section.2.2}% 
+\contentsline {subsection}{\numberline {2.2.1}Received Signal Strength Indicator}{6}{subsection.2.2.1}% 
+\contentsline {subsection}{\numberline {2.2.2}Time Delay Estimation}{7}{subsection.2.2.2}% 
+\contentsline {subsubsection}{\numberline {2.2.2.1}Time of Arrival}{7}{subsubsection.2.2.2.1}% 
+\contentsline {subsubsection}{\numberline {2.2.2.2}Time Difference of Arrival}{7}{subsubsection.2.2.2.2}% 
+\contentsline {subsubsection}{\numberline {2.2.2.3}Generalized Cross-Correlation}{7}{subsubsection.2.2.2.3}% 
+\contentsline {subsubsection}{\numberline {2.2.2.4}Cross-Correlation}{8}{subsubsection.2.2.2.4}% 
+\contentsline {subsubsection}{\numberline {2.2.2.5}Maximum Likelihood}{8}{subsubsection.2.2.2.5}% 
+\contentsline {subsubsection}{\numberline {2.2.2.6}Time of Flight}{8}{subsubsection.2.2.2.6}% 
+\contentsline {section}{\numberline {2.3}Localization estimation}{9}{section.2.3}% 
+\contentsline {subsection}{\numberline {2.3.1}Triangulation}{9}{subsection.2.3.1}% 
+\contentsline {subsubsection}{\numberline {2.3.1.1}Three-Object Triangulation}{9}{subsubsection.2.3.1.1}% 
+\contentsline {subsubsection}{\numberline {2.3.1.2}Geometric Triangulation algorithm}{9}{subsubsection.2.3.1.2}% 
+\contentsline {subsection}{\numberline {2.3.2}Trilateration}{11}{subsection.2.3.2}% 
+\contentsline {subsection}{\numberline {2.3.3}Multilateration}{11}{subsection.2.3.3}% 
+\contentsline {section}{\numberline {2.4}Positioning Systems}{12}{section.2.4}% 
+\contentsline {subsection}{\numberline {2.4.1}Long Baseline (LBL)}{12}{subsection.2.4.1}% 
+\contentsline {subsection}{\numberline {2.4.2}Short Baseline (SBL)}{14}{subsection.2.4.2}% 
+\contentsline {subsection}{\numberline {2.4.3}Ultra Short Baseline (USBL)}{14}{subsection.2.4.3}% 
+\contentsline {subsection}{\numberline {2.4.4}Inverted Systems}{15}{subsection.2.4.4}% 
+\contentsline {section}{\numberline {2.5}Commercial Solutions}{15}{section.2.5}% 
+\contentsline {chapter}{\numberline {3}ss}{17}{chapter.3}% 
+\contentsline {chapter}{\numberline {4}Proposed System}{19}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}HDL Module Design}{19}{section.4.1}% 
+\contentsline {chapter}{\numberline {5}Research Problem}{21}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Problem Statement}{21}{section.5.1}% 
+\contentsline {section}{\numberline {5.2}Hypothesis and Research Questions}{21}{section.5.2}% 
+\contentsline {chapter}{\numberline {6}Experiments on Localization Reliability and Improvement}{23}{chapter.6}% 
+\contentsline {chapter}{\numberline {A}Lorem Ipsum}{25}{appendix.A}% 
+\contentsline {section}{\numberline {A.1}O que \IeC {\'e} o \emph {Lorem Ipsum}?}{25}{section.A.1}% 
+\contentsline {section}{\numberline {A.2}De onde Vem o Lorem?}{25}{section.A.2}% 
+\contentsline {section}{\numberline {A.3}Porque se usa o Lorem?}{26}{section.A.3}% 
+\contentsline {section}{\numberline {A.4}Onde se Podem Encontrar Exemplos?}{26}{section.A.4}% 
