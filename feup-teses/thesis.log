@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.19)  20 JUN 2020 13:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.19)  26 JUN 2020 17:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -435,25 +435,28 @@ Package: multirow 2019/01/01 v2.4 Span multiple rows of a table
 \openout2 = `mymacros.aux'.
 
 (./mymacros.tex) (./thesis.aux (./abstract.aux) (./abbrevs.aux) (./chapter1.aux
-) (./chapter2.aux) (./chapter3.aux) (./chapter4.aux) (./chapter5.aux)
-(./chapter6.aux) (./chapter7.aux))
+) (./chapter2.aux) (./chapter4.aux) (./chapter5.aux) (./chapter6.aux
+
+LaTeX Warning: Label `sec:config-perf' multiply defined.
+
+) (./chapter7.aux))
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 67.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 71.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -535,7 +538,7 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 147.
 )
-Package hyperref Info: Link coloring ON on input line 67.
+Package hyperref Info: Link coloring ON on input line 71.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -545,9 +548,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count137
 )
-LaTeX Info: Redefining \ref on input line 67.
-LaTeX Info: Redefining \pageref on input line 67.
-LaTeX Info: Redefining \nameref on input line 67.
+LaTeX Info: Redefining \ref on input line 71.
+LaTeX Info: Redefining \pageref on input line 71.
+LaTeX Info: Redefining \nameref on input line 71.
 
 (./thesis.out) (./thesis.out)
 \@outlinefile=\write3
@@ -555,15 +558,15 @@ LaTeX Info: Redefining \nameref on input line 67.
 
 \@crestbox=\box36
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 108.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 112.
 LaTeX Font Info:    Font shape `T1/ptm/bx/sc' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/sc' tried instead on input line 108.
+(Font)              Font shape `T1/ptm/b/sc' tried instead on input line 112.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 108.
-<figures/uporto-feup.pdf, id=200, 338.26375pt x 126.4725pt>
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 112.
+<figures/uporto-feup.pdf, id=209, 338.26375pt x 126.4725pt>
 File: figures/uporto-feup.pdf Graphic file (type pdf)
 <use figures/uporto-feup.pdf>
-Package pdftex.def Info: figures/uporto-feup.pdf  used on input line 108.
+Package pdftex.def Info: figures/uporto-feup.pdf  used on input line 112.
 (pdftex.def)             Requested size: 204.85983pt x 76.59618pt.
  [-3
 
@@ -572,21 +575,33 @@ Package pdftex.def Info: figures/uporto-feup.pdf  used on input line 108.
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./figur
 es/uporto-feup.pdf>]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 108.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 112.
 
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 108.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 112.
  [-2
 
 ]
 \openout2 = `abstract.aux'.
 
 
-(./abstract.tex [1
+(./abstract.tex
+Underfull \hbox (badness 1655) in paragraph at lines 4--5
+\T1/ptm/m/n/10.95 Dispositivos robóti-cos pro-gramáveis como \T1/ptm/m/it/10.95
+ Au-tonomous Un-der-wa-ter Ve-hi-cles \T1/ptm/m/n/10.95 (AUVs) são
+ []
+
+
+Underfull \hbox (badness 1629) in paragraph at lines 6--7
+\T1/ptm/m/n/10.95 en-tre AUVs através do método \T1/ptm/m/it/10.95 Ultra-Short 
+Base-line \T1/ptm/m/n/10.95 (USBL). Esta téc-nica baseia-se na
+ []
+
+[1
 
 
 
@@ -684,16 +699,28 @@ l.19
       [1
 
 
-])pdfTeX warning (ext4): destination with the same identifier (name{page.2}) ha
-s been already used, duplicate ignored
+]
+Underfull \hbox (badness 1394) in paragraph at lines 28--29
+\T1/ptm/m/n/10.95 or-der to im-prove the es-ti-ma-tion pro-cess. Fi-nally, the 
+im-ple-mented sys-tem is val-i-dated
+ []
+
+)pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
+ been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.130 \include{chapter1}
+l.134 \include{chapter1}
                          [2]
 \openout2 = `chapter2.aux'.
 
  (./chapter2.tex
 Chapter 2.
+
+Underfull \hbox (badness 1735) in paragraph at lines 3--4
+\T1/ptm/m/n/10.95 This chap-ter presents the fun-da-men-tal con-cepts of un-der
+-wa-ter acous-tics en-gi-neer-ing for
+ []
+
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 19.
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
@@ -707,7 +734,7 @@ l.23 A
 
 
 ]
-<figures/sound-profile.png, id=365, 412.54124pt x 394.47375pt>
+<figures/sound-profile.png, id=369, 412.54124pt x 394.47375pt>
 File: figures/sound-profile.png Graphic file (type png)
 <use figures/sound-profile.png>
 Package pdftex.def Info: figures/sound-profile.png  used on input line 27.
@@ -718,7 +745,7 @@ been already used, duplicate ignored
                    \relax 
 l.42 
       [4 <./figures/sound-profile.png>]
-<figures/multipath.png, id=377, 564.1075pt x 256.96pt>
+<figures/multipath.png, id=381, 564.1075pt x 256.96pt>
 File: figures/multipath.png Graphic file (type png)
 <use figures/multipath.png>
 Package pdftex.def Info: figures/multipath.png  used on input line 45.
@@ -750,12 +777,12 @@ fier (name{page.8}) has been already used, duplicate ignored
                    \relax 
 l.169 
        [8]
-<figures/triangulation.png, id=434, 306.14375pt x 242.9075pt>
+<figures/triangulation.png, id=438, 306.14375pt x 242.9075pt>
 File: figures/triangulation.png Graphic file (type png)
 <use figures/triangulation.png>
 Package pdftex.def Info: figures/triangulation.png  used on input line 191.
 (pdftex.def)             Requested size: 170.71393pt x 135.44905pt.
-<figures/geotriang.png, id=435, 530.98375pt x 392.46625pt>
+<figures/geotriang.png, id=439, 530.98375pt x 392.46625pt>
 File: figures/geotriang.png Graphic file (type png)
 <use figures/geotriang.png>
 Package pdftex.def Info: figures/geotriang.png  used on input line 204.
@@ -777,7 +804,7 @@ y used, duplicate ignored
                    \relax 
 l.253 \end{eqnarray}
                      [11]
-<figures/lblsblusbl.png, id=471, 1164.35pt x 872.25874pt>
+<figures/lblsblusbl.png, id=475, 1164.35pt x 872.25874pt>
 File: figures/lblsblusbl.png Graphic file (type png)
 <use figures/lblsblusbl.png>
 Package pdftex.def Info: figures/lblsblusbl.png  used on input line 263.
@@ -786,15 +813,16 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.12}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.275 
-       [12 <./figures/lblsblusbl.png>] [13]
-<figures/usbl-config.png, id=499, 447.6725pt x 419.5675pt>
+l.274 A
+        complete localization procedure starts with the vehicle sending an a...
+[12 <./figures/lblsblusbl.png>] [13]
+<figures/usbl-config.png, id=501, 447.6725pt x 419.5675pt>
 File: figures/usbl-config.png Graphic file (type png)
 <use figures/usbl-config.png>
 Package pdftex.def Info: figures/usbl-config.png  used on input line 315.
 (pdftex.def)             Requested size: 213.39568pt x 200.00085pt.
 
-Underfull \vbox (badness 3482) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [14 <./figures/usbl-config.png>]
 Overfull \hbox (3.03284pt too wide) in paragraph at lines 357--357
@@ -811,113 +839,130 @@ Overfull \hbox (4.54181pt too wide) in paragraph at lines 346--369
 [][] 
  []
 
-) [15] [16]
-\openout2 = `chapter3.aux'.
 
- (./chapter3.tex
-Chapter 3.
+Underfull \vbox (badness 1019) has occurred while \output is active []
+
+ [15]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 15.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 393.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 15.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 393.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 15.
-[17
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 393.
 
-
-
-]) [18]
+[16]) [17]
 \openout2 = `chapter4.aux'.
 
- (./chapter4.tex
-Chapter 4.
-
-LaTeX Warning: Reference `fig:auv_scene' on page 19 undefined on input line 8.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [19
+ (./chapter4.tex [18
 
 
 
-])
-[20]
+]
+Chapter 3.
+<figures/proposed-solution.png, id=549, 898.35625pt x 524.96124pt>
+File: figures/proposed-solution.png Graphic file (type png)
+<use figures/proposed-solution.png>
+Package pdftex.def Info: figures/proposed-solution.png  used on input line 11.
+(pdftex.def)             Requested size: 298.75264pt x 174.57545pt.
+[19 <./figures/proposed-solution.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 31--33
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--36
+
+ []
+
+
+Underfull \vbox (badness 1776) has occurred while \output is active []
+
+ [20])
+[21]
 \openout2 = `chapter5.aux'.
 
- (./chapter5.tex
-Chapter 5.
-
-Underfull \vbox (badness 1014) has occurred while \output is active []
-
- [21
+ (./chapter5.tex [22
 
 
 
 ]
-[22] [23]
-<figures/octant.png, id=587, 795.97375pt x 685.56125pt>
-File: figures/octant.png Graphic file (type png)
-<use figures/octant.png>
-Package pdftex.def Info: figures/octant.png  used on input line 121.
-(pdftex.def)             Requested size: 298.75264pt x 257.3045pt.
-
-Underfull \vbox (badness 1472) has occurred while \output is active []
-
- [24 <./figures/octant.png>]) [25]
+Chapter 4.
+[23]) [24]
 \openout2 = `chapter6.aux'.
 
- (./chapter6.tex [26
+ (./chapter6.tex
+Chapter 5.
+[25
 
 
 
-]
-Chapter 6.
-) [27]
+] [26] [27]
+Underfull \hbox (badness 10000) in paragraph at lines 147--168
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 147--168
+
+ []
+
+) [28]
 \openout2 = `chapter7.aux'.
 
- (./chapter7.tex [28
+ (./chapter7.tex
+Chapter 6.
+) [29
 
 
 
-]
-Chapter 7.
-) [29] [30
+] [30
 
 
 ] (./thesis.bbl [31
 
 ]
-Underfull \hbox (badness 2096) in paragraph at lines 109--114
-[]\T1/ptm/m/n/10.95 Kongsberg Mar-itime.  Hipap - high pre-ci-sion acous-tic po
--si-tion-ing, 2016.  [On-
+Underfull \hbox (badness 2035) in paragraph at lines 102--107
+\T1/ptm/m/n/10.95 https://www.deeperblue.com/fifteen-percent-of-ocean-floor-now
+-mapped/. [Ac-cessed Oct.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 109--114
+\T1/ptm/m/n/10.95 Avail-able: https://www.kongsberg.com/maritime/products/Acous
+tics-Positioning-and-
  []
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 157.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 161.
  [32]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 157.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 161.
  (./thesis.aux (./abstract.aux) (./abbrevs.aux) (./chapter1.aux)
-(./chapter2.aux) (./chapter3.aux) (./chapter4.aux) (./chapter5.aux)
-(./chapter6.aux) (./chapter7.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 157.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 157.
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 6F921B6625096A54DC4E0908FE1EC2BE;3471.
+(./chapter2.aux) (./chapter4.aux) (./chapter5.aux) (./chapter6.aux)
+(./chapter7.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 161.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 161.
 
 
-LaTeX Warning: There were undefined references.
+Package rerunfilecheck Warning: File `thesis.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 157.
+Package rerunfilecheck Info: Checksums for `thesis.out':
+(rerunfilecheck)             Before: 4471ECE371539F80FE21C53BC584EBE7;3643
+(rerunfilecheck)             After:  454D9B51B1E37019DB211E0D1FAC4378;3642.
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 161.
  ) 
 Here is how much of TeX's memory you used:
- 9466 strings out of 492616
- 138521 string characters out of 6129480
- 250296 words of memory out of 5000000
- 12944 multiletter control sequences out of 15000+600000
+ 9464 strings out of 492616
+ 138553 string characters out of 6129480
+ 249990 words of memory out of 5000000
+ 12947 multiletter control sequences out of 15000+600000
  83403 words of font info for 128 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,16n,45p,781b,579s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,16n,45p,815b,579s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -930,10 +975,10 @@ st/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2019/texmf-dist/fonts/ty
 pe1/urw/times/utmb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/ti
 mes/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmr8a
 .pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (46 pages, 345835 bytes).
+Output written on thesis.pdf (46 pages, 343711 bytes).
 PDF statistics:
- 714 PDF objects out of 1000 (max. 8388607)
- 631 compressed objects within 7 object streams
- 163 named destinations out of 1000 (max. 500000)
- 433 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 720 PDF objects out of 1000 (max. 8388607)
+ 637 compressed objects within 7 object streams
+ 165 named destinations out of 1000 (max. 500000)
+ 449 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -6,7 +6,7 @@
 \BOOKMARK [1][-]{section.1.1}{1.1 Context and Motivation}{chapter.1}% 6
 \BOOKMARK [1][-]{section.1.2}{1.2 Objectives}{chapter.1}% 7
 \BOOKMARK [1][-]{section.1.3}{1.3 Document Structure}{chapter.1}% 8
-\BOOKMARK [0][-]{chapter.2}{2 Fundamentals}{}% 9
+\BOOKMARK [0][-]{chapter.2}{2 State of the Art}{}% 9
 \BOOKMARK [1][-]{section.2.1}{2.1 Underwater acoustic channel}{chapter.2}% 10
 \BOOKMARK [2][-]{subsection.2.1.1}{2.1.1 Speed of sound}{section.2.1}% 11
 \BOOKMARK [2][-]{subsection.2.1.2}{2.1.2 Multipath}{section.2.1}% 12
@@ -25,25 +25,27 @@
 \BOOKMARK [2][-]{subsection.2.4.3}{2.4.3 Ultra Short Baseline \(USBL\)}{section.2.4}% 25
 \BOOKMARK [2][-]{subsection.2.4.4}{2.4.4 Inverted Systems}{section.2.4}% 26
 \BOOKMARK [1][-]{section.2.5}{2.5 Commercial Solutions}{chapter.2}% 27
-\BOOKMARK [0][-]{chapter.3}{3 State of the Art}{}% 28
-\BOOKMARK [1][-]{section.3.1}{3.1 Optimal sensor configuration methods}{chapter.3}% 29
-\BOOKMARK [2][-]{subsection.3.1.1}{3.1.1 Cr\341mer-Rao lower bound}{section.3.1}% 30
-\BOOKMARK [0][-]{chapter.4}{4 Research Problem}{}% 31
-\BOOKMARK [1][-]{section.4.1}{4.1 Problem Statement}{chapter.4}% 32
-\BOOKMARK [1][-]{section.4.2}{4.2 Hypothesis and Research Questions}{chapter.4}% 33
-\BOOKMARK [0][-]{chapter.5}{5 Proposed System}{}% 34
-\BOOKMARK [1][-]{section.5.1}{5.1 HDL Module Design}{chapter.5}% 35
-\BOOKMARK [2][-]{subsection.5.1.1}{5.1.1 Hilbert Filter}{section.5.1}% 36
-\BOOKMARK [2][-]{subsection.5.1.2}{5.1.2 Cordic}{section.5.1}% 37
-\BOOKMARK [2][-]{subsection.5.1.3}{5.1.3 phasediff}{section.5.1}% 38
-\BOOKMARK [2][-]{subsection.5.1.4}{5.1.4 phasemean}{section.5.1}% 39
-\BOOKMARK [1][-]{section.5.2}{5.2 Angle of Arrival Calculation}{chapter.5}% 40
-\BOOKMARK [1][-]{section.5.3}{5.3 Systematic analysis of geometric configurations performance}{chapter.5}% 41
-\BOOKMARK [2][-]{subsection.5.3.1}{5.3.1 Analytic Approach}{section.5.3}% 42
-\BOOKMARK [2][-]{subsection.5.3.2}{5.3.2 Simulation Results}{section.5.3}% 43
-\BOOKMARK [0][-]{chapter.6}{6 Experiments on Localization Reliability and Improvement}{}% 44
-\BOOKMARK [0][-]{chapter.7}{7 Conclusions}{}% 45
-\BOOKMARK [1][-]{section.7.1}{7.1 Summary}{chapter.7}% 46
-\BOOKMARK [1][-]{section.7.2}{7.2 Main Contributions}{chapter.7}% 47
-\BOOKMARK [1][-]{section.7.3}{7.3 Future Work}{chapter.7}% 48
-\BOOKMARK [0][-]{section*.16}{References}{}% 49
+\BOOKMARK [1][-]{section.2.6}{2.6 Angle of arrival determination}{chapter.2}% 28
+\BOOKMARK [1][-]{section.2.7}{2.7 Methods for optimizing sensor configurations }{chapter.2}% 29
+\BOOKMARK [2][-]{subsection.2.7.1}{2.7.1 Cr\341mer-Rao lower bound}{section.2.7}% 30
+\BOOKMARK [0][-]{chapter.3}{3 Research Problem}{}% 31
+\BOOKMARK [1][-]{section.3.1}{3.1 Problem Statement}{chapter.3}% 32
+\BOOKMARK [1][-]{section.3.2}{3.2 Hypothesis and Research Questions}{chapter.3}% 33
+\BOOKMARK [1][-]{section.3.3}{3.3 Validation Methods}{chapter.3}% 34
+\BOOKMARK [0][-]{chapter.4}{4 Proposed System}{}% 35
+\BOOKMARK [1][-]{section.4.1}{4.1 HDL Module Design}{chapter.4}% 36
+\BOOKMARK [2][-]{subsection.4.1.1}{4.1.1 Hilbert Filter}{section.4.1}% 37
+\BOOKMARK [2][-]{subsection.4.1.2}{4.1.2 Cordic}{section.4.1}% 38
+\BOOKMARK [2][-]{subsection.4.1.3}{4.1.3 phasediff}{section.4.1}% 39
+\BOOKMARK [2][-]{subsection.4.1.4}{4.1.4 phasemean}{section.4.1}% 40
+\BOOKMARK [1][-]{section.4.2}{4.2 Angle of Arrival Calculation}{chapter.4}% 41
+\BOOKMARK [0][-]{chapter.5}{5 Dynamic reconfigurable configuration method}{}% 42
+\BOOKMARK [1][-]{section.5.1}{5.1 Methodological approach}{chapter.5}% 43
+\BOOKMARK [1][-]{section.5.2}{5.2 Systematic analysis of geometric configurations performance}{chapter.5}% 44
+\BOOKMARK [2][-]{subsection.5.2.1}{5.2.1 Analytic Approach}{section.5.2}% 45
+\BOOKMARK [2][-]{subsection.5.2.2}{5.2.2 Simulation Results}{section.5.2}% 46
+\BOOKMARK [0][-]{chapter.6}{6 Conclusions}{}% 47
+\BOOKMARK [1][-]{section.6.1}{6.1 Summary}{chapter.6}% 48
+\BOOKMARK [1][-]{section.6.2}{6.2 Main Contributions}{chapter.6}% 49
+\BOOKMARK [1][-]{section.6.3}{6.3 Future Work}{chapter.6}% 50
+\BOOKMARK [0][-]{section*.16}{References}{}% 51

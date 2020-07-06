@@ -1,3 +1,4 @@
+%function [ind_min_both_dev, ind_min_mse_view, mean_R] = test_config4position_timediff(s) %ind_min_both_dev
 %--------------------------------------------------------------------------
 % Description: 
 %--------------------------------------------------------------------------
@@ -9,10 +10,10 @@ clear
 % for single source position
 plot_Hconfig = 0;
 plot_mse_deviation = 1;
-plot_dev_overlaid = 1;
+plot_dev_overlaid = 0;
 
 %-----parameters-----------------------------------------------------------
-accum_samples = 800;   %nº accumulated samples w/ random error for same position
+accum_samples = 1000;   %nº accumulated samples w/ random error for same position
 max_dev = 0.5e-6;      %max deviation of injected error in time differences
                        %0.5us => [-2.5º,2.5º]
 %--------------------------------------------------------------------------
@@ -42,7 +43,7 @@ ri = [q   0   0    0    0    0   0    0    0;
       0   w   -w   0    0    e   -e   e    -e];
 %-------------------------------------------------------------------------- 
 
-s=[1000;0;-100]; %single source position for test
+s=[-1000;0;-1000]; %single source position for test
 [rownum,n_samples] = size(s); %number of samples to compute
 
 cnt_comb =1; %initialize counter of all hydrophone combinations
@@ -155,7 +156,7 @@ for gen_test=1:10
     
     % -----------------------------------------------------------------
     % definition of hydrophones w/ direct view to the source position
-    [h_view] = hydro_direct_view(mean_R, ri, w, q);
+    [h_view] = hydro_direct_view(mean_R, ri, w, q); %mean_R instead of s
 
     % -----------------------------------------------------------------
     %define which configurations have direct view to the source position
@@ -187,6 +188,7 @@ for gen_test=1:10
     end
     
     index_view = index_view(2:end);
+    % -----------------------------------------------------------------
     
     %accumulate MSE error of all configurations
     gen_mse = gen_mse + mse_config;
@@ -376,4 +378,5 @@ if plot_Hconfig == 1
 	%legend('Hydrophones')
     
 end
+%end
 

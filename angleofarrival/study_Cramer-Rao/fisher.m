@@ -1,4 +1,4 @@
-function [max_det, min_det, std_det, pos_max_det, pos_min_det] = fisher(ri)
+function [max_det, min_det, std_det, pos_max_det, pos_min_det] = fisher(ri,s)
 %--------------------------------------------------------------------------
 % Description: For a certain sensors configuration and a known acoustic
 % source positions matrix, it is calculated the Fisher Information Matrix 
@@ -33,13 +33,13 @@ if not_function == 1
 
     %Sensors' configuration [r1 r2 r3 r4];
     %r1 -> front; r2 -> left; r3 -> right; r4 -> tcop;
-    ri = [2    0       0       0;
-          0      e       -e      0;
-          0      -e      -e      w];
-      
-    ri = [2    0       0         0;
-          0      e       -e      0;
-          0      -e      -e      -w];
+%     ri = [0.4    0       0       0;
+%           0      e       -e      0;
+%           0      -e      -e      w];
+%       
+%     ri = [2    0       0         0;
+%           0      e       -e      0;
+%           0      -e      -e      -w];
 end
 %--------------------------------------------------------------------------
 %_____POSITIONS ARRAY TO BE TESTED_________________________________________
@@ -90,7 +90,8 @@ if single_position == 0
         end
     end
 else
-    s=[1000;0;-100];
+    %s=[1000;0;-1000]; 
+    %s=[1000.00133965043;-0.239395036515780;-100.136022502969];
 end
 [rownum,length_s] = size(s); %number of samples to compute
 
@@ -100,11 +101,11 @@ end
 %Loop: runs all positions to be tested (vector s)
 for i=1:length_s
     
-%     ti = zeros(4,1); %initialize TOA vector
-%     for k=1:4
-%         % times of arrival from the source to the 4 hydrophones
-%         ti(k) = t0 + norm(ri(:,k) - s(:,i)) / cs;
-%     end
+    ti = zeros(4,1); %initialize TOA vector
+    for k=1:4
+        % times of arrival from the source to the 4 hydrophones
+        ti(k) = t0 + norm(ri(:,k) - s(:,i)) / cs;
+    end
 
     %vector that conects each sensor to the acoustic source
     d1 = ri(:,1) - s(:,i);
@@ -128,7 +129,7 @@ for i=1:length_s
     jacob_tran = jacob';
 
     %variance value
-    dev = (4*6e-3/1500);
+    dev = 5e-7;%(4*6e-3/1500);
 
     %covariance matrix
     covariance = [1/(dev^2) 0 0 0;
@@ -144,18 +145,68 @@ for i=1:length_s
 %                                     (d2*d2'/norm(d2)^2) + ...
 %                                     (d3*d3'/norm(d3)^2) + ...
 %                                     (d4*d4'/norm(d4)^ 2));
-
+    
+    %------------------------------------------------------
+    % D optimality - minimum determinant of inverse of information matrix
     %determinant of FIM
     %for each position, it plots the sphere radius of the deviation error
     %(considers that the deviation standard is a sphere and not a elipsoid)
     determinant_fisher(i) = det(fisher_info^(-1))^(1/6);
+    %determinant_fisher(i) = det(fisher_info^(-1));
     
+    %------------------------------------------------------
+    % E optimality - maximizes the minimum eigenvalue of the information matrix
     % eigen values of the inverted fisher matrix gives the deviation error
     % in each axis of the elipsoid.
     %(max eigen value is the max deviation which corresponds to a specific axis)
     eig_value(:,i) = eig(fisher_info^(-1));
     eigen_fisher(i) = max(eig_value(:,i))^.5;
+    
+    %eig_value(:,i) = eig(fisher_info);
+    %eigen_fisher(i) = min(eig_value(:,i));
+    
+    %------------------------------------------------------
+    % A optimality - minimum trace of the inverse fisher matrix
+    inv_fisher_info = fisher_info^(-1);
+    trace_inf_A = 0;
+    [n_rows,n_col] = size(inv_fisher_info);
+    for i = 1:n_rows
+        diag_opposite(i) = inv_fisher_info(i,n_col-i+1);
+        trace_inf_A = trace_inf_A + diag_opposite(i);
+    end
+    
+    %------------------------------------------------------
+    % T optimality - max trace of the fisher matrix
+    trace_inf_T = 0;
+    [n_rows,n_col] = size(fisher_info);
+    for i = 1:n_rows
+        diag_opposite(i) = fisher_info(i,n_col-i+1);
+        trace_inf_T = trace_inf_T + diag_opposite(i);
+    end
+    
+    %------------------------------------------------------
+    % G optimality
+    fisher_info = s'.* fisher_info^(-1) .* s;
+    g_optimal_diagonal = diag(fisher_info);
+    g_optimal_max = max(g_optimal_diagonal);
+    
 end 
+
+%---------------------------------------------
+%----VOLUME SPHERE----------------------------
+% us_volume = (4/3)*pi*determinant_fisher^3;
+% determinant_fisher = us_volume;
+%---------------------------------------------
+%---------------------------------------------
+
+%---------------------------------------------
+%----VOLUME ELLIPSOID----------------------------
+% ue_volume = (4/3)*pi*eig_value(1,1)*eig_value(2,1)*eig_value(3,1);
+% determinant_fisher = ue_volume;
+%---------------------------------------------
+%---------------------------------------------
+
+eig_value_tot = eig_value(1,1) + eig_value(2,1) + eig_value(3,1);
 
 [max_det,ind_max_det] = max(determinant_fisher); %max radius of sphere
 [min_det,ind_min_det] = min(determinant_fisher); %min radius of sphere
