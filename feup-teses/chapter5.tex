@@ -5,7 +5,7 @@ The system will be presented in two distinct sections. The first component is th
 
 \section{HDL Module Design}
 
-The system which is proposed to be implemented in this research work has as input 4 signals which are received by  hydrophone of the array, and outputs an average phase difference between all combinations of pairs of hydrophones. 
+The system which is proposed to be implemented in this research work has as input 4 signals which are received by each hydrophone of the array, and outputs an average phase difference between all combinations of pairs of hydrophones. 
 
 - ver regras basicas de hardware development
 - sustema sincrono, available clock cycles globais
@@ -21,6 +21,23 @@ The system which is proposed to be implemented in this research work has as inpu
 \end{enumerate}
 
 \subsection{Hilbert Filter}
+
+
+\begin{eqnarray}
+H(f)(t) = \frac{1}{\pi}\int_{-\infty}^{\infty}\frac{f(\tau)}{t-\tau}d\tau
+\label{eq:hilbert_integral}
+\end{eqnarray}
+
+\begin{eqnarray}
+&Imag_0 = x_{-1}*c_1 + x_{-3}*c_3 + x_{-5}*c_5 + x_{-7}*c_7
+\label{eq:hilbert_imeq}
+\end{eqnarray}
+
+\begin{eqnarray}
+&Real_0 = x_{-4} 
+\label{eq:hilbert_reeq}
+\end{eqnarray}
+
 - matematica brevemente, equação base, resposta impulsional, ganho, coeficientes e ordem usada
 \\
 - schematics 

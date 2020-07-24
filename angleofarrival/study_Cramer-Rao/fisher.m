@@ -1,4 +1,4 @@
-function [max_det, min_det, std_det, pos_max_det, pos_min_det] = fisher(ri,s)
+function [max_det, min_det, std_det, pos_max_det, pos_min_det,eig_value,eig_vector] = fisher(ri,s)
 %--------------------------------------------------------------------------
 % Description: For a certain sensors configuration and a known acoustic
 % source positions matrix, it is calculated the Fisher Information Matrix 
@@ -104,20 +104,30 @@ for i=1:length_s
     ti = zeros(4,1); %initialize TOA vector
     for k=1:4
         % times of arrival from the source to the 4 hydrophones
-        ti(k) = t0 + norm(ri(:,k) - s(:,i)) / cs;
+        ti(k) = t0 + norm(ri(:,k) - s(:,i)) / cs + randn()*0.1; %+ randn()*0.1
     end
-
+    
     %vector that conects each sensor to the acoustic source
+
     d1 = ri(:,1) - s(:,i);
     d2 = ri(:,2) - s(:,i);
     d3 = ri(:,3) - s(:,i);
     d4 = ri(:,4) - s(:,i);
+    
+    d1_norm = ti(1)*cs;
+    d2_norm = ti(2)*cs;
+    d3_norm = ti(3)*cs;
+    d4_norm = ti(4)*cs;
 
     %first collumn of Jacobian matrix
-    col_jacob1 = (d1')/norm(d1);
-    col_jacob2 = (d2')/norm(d2);
-    col_jacob3 = (d3')/norm(d3);
-    col_jacob4 = (d4')/norm(d4);
+%     col_jacob1 = (d1')/norm(d1);
+%     col_jacob2 = (d2')/norm(d2);
+%     col_jacob3 = (d3')/norm(d3);
+%     col_jacob4 = (d4')/norm(d4);
+    col_jacob1 = (d1')/d1_norm;
+    col_jacob2 = (d2')/d2_norm;
+    col_jacob3 = (d3')/d3_norm;
+    col_jacob4 = (d4')/d4_norm;
 
     %jacobian matrix
     jacob = (1/cs) * [col_jacob1;
@@ -153,13 +163,14 @@ for i=1:length_s
     %(considers that the deviation standard is a sphere and not a elipsoid)
     determinant_fisher(i) = det(fisher_info^(-1))^(1/6);
     %determinant_fisher(i) = det(fisher_info^(-1));
-    
+    eig_vector = zeros(3,3);
     %------------------------------------------------------
     % E optimality - maximizes the minimum eigenvalue of the information matrix
     % eigen values of the inverted fisher matrix gives the deviation error
     % in each axis of the elipsoid.
     %(max eigen value is the max deviation which corresponds to a specific axis)
-    eig_value(:,i) = eig(fisher_info^(-1));
+    %eig_value(:,i) = eig(fisher_info^(-1));
+    [eig_vector,eig_value] = eig(fisher_info^(-1));
     eigen_fisher(i) = max(eig_value(:,i))^.5;
     
     %eig_value(:,i) = eig(fisher_info);
@@ -209,7 +220,7 @@ end
 eig_value_tot = eig_value(1,1) + eig_value(2,1) + eig_value(3,1);
 
 [max_det,ind_max_det] = max(determinant_fisher); %max radius of sphere
-[min_det,ind_min_det] = min(determinant_fisher); %min radius of sphere
+[min_det,ind_min_det] = min(eigen_fisher); %min radius of sphere
 std_det = std(determinant_fisher); %standard deviation
 
 

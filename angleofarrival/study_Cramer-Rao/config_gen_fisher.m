@@ -1,12 +1,13 @@
-function [best_rad_view_ind,diff_radius_myvsfisher] = config_gen_fisher(s, ind_best_config)
+%function [best_rad_view_ind,diff_radius_myvsfisher] = config_gen_fisher(s, ind_best_config)
 %--------------------------------------------------------------------------
 % Description: 
 %--------------------------------------------------------------------------
 % Author : Paula Graça (paula.graca@fe.up.pt), April 2020
 %--------------------------------------------------------------------------
-%clear
+clear
 
 plot_on = 0;
+plot_uncert_vec = 1;
 
 %--------------------------------------------------------------------------
 %_____TESTING CONFIGURATIONS_______________________________________________
@@ -26,7 +27,7 @@ ri = [q   0   0    0    0    0   0    0    0;
       0   0   0    w    -w   e   e    -e   -e;
       0   w   -w   0    0    e   -e   e    -e];
 
-%s=[-999.993616756728;-599.917471022661;600.081947376573]; %single source position for test
+s=[100;100;100]; %single source position for test
   
 h1 = ri(:,1); %h1 = nose hydrophone gives the 3rd dimension
 cnt_comb = 1;
@@ -45,14 +46,15 @@ cnt_comb = 1;
                 if(i_h3 < i_h4)
                     h4 = ri(:,i_h4);
                 end
-
+                
+                hconfig_ind = [1 i_h2 i_h3 i_h4];
                 hconfig = [h1 h2 h3 h4]; %configuration composed by this iteration hydrophones
 
                 %all possible combinations that exist
                 %can be consulted associating the collumn index to a calculated error
                 hydro_comb(:,cnt_comb) = [1 i_h2 i_h3 i_h4]; 
                 
-                [max_det, min_det, std_det, pos_max_det, pos_min_det] = ...
+                [max_det, min_det, std_det, pos_max_det, pos_min_det,eig_value,eig_vector] = ...
                     fisher(hconfig,s);
                 
                 vec_max_det(cnt_comb) = max_det;
@@ -62,6 +64,48 @@ cnt_comb = 1;
                 vec_pos_min_det(:,cnt_comb) = pos_min_det;
                 
                 cnt_comb = cnt_comb + 1;
+                
+                %----------------------------------------------------------
+                %------choose config for uncertainty plot------------------
+                if isequal(hconfig_ind,[1 4 7 8])
+                    uncert_vec1_pos_org = eig_vector(:,1) * (eig_value(1,1)/2);
+                    uncert_vec2_pos_org = eig_vector(:,2) * (eig_value(2,2)/2);
+                    uncert_vec3_pos_org = eig_vector(:,3) * (eig_value(3,3)/2);
+                    
+                    uncert_vec1_neg_org = - eig_vector(:,1) * (eig_value(1,1)/2);
+                    uncert_vec2_neg_org = - eig_vector(:,2) * (eig_value(2,2)/2);
+                    uncert_vec3_neg_org = - eig_vector(:,3) * (eig_value(3,3)/2);
+                    
+                    
+                    uncert_vec1_pos = s + uncert_vec1_pos_org;
+                    uncert_vec2_pos = s + uncert_vec2_pos_org;
+                    uncert_vec3_pos = s + uncert_vec3_pos_org;
+                    
+                    uncert_vec1_neg = s + uncert_vec1_neg_org;
+                    uncert_vec2_neg = s + uncert_vec2_neg_org;
+                    uncert_vec3_neg = s + uncert_vec3_neg_org;
+                    
+                    %angle between position vector s and uncertainty axis
+                    ang_uncert_vec1_pos = atan2(norm(cross(uncert_vec1_pos_org,s)),dot(uncert_vec1_pos_org,s));
+                    ang_uncert_vec1_pos = ang_uncert_vec1_pos * 180/pi;
+                    ang_uncert_vec1_neg = atan2(norm(cross(uncert_vec1_neg_org,s)),dot(uncert_vec1_neg_org,s));
+                    ang_uncert_vec1_neg = ang_uncert_vec1_neg * 180/pi;
+                    
+                    ang_uncert_vec2_pos = atan2(norm(cross(uncert_vec2_pos_org,s)),dot(uncert_vec2_pos_org,s));
+                    ang_uncert_vec2_pos = ang_uncert_vec2_pos * 180/pi;
+                    ang_uncert_vec2_neg = atan2(norm(cross(uncert_vec2_neg_org,s)),dot(uncert_vec2_neg_org,s));
+                    ang_uncert_vec2_neg = ang_uncert_vec2_neg * 180/pi;
+                    
+                    ang_uncert_vec3_pos = atan2(norm(cross(uncert_vec3_pos_org,s)),dot(uncert_vec3_pos_org,s));
+                    ang_uncert_vec3_pos = ang_uncert_vec3_pos * 180/pi;
+                    ang_uncert_vec3_neg = atan2(norm(cross(uncert_vec3_neg_org,s)),dot(uncert_vec3_neg_org,s));
+                    ang_uncert_vec3_neg = ang_uncert_vec3_neg * 180/pi;
+                    
+                    fprintf('Uncertainty axis 1 : %.6d and %.6d \n', ang_uncert_vec1_pos,ang_uncert_vec1_neg);
+                    fprintf('Uncertainty axis 2 : %.6d and %.6d \n', ang_uncert_vec2_pos,ang_uncert_vec2_neg);
+                    fprintf('Uncertainty axis 3 : %.6d and %.6d \n', ang_uncert_vec3_pos,ang_uncert_vec3_neg);
+                end
+                
             end
         end
     end
@@ -154,7 +198,7 @@ best_rad_view_ind = original_ind_view(best_rad_view_ind);
 %-----------------------------------------------------------------
 %COMPARE BEST CONFIG IN FISHER WITH BEST IN MY SCRIPT
 %vec_min_det(ind_best_config);
-diff_radius_myvsfisher = abs((best_rad_view - vec_min_det(ind_best_config))/best_rad_view);
+%diff_radius_myvsfisher = abs((best_rad_view - vec_min_det(ind_best_config))/best_rad_view);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if test_max == 1
     diff_radius_myvsfisher = abs((best_rad_view - vec_max_det(ind_best_config))/best_rad_view);
@@ -166,7 +210,7 @@ end
 
 %plot minimum radius for each configuration
 if plot_on ==1
-    figure(5)
+    figure
     plot(vec_min_det)
     hold on 
     plot(index_view,min_radius_view,'o')
@@ -179,4 +223,62 @@ if plot_on ==1
     xlabel('Config nº');
     ylabel('Radius of sphere(m)');
 end
+if plot_uncert_vec == 1
+     %--plot connector vectors from origin to estimated source positions--
+     figure
+     %plot3([R_estimations(1,i),0],[R_estimations(2,i),0],[R_estimations(3,i),0],'g')
+     plot3([uncert_vec1_pos(1,1),uncert_vec1_neg(1,1)],...
+           [uncert_vec1_pos(2,1),uncert_vec1_neg(2,1)],...
+           [uncert_vec1_pos(3,1),uncert_vec1_neg(3,1)],'g')
+
+     hold on
+     
+     plot3([uncert_vec2_pos(1,1),uncert_vec2_neg(1,1)],...
+           [uncert_vec2_pos(2,1),uncert_vec2_neg(2,1)],...
+           [uncert_vec2_pos(3,1),uncert_vec2_neg(3,1)],'r')
+     
+     hold on    
+        
+     plot3([uncert_vec3_pos(1,1),uncert_vec3_neg(1,1)],...
+           [uncert_vec3_pos(2,1),uncert_vec3_neg(2,1)],...
+           [uncert_vec3_pos(3,1),uncert_vec3_neg(3,1)],'b')
+     
+     %scatter3(0,0,0,'b')
+     
+%      hold on 
+%      
+%      plot3([uncert_vec1_pos(1,1),0],...
+%            [uncert_vec1_pos(2,1),0],...
+%            [uncert_vec1_pos(3,1),0],'y')
+%      hold on  
+%      plot3([uncert_vec2_pos(1,1),0],...
+%            [uncert_vec2_pos(2,1),0],...
+%            [uncert_vec2_pos(3,1),0],'y')
+%      hold on  
+%      plot3([uncert_vec3_pos(1,1),0],...
+%            [uncert_vec3_pos(2,1),0],...
+%            [uncert_vec3_pos(3,1),0],'y')
+%      hold on
+%      plot3([uncert_vec1_neg(1,1),0],...
+%            [uncert_vec1_neg(2,1),0],...
+%            [uncert_vec1_neg(3,1),0],'m')
+%      hold on  
+%      plot3([uncert_vec2_neg(1,1),0],...
+%            [uncert_vec2_neg(2,1),0],...
+%            [uncert_vec2_neg(3,1),0],'m')
+%      hold on  
+%      plot3([uncert_vec3_neg(1,1),0],...
+%            [uncert_vec3_neg(2,1),0],...
+%            [uncert_vec3_neg(3,1),0],'m')
+     
+%      xlim([0 100]) 
+%      ylim([0 100]) 
+%      zlim([0 100]) 
+     
+     legend('uncert_1','uncert_2','uncert_3');
+     title('Unertainty vectors around estimated position');
+     xlabel('x');
+     ylabel('y');
+     zlabel('z');
 end
+%end

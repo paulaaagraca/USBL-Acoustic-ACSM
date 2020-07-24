@@ -12,7 +12,7 @@ function [mse_config,deviation_azimuth_config,deviation_elevation_config] = ...
 %     errors
 %--------------------------------------------------------------------------
 % Inputs:
-%   - ri:___hydrophone configuration being tested
+%   - ri:___hydrophone configuration  being tested
 %   - max_dev:___maximum injected error in time difference of arrival
 %   - source_pos_single:___if equal to  1, estimated source positions can
 %     be plotted

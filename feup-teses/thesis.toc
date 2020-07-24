@@ -33,6 +33,11 @@
 \contentsline {section}{\numberline {2.6}Angle of arrival determination}{16}{section.2.6}% 
 \contentsline {section}{\numberline {2.7}Methods for optimizing sensor configurations }{16}{section.2.7}% 
 \contentsline {subsection}{\numberline {2.7.1}Cr\IeC {\'a}mer-Rao lower bound}{16}{subsection.2.7.1}% 
+\contentsline {subsection}{\numberline {2.7.2}Optimal design and optimality criteria}{17}{subsection.2.7.2}% 
+\contentsline {subsubsection}{\numberline {2.7.2.1}D-optimality}{18}{subsubsection.2.7.2.1}% 
+\contentsline {subsubsection}{\numberline {2.7.2.2}E-optimality}{18}{subsubsection.2.7.2.2}% 
+\contentsline {subsubsection}{\numberline {2.7.2.3}A-optimality}{18}{subsubsection.2.7.2.3}% 
+\contentsline {subsubsection}{\numberline {2.7.2.4}G-optimality}{18}{subsubsection.2.7.2.4}% 
 \contentsline {chapter}{\numberline {3}Research Problem}{19}{chapter.3}% 
 \contentsline {section}{\numberline {3.1}Problem Statement}{19}{section.3.1}% 
 \contentsline {section}{\numberline {3.2}Hypothesis and Research Questions}{20}{section.3.2}% 
@@ -54,6 +59,6 @@
 \contentsline {subsubsection}{\numberline {5.2.2.1}Conclusions}{28}{subsubsection.5.2.2.1}% 
 \contentsline {chapter}{\numberline {6}Conclusions}{29}{chapter.6}% 
 \contentsline {section}{\numberline {6.1}Summary}{29}{section.6.1}% 
-\contentsline {section}{\numberline {6.2}Main Contributions}{29}{section.6.2}% 
+\contentsline {section}{\numberline {6.2}Contributions }{29}{section.6.2}% 
 \contentsline {section}{\numberline {6.3}Future Work}{29}{section.6.3}% 
 \contentsline {chapter}{References}{31}{section*.16}% 

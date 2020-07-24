@@ -5,53 +5,52 @@ A level-1 auxiliary file: abstract.aux
 A level-1 auxiliary file: abbrevs.aux
 A level-1 auxiliary file: chapter1.aux
 A level-1 auxiliary file: chapter2.aux
-A level-1 auxiliary file: chapter3.aux
 A level-1 auxiliary file: chapter4.aux
 A level-1 auxiliary file: chapter5.aux
 A level-1 auxiliary file: chapter6.aux
 A level-1 auxiliary file: chapter7.aux
-The style file: plain.bst
+The style file: ieeetr.bst
 Database file #1: myrefs.bib
 Warning--empty publisher in pathloss
-You've used 24 entries,
-            2118 wiz_defined-function locations,
-            638 strings with 8323 characters,
-and the built_in function-call counts, 7947 in all, are:
-= -- 771
-> -- 352
-< -- 8
-+ -- 144
-- -- 116
-* -- 519
-:= -- 1295
-add.period$ -- 77
-call.type$ -- 24
-change.case$ -- 131
+You've used 25 entries,
+            1876 wiz_defined-function locations,
+            624 strings with 7927 characters,
+and the built_in function-call counts, 6394 in all, are:
+= -- 632
+> -- 223
+< -- 0
++ -- 86
+- -- 61
+* -- 425
+:= -- 889
+add.period$ -- 33
+call.type$ -- 25
+change.case$ -- 26
 chr.to.int$ -- 0
-cite$ -- 25
-duplicate$ -- 300
-empty$ -- 661
-format.name$ -- 116
-if$ -- 1719
+cite$ -- 26
+duplicate$ -- 323
+empty$ -- 643
+format.name$ -- 61
+if$ -- 1605
 int.to.chr$ -- 0
-int.to.str$ -- 24
-missing$ -- 15
-newline$ -- 124
-num.names$ -- 48
-pop$ -- 164
+int.to.str$ -- 25
+missing$ -- 16
+newline$ -- 86
+num.names$ -- 25
+pop$ -- 101
 preamble$ -- 1
-purify$ -- 106
+purify$ -- 0
 quote$ -- 0
-skip$ -- 226
+skip$ -- 242
 stack$ -- 0
-substring$ -- 435
-swap$ -- 74
-text.length$ -- 8
+substring$ -- 368
+swap$ -- 132
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 96
+type$ -- 0
 warning$ -- 1
-while$ -- 72
-width$ -- 26
-write$ -- 269
+while$ -- 59
+width$ -- 27
+write$ -- 253
 (There was 1 warning)

@@ -85,7 +85,7 @@ tdoa = [ti(1)-ti(2);
 
 
 %define time of arrival to the reference hydrophone
-Tref = t0 + norm( s - (a - ri(:,ref_H) ) ) / cs; % + rand()/100/cs
+Tref = t0 + norm( s - (a - ri(:,ref_H) ) ) / cs ; % + randn()*0.05     + rand()/100/cs
 
 % For big distances between the AUV and the source, it can be used a
 % constant Tref value and substitute it for the calculation above

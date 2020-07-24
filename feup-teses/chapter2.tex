@@ -384,23 +384,23 @@ When evaluating the performance of a localization system which integrates a mult
 
 \subsection{Crámer-Rao lower bound}	\label{sec:cramer}
 
-In this thesis, it is conducted a study based on the Crámer-Rao lower bound, which is generally used to generate a \textit{so-called uncertainty ellipse} \cite{bishop-cramer-rao} that represents the spatial variance distribution of the estimated position. The overall desired result is to find the minimum variance value that is related to the chosen configuration geometry, which indicates that it is the optimal solution for estimating a certain position. This method utilizes the Fisher Information matrix (FIM), whose components translate characteristics of the observation vector.
+In this thesis, it is conducted a study based on the Crámer-Rao lower bound, which is generally used to generate a \textit{so-called uncertainty ellipse} \cite{bishop-cramer-rao} that represents the spatial variance distribution of the estimated position. The overall desired result is to find the minimum variance value that is related to the chosen configuration geometry, which indicates that it is the optimal solution for estimating a certain position. This method utilizes the Fisher Information matrix (FIM), which measures the quantity of information that can be extracted from an observation vector about a certain parameter.
 
 In order to avoid loss of generality, it is considered a set of N sensors and a settled position for the target, the acoustic source, defined by $s_{t}$ = [$x_{s_{t}}$, $y_{s_{t}}$, $z_{s_{t}}$]$^T$. In addition, the position of each sensor is defined as $r_{i}$ = [$x_{r_{i}}$, $y_{r_{i}}$, $z_{r_{i}}$] and, consequently, the measurement of distance between each sensor and the source is defined as d$_{i}$ = $|| s_{t} - r_{i} ||$.
 
 Thereafter, the observations vector will be formulated containing the observed times-of-arrival (TOA) of the signal from the acoustic source to each one of the hydrophones, considering their geometric position. These times contain a noise vector component, which can be approximated to to a Gaussian distribution $n_i \sim \mathcal{N}(\mu,\,\sigma^{2})$. The samples can be calculated through the expression \ref{eq:obs_vec}, where it is considered an initial time of arrival $t_0$. Additionally, c represents the sound speed underwater.
 
-{\large\[
+\begin{eqnarray}
 	t_i = t_0 + \frac{||d_i||}{c} + n_i
 	\label{eq:obs_vec}
-	\]}
+\end{eqnarray}
 
 After having the observations matrix, it is established the condition to formulate the Fisher Information matrix, $I(d)$ , which results into equation \ref{eq:fisher}.
 
-{\large\[
+\begin{eqnarray}
 	I(d) = \nabla_{d}t(d)^T \; \Sigma^{-1} \; \nabla_{d}t(d)
 	\label{eq:fisher}
-	\]}
+\end{eqnarray}
 
 $\nabla_{d}t(d)$ is the gradient matrix of the observations vector regarding $d_i$, whereas $\Sigma$ is the covariance matrix, in which the diagonal contains the standard deviation of the components of each noise vector, construed as $(\sigma_1^2 , \sigma_2^2 , ... , \sigma_N^2)$ .
 
@@ -415,3 +415,23 @@ This same process is adopted in this dissertation. All steps specifically taken 
 %_______________________________________________________________________________
 %_______________________________________________________________________________
 
+\subsection{Optimal design and optimality criteria}	\label{sec:optimaldesign}
+
+When contemplating system designs, the optimal solution for a problem is generally a subjective matter which depends on the chosen principal. Following this idea, we can define optimal designs as experimentally generated designs of various types of systems which are usually optimal for a targeted statistical model and are modelled by a specific optimality criterion. These criteria can be organized in four distinct groups \cite{compare-optimality-crit}:
+\begin{itemize}
+	\item \textbf{Information-based} : comprehends all criteria that are related to the Fisher information matrix $X'X$. Some of the criteria which fits into this category are A, D, E and G-optimality.
+	\item \textbf{Distance-based} : includes criteria which depends on the distance $d(x,A)$ from a point $x$ in the Euclidean space $\mathbb{R}^{p}$ to a set $A \subset \mathbb{R}^{p}$. U and S-optimality are integrated in this category.
+	\item \textbf{Compound design} : combine different adjusted criteria in different weighted proportions in order to meet a desired statistical function.
+	\item Other : all criteria which do not fit in the previous three sets can be encompassed in a fourth general set.
+\end{itemize}
+
+The most relevant category for the present work is the information-based criteria, since we want to maximize the information that can be extracted from a certain design and we do not need to minimize the distances between the receptors and the source. Therefore some of the most commonly used criteria will be better explained in the following subsections.
+
+\subsubsection{D-optimality}
+The D-optimality criterion 
+
+\subsubsection{E-optimality}
+
+\subsubsection{A-optimality}
+
+\subsubsection{G-optimality}

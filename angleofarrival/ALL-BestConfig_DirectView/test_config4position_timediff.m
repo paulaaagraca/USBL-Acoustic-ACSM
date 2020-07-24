@@ -9,8 +9,9 @@ clear
 %----test options----------------------------------------------------------
 % for single source position
 plot_Hconfig = 0;
-plot_mse_deviation = 1;
+plot_mse_deviation = 0;
 plot_dev_overlaid = 0;
+plot_vec_Restimations = 1;
 
 %-----parameters-----------------------------------------------------------
 accum_samples = 1000;   %nº accumulated samples w/ random error for same position
@@ -43,7 +44,7 @@ ri = [q   0   0    0    0    0   0    0    0;
       0   w   -w   0    0    e   -e   e    -e];
 %-------------------------------------------------------------------------- 
 
-s=[-1000;0;-1000]; %single source position for test
+s=[10;200;200]; %single source position for test
 [rownum,n_samples] = size(s); %number of samples to compute
 
 cnt_comb =1; %initialize counter of all hydrophone combinations
@@ -72,7 +73,8 @@ for gen_test=1:10
                 if(i_h3 < i_h4)
                     h4 = ri(:,i_h4);
                 end
-
+                
+                hconfig_ind = [1 i_h2 i_h3 i_h4];
                 hconfig = [h1 h2 h3 h4]; %configuration composed by this iteration hydrophones
 
                 %all possible combinations that exist
@@ -100,9 +102,16 @@ for gen_test=1:10
 
                         %difference between calculated and real elevation
                         error_i_elevation(k) = elevation - real_elevation*180/pi; %elevation angle
-                        %-----------------------------------------------------------------
                         
+                        % accumulate estimated position to calculate a mean estimation
                         accum_R = accum_R + R;
+                        
+                        
+                        %-----------------------------------------------------------------------
+                        %for a single source position, accumulate estimated samples
+                        if gen_test == 1 && isequal(hconfig_ind,[1 4 7 8]) && i == 1
+                            R_estimations(:,k) = R;   %accumulate estimated R of 1 position (to be plotted)
+                        end 
                         
                     end
                     
@@ -377,6 +386,41 @@ if plot_Hconfig == 1
 	scatter3(X, Y, Z, 200, 'c', 'filled')
 	%legend('Hydrophones')
     
+end
+
+if plot_vec_Restimations == 1
+
+%      [rownum,n_samples_R_estimations] = size(R_estimations); %number of samples to compute
+% 
+%      %--plot connector vectors from origin to estimated source positions--
+%      figure
+% 
+%      for i=1:n_samples_R_estimations
+%          plot3([R_estimations(1,i),0],[R_estimations(2,i),0],[R_estimations(3,i),0],'g')
+%          hold on
+%      end
+% 
+%      plot3([s(1,1),0],[s(2,1),0],[s(3,1),0],'b')   
+%      title('Estimated Vectors w/ injected error');
+%      xlabel('y');
+%      ylabel('x');
+%      zlabel('z');
+%      
+     %--plot estimated source positions------------------------------
+     figure
+
+     scatter3(R_estimations(1,:),R_estimations(2,:),R_estimations(3,:),40,'g','filled')
+     hold on
+     scatter3(s(1,1),s(2,1),s(3,1),40,'b','filled')
+     
+%      xlim([560 660])
+%      ylim([150 250])
+%      zlim([-1100 -900])
+     
+     title('Estimated source position w/ injected error');
+     xlabel('x');
+     ylabel('y');
+     zlabel('z');
 end
 %end
 

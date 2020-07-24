@@ -59,7 +59,7 @@
 %% Option for numeric references (citation order)
 \newif\if@numericrefs
 \@numericrefsfalse
-%\DeclareOption{numericrefs}{\@numericrefstrue}
+\DeclareOption{numericrefs}{\@numericrefstrue}
 
 %% Option for alpha references
 \newif\if@alpharefs
@@ -587,7 +587,7 @@ with the `report' document style}{}}{}
   \newcommand{\PrintBib}[1]{%
     \renewcommand{\bibname}{References}%
     \if@numericrefs%
-      \bibliographystyle{plain}%
+      \bibliographystyle{ieeetr}%
     \else%
       \if@alpharefs%
         \bibliographystyle{alpha}%
