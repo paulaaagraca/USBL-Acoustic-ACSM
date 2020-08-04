@@ -13,8 +13,11 @@ plot_mse_deviation = 0;
 plot_dev_overlaid = 0;
 plot_vec_Restimations = 1;
 
+rotation_hydro = 0;
+rotation_ptcloud = 1;
+
 %-----parameters-----------------------------------------------------------
-accum_samples = 1000;   %nº accumulated samples w/ random error for same position
+accum_samples = 10000;   %nº accumulated samples w/ random error for same position
 max_dev = 0.5e-6;      %max deviation of injected error in time differences
                        %0.5us => [-2.5º,2.5º]
 %--------------------------------------------------------------------------
@@ -32,24 +35,86 @@ accum_R = zeros(3,1);  %accumulate R from each sample
 %--------------------------------------------------------------------------
 %Definition of hydrophone matrix
 
-q=0.2; %distance from origin to nose hydrophone
+q=0.1; %distance from origin to nose hydrophone
 w=0.1; %radius of hydrophone circle
 e=sqrt(2)/2 * w;  % distance from axis to intermediate hydrophones
 
 % hydrophones configuration [r1 r2 r3 r4 r5 r6 r7 r8 r9];
 % r1 -> front; circle: r2:top; r3:bottom; r4:right; r5:left; 
 % r6:right-top; r7:righ-bottom; r8:left-top; r9:left-bottom;
-ri = [q   0   0    0    0    0   0    0    0;
-      0   0   0    w    -w   e   e    -e   -e;
-      0   w   -w   0    0    e   -e   e    -e];
+rii = [q   0   0    0    0    0   0    0    0  ;
+       0   0   0    w    -w   e   e    -e   -e ;
+       0   w   -w   0    0    e   -e   e    -e];
 %-------------------------------------------------------------------------- 
 
-s=[10;200;200]; %single source position for test
-[rownum,n_samples] = size(s); %number of samples to compute
+si = [1000;1000;1000]; %single source position for test
 
+[rownum,n_samples] = size(si); %number of samples to compute
+
+ %rotation of hydrophone configuration
+ [rot_az,rot_el,rot_norm] = cart2sph(si(1,1),si(2,1),si(3,1));
+
+%-----------------------------------------------
+if rotation_hydro == 1
+
+    %prepare first 4 hydrophones from ring
+    H0(1,1:4) = [rii(:,2)' 1];
+    H0(2,1:4) = [rii(:,3)' 1];
+    H0(3,1:4) = [rii(:,4)' 1];
+    H0(4,1:4) = [rii(:,5)' 1];
+
+    %prepare second 4 hydrophones from ring
+    H1(1,1:4) = [rii(:,6)' 1];
+    H1(2,1:4) = [rii(:,7)' 1];
+    H1(3,1:4) = [rii(:,8)' 1];
+    H1(4,1:4) = [rii(:,9)' 1];
+
+    %prepare nose hydrophone
+    Hn(1,1:4) = [rii(:,1)' 1];
+    Hn(2,1:4) = [0 0 0 1];
+    Hn(3,1:4) = [0 0 0 1];
+    Hn(4,1:4) = [0 0 0 1];
+
+    %rotation in elevaton - around y axis
+    rot_elevation_y = rotY3D(-(-rot_el)); %z axis is inverted
+    %rotation in azimuth - around z axis
+    rot_azimuth_z = rotZ3D(-rot_az); 
+    %total rotation matrix
+    rot_mat = rot_azimuth_z * rot_elevation_y;
+
+    %apply rotation matrix to hydroophone possible positions
+    for i=1:4
+        H0f(i,:) = ( rot_mat * H0(i,:)' )';
+        H1f(i,:) = ( rot_mat * H1(i,:)' )';
+        Hnf(i,:) = ( rot_mat * Hn(i,:)' )';
+    end
+
+%    %plot rotated hydrophone possible positions
+%     plot_hydro(H0f);
+%     plot_hydro(H1f);
+%     plot_hydro(Hnf);
+
+    %tranfer rotated hydrophone configurations to ri matrix
+    ri(:,1) = Hnf(1,1:3)';
+    ri(:,2) = H0f(1,1:3)';
+    ri(:,3) = H0f(2,1:3)';
+    ri(:,4) = H0f(3,1:3)';
+    ri(:,5) = H0f(4,1:3)';
+    ri(:,6) = H1f(1,1:3)';
+    ri(:,7) = H1f(2,1:3)';
+    ri(:,8) = H1f(3,1:3)';
+    ri(:,9) = H1f(4,1:3)';
+    
+    s = [si(1,1); 0; 0]; %fix source position in x axis
+else
+    ri = rii;
+    s  = si;
+end
+%----------------------------------------------------------
 cnt_comb =1; %initialize counter of all hydrophone combinations
 
-h1 = ri(:,1); %h1 = nose hydrophone gives the 3rd dimension
+%h1 = ri(:,1); %h1 = nose hydrophone gives the 3rd dimension
+h1 = ri(:,1);
 
 %Loop: observe variations of best hydro config due to injected error in TDOA
 for gen_test=1:10
@@ -80,7 +145,8 @@ for gen_test=1:10
                 %all possible combinations that exist
                 %can be consulted associating the collumn index to a calculated error
                 hydro_comb(:,cnt_comb) = [1 i_h2 i_h3 i_h4]; 
-
+                
+                
                 %compute error for i different samples -> currently 1
                 for i=1:n_samples
 
@@ -109,7 +175,7 @@ for gen_test=1:10
                         
                         %-----------------------------------------------------------------------
                         %for a single source position, accumulate estimated samples
-                        if gen_test == 1 && isequal(hconfig_ind,[1 4 7 8]) && i == 1
+                        if gen_test == 1 && isequal(hconfig_ind,[1 2 7 8]) && i == 1
                             R_estimations(:,k) = R;   %accumulate estimated R of 1 position (to be plotted)
                         end 
                         
@@ -165,7 +231,10 @@ for gen_test=1:10
     
     % -----------------------------------------------------------------
     % definition of hydrophones w/ direct view to the source position
-    [h_view] = hydro_direct_view(mean_R, ri, w, q); %mean_R instead of s
+    mean_R(2,1) = mean_R(2,1) + si(2,1);
+    mean_R(3,1) = mean_R(3,1) + si(3,1);
+    
+    [h_view] = hydro_direct_view(mean_R, rii, w, q); %mean_R instead of s
 
     % -----------------------------------------------------------------
     %define which configurations have direct view to the source position
@@ -286,7 +355,7 @@ ind_min_both_dev = index_view(ind_min_both_dev);
 %//////////////////_PLOT OPTIONS_//////////////////////////////////////////
 %plot MSE and deviation in azimuth and elevation for every configuration
 if plot_mse_deviation == 1
-    figure(8)
+    figure
     
     subplot(1,3,1)
     plot(mean_mse_per_config)
@@ -321,7 +390,7 @@ if plot_mse_deviation == 1
 end
 
 if plot_dev_overlaid == 1
-    figure(9)
+    figure
 
     plot(mean_dev_azimuth_per_config,'Color','b','LineWidth',0.5)
     hold on 
@@ -346,7 +415,7 @@ end
     
 %plot a specific hydrophone configuration
 if plot_Hconfig == 1
-	figure(7)
+	figure
     
     plot_h = hconfig_best_az;
     
@@ -407,11 +476,56 @@ if plot_vec_Restimations == 1
 %      zlabel('z');
 %      
      %--plot estimated source positions------------------------------
-     figure
+    
+    if rotation_ptcloud == 1
+        R_estimations_mat = [R_estimations' ones(length(R_estimations),1)];
+        s_rot_mat = [s' 1; 0 0 0 1; 0 0 0 1; 0 0 0 1];
 
-     scatter3(R_estimations(1,:),R_estimations(2,:),R_estimations(3,:),40,'g','filled')
-     hold on
-     scatter3(s(1,1),s(2,1),s(3,1),40,'b','filled')
+        %rotation in elevaton - around y axis
+        rot_elevation_y = rotY3D(-(-rot_el)); %z axis is inverted
+        %rotation in azimuth - around z axis
+        rot_azimuth_z = rotZ3D(-rot_az); 
+        %total rotation matrix
+        rot_mat = rot_elevation_y *  rot_azimuth_z ;
+
+        %apply rotation matrix to hydroophone possible positions
+        for i = 1:4:length(R_estimations_mat)
+            R_estimations_rot(i:i+3,:) = ( rot_mat * R_estimations_mat(i:i+3,:)' )';
+        end
+        s_rot = rot_mat * s_rot_mat';
+        R_estimations_rott(1:3,:) = R_estimations_rot(:,1:3)';
+        
+        s_rott = s_rot(1,1:3)';
+        %------------
+        figure
+        subplot(1,3,1)
+        scatter(R_estimations_rott(1,:),R_estimations_rott(3,:))
+        xlabel('x');
+        ylabel('z');
+        
+        subplot(1,3,2)
+        scatter(R_estimations_rott(2,:),R_estimations_rott(3,:))
+        xlabel('y');
+        ylabel('z');
+        
+        subplot(1,3,3)
+        scatter(R_estimations_rott(1,:),R_estimations_rott(2,:))
+        xlabel('x');
+        ylabel('y');
+        %------------
+        
+%         figure
+%         scatter3(R_estimations_rott(1,:),R_estimations_rott(2,:),R_estimations_rott(3,:),40,'r','filled')
+%         hold on
+%         scatter3(s_rott(1,1),s_rott(2,1),s_rott(3,1),40,'b','filled')
+%         hold on
+    end
+
+%    %plot original 
+%      figure
+%      scatter3(R_estimations(1,:),R_estimations(2,:),R_estimations(3,:),40,'g','filled')
+%      hold on
+%      scatter3(s(1,1),s(2,1),s(3,1),40,'b','filled')
      
 %      xlim([560 660])
 %      ylim([150 250])

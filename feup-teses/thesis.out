@@ -34,19 +34,23 @@
 \BOOKMARK [1][-]{section.3.2}{3.2 Hypothesis and Research Questions}{chapter.3}% 34
 \BOOKMARK [1][-]{section.3.3}{3.3 Validation Methods}{chapter.3}% 35
 \BOOKMARK [0][-]{chapter.4}{4 Proposed System}{}% 36
-\BOOKMARK [1][-]{section.4.1}{4.1 HDL Module Design}{chapter.4}% 37
+\BOOKMARK [1][-]{section.4.1}{4.1 HDL Module Architecture}{chapter.4}% 37
 \BOOKMARK [2][-]{subsection.4.1.1}{4.1.1 Hilbert Filter}{section.4.1}% 38
 \BOOKMARK [2][-]{subsection.4.1.2}{4.1.2 Cordic}{section.4.1}% 39
 \BOOKMARK [2][-]{subsection.4.1.3}{4.1.3 phasediff}{section.4.1}% 40
 \BOOKMARK [2][-]{subsection.4.1.4}{4.1.4 phasemean}{section.4.1}% 41
-\BOOKMARK [1][-]{section.4.2}{4.2 Angle of Arrival Calculation}{chapter.4}% 42
-\BOOKMARK [0][-]{chapter.5}{5 Dynamic reconfigurable configuration method}{}% 43
-\BOOKMARK [1][-]{section.5.1}{5.1 Methodological approach}{chapter.5}% 44
-\BOOKMARK [1][-]{section.5.2}{5.2 Systematic analysis of geometric configurations performance}{chapter.5}% 45
-\BOOKMARK [2][-]{subsection.5.2.1}{5.2.1 Analytic Approach}{section.5.2}% 46
-\BOOKMARK [2][-]{subsection.5.2.2}{5.2.2 Simulation Results}{section.5.2}% 47
-\BOOKMARK [0][-]{chapter.6}{6 Conclusions}{}% 48
-\BOOKMARK [1][-]{section.6.1}{6.1 Summary}{chapter.6}% 49
-\BOOKMARK [1][-]{section.6.2}{6.2 Contributions }{chapter.6}% 50
-\BOOKMARK [1][-]{section.6.3}{6.3 Future Work}{chapter.6}% 51
-\BOOKMARK [0][-]{section*.16}{References}{}% 52
+\BOOKMARK [2][-]{subsection.4.1.5}{4.1.5 Phase Ambiguity}{section.4.1}% 42
+\BOOKMARK [1][-]{section.4.2}{4.2 Angle of Arrival Estimation}{chapter.4}% 43
+\BOOKMARK [2][-]{subsection.4.2.1}{4.2.1 Theoretical considerations}{section.4.2}% 44
+\BOOKMARK [1][-]{section.4.3}{4.3 Methodological Approach}{chapter.4}% 45
+\BOOKMARK [1][-]{section.4.4}{4.4 Experimental analysis}{chapter.4}% 46
+\BOOKMARK [0][-]{chapter.5}{5 Dynamic reconfigurable configuration method}{}% 47
+\BOOKMARK [1][-]{section.5.1}{5.1 Methodological approach}{chapter.5}% 48
+\BOOKMARK [1][-]{section.5.2}{5.2 Systematic comparison of geometric configurations performance}{chapter.5}% 49
+\BOOKMARK [2][-]{subsection.5.2.1}{5.2.1 Analytic Approach}{section.5.2}% 50
+\BOOKMARK [2][-]{subsection.5.2.2}{5.2.2 Simulation Results}{section.5.2}% 51
+\BOOKMARK [0][-]{chapter.6}{6 Conclusions}{}% 52
+\BOOKMARK [1][-]{section.6.1}{6.1 Summary}{chapter.6}% 53
+\BOOKMARK [1][-]{section.6.2}{6.2 Contributions }{chapter.6}% 54
+\BOOKMARK [1][-]{section.6.3}{6.3 Future Work}{chapter.6}% 55
+\BOOKMARK [0][-]{section*.18}{References}{}% 56

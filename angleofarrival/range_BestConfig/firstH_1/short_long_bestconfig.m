@@ -14,7 +14,7 @@ plot_dev_overlaid = 0;
 plot_vec_Restimations = 0;
 
 %-----parameters-----------------------------------------------------------
-accum_samples = 10;   %nº accumulated samples w/ random error for same position
+accum_samples = 1000;   %nº accumulated samples w/ random error for same position
 max_dev = 0.5e-6;      %max deviation of injected error in time differences
                        %0.5us => [-2.5º,2.5º]
 %--------------------------------------------------------------------------
@@ -82,7 +82,7 @@ t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 [rownum,n_samples_azimuth] = size(t_azimuth_rad);  %number of azimuth_positionss
 [rownum,n_samples_elevation] = size(t_elevation_rad); %number of elevation_positions
 
-norm_v = [1000]; % norm values to be tested (row)
+norm_v = [50]; % norm values to be tested (row)
 
 count = 1;     % size of vector s +1
 count_sph = 1; % size of vector spherical +1

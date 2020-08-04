@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.19)  24 JUL 2020 13:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.19)  3 AUG 2020 15:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -559,7 +559,7 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/sc' in size <14.4> not available
 (Font)              Font shape `T1/ptm/b/sc' tried instead on input line 112.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 112.
-<figures/uporto-feup.pdf, id=213, 338.26375pt x 126.4725pt>
+<figures/uporto-feup.pdf, id=229, 338.26375pt x 126.4725pt>
 File: figures/uporto-feup.pdf Graphic file (type pdf)
 <use figures/uporto-feup.pdf>
 Package pdftex.def Info: figures/uporto-feup.pdf  used on input line 112.
@@ -730,7 +730,7 @@ l.23 A
 
 
 ]
-<figures/sound-profile.png, id=374, 412.54124pt x 394.47375pt>
+<figures/sound-profile.png, id=398, 412.54124pt x 394.47375pt>
 File: figures/sound-profile.png Graphic file (type png)
 <use figures/sound-profile.png>
 Package pdftex.def Info: figures/sound-profile.png  used on input line 27.
@@ -741,7 +741,7 @@ been already used, duplicate ignored
                    \relax 
 l.42 
       [4 <./figures/sound-profile.png>]
-<figures/multipath.png, id=386, 564.1075pt x 256.96pt>
+<figures/multipath.png, id=410, 564.1075pt x 256.96pt>
 File: figures/multipath.png Graphic file (type png)
 <use figures/multipath.png>
 Package pdftex.def Info: figures/multipath.png  used on input line 45.
@@ -773,12 +773,12 @@ fier (name{page.8}) has been already used, duplicate ignored
                    \relax 
 l.169 
        [8]
-<figures/triangulation.png, id=443, 306.14375pt x 242.9075pt>
+<figures/triangulation.png, id=468, 306.14375pt x 242.9075pt>
 File: figures/triangulation.png Graphic file (type png)
 <use figures/triangulation.png>
 Package pdftex.def Info: figures/triangulation.png  used on input line 191.
 (pdftex.def)             Requested size: 170.71393pt x 135.44905pt.
-<figures/geotriang.png, id=444, 530.98375pt x 392.46625pt>
+<figures/geotriang.png, id=469, 530.98375pt x 392.46625pt>
 File: figures/geotriang.png Graphic file (type png)
 <use figures/geotriang.png>
 Package pdftex.def Info: figures/geotriang.png  used on input line 204.
@@ -800,7 +800,7 @@ y used, duplicate ignored
                    \relax 
 l.253 \end{eqnarray}
                      [11]
-<figures/lblsblusbl.png, id=480, 1164.35pt x 872.25874pt>
+<figures/lblsblusbl.png, id=504, 1164.35pt x 872.25874pt>
 File: figures/lblsblusbl.png Graphic file (type png)
 <use figures/lblsblusbl.png>
 Package pdftex.def Info: figures/lblsblusbl.png  used on input line 263.
@@ -812,7 +812,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.12}) has
 l.274 A
         complete localization procedure starts with the vehicle sending an a...
 [12 <./figures/lblsblusbl.png>] [13]
-<figures/usbl-config.png, id=506, 447.6725pt x 419.5675pt>
+<figures/usbl-config.png, id=530, 447.6725pt x 419.5675pt>
 File: figures/usbl-config.png Graphic file (type png)
 <use figures/usbl-config.png>
 Package pdftex.def Info: figures/usbl-config.png  used on input line 315.
@@ -844,7 +844,7 @@ Underfull \vbox (badness 1019) has occurred while \output is active []
 
  (./chapter4.tex
 Chapter 3.
-<figures/proposed-solution.png, id=563, 898.35625pt x 524.96124pt>
+<figures/proposed-solution.png, id=588, 898.35625pt x 524.96124pt>
 File: figures/proposed-solution.png Graphic file (type png)
 <use figures/proposed-solution.png>
 Package pdftex.def Info: figures/proposed-solution.png  used on input line 11.
@@ -876,41 +876,67 @@ Underfull \vbox (badness 1776) has occurred while \output is active []
 
 ]
 Chapter 4.
-[23]) [24]
+[23]
+<figures/phase-diff.png, id=620, 2666.96375pt x 1090.0725pt>
+File: figures/phase-diff.png Graphic file (type png)
+<use figures/phase-diff.png>
+Package pdftex.def Info: figures/phase-diff.png  used on input line 77.
+(pdftex.def)             Requested size: 512.14832pt x 209.32813pt.
+
+Overfull \hbox (85.35696pt too wide) in paragraph at lines 77--78
+ [][] 
+ []
+
+[24]
+Underfull \hbox (badness 1097) in paragraph at lines 88--89
+[]\T1/ptm/m/n/10.95 One pos-si-bil-ity to solve phase am-bi-gu-ity in this sys-
+tem would be to place the four
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25 <./figures/phase-diff.png>]
+<figures/hyperbole-dist.png, id=638, 2508.37125pt x 1887.05pt>
+File: figures/hyperbole-dist.png Graphic file (type png)
+<use figures/hyperbole-dist.png>
+Package pdftex.def Info: figures/hyperbole-dist.png  used on input line 113.
+(pdftex.def)             Requested size: 341.43437pt x 256.84273pt.
+ [26]) [27 <./figures/hyperbole-dist.png>]
 \openout2 = `chapter6.aux'.
 
- (./chapter6.tex
+ (./chapter6.tex [28
+
+
+
+]
 Chapter 5.
-[25
-
-
-
-] [26] [27]
-Underfull \hbox (badness 10000) in paragraph at lines 147--168
+[29] [30] [31]
+Underfull \hbox (badness 10000) in paragraph at lines 151--172
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--168
+Underfull \hbox (badness 10000) in paragraph at lines 151--172
 
  []
 
-) [28]
+) [32]
 \openout2 = `chapter7.aux'.
 
  (./chapter7.tex
 Chapter 6.
 
-Underfull \hbox (badness 1057) in paragraph at lines 20--21
+Underfull \hbox (badness 1057) in paragraph at lines 22--23
 []\T1/ptm/m/n/10.95 Using Ma-chine Learn-ing tech-niques in or-der to find the 
 op-ti-mal hy-drophone ar-ray
  []
 
-) [29
+) [33
 
 
 
-] [30
+] [34
 
 
 ] (./thesis.bbl
@@ -919,7 +945,7 @@ Underfull \hbox (badness 2035) in paragraph at lines 4--8
 -mapped/. [Ac-cessed Oct.
  []
 
-[31
+[35
 
 ]
 Underfull \hbox (badness 5741) in paragraph at lines 89--92
@@ -947,7 +973,7 @@ Underfull \hbox (badness 1102) in paragraph at lines 131--135
 
 )
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 161.
- [32]
+ [36]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 161.
  (./thesis.aux (./abstract.aux) (./abbrevs.aux) (./chapter1.aux)
 (./chapter2.aux) (./chapter4.aux) (./chapter5.aux) (./chapter6.aux)
@@ -955,17 +981,17 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 161.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 161.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 161.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 8BE12364FBB4E129C243585F4F646510;3736.
+(rerunfilecheck)             Checksum: 7FBABFE1A2B3771CE75FD9ED8A7B2535;4050.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 161.
  ) 
 Here is how much of TeX's memory you used:
- 9441 strings out of 492616
- 138452 string characters out of 6129480
- 250253 words of memory out of 5000000
- 12928 multiletter control sequences out of 15000+600000
+ 9476 strings out of 492616
+ 139062 string characters out of 6129480
+ 249798 words of memory out of 5000000
+ 12948 multiletter control sequences out of 15000+600000
  67139 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,16n,45p,815b,579s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,16n,45p,893b,579s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -978,10 +1004,10 @@ st/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2019/texmf-dist/fonts/ty
 pe1/urw/times/utmb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/ti
 mes/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmr8a
 .pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (46 pages, 348255 bytes).
+Output written on thesis.pdf (50 pages, 793784 bytes).
 PDF statistics:
- 738 PDF objects out of 1000 (max. 8388607)
- 655 compressed objects within 7 object streams
- 176 named destinations out of 1000 (max. 500000)
- 457 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 799 PDF objects out of 1000 (max. 8388607)
+ 707 compressed objects within 8 object streams
+ 189 named destinations out of 1000 (max. 500000)
+ 499 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -2,7 +2,7 @@
 
 This chapter presents the fundamental concepts of underwater acoustics engineering for localization and positioning of aquatic autonomous vehicles.
 
-\section{Underwater acoustic channel} \label{sec:acoustchann}
+\section{Underwater acoustic channel} \label{subsec: acoustic-channel}
 
 Although satellite based navigation systems are the most commonly used for positioning and localization at the air, the used radio signals are highly absorbed by the water and thus inappropriate for underwater localization and also for communications. Therefore, the state of the art solutions for long range localization and communications rely on the propagation of acoustic signals.
 
@@ -229,7 +229,7 @@ Considering a scenario with three reference beacons, the distance between the ta
 
 Trilateration is commonly used in underwater acoustic localization, as it used to find a relative position of the target in two dimensions and additionally determines the depth as third dimension, by using a pressure sensor with high accuracy.
 
-\subsection{Multilateration}
+\subsection{Multilateration} \label{subsec:multilateration}
 
 Multilateration is a generalization of the trilateration technique, as it uses the same conceptual principal with multiple reference beacons instead of exactly three. In this method, the employment of \textit{n+1} nodes will allow to determine \textit{n} coordinates \cite{arch_localiz}. For example, determining the position (x,y,z) of a target, would require to resolve a system of equations using \ref{eq:mult}. $(x_{i}, y_{i}, z_{i})$ is the coordinates of the beacon and $d_{i}$ is the distance between the beacon and the target.
 

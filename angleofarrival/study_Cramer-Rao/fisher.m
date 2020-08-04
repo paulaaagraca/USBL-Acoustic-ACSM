@@ -104,7 +104,7 @@ for i=1:length_s
     ti = zeros(4,1); %initialize TOA vector
     for k=1:4
         % times of arrival from the source to the 4 hydrophones
-        ti(k) = t0 + norm(ri(:,k) - s(:,i)) / cs + randn()*0.1; %+ randn()*0.1
+        ti(k) = t0 + norm(ri(:,k) - s(:,i)) / cs; %+ randn()*0.1
     end
     
     %vector that conects each sensor to the acoustic source
