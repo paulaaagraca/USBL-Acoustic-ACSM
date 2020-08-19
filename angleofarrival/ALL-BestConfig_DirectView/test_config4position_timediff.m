@@ -13,7 +13,6 @@ plot_mse_deviation = 0;
 plot_dev_overlaid = 0;
 plot_vec_Restimations = 1;
 
-rotation_hydro = 0;
 rotation_ptcloud = 1;
 
 %-----parameters-----------------------------------------------------------
@@ -42,75 +41,18 @@ e=sqrt(2)/2 * w;  % distance from axis to intermediate hydrophones
 % hydrophones configuration [r1 r2 r3 r4 r5 r6 r7 r8 r9];
 % r1 -> front; circle: r2:top; r3:bottom; r4:right; r5:left; 
 % r6:right-top; r7:righ-bottom; r8:left-top; r9:left-bottom;
-rii = [q   0   0    0    0    0   0    0    0  ;
-       0   0   0    w    -w   e   e    -e   -e ;
-       0   w   -w   0    0    e   -e   e    -e];
+ri = [q   0   0    0    0    0   0    0    0  ;
+      0   0   0    w    -w   e   e    -e   -e ;
+      0   w   -w   0    0    e   -e   e    -e];
 %-------------------------------------------------------------------------- 
 
-si = [1000;1000;1000]; %single source position for test
+s = [1000;0;0]; %single source position for test
 
-[rownum,n_samples] = size(si); %number of samples to compute
+[rownum,n_samples] = size(s); %number of samples to compute
 
- %rotation of hydrophone configuration
- [rot_az,rot_el,rot_norm] = cart2sph(si(1,1),si(2,1),si(3,1));
+%rotation of hydrophone configuration
+[rot_az,rot_el,rot_norm] = cart2sph(s(1,1),s(2,1),s(3,1));
 
-%-----------------------------------------------
-if rotation_hydro == 1
-
-    %prepare first 4 hydrophones from ring
-    H0(1,1:4) = [rii(:,2)' 1];
-    H0(2,1:4) = [rii(:,3)' 1];
-    H0(3,1:4) = [rii(:,4)' 1];
-    H0(4,1:4) = [rii(:,5)' 1];
-
-    %prepare second 4 hydrophones from ring
-    H1(1,1:4) = [rii(:,6)' 1];
-    H1(2,1:4) = [rii(:,7)' 1];
-    H1(3,1:4) = [rii(:,8)' 1];
-    H1(4,1:4) = [rii(:,9)' 1];
-
-    %prepare nose hydrophone
-    Hn(1,1:4) = [rii(:,1)' 1];
-    Hn(2,1:4) = [0 0 0 1];
-    Hn(3,1:4) = [0 0 0 1];
-    Hn(4,1:4) = [0 0 0 1];
-
-    %rotation in elevaton - around y axis
-    rot_elevation_y = rotY3D(-(-rot_el)); %z axis is inverted
-    %rotation in azimuth - around z axis
-    rot_azimuth_z = rotZ3D(-rot_az); 
-    %total rotation matrix
-    rot_mat = rot_azimuth_z * rot_elevation_y;
-
-    %apply rotation matrix to hydroophone possible positions
-    for i=1:4
-        H0f(i,:) = ( rot_mat * H0(i,:)' )';
-        H1f(i,:) = ( rot_mat * H1(i,:)' )';
-        Hnf(i,:) = ( rot_mat * Hn(i,:)' )';
-    end
-
-%    %plot rotated hydrophone possible positions
-%     plot_hydro(H0f);
-%     plot_hydro(H1f);
-%     plot_hydro(Hnf);
-
-    %tranfer rotated hydrophone configurations to ri matrix
-    ri(:,1) = Hnf(1,1:3)';
-    ri(:,2) = H0f(1,1:3)';
-    ri(:,3) = H0f(2,1:3)';
-    ri(:,4) = H0f(3,1:3)';
-    ri(:,5) = H0f(4,1:3)';
-    ri(:,6) = H1f(1,1:3)';
-    ri(:,7) = H1f(2,1:3)';
-    ri(:,8) = H1f(3,1:3)';
-    ri(:,9) = H1f(4,1:3)';
-    
-    s = [si(1,1); 0; 0]; %fix source position in x axis
-else
-    ri = rii;
-    s  = si;
-end
-%----------------------------------------------------------
 cnt_comb =1; %initialize counter of all hydrophone combinations
 
 %h1 = ri(:,1); %h1 = nose hydrophone gives the 3rd dimension
@@ -175,7 +117,8 @@ for gen_test=1:10
                         
                         %-----------------------------------------------------------------------
                         %for a single source position, accumulate estimated samples
-                        if gen_test == 1 && isequal(hconfig_ind,[1 2 7 8]) && i == 1
+                         ce = [1 2 4 9];
+                        if gen_test == 1 && isequal(hconfig_ind,ce) && i == 1
                             R_estimations(:,k) = R;   %accumulate estimated R of 1 position (to be plotted)
                         end 
                         
@@ -197,7 +140,6 @@ for gen_test=1:10
                     error_i_elevation = abs(error_i_elevation);
                     %elevation error for a single source position
                     error_elevation(cnt_comb) = mean(error_i_elevation);
-
                   
 
                     % Mean squared error (of a certain hydrophone configuration)
@@ -231,10 +173,10 @@ for gen_test=1:10
     
     % -----------------------------------------------------------------
     % definition of hydrophones w/ direct view to the source position
-    mean_R(2,1) = mean_R(2,1) + si(2,1);
-    mean_R(3,1) = mean_R(3,1) + si(3,1);
+    mean_R(2,1) = mean_R(2,1) + s(2,1);
+    mean_R(3,1) = mean_R(3,1) + s(3,1);
     
-    [h_view] = hydro_direct_view(mean_R, rii, w, q); %mean_R instead of s
+    [h_view] = hydro_direct_view(mean_R, ri, w, q); %mean_R instead of s
 
     % -----------------------------------------------------------------
     %define which configurations have direct view to the source position
@@ -474,7 +416,7 @@ if plot_vec_Restimations == 1
 %      xlabel('y');
 %      ylabel('x');
 %      zlabel('z');
-%      
+     
      %--plot estimated source positions------------------------------
     
     if rotation_ptcloud == 1
@@ -502,39 +444,70 @@ if plot_vec_Restimations == 1
         scatter(R_estimations_rott(1,:),R_estimations_rott(3,:))
         xlabel('x');
         ylabel('z');
+        axis equal
         
         subplot(1,3,2)
         scatter(R_estimations_rott(2,:),R_estimations_rott(3,:))
         xlabel('y');
         ylabel('z');
+        axis equal
         
         subplot(1,3,3)
         scatter(R_estimations_rott(1,:),R_estimations_rott(2,:))
         xlabel('x');
         ylabel('y');
+        axis equal
         %------------
         
-%         figure
-%         scatter3(R_estimations_rott(1,:),R_estimations_rott(2,:),R_estimations_rott(3,:),40,'r','filled')
-%         hold on
-%         scatter3(s_rott(1,1),s_rott(2,1),s_rott(3,1),40,'b','filled')
-%         hold on
+%         for asd=1:3
+            figure
+            scatter3(R_estimations_rott(1,:),R_estimations_rott(2,:),R_estimations_rott(3,:),40,'r','filled')
+            hold on
+            scatter3(s_rott(1,1),s_rott(2,1),s_rott(3,1),40,'b','filled')
+            hold on
+            scatter3(0,0,0,40,'b','filled')
+            hold on
+%             if asd == 1
+%                 %zx
+%                 view(0,0)
+%                 axis equal
+%                 %------- 
+%             end
+%             if asd == 2
+%                 %zy
+%                 view(90,0)
+%                 axis equal
+%                 %--------
+%             end
+%             if asd == 3
+%                 %yx
+%                 view(0,90)
+%                 axis equal
+%                 %--------
+%             end
+%         end
     end
 
-%    %plot original 
-%      figure
-%      scatter3(R_estimations(1,:),R_estimations(2,:),R_estimations(3,:),40,'g','filled')
-%      hold on
-%      scatter3(s(1,1),s(2,1),s(3,1),40,'b','filled')
+   %plot original 
+     figure
+     scatter3(R_estimations(1,:),R_estimations(2,:),R_estimations(3,:),40,'g','filled')
+     hold on
+     scatter3(s(1,1),s(2,1),s(3,1),40,'b','filled')
+     hold on
+     scatter3(0,0,0,40,'b','filled')
+     hold on
+     scatter3([ri(1,ce(1)) ri(1,ce(2)) ri(1,ce(3)) ri(1,ce(4))],[ri(2,ce(1)) ri(2,ce(2)) ri(2,ce(3)) ri(2,ce(4))], [ri(3,ce(1)) ri(3,ce(2)) ri(3,ce(3)) ri(3,ce(4))],40,'k','filled')
      
 %      xlim([560 660])
 %      ylim([150 250])
 %      zlim([-1100 -900])
-     
+
      title('Estimated source position w/ injected error');
      xlabel('x');
      ylabel('y');
      zlabel('z');
 end
 %end
+
+save('../study_Cramer-Rao/plots/clouds/estim_[1000,0,0]_1249_10000samp.mat', 'R_estimations_rott', '-mat')
 

@@ -12,10 +12,10 @@ clear
 
 %---test options-----------------------------------------------------------
 plot_position_cloud = 0;    % plot 3D source positions
-plot_error_cartesian = 1;   % plot error in cartesian coordinates
+plot_error_cartesian = 0;   % plot error in cartesian coordinates
 plot_error_spherical = 1;   % plot error in spherical coordinates
-plot_error3d_azimuth = 1;   % plot error of azimuth per azimuth(x) and elevation(y)
-plot_error3d_elevation = 1; % plot error of elevation per azimuth(x) and elevation(y)
+plot_error3d_azimuth = 0;   % plot error of azimuth per azimuth(x) and elevation(y)
+plot_error3d_elevation = 0; % plot error of elevation per azimuth(x) and elevation(y)
 %--------------------------------------------------------------------------
 
 %init error variales
@@ -27,18 +27,31 @@ error_elevation = zeros();
 error_norm = zeros();
 s = zeros(3,1);
 
+w = 0.1;
+e = sqrt(2)/2 * w;
+
 % hydrophones configuration [r1 r2 r3 r4];
 % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
+%__A__
 ri = [0.02  0.02   0      0;
-      0     0      0.5    -0.5;
-      0.5   -0.5   0      0];
+      0     0      0.1    -0.1;
+      0.1   -0.1   0      0];
+%__B__  
+% ri = [0.1  0     0     0;
+%       0    0    -e     e;
+%       0    0.1  -e    -e];  
+
+%__C__
+% ri = [0.1  0     0.1    0.2;
+%       0    0     -e     e;
+%       0    0.1   -e    -e];
 
 % define range of azimuth
-t_azimuth_deg = -45:1:45;                 % azimuth values in degrees
+t_azimuth_deg = -180:1:180;                 % azimuth values in degrees
 t_azimuth_rad = t_azimuth_deg * (pi/180);    % azimuth values in radians
 
 % define range of elevation
-t_elevation_deg = -60:1:60;                 % elevation values in degrees
+t_elevation_deg = -80:1:80;                 % elevation values in degrees
 t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 
 % save sizes of azimuth and elevation matrix 
@@ -48,7 +61,7 @@ t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 
 %--------------------------------------------------------------------------
 
-norm = [10]; % norm values to be tested (row)
+norm = [1000]; % norm values to be tested (row)
 
 count = 1;     % size of vector s +1
 count_sph = 1; % size of vector spherical +1
@@ -96,6 +109,9 @@ for i=1:n_samples
     %calculate real spherical coordinates
     [real_azimuth,real_elevation,real_norm] = cart2sph(s(1,i),s(2,i),s(3,i));
     
+    qw = real_azimuth*180/pi;
+    wq = real_elevation*180/pi;
+    
     %compute absolute difference between estimated and real values
     errorx(i) = abs(R(1)-real_r(1));       %x coordinate
     errory(i) = abs(R(2)-real_r(2));       %y coordinate
@@ -108,16 +124,39 @@ for i=1:n_samples
     if (error_azimuth(i) > 350)
         error_azimuth(i) = abs(error_azimuth(i) - 360);
     end
+    
+    
+    if (error_azimuth(i) > 60)
+        if azimuth > 0 && qw < 0
+             diff_a = 180-abs(qw);
+             diff_azimuth = 180 - azimuth;
+             error_azimuth(i) = diff_azimuth + diff_a;
+        end
+         if qw > 0 && azimuth < 0
+             diff_azimuth = 180-abs(azimuth);
+             diff_a = 180 - qw;
+             error_azimuth(i) = diff_azimuth + diff_a;
+        end
+    end
+    
 end
 
 
 %maximum error
-[max_x] = max(errorx);
-[max_y] = max(errory);
-[max_z] = max(errorz);
-[max_azimuth] = max(error_azimuth);
-[max_elevation] = max(error_elevation);
-[max_norm] = max(error_norm);
+% [max_x] = max(errorx);
+% [max_y] = max(errory);
+% [max_z] = max(errorz);
+% [max_azimuth] = max(error_azimuth);
+% [max_elevation] = max(error_elevation);
+% [max_norm] = max(error_norm);
+
+%maximum error
+[min_x] = min(errorx);
+[min_y] = min(errory);
+[min_z] = min(errorz);
+[min_azimuth] = min(error_azimuth);
+[min_elevation] = min(error_elevation);
+[min_norm] = min(error_norm);
 
 %mean error
 mean_x = mean(errorx);
@@ -142,7 +181,7 @@ mse = sqrt(mean_azimuth^2 + mean_elevation^2);
 %***** PLOT OPTIONS *******************************************************
 %-----plot source 3D positions---------------------------------------------
 if plot_position_cloud == 1
-    figure(1)
+    figure
     
     scatter3(s(1,:),s(2,:),s(3,:),40,'g','filled')
     title('Cloud of source positions')
@@ -153,7 +192,7 @@ end
 
 %-----plot error in cartesian coordinates: x, y and z----------------------
 if plot_error_cartesian == 1
-    figure(2)
+    figure
     
     subplot(1,3,1)
     plot(errorx)    %error of x
@@ -179,33 +218,38 @@ end
 
 %-----plot error in spherical coordinates: azimuth, elevation and norm-----
 if plot_error_spherical == 1 
-    figure(3)
+    f=figure;
     
     subplot(1,3,1)
     plot(error_azimuth)    %error of azimuth
-    title('Error of Azimuth (deg)')
-    xlabel('Nº samples') 
+    title('Azimuth Error (deg)')
+    xlabel('# of source position') 
     ylabel('Magnitude of Error') 
     
     subplot(1,3,2)
     plot(error_elevation)    %error of elevation
-    title('Error of Elevation (deg)')
-    xlabel('Nº samples') 
+    title('Elevation Error (deg)')
+    xlabel('# of source position') 
     ylabel('Magnitude of Error') 
     
     subplot(1,3,3)
     plot(error_norm)    %error of norm
-    title('Error of Norm (m)')
-    xlabel('Nº samples') 
+    title('Norm Error (m)')
+    xlabel('# of source position') 
     ylabel('Magnitude of Error')
-    
+   
     %position window in screen
-    set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.2, 0.2, 0.7, 0.6]);
+    set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 1, 0.7, 0.6]);
+    
+    %saveas(f,'../../feup-teses/figures/plots/plot-s1-A-n1','jpg')
+    
+    
+   
 end
 
 %-----plot error of azimuth (per azimuth and elevation) in 3D--------------
 if plot_error3d_azimuth == 1
-    figure(4)
+    figure
     scatter3(spherical(1,:),spherical(2,:),error_azimuth,40,'g','filled')
     
     title('Error of Azimuth (deg)');
@@ -216,7 +260,7 @@ end
 
 %-----plot error of elevation (per azimuth and elevation) in 3D------------
 if plot_error3d_elevation == 1  
-    figure(5)
+    figure
     scatter3(spherical(1,:),spherical(2,:),error_elevation,40,'g','filled')
     
     title('Error of Elevation (deg)');

@@ -520,7 +520,7 @@ with the `report' document style}{}}{}
 
 %% Some more internal commands
 \newcommand{\Activate@lineno}{\if@uselineno\linenumbers\switchlinenumbers*\fi}
-\newcommand{\@StartPrelim}{\cleardoublepage\setcounter{page}{1}\pagestyle{fancy}}
+\newcommand{\@StartPrelim}{\cleardoublepage\pagenumbering{roman}\setcounter{page}{1}\pagestyle{fancy}}
 
 %% External commands
 \newcommand{\StartBody}{\cleardoublepage\pagenumbering{arabic}\setcounter{page}{1}\pagestyle{fancy}\Activate@lineno}

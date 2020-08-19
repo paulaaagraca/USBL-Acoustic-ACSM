@@ -7,7 +7,7 @@
 clear
 
 plot_on = 0;
-plot_uncert_vec = 1;
+plot_uncert_vec = 0;
 rotation = 1;
 
 %--------------------------------------------------------------------------
@@ -28,8 +28,8 @@ ri = [q   0   0    0    0    0   0    0    0;
       0   0   0    w    -w   e   e    -e   -e;
       0   w   -w   0    0    e   -e   e    -e];
 
-s=[0;100;0]; %single source position for test
-  
+s=[0;1000;0]; %single source position for test
+
 h1 = ri(:,1); %h1 = nose hydrophone gives the 3rd dimension
 cnt_comb = 1;
 %Loop: all possible hydrophones for h2
@@ -58,6 +58,8 @@ cnt_comb = 1;
                 [max_det, min_det, std_det, pos_max_det, pos_min_det,eig_value,eig_vector] = ...
                     fisher(hconfig,s);
                 
+                eig_value = sqrt(eig_value);
+                
                 vec_max_det(cnt_comb) = max_det;
                 vec_min_det(cnt_comb) = min_det;
                 vec_std_det(cnt_comb) = std_det;
@@ -69,9 +71,10 @@ cnt_comb = 1;
                 %rotation of hydrophone configuration
                  [rot_az,rot_el,rot_norm] = cart2sph(s(1,1),s(2,1),s(3,1));
                 
-               %----------------------------------------------------------
+                %----------------------------------------------------------
                 %------choose config for uncertainty plot------------------
-                if isequal(hconfig_ind,[1 4 6 7])
+                ce = [1 4 6 8];
+                if isequal(hconfig_ind, ce)
                     uncert_vec1_pos_org = eig_vector(:,1) * (eig_value(1,1)/2);
                     uncert_vec2_pos_org = eig_vector(:,2) * (eig_value(2,2)/2);
                     uncert_vec3_pos_org = eig_vector(:,3) * (eig_value(3,3)/2);
@@ -105,9 +108,9 @@ cnt_comb = 1;
                     ang_uncert_vec3_neg = atan2(norm(cross(uncert_vec3_neg_org,s)),dot(uncert_vec3_neg_org,s));
                     ang_uncert_vec3_neg = ang_uncert_vec3_neg * 180/pi;
                     
-                    fprintf('Uncertainty axis 1 : %.6f and %.6f \n', ang_uncert_vec1_pos,ang_uncert_vec1_neg);
-                    fprintf('Uncertainty axis 2 : %.6f and %.6f \n', ang_uncert_vec2_pos,ang_uncert_vec2_neg);
-                    fprintf('Uncertainty axis 3 : %.6f and %.6f \n', ang_uncert_vec3_pos,ang_uncert_vec3_neg);
+                    fprintf('Uncertainty axis 1 : %.6f - %.6f and %.6f \n', eig_value(1,1),ang_uncert_vec1_pos,ang_uncert_vec1_neg);
+                    fprintf('Uncertainty axis 2 : %.6f - %.6f and %.6f \n', eig_value(2,2),ang_uncert_vec2_pos,ang_uncert_vec2_neg);
+                    fprintf('Uncertainty axis 3 : %.6f - %.6f and %.6f \n', eig_value(3,3),ang_uncert_vec3_pos,ang_uncert_vec3_neg);
                     
                     
                 %-----------------------------------------------
@@ -116,11 +119,6 @@ cnt_comb = 1;
                                           eig_vector(:,2)' 1; 
                                           eig_vector(:,3)' 1; 
                                           0 0 0 1];
-                                       
-%                     uncert_vec_neg_mat = [uncert_vec1_neg_org' 1;
-%                                           uncert_vec2_neg_org' 1; 
-%                                           uncert_vec3_neg_org' 1; 
-%                                           0 0 0 1];
 
                     %rotation in elevaton - around y axis
                     rot_elevation_y = rotY3D(-(-rot_el)); %z axis is inverted
@@ -129,48 +127,45 @@ cnt_comb = 1;
                     %total rotation matrix
                     rot_mat = rot_elevation_y *  rot_azimuth_z ;
 
+                    %rotation transformation
                     uncert_vec_pos_rot = rot_mat * uncert_vec_pos_mat;
-                    %uncert_vec_neg_rot = rot_mat * uncert_vec_neg_mat;
-
+                    
+                    %get eigen vectors
                     eig_vec_rot_pos = uncert_vec_pos_rot(1:3,1:3)';
                     
-                    
+                    %rotate source position
                     s_rot_mat = [s' 1; 0 0 0 1; 0 0 0 1; 0 0 0 1];
                     s_rot = rot_mat * s_rot_mat';
-
                     s_rott = s_rot(1,1:3)';
                     
+                    %get uncertainty vectors 
+                    uncert_vec1_pos_orgr = eig_vec_rot_pos(:,1) * (eig_value(1,1)/2);
+                    uncert_vec2_pos_orgr = eig_vec_rot_pos(:,2) * (eig_value(2,2)/2);
+                    uncert_vec3_pos_orgr = eig_vec_rot_pos(:,3) * (eig_value(3,3)/2);
                     
-                    uncert_vec1_pos_org = eig_vec_rot_pos(:,1) * (eig_value(1,1)/2);
-                    uncert_vec2_pos_org = eig_vec_rot_pos(:,2) * (eig_value(2,2)/2);
-                    uncert_vec3_pos_org = eig_vec_rot_pos(:,3) * (eig_value(3,3)/2);
-                    
-                    uncert_vec1_neg_org = - eig_vec_rot_pos(:,1) * (eig_value(1,1)/2);
-                    uncert_vec2_neg_org = - eig_vec_rot_pos(:,2) * (eig_value(2,2)/2);
-                    uncert_vec3_neg_org = - eig_vec_rot_pos(:,3) * (eig_value(3,3)/2);
+                    uncert_vec1_neg_orgr = - eig_vec_rot_pos(:,1) * (eig_value(1,1)/2);
+                    uncert_vec2_neg_orgr = - eig_vec_rot_pos(:,2) * (eig_value(2,2)/2);
+                    uncert_vec3_neg_orgr = - eig_vec_rot_pos(:,3) * (eig_value(3,3)/2);
    
-                  
-                    uncert_vec1_posr = s_rott + uncert_vec1_pos_org;
-                    uncert_vec2_posr = s_rott + uncert_vec2_pos_org;
-                    uncert_vec3_posr = s_rott + uncert_vec3_pos_org;
+                    %center eigen vector in rotated source position
+                    uncert_vec1_posr = s_rott + uncert_vec1_pos_orgr;
+                    uncert_vec2_posr = s_rott + uncert_vec2_pos_orgr;
+                    uncert_vec3_posr = s_rott + uncert_vec3_pos_orgr;
                     
-                    uncert_vec1_negr = s_rott + uncert_vec1_neg_org;
-                    uncert_vec2_negr = s_rott + uncert_vec2_neg_org;
-                    uncert_vec3_negr = s_rott + uncert_vec3_neg_org;
-                    
-                    %------------
+                    uncert_vec1_negr = s_rott + uncert_vec1_neg_orgr;
+                    uncert_vec2_negr = s_rott + uncert_vec2_neg_orgr;
+                    uncert_vec3_negr = s_rott + uncert_vec3_neg_orgr;
                     
                 end
                 %----------------------------------------------------------
                     
                 end
-                
             end
         end
     end
-    
-    %define direct vision region for each hydrophone
-    [h_view] = hydro_direct_view(s, ri, w, q);
+
+%define direct vision region for each hydrophone
+[h_view] = hydro_direct_view(s, ri, w, q);
     
     
 %-----------------------------------------------------------------
@@ -209,7 +204,7 @@ index_view = index_view(2:end);
 original_ind_view = zeros(1);
 min_radius_view = zeros(1);
 if test_max == 1
-max_radius_view = zeros(1);
+    max_radius_view = zeros(1); 
 end
 
 %-----------------------------------------------------------------
@@ -243,14 +238,6 @@ end
 %map original index of hydrophone config to best config with view
 best_rad_view_ind = original_ind_view(best_rad_view_ind);
 
-%transpose for copy+paste in excel
-% hydro_comb_t = hydro_comb';
-% vec_max_det_t = vec_max_det';
-% vec_min_det_t = vec_min_det';
-% vec_std_det_t = vec_std_det';
-% vec_pos_max_det_t = vec_pos_max_det';
-% vec_pos_min_det_t = vec_pos_min_det';
-
 %-----------------------------------------------------------------
 %-----------------------------------------------------------------
 %-----------------------------------------------------------------
@@ -283,111 +270,182 @@ if plot_on ==1
     ylabel('Radius of sphere(m)');
 end
 if plot_uncert_vec == 1
-     %--plot connector vectors from origin to estimated source positions--
-     figure
+%      %--plot connector vectors from origin to estimated source positions--
+    figure
+
      %plot3([R_estimations(1,i),0],[R_estimations(2,i),0],[R_estimations(3,i),0],'g')
      plot3([uncert_vec1_pos(1,1),uncert_vec1_neg(1,1)],...
            [uncert_vec1_pos(2,1),uncert_vec1_neg(2,1)],...
            [uncert_vec1_pos(3,1),uncert_vec1_neg(3,1)],'g')
-
+     axis equal
      hold on
      
      plot3([uncert_vec2_pos(1,1),uncert_vec2_neg(1,1)],...
            [uncert_vec2_pos(2,1),uncert_vec2_neg(2,1)],...
            [uncert_vec2_pos(3,1),uncert_vec2_neg(3,1)],'r')
-     
+     axis equal
      hold on    
         
      plot3([uncert_vec3_pos(1,1),uncert_vec3_neg(1,1)],...
            [uncert_vec3_pos(2,1),uncert_vec3_neg(2,1)],...
            [uncert_vec3_pos(3,1),uncert_vec3_neg(3,1)],'b')
-      
+     axis equal
      hold on
      scatter3(s(1,1),s(2,1),s(3,1),40,'r','filled')  
        
-     if rotation == 1  
-     %---  
-     figure
-     %hold on
-     plot3([uncert_vec1_posr(1,1),uncert_vec1_negr(1,1)],...
-           [uncert_vec1_posr(2,1),uncert_vec1_negr(2,1)],...
-           [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'g')
-
-     hold on
-     
-     plot3([uncert_vec2_posr(1,1),uncert_vec2_negr(1,1)],...
-           [uncert_vec2_posr(2,1),uncert_vec2_negr(2,1)],...
-           [uncert_vec2_posr(3,1),uncert_vec2_negr(3,1)],'r')
-     
-     hold on    
-        
-     plot3([uncert_vec3_posr(1,1),uncert_vec3_negr(1,1)],...
-           [uncert_vec3_posr(2,1),uncert_vec3_negr(2,1)],...
-           [uncert_vec3_posr(3,1),uncert_vec3_negr(3,1)],'b')
-     end
-     
-     hold on
-     scatter3(s_rott(1,1),s_rott(2,1),s_rott(3,1),40,'b','filled')  
-     
-     legend('uncert_1','uncert_2','uncert_3');  
-     title('Unertainty vectors around estimated position');
+     %legend('uncert_1','uncert_2','uncert_3');  
+     %title('Unertainty vectors around estimated position');
      xlabel('x');
      ylabel('y');
      zlabel('z');
      
-        figure
-        %zx
-        subplot(1,3,1)
-        plot([uncert_vec1_posr(1,1),uncert_vec1_negr(1,1)],...
-           [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'g')
-        xlabel('x');
-        ylabel('z');
-        
-        %zy
-        subplot(1,3,2)
-        plot([uncert_vec1_posr(2,1),uncert_vec1_negr(2,1)],...
-            [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'g')
-        xlabel('y');
-        ylabel('z');
-        
-        %yx
-        subplot(1,3,3)
-        plot([uncert_vec1_posr(1,1),uncert_vec1_negr(1,1)],...
-           [uncert_vec1_posr(2,1),uncert_vec1_negr(2,1)],'g')
-        xlabel('x');
-        ylabel('y');
-     
-     
-%      hold on 
-%      
-%      plot3([uncert_vec1_pos(1,1),0],...
-%            [uncert_vec1_pos(2,1),0],...
-%            [uncert_vec1_pos(3,1),0],'y')
-%      hold on  
-%      plot3([uncert_vec2_pos(1,1),0],...
-%            [uncert_vec2_pos(2,1),0],...
-%            [uncert_vec2_pos(3,1),0],'y')
-%      hold on  
-%      plot3([uncert_vec3_pos(1,1),0],...
-%            [uncert_vec3_pos(2,1),0],...
-%            [uncert_vec3_pos(3,1),0],'y')
-%      hold on
-%      plot3([uncert_vec1_neg(1,1),0],...
-%            [uncert_vec1_neg(2,1),0],...
-%            [uncert_vec1_neg(3,1),0],'m')
-%      hold on  
-%      plot3([uncert_vec2_neg(1,1),0],...
-%            [uncert_vec2_neg(2,1),0],...
-%            [uncert_vec2_neg(3,1),0],'m')
-%      hold on  
-%      plot3([uncert_vec3_neg(1,1),0],...
-%            [uncert_vec3_neg(2,1),0],...
-%            [uncert_vec3_neg(3,1),0],'m')
-     
-%      xlim([0 100]) 
-%      ylim([0 100]) 
-%      zlim([0 100]) 
-     
+     if rotation == 1  
+         figure
+         for asd = 1:3
+             %hold on
+             subplot(1,3,asd)
+             plot3([uncert_vec1_posr(1,1),uncert_vec1_negr(1,1)],...
+                   [uncert_vec1_posr(2,1),uncert_vec1_negr(2,1)],...
+                   [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'g')
 
+             hold on
+
+             plot3([uncert_vec2_posr(1,1),uncert_vec2_negr(1,1)],...
+                   [uncert_vec2_posr(2,1),uncert_vec2_negr(2,1)],...
+                   [uncert_vec2_posr(3,1),uncert_vec2_negr(3,1)],'r')
+
+             hold on    
+
+             plot3([uncert_vec3_posr(1,1),uncert_vec3_negr(1,1)],...
+                   [uncert_vec3_posr(2,1),uncert_vec3_negr(2,1)],...
+                   [uncert_vec3_posr(3,1),uncert_vec3_negr(3,1)],'b')
+
+             hold on
+             scatter3(s_rott(1,1),s_rott(2,1),s_rott(3,1),40,'b','filled') 
+
+             %legend('uncert_1','uncert_2','uncert_3');  
+             %title('Unertainty vectors around estimated position');
+             xlabel('x');
+             ylabel('y');
+             zlabel('z');
+
+             if asd == 1     
+             %zx
+             axis equal
+             view(0,0)
+             end
+
+             if asd == 2
+             %zy
+             axis equal
+             view(90,0)
+             end
+
+             if asd == 3
+             %yx
+             axis equal
+             view(0,90)
+             end
+         end    
+     end
 end
+%%
+%--------------------------------------------------------------------------
+%--------PRINT OVERLAID MONTE CARLO AND FISHER SIMULATION PLOTS------------
+
+load('../study_Cramer-Rao/plots/clouds/estim_[0,1000,0]_1468best_10000samp.mat', 'R_estimations_rott');
+
+figure
+scatter3(R_estimations_rott(1,:),R_estimations_rott(2,:),R_estimations_rott(3,:),40,'r','filled')
+
+figure
+     for asd = 1:3
+         subplot(1,3,asd)
+         if asd == 1   
+             %xz
+             scatter(R_estimations_rott(1,:),R_estimations_rott(3,:),'filled')     
+             axis equal
+             xlabel('x');
+             ylabel('z');
+             hold on
+
+             plot([uncert_vec1_posr(1,1),uncert_vec1_negr(1,1)],...
+                  [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'k')
+             axis equal
+
+             hold on
+             
+             plot([uncert_vec2_posr(1,1),uncert_vec2_negr(1,1)],...
+                  [uncert_vec2_posr(3,1),uncert_vec2_negr(3,1)],'g')
+             axis equal
+
+             hold on
+             plot([uncert_vec3_posr(1,1),uncert_vec3_negr(1,1)],...
+                  [uncert_vec3_posr(3,1),uncert_vec3_negr(3,1)],'r')
+             axis equal
+
+         end
+
+         if asd == 2
+             %yz
+             scatter(R_estimations_rott(2,:),R_estimations_rott(3,:),'filled')                   
+             xlabel('y');
+             ylabel('z');
+             axis equal
+             hold on
+             
+             plot([uncert_vec1_posr(2,1),uncert_vec1_negr(2,1)],...
+                  [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'k')
+             axis equal
+
+             hold on    
+             
+             plot([uncert_vec2_posr(2,1),uncert_vec2_negr(2,1)],...
+                  [uncert_vec2_posr(3,1),uncert_vec2_negr(3,1)],'g')
+             axis equal
+
+             hold on   
+             plot([uncert_vec3_posr(2,1),uncert_vec3_negr(2,1)],...
+                  [uncert_vec3_posr(3,1),uncert_vec3_negr(3,1)],'r')
+             axis equal
+
+             
+         end
+
+         if asd == 3
+             %xy
+             scatter(R_estimations_rott(1,:),R_estimations_rott(2,:),'filled') 
+             xlabel('x');
+             ylabel('y');
+             axis equal
+             hold on
+             
+             plot([uncert_vec1_posr(1,1),uncert_vec1_negr(1,1)],...
+                  [uncert_vec1_posr(2,1),uncert_vec1_negr(2,1)],'k')
+             axis equal
+             
+             hold on
+             
+             plot([uncert_vec2_posr(1,1),uncert_vec2_negr(1,1)],...
+                  [uncert_vec2_posr(2,1),uncert_vec2_negr(2,1)],'g')
+             axis equal
+             
+             hold on
+             
+             plot([uncert_vec3_posr(1,1),uncert_vec3_negr(1,1)],...
+                  [uncert_vec3_posr(2,1),uncert_vec3_negr(2,1)],'r')
+             axis equal
+         end
+
+         %hold on
+
+        % scatter3(s_rott(1,1),s_rott(2,1),s_rott(3,1),40,'b','filled')
+         
+         axis equal
+
+         %legend('uncert_1','uncert_2','uncert_3');  
+         %title('Unertainty vectors around estimated position');
+
+     end
+
 %end

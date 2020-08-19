@@ -14,7 +14,7 @@ plot_dev_overlaid = 0;
 plot_vec_Restimations = 0;
 
 %-----parameters-----------------------------------------------------------
-accum_samples = 1000;   %nº accumulated samples w/ random error for same position
+accum_samples = 100;   %nº accumulated samples w/ random error for same position
 max_dev = 0.5e-6;      %max deviation of injected error in time differences
                        %0.5us => [-2.5º,2.5º]
 %--------------------------------------------------------------------------
@@ -157,7 +157,7 @@ for gen_test=1:10
                     %can be consulted associating the collumn index to a calculated error
                     hydro_comb(:,cnt_comb) = [0 i_h2 i_h3 i_h4]; 
 
-                    %compute error for i different samples -> currently 1
+                    %compute error for i different samples
                      for i=1:n_samples
 
                         %calculate real spherical coordinates
@@ -239,12 +239,13 @@ for gen_test=1:10
     % definition of hydrophones w/ direct view to the source position
     
     %[h_view] = hydro_direct_view(mean_R, ri, w, q); %mean_R instead of s
-    [h_view] = hydro_direct_view_extra(mean_R, ri, w, q); %mean_R instead of s
+    %[h_view] = hydro_direct_view_extra(mean_R, ri, w, q); %mean_R instead of s
     
+    h_view = 0:1:24;
 
     % -----------------------------------------------------------------
     %define which configurations have direct view to the source position
-    [row,col_hcomb] = size(hydro_comb);
+     [row,col_hcomb] = size(hydro_comb);
     index_view = zeros(1);
     cnt_hydro_with_view = 0;
     [row,col_h_view] = size(h_view);
@@ -295,21 +296,21 @@ for gen_test=1:10
 
     cnt_comb = 1;
     
-    %************__EXTRACT (MEAN) BEST CONFIGURATION__*************************
-    %best MSE
-    [sets_config_mse] = extract_mean_best_config(gen_hconfig_best_mse,index_view);
-    
-    %best azimuth deviation
-    [sets_config_d_az] = extract_mean_best_config(gen_hconfig_best_az,index_view);
-    
-    %best elevation deviation
-    [sets_config_d_el] = extract_mean_best_config(gen_hconfig_best_el,index_view);
-    
 end
+
+%************__EXTRACT (MEAN) BEST CONFIGURATION__*************************
+%best MSE
+[sets_config_mse] = extract_mean_best_config(gen_hconfig_best_mse,index_view);
+
+%best azimuth deviation
+[sets_config_d_az] = extract_mean_best_config(gen_hconfig_best_az,index_view);
+
+%best elevation deviation
+[sets_config_d_el] = extract_mean_best_config(gen_hconfig_best_el,index_view);
 
 % -----------------------------------------------------------------
 %mean MSE of each configuration
-mean_mse_per_config = gen_mse/col_hcomb; %col_hcomb
+mean_mse_per_config = gen_mse/col_hcomb;
 %mean azimuth deviation of each configuration
 mean_dev_azimuth_per_config = gen_dev_azimuth/col_hcomb;
 %mean elevation deviation of each configuration
@@ -337,18 +338,18 @@ mse_view = mse_view(2:end);
 dev_azimuth_view = dev_azimuth_view(2:end);
 dev_elevation_view = dev_elevation_view(2:end);
 
-% -----------------------------------------------------------------
+%-----------------------------------------------------------------
 %index and value of minimum MSE (configuration)
 [min_mse_view,ind_min_mse_view] = min(mse_view);
 %index and value of minimum azimuth deviation (configuration)
-[dev_az_mse_view,ind_dev_az_mse_view]=min(dev_azimuth_view);
+[dev_az_mse_view,ind_dev_az_mse_view] = min(dev_azimuth_view);
 %index and value of minimum elevation deviation (configuration)
-[dev_el_mse_view,ind_dev_el_mse_view]=min(dev_elevation_view);
+[dev_el_mse_view,ind_dev_el_mse_view] = min(dev_elevation_view);
 
 ind_min_mse_view = index_view(ind_min_mse_view);
 ind_dev_az_mse_view = index_view(ind_dev_az_mse_view);
 ind_dev_el_mse_view = index_view(ind_dev_el_mse_view);
-% -----------------------------------------------------------------
+%-----------------------------------------------------------------
 % mse of deviations 
 for i = 1:length(index_view)
     %mse_both_dev(i) = sqrt(dev_azimuth_view(i)^2+dev_elevation_view(i)^2);
@@ -357,11 +358,16 @@ end
 [min_both_dev,ind_min_both_dev] = min(mse_both_dev);
 ind_min_both_dev = index_view(ind_min_both_dev);
 
+%comparing parameters:
+p_max_azimuth = max(mean_dev_azimuth_per_config);
+p_max_elevation = max(mean_dev_elevation_per_config);
+p_std_azimuth = std(mean_dev_azimuth_per_config);
+p_std_elevation = std(mean_dev_elevation_per_config);
 
 %//////////////////_PLOT OPTIONS_//////////////////////////////////////////
 %plot MSE and deviation in azimuth and elevation for every configuration
 if plot_mse_deviation == 1
-    figure(8)
+    figure
     
     subplot(1,3,1)
     plot(mean_mse_per_config)

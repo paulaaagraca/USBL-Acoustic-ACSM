@@ -11,6 +11,9 @@
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Communication System\relax }}{19}{figure.caption.14}% 
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Phase difference to reference point and phase ambiguity\relax }}{25}{figure.caption.15}% 
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Hyperbolic representation of acoustic source position possibilities in relation to ToA to two hydrophones\relax }}{27}{figure.caption.16}% 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Ambiguity correction through correlation and phase difference\relax }}{26}{figure.caption.16}% 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Hyperbolic representation of acoustic source position possibilities in relation to ToA to two hydrophones\relax }}{27}{figure.caption.17}% 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Considered scheme for angle of arrival estimation\relax }}{29}{figure.caption.18}% 
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Plots of azimuth, elevation and norm errors for defined source positions\relax }}{34}{figure.caption.20}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }

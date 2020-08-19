@@ -102,11 +102,11 @@ Since the underwater acoustic channel suffers from multipath, time variance and 
 \subsection{Time Delay Estimation}
 Time Delay Estimation (TDE) mechanisms use a pair of nodes, the target and the reference point, to measure the range between them. This distance is based on the time that it takes for a signal to travel from the reference point to the target.
 
-There are three main categories that devide TDE methods, which are Time Difference of Arrival (TDOA), Time of Arrival (TOA) and Time of Flight (TOF).
+There are three main categories that devide TDE methods, which are Time Difference of Arrival (TDoA), Time of Arrival (ToA) and Time of Flight (ToF).
 
 \subsubsection{Time of Arrival}
 
-Time of Arrival (TOA) is interpreted as the time delay between the transmission of a signal in the reference node until its reception on the target node. Although this is the conceptually simplest method to employ, it requires synchronization between the nodes since the target entity needs to know the instance when the signal was sent to be able to calculate the difference.
+Time of Arrival (ToA) is interpreted as the time delay between the transmission of a signal in the reference node until its reception on the target node. Although this is the conceptually simplest method to employ, it requires synchronization between the nodes since the target entity needs to know the instance when the signal was sent to be able to calculate the difference.
 
 Considering a generic transmitted signal \textit{s(t)}, the received signal can be expressed as \ref{eq:toa}, where $\tau$ represents the time of arrival and \textit{n(t)} is white noise with zero mean \cite{wirelesscomm}. 
 
@@ -115,13 +115,22 @@ Considering a generic transmitted signal \textit{s(t)}, the received signal can 
 \label{eq:toa}
 \end{eqnarray}
 
+\subsubsection{Time of Flight}
+
+Time of Flight (ToF) measures essentially the round-trip time communication between two nodes. The target node sends a signal to the reference node, which has an integrated transponder that responds transmitting a signal back to the target. The ToF is then estimated as the time interval from the moment the first signal is transmitted until the moment the second signal is received by the same node. 
+
+This method may be used without additional synchronization systems as it assumes that the response signal is sent immediately after the received one and the intrinsic transmitting delays are known.
+
+The accuracy of this technique depends mainly on the environment conditions, which include the water properties and the surrounding reflection surfaces which cause multipath. Therefore, the mechanism is susceptible of variable errors according to the location and characteristics of its employment.
+
 \subsubsection{Time Difference of Arrival}
 
-The Time Difference of Arrival (TDOA) is a technique that compares the time of arrival of a signal to different hydrophones in order to estimate the angle of arrival of the acoustic signal. The array of reception hydrophones have known determined positions among them so that is is possible to compare the different times of arrival or phase differences. This method can be employed using a uni-directional signal or a round trip communication.
+The Time Difference of Arrival (TDoA) is a technique that compares the time of arrival of a signal to different hydrophones in order to estimate the angle of arrival of the acoustic signal. The array of reception hydrophones have known determined positions among them so that is is possible to compare the different times of arrival or phase differences. This method can be employed using a uni-directional signal or a round trip communication.
 
-There are several algorithms and mathematical models that can be employed to execute the TDOA method, such as the Cross-Correlation and Maximum Likelihood.
+There are several algorithms and mathematical models that can be employed to execute the TDoA method, such as Cross-Correlation and Maximum Likelihood.
 
-\subsubsection{Generalized Cross-Correlation}
+\begin{itemize}
+	\item \textbf{Generalized Cross-Correlation}
 
 The Generalized Cross-Correlation (GCC) method is used to generically represent the relationship strength between two signals.
 
@@ -144,13 +153,13 @@ From these expressions, the generalized cross-correlation function between signa
 Finally, the maximum value of $R_{x1x2}(\tau)$, expressed in \ref{eq:gcc4}, is the so called correlation peak and provides information about the time delay $\tau$ which is the main matter of Time Delay Estimation. 
 
 
-\subsubsection{Cross-Correlation}
+	\item \textbf{Cross-Correlation}
 
 After approaching the generalized method of cross-correlation, it is possible to better understand the Cross-Correlation (CC) method. There are two main variations of CC \cite{crosscorr}, which are the slow cross-correlation in the  time domain and the fast cross-correlation in the frequency domain. The second approach is based on the Fast Fourier Transform as it locates the peak by analyzing frequency similarities between the signals. 
 
 Th Cross-Correlation technique uses a prefilter $\psi(f)$ equal to 1, as it is the simplest method of its kind.
 
-\subsubsection{Maximum Likelihood}
+	\item \textbf{Maximum Likelihood}
 
 The Maximum Likelihood (ML) method is a variation of Cross-Correlation which uses the prefilter $\psi(f)$ represented mathematically by \ref{eq:ml1}, where $\gamma_{12}(f)$ is a function of spectrum of cross-correlation $G_{x1x2}(f)$ and spectrum of auto-correlations $G_{x1x1}(f)$, $G_{x2x2}(f)$ as expressed in \ref{eq:ml2} \cite{crosscorr}.
 
@@ -162,14 +171,7 @@ The Maximum Likelihood (ML) method is a variation of Cross-Correlation which use
 \end{eqnarray}
 
 There is also a version of ML that uses the power spectral densities of the signals, which can be helpful for calculations in various applications. 
-
-\subsubsection{Time of Flight}
-
-Time of Flight (TOA) measures essentially the round-trip time communication between two nodes. The target node sends a signal to the reference node, which has an integrated transponder that responds transmitting a signal back to the target. T4he TOA is then estimated as the time interval from the moment the first signal is transmitted until the moment the second signal is received by the same node. 
-
-This method may be used without additional synchronization systems as it assumes that the response signal is sent immediately after the received one and the intrinsic transmitting delays are known.
-
-The accuracy of this technique depends mainly on the environment conditions, which include the water properties and the surrounding reflection surfaces which cause multipath. Therefore, the mechanism is susceptible of variable errors according to the location and characteristics of its employment.
+\end{itemize}
 
 %________________________________________________________
 
@@ -240,7 +242,7 @@ Multilateration is a generalization of the trilateration technique, as it uses t
 
 Distributed mechanisms, such as multilateration, are usually divided in three phases of positioning \cite{suvey-loc}:
 \begin{itemize}
-	\item Distance estimation between the reference nodes and target object, usually using TDOA or TOF mechanisms;
+	\item Distance estimation between the reference nodes and target object, usually using TDoA or ToF mechanisms;
 	\item Position estimation, usually obtained by solving a system of linear equations through mathematical efficient techniques;
 	\item Final refinement of the measurement in order to improve accuracy.
 \end{itemize}
@@ -256,7 +258,7 @@ As an alternative to solve localization issues using circumferences, multilatera
 
 \section{Positioning Systems}
 
-Positioning systems are used to track the underwater position of a vehicle or other object, in relation to reference structures of transponders called \textit{baseline stations}. These systems are classified based on the distance between the baseline stations. The configurations that will be explained are Long Baseline (LBL), Short Baseline (SBL), Ultra Short Baseline (USBL) and the inverted versions of all above.
+Positioning systems are used to track the underwater position of a vehicle or other object, in relation to reference structures of transponders called \textit{baseline stations}. These systems are classified based on the distance between the baseline stations. The configurations that will be explained are Long Baseline (LBL), Short Baseline (SBL), Ultra-Short Baseline (USBL) and the inverted versions of all above.
 
 \begin{figure}[!htbp]
 	\centering
@@ -289,9 +291,9 @@ The position of the vehicle to be tracked can be determined by translating the T
 
 In a SBL system, when the distance between baseline stations is increased the accuracy improves and, contrarily, when the mentioned distance decreases the accuracy deteriorates, which can raise some deployment challenges.
 
-\subsection{Ultra Short Baseline (USBL)}
+\subsection{Ultra-Short Baseline (USBL)}
 
-Ultra short baseline systems are composed essentially by one baseline station, with an array consisting of several traducers distanced typically less than the wavelength \cite{lblsblusbl}, and a transponder integrated on the object to be tracked. It is usually used in underwater positioning in shallow areas of the sea, as represented in figure c) \ref{fig:lblsblusbl}.
+Ultra-short baseline systems are composed essentially by one baseline station, with an array consisting of several traducers distanced typically less than the wavelength \cite{lblsblusbl}, and a transponder integrated on the object to be tracked. It is usually used in underwater positioning in shallow areas of the sea, as represented in figure c) \ref{fig:lblsblusbl}.
 
 Similarly to the previously mentioned procedures, the USBL positioning method relies on the Time of Flight of the exchanged signals. However, the traducers are too spatially close from each other to execute an accurate trilateration. Instead, it is measured the phase difference or time-delay difference of the received signal between every traducer, in order to estimate the azimuth and distance to the acoustic source. 
 
@@ -342,7 +344,7 @@ There are several commercial solutions for underwater positioning using the ultr
 
 \textit{Kongsberg} produces the HiPAP family of transducers \cite{hipap_hardw}, which can use the Cymbal acoustic protocol (PSK) or the frequency shift (FSK) modulation technique. Particularly the HiPAP 352 is the model with higher number of active transducers and is able to reaches 0.02m of range accuracy.
 
-\begin{table}[H] %use !htbp to adjust
+\begin{table}[!htbp] %use !htbp to adjust
 	\begin{tabular}{|c|c|c c c|}
 		\hline
 		Company
@@ -358,9 +360,8 @@ There are several commercial solutions for underwater positioning using the ultr
 		& Micro-Ranger 2 & MF & 0.2-9 & 995\\
 		& Mini-Ranger 2 & MF & 0.2-9 & 995\\ 
 		\hline 
-		\multirow{2}{4em}{Applied Acoustics} 
+		\begin{tabular}{@{}c@{}}Applied \\ Acoustics\end{tabular}
 		& Easytrak Alpha Portable 2655 & MF & n.d. & 500 \\
-		&  &  &  & \\
 		\hline 
 		\multirow{1}{4em}{Kongsberg} 
 		& HiPAP 352 & 21-31 & n.d. & 5000 \\
@@ -388,7 +389,7 @@ In this thesis, it is conducted a study based on the Crámer-Rao lower bound, wh
 
 In order to avoid loss of generality, it is considered a set of N sensors and a settled position for the target, the acoustic source, defined by $s_{t}$ = [$x_{s_{t}}$, $y_{s_{t}}$, $z_{s_{t}}$]$^T$. In addition, the position of each sensor is defined as $r_{i}$ = [$x_{r_{i}}$, $y_{r_{i}}$, $z_{r_{i}}$] and, consequently, the measurement of distance between each sensor and the source is defined as d$_{i}$ = $|| s_{t} - r_{i} ||$.
 
-Thereafter, the observations vector will be formulated containing the observed times-of-arrival (TOA) of the signal from the acoustic source to each one of the hydrophones, considering their geometric position. These times contain a noise vector component, which can be approximated to to a Gaussian distribution $n_i \sim \mathcal{N}(\mu,\,\sigma^{2})$. The samples can be calculated through the expression \ref{eq:obs_vec}, where it is considered an initial time of arrival $t_0$. Additionally, c represents the sound speed underwater.
+Thereafter, the observations vector will be formulated containing the observed times-of-arrival (ToA) of the signal from the acoustic source to each one of the hydrophones, considering their geometric position. These times contain a noise vector component, which can be approximated to to a Gaussian distribution $n_i \sim \mathcal{N}(\mu,\,\sigma^{2})$. The samples can be calculated through the expression \ref{eq:obs_vec}, where it is considered an initial time of arrival $t_0$. Additionally, c represents the sound speed underwater.
 
 \begin{eqnarray}
 	t_i = t_0 + \frac{||d_i||}{c} + n_i

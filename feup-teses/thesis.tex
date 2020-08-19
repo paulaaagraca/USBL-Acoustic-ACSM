@@ -19,9 +19,12 @@
 
 %% For iso-8859-1 (latin1), comment next line and uncomment the second line
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath}	%matrix
-\usepackage{amssymb}	
-\usepackage{float}	% H ()figure position parameter)
+\usepackage{amsmath}	      %matrix
+\usepackage{amssymb}	     %add math symbols
+\usepackage{float}				   % H ()figure position parameter)
+\usepackage{enumitem} 		  %alphabetic lists
+\usepackage{array, makecell} %makebox table
+\usepackage{indentfirst}	    %indent first line after section
 
 \usepackage{booktabs}
 \setlength\defaultaddspace{1ex}
@@ -150,7 +153,7 @@
 
 %% Bibliography
 %% Comment the next command if BibTeX file not used
-%% bibliography is in ``myrefs.bib''
+%% bibliography is in ``myrefs.bib''     title('Unertainty vectors around estimated position');
 \PrintBib{myrefs}
 
 %% Index

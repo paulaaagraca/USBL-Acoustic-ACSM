@@ -65,10 +65,9 @@ tdoa = [ti(1)-ti(2);
         ti(3)-ti(4)];
 
 %lower precision
-%tdoa = round(tdoa*10^8)/10^8;
-% tdoai = tdoa * 1e6;
-% tdoaib = round(tdoai * 2^(1))/2^(1);
-% tdoa = tdoaib / 1e6;
+% tdoai = tdoa * 1e6; %convert to microseconds
+% tdoaib = round(tdoai * 2^(1))/2^(1); %number of decimal places
+% tdoa = tdoaib / 1e6; %convert to seconds
 %--------------------------------------------------------------------------
 % From this point on, it is considered that the source position is unknown
 
@@ -164,6 +163,7 @@ Y = [cs^2*(T(1))^2 - ri(:,1)'*ri(:,1);
       
 X =(A'*A)^(-1)*A'*Y;
 R = X(2:4);
+
 
 %convert cartesian coordinates to spherical
 [azimuth,elevation,r] = cart2sph(R(1),R(2),R(3));

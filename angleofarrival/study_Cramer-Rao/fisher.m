@@ -104,7 +104,7 @@ for i=1:length_s
     ti = zeros(4,1); %initialize TOA vector
     for k=1:4
         % times of arrival from the source to the 4 hydrophones
-        ti(k) = t0 + norm(ri(:,k) - s(:,i)) / cs; %+ randn()*0.1
+        ti(k) = t0 + norm(ri(:,k) - s(:,i)) / cs;
     end
     
     %vector that conects each sensor to the acoustic source
@@ -139,7 +139,7 @@ for i=1:length_s
     jacob_tran = jacob';
 
     %variance value
-    dev = 5e-7;%(4*6e-3/1500);
+    dev = 0.5e-6;%(4*6e-3/1500); 5e-7
 
     %covariance matrix
     covariance = [1/(dev^2) 0 0 0;
@@ -217,7 +217,7 @@ end
 %---------------------------------------------
 %---------------------------------------------
 
-eig_value_tot = eig_value(1,1) + eig_value(2,1) + eig_value(3,1);
+%eig_value_tot = eig_value(1,1) + eig_value(2,1) + eig_value(3,1);
 
 [max_det,ind_max_det] = max(determinant_fisher); %max radius of sphere
 [min_det,ind_min_det] = min(eigen_fisher); %min radius of sphere
