@@ -8,12 +8,20 @@
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Generic configuration of: a) LBL; b) SBL; c) USBL\relax }}{12}{figure.caption.11}% 
 \contentsline {figure}{\numberline {2.6}{\ignorespaces USBL system configuration\relax }}{14}{figure.caption.12}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Communication System\relax }}{19}{figure.caption.14}% 
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Communication System\relax }}{19}{figure.caption.15}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Phase difference to reference point and phase ambiguity\relax }}{25}{figure.caption.15}% 
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Ambiguity correction through correlation and phase difference\relax }}{26}{figure.caption.16}% 
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Hyperbolic representation of acoustic source position possibilities in relation to ToA to two hydrophones\relax }}{27}{figure.caption.17}% 
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Considered scheme for angle of arrival estimation\relax }}{29}{figure.caption.18}% 
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Plots of azimuth, elevation and norm errors for defined source positions\relax }}{34}{figure.caption.20}% 
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Phase difference to reference point and phase ambiguity\relax }}{26}{figure.caption.21}% 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Ambiguity correction through correlation and phase difference\relax }}{27}{figure.caption.22}% 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Hyperbolic representation of acoustic source position possibilities in relation to ToA to two hydrophones\relax }}{28}{figure.caption.23}% 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Considered scheme for angle of arrival estimation\relax }}{30}{figure.caption.26}% 
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Plots of azimuth, elevation and norm errors for defined source positions\relax }}{34}{figure.caption.29}% 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Hydrophone positions for an implementation with 9 hydrophones\relax }}{38}{figure.caption.41}% 
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Model of AUV used to calculate the LOS region\relax }}{42}{figure.caption.42}% 
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Line of sight regions in plane yz for x < 0\relax }}{43}{figure.caption.43}% 
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Line of sight regions in plane yz for x $\geq $ 0\relax }}{44}{figure.caption.44}% 
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Errors obtained for all configurations when estimating position (10,10,10)\relax }}{45}{figure.caption.46}% 
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Overlaid azimuth and elevation deviations for all configurations when estimating position (10,10,10)\relax }}{46}{figure.caption.47}% 
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Hydrophone possible positions for optimality study based on range\relax }}{49}{figure.caption.50}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }

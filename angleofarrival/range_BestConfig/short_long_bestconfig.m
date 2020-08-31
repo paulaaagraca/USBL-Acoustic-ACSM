@@ -11,10 +11,10 @@ clear
 plot_Hconfig = 0;
 plot_mse_deviation = 0;
 plot_dev_overlaid = 0;
-plot_vec_Restimations = 1;
+plot_vec_Restimations = 0;
 
 %-----parameters-----------------------------------------------------------
-accum_samples = 1;   %nº accumulated samples w/ random error for same position
+accum_samples = 1000;   %nº accumulated samples w/ random error for same position
 max_dev = 0.5e-6;      %max deviation of injected error in time differences
                        %0.5us => [-2.5º,2.5º]
 %--------------------------------------------------------------------------
@@ -29,6 +29,7 @@ gen_dev_azimuth = 0;   %accumulate azimuth deviation of each hydrophone configur
 gen_dev_elevation = 0; %accumulate elevation deviation of each hydrophone configuration
 accum_R = zeros(3,1);  %accumulate R from each sample
 
+flag_det = 0;
 cnt_det_A = 1;
 %--------------------------------------------------------------------------
 %Definition of hydrophone matrix
@@ -40,9 +41,9 @@ e=sqrt(2)/2 * w;  % distance from axis to intermediate hydrophones
 % hydrophones configuration [r1 r2 r3 r4 r5 r6 r7 r8 r9];
 % r1 -> front; circle: r2:top; r3:bottom; r4:right; r5:left; 
 % r6:right-top; r7:righ-bottom; r8:left-top; r9:left-bottom;
-ri = [q  0   0    0    0    0   0    0    0;
-      0  0   0    w    -w   e   e    -e   -e;
-      0  w   -w   0    0    e   -e   e    -e];
+ri = [0   0    0    0    0   0    0    0;
+      0   0    w    -w   e   e    -e   -e;
+      w   -w   0    0    e   -e   e    -e];
 
 %init
 ri_shift1= zeros(3,1);
@@ -52,11 +53,11 @@ ri_shift2= zeros(3,1);
 
 deviation_x = 0.2;
 
-for i = 2:length(ri)
-    ri_shift1(1,i-1) = ri(1,i) - deviation_x;
-    ri_shift1(2:end,i-1) = ri(2:end,i);
-    ri_shift2(1,i-1) = ri(1,i) - 2*deviation_x;
-    ri_shift2(2:end,i-1) = ri(2:end,i);
+for i = 1:length(ri)
+    ri_shift1(1,i) = ri(1,i) - deviation_x;
+    ri_shift1(2:end,i) = ri(2:end,i);
+    ri_shift2(1,i) = ri(1,i) - 2*deviation_x;
+    ri_shift2(2:end,i) = ri(2:end,i);
     %ri_shift3(1,i) = ri(1,i) - 3*deviation_x;
     %ri_shift3(2:end,i) = ri(2:end,i);
     %ri_shift4 = ri(1,i) - 4*w;
@@ -81,7 +82,7 @@ t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 [rownum,n_samples_azimuth] = size(t_azimuth_rad);  %number of azimuth_positionss
 [rownum,n_samples_elevation] = size(t_elevation_rad); %number of elevation_positions
 
-norm_v = [1000]; % norm values to be tested (row)
+norm_v = [100]; % norm values to be tested (row)
 
 count = 1;     % size of vector s +1
 count_sph = 1; % size of vector spherical +1
@@ -118,7 +119,7 @@ end
 %-------------------------------------------------------------------------- 
 %-------------------------------------------------------------------------- 
 cnt_comb = 1; %initialize counter of all hydrophone combinations
-%h1 = [q; 0; 0]; %h1 = nose hydrophone gives the 3rd dimension
+h1 = [q; 0; 0]; %h1 = nose hydrophone gives the 3rd dimension
 %Loop: observe variations of best hydro config due to injected error in TDOA
 for gen_test=1:10
 
@@ -126,30 +127,16 @@ for gen_test=1:10
     min_dev_elevation = 1000;
     min_mse = 1000;
 
-    %Loop: all possible hydrophones for h2
-	for i_h1 = 1:length(ri_shift_tot) - 3
-        h1 = ri_shift_tot(:,i_h1);
-    
         %Loop: all possible hydrophones for h2
-        for i_h2 = (i_h1+1):length(ri_shift_tot) - 2
-            if(i_h1 < i_h2)
-                h2 = ri_shift_tot(:,i_h2);
-            end
-            if (i_h2 == i_h1+length(ri)-1 && i_h1>1) || i_h2 == (i_h1+2*(length(ri)-1)  && i_h1>1)
-                continue;
-            end
-            
-              if i_h1 == 2 && i_h2 == 3 
-                    a=1;
-              end
+        for i_h2 = 1:length(ri_shift_tot) - 2
+        	h2 = ri_shift_tot(:,i_h2);
             
             %Loop: all possible hydrophones for h3
             for i_h3 = (i_h2+1):length(ri_shift_tot)
                 if(i_h2 < i_h3)
                     h3 = ri_shift_tot(:,i_h3);
                 end
-                if (i_h3 == i_h1+length(ri)-1 && i_h1>1) || (i_h3 == i_h1+2*(length(ri)-1)  && i_h1>1) || ...
-                   i_h3 == i_h2+(length(ri)-1) || i_h3 == i_h2+2*(length(ri)-1)
+                if i_h3 == i_h2+length(ri) || i_h3 == i_h2+2*length(ri)
                     continue;
                 end
                 
@@ -158,27 +145,19 @@ for gen_test=1:10
                     if(i_h3 < i_h4)
                         h4 = ri_shift_tot(:,i_h4);
                     end
-                    if  (i_h1 > 1 && i_h1 < 10) && i_h2 < 10 && i_h3 < 10 && i_h4 < 10
-                        continue;
-                    elseif (i_h1 >= 10 && i_h1 <= 17) && (i_h2 >= 10 && i_h2 <= 17) && (i_h3 >= 10 && i_h3 <= 17) && (i_h4 >= 10 && i_h4 <= 17)
-                        continue;
-                    elseif i_h1 >= 18 && i_h2 >= 18 && i_h3 >= 18 && i_h4 >= 18
-                        continue;
-                    end
-                    if (i_h4 == i_h1+length(ri)-1 && i_h1>1) || (i_h4 == i_h1+2*(length(ri)-1)  && i_h1>1)|| ...
-                        i_h4 == i_h2+length(ri)-1 || i_h4 == i_h2+2*(length(ri)-1) || ...
-                        i_h4 == i_h3+length(ri)-1 || i_h4 == i_h3+2*(length(ri)-1)     
+                    if i_h4 == i_h2+length(ri) || i_h4 == i_h2+2*length(ri) || ...
+                       i_h4 == i_h3+length(ri) || i_h4 == i_h3+2*length(ri)   
                         continue;
                     end
 
-                    hconfig_ind = [i_h1 i_h2 i_h3 i_h4]
+                    hconfig_ind = [0 i_h2 i_h3 i_h4];
                     hconfig = [h1 h2 h3 h4]; %configuration composed by this iteration hydrophones
 
                     %all possible combinations that exist
                     %can be consulted associating the collumn index to a calculated error
-                    hydro_comb(:,cnt_comb) = [i_h1 i_h2 i_h3 i_h4]; 
+                    hydro_comb(:,cnt_comb) = [0 i_h2 i_h3 i_h4]; 
 
-                    %compute error for i different samples -> currently 1
+                    %compute error for i different samples
                      for i=1:n_samples
 
                         %calculate real spherical coordinates
@@ -187,9 +166,10 @@ for gen_test=1:10
                          for k=1:accum_samples
                              %hconfig_ind
                              [R,a,azimuth,elevation,norm,det_A] = testTOA_timediff(s(:,i), hconfig, max_dev);
-                             if abs(det_A) < 0.0000000001
+                             if abs(det_A) == 0 && flag_det == 0
                                 det0_config(:,cnt_det_A) = hconfig_ind';
                                 cnt_det_A = cnt_det_A + 1;
+                                flag_det = 1;
                             end
                             %----------ERROR OF INJECTED RANDOM DEVIATION----------------------
                             %difference between calculated and real azimuth
@@ -249,47 +229,50 @@ for gen_test=1:10
                         end
                         accum_R=0;
                      end
+                flag_det = 0;
                 cnt_comb=cnt_comb+1;
                 end
-            flag4 = 0;
             end
         end
-    end
     
     % -----------------------------------------------------------------
     % definition of hydrophones w/ direct view to the source position
+    
     %[h_view] = hydro_direct_view(mean_R, ri, w, q); %mean_R instead of s
+    %[h_view] = hydro_direct_view_extra(mean_R, ri, w, q); %mean_R instead of s
+    
+    h_view = 0:1:24;
 
     % -----------------------------------------------------------------
     %define which configurations have direct view to the source position
-%     [row,col_hcomb] = size(hydro_comb);
-%     index_view = zeros(1);
-%     cnt_hydro_with_view = 0;
-%     [row,col_h_view] = size(h_view);
-%     sig_comb_view = 0;
-%     
-%     for index_comb = 1:col_hcomb
-%         for row = 2:4
-%             for cnt_array = 1:col_h_view
-%                 if hydro_comb(row,index_comb) == h_view(cnt_array)
-%                     cnt_hydro_with_view = cnt_hydro_with_view + 1;
-%                     if cnt_hydro_with_view == 3
-%                         index_view = [index_view index_comb];
-%                     end
-%                     sig_comb_view = 1;
-%                     break;
-%                 end
-%             end
-%             if sig_comb_view == 0
-%                 break;
-%             else
-%                 sig_comb_view = 0;
-%             end
-%         end
-%         cnt_hydro_with_view = 0;
-%     end
-%     
-%     index_view = index_view(2:end);
+     [row,col_hcomb] = size(hydro_comb);
+    index_view = zeros(1);
+    cnt_hydro_with_view = 0;
+    [row,col_h_view] = size(h_view);
+    sig_comb_view = 0;
+    
+    for index_comb = 1:col_hcomb
+        for row = 2:4
+            for cnt_array = 1:col_h_view
+                if hydro_comb(row,index_comb) == h_view(cnt_array)
+                    cnt_hydro_with_view = cnt_hydro_with_view + 1;
+                    if cnt_hydro_with_view == 3
+                        index_view = [index_view index_comb];
+                    end
+                    sig_comb_view = 1;
+                    break;
+                end
+            end
+            if sig_comb_view == 0
+                break;
+            else
+                sig_comb_view = 0;
+            end
+        end
+        cnt_hydro_with_view = 0;
+    end
+    
+    index_view = index_view(2:end);
     % -----------------------------------------------------------------
     
     %accumulate MSE error of all configurations
@@ -313,73 +296,114 @@ for gen_test=1:10
 
     cnt_comb = 1;
     
-%     %************__EXTRACT (MEAN) BEST CONFIGURATION__*************************
-%     %best MSE
-%     [sets_config_mse] = extract_mean_best_config(gen_hconfig_best_mse,index_view);
-%     
-%     %best azimuth deviation
-%     [sets_config_d_az] = extract_mean_best_config(gen_hconfig_best_az,index_view);
-%     
-%     %best elevation deviation
-%     [sets_config_d_el] = extract_mean_best_config(gen_hconfig_best_el,index_view);
-    
 end
+
+%************__EXTRACT (MEAN) BEST CONFIGURATION__*************************
+% %best MSE
+% [sets_config_mse] = extract_mean_best_config(gen_hconfig_best_mse,index_view);
+% 
+% %best azimuth deviation
+% [sets_config_d_az] = extract_mean_best_config(gen_hconfig_best_az,index_view);
+% 
+% %best elevation deviation
+% [sets_config_d_el] = extract_mean_best_config(gen_hconfig_best_el,index_view);
 
 % -----------------------------------------------------------------
 %mean MSE of each configuration
-mean_mse_per_config = gen_mse/1512; %col_hcomb
+mean_mse_per_config = gen_mse/gen_test; %col_hcomb
 %mean azimuth deviation of each configuration
-mean_dev_azimuth_per_config = gen_dev_azimuth/1512;
+mean_dev_azimuth_per_config = gen_dev_azimuth/gen_test;
 %mean elevation deviation of each configuration
-mean_dev_elevation_per_config = gen_dev_elevation/1512;
+mean_dev_elevation_per_config = gen_dev_elevation/gen_test;
 
-% mse_view = zeros(1);
-% dev_azimuth_view = zeros(1);
-% dev_elevation_view = zeros(1);
-%
+mse_view = zeros(1);
+dev_azimuth_view = zeros(1);
+dev_elevation_view = zeros(1);
+
 %form matrixes with errors from config with view
-% for i = 1:length(index_view)
-%     
-%     ind = index_view(i); %ind contains index of hydro configuration (out of 56)
-%     
-%     %accumulate mse values for index of configurations with view
-%     mse_view = [mse_view mean_mse_per_config(ind)];
-%     %accumulate deviation in azimuth values for index of configurations with view
-%     dev_azimuth_view = [dev_azimuth_view mean_dev_azimuth_per_config(ind)];
-%     %accumulate deviation in elevation values for index of configurations with view    
-%     dev_elevation_view = [dev_elevation_view mean_dev_elevation_per_config(ind)];
-% end
-% 
-% %remove first element of each array
-% mse_view = mse_view(2:end);
-% dev_azimuth_view = dev_azimuth_view(2:end);
-% dev_elevation_view = dev_elevation_view(2:end);
+for i = 1:length(index_view)
+    
+    ind = index_view(i); %ind contains index of hydro configuration (out of 56)
+    
+    %accumulate mse values for index of configurations with view
+    mse_view = [mse_view mean_mse_per_config(ind)];
+    %accumulate deviation in azimuth values for index of configurations with view
+    dev_azimuth_view = [dev_azimuth_view mean_dev_azimuth_per_config(ind)];
+    %accumulate deviation in elevation values for index of configurations with view    
+    dev_elevation_view = [dev_elevation_view mean_dev_elevation_per_config(ind)];
+end
 
-% % -----------------------------------------------------------------
-% %index and value of minimum MSE (configuration)
-% [min_mse_view,ind_min_mse_view] = min(mse_view);
-% %index and value of minimum azimuth deviation (configuration)
-% [dev_az_mse_view,ind_dev_az_mse_view]=min(dev_azimuth_view);
-% %index and value of minimum elevation deviation (configuration)
-% [dev_el_mse_view,ind_dev_el_mse_view]=min(dev_elevation_view);
-% 
-% ind_min_mse_view = index_view(ind_min_mse_view);
-% ind_dev_az_mse_view = index_view(ind_dev_az_mse_view);
-% ind_dev_el_mse_view = index_view(ind_dev_el_mse_view);
-% % -----------------------------------------------------------------
-% % mse of deviations 
-% for i = 1:length(index_view)
-%     %mse_both_dev(i) = sqrt(dev_azimuth_view(i)^2+dev_elevation_view(i)^2);
-%     mse_both_dev(i) = mean([dev_azimuth_view(i) dev_elevation_view(i)]);
-% end
-% [min_both_dev,ind_min_both_dev] = min(mse_both_dev);
-% ind_min_both_dev = index_view(ind_min_both_dev);
+%remove first element of each array
+mse_view = mse_view(2:end);
+dev_azimuth_view = dev_azimuth_view(2:end);
+dev_elevation_view = dev_elevation_view(2:end);
 
+%-----------------------------------------------------------------
+%index and value of minimum MSE (configuration)
+[min_mse_view,ind_min_mse_view] = min(mse_view);
+%index and value of minimum azimuth deviation (configuration)
+[dev_az_mse_view,ind_dev_az_mse_view] = min(dev_azimuth_view);
+%index and value of minimum elevation deviation (configuration)
+[dev_el_mse_view,ind_dev_el_mse_view] = min(dev_elevation_view);
+
+ind_min_mse_view = index_view(ind_min_mse_view);
+ind_dev_az_mse_view = index_view(ind_dev_az_mse_view);
+ind_dev_el_mse_view = index_view(ind_dev_el_mse_view);
+%-----------------------------------------------------------------
+%-----------------------------------------------------------------
+%index and value of max MSE (configuration)
+[max_mse_view,ind_max_mse_view] = max(mse_view);
+%index and value of max azimuth deviation (configuration)
+[max_dev_az_view,ind_max_dev_az_view] = max(dev_azimuth_view);
+%index and value of max elevation deviation (configuration)
+[max_dev_el_view,ind_max_dev_el_view] = max(dev_elevation_view);
+
+ind_max_mse_view = index_view(ind_max_mse_view);
+ind_max_dev_az_view = index_view(ind_max_dev_az_view);
+ind_max_dev_el_view = index_view(ind_max_dev_el_view);
+%-----------------------------------------------------------------
+% mse of deviations 
+for i = 1:length(index_view)
+    %mse_both_dev(i) = sqrt(dev_azimuth_view(i)^2+dev_elevation_view(i)^2);
+    mse_both_dev(i) = mean([dev_azimuth_view(i) dev_elevation_view(i)]);
+end
+[min_both_dev,ind_min_both_dev] = min(mse_both_dev);
+ind_min_both_dev = index_view(ind_min_both_dev);
+
+%comparing parameters:
+%max of all configurations
+pe_max_azimuth = max(mean_dev_azimuth_per_config);
+pf_max_elevation = max(mean_dev_elevation_per_config);
+pg_max_mse = max(mean_mse_per_config);
+%std of all configurations
+p_std_azimuth = std(mean_dev_azimuth_per_config);
+p_std_elevation = std(mean_dev_elevation_per_config);
+p_std_mse = std(mean_mse_per_config);
+
+%config that achieves max dev
+pm_max_mse_view = max_mse_view;
+po_max_dev_az_view = max_dev_az_view;
+pq_max_dev_el_view = max_dev_el_view;
+pl_ind_max_mse_view = ind_max_mse_view;
+pn_ind_max_dev_az_view = ind_max_dev_az_view;
+pp_ind_max_dev_el_view = ind_max_dev_el_view;
+
+%best configurations
+ph_min_mse_view = min_mse_view;
+pi_dev_az_mse_view = dev_az_mse_view;
+pj_dev_el_mse_view = dev_el_mse_view;
+
+pd_ind_min_mse_view = ind_min_mse_view;
+pa_ind_dev_az_mse_view = ind_dev_az_mse_view;
+pb_ind_dev_el_mse_view = ind_dev_el_mse_view;
+
+pk_min_both_dev = min_both_dev;
+pc_ind_min_both_dev = ind_min_both_dev;
 
 %//////////////////_PLOT OPTIONS_//////////////////////////////////////////
 %plot MSE and deviation in azimuth and elevation for every configuration
 if plot_mse_deviation == 1
-    figure(8)
+    figure
     
     subplot(1,3,1)
     plot(mean_mse_per_config)
@@ -414,7 +438,7 @@ if plot_mse_deviation == 1
 end
 
 if plot_dev_overlaid == 1
-    figure(9)
+    figure
 
     plot(mean_dev_azimuth_per_config,'Color','b','LineWidth',0.5)
     hold on 
@@ -439,7 +463,7 @@ end
     
 %plot a specific hydrophone configuration
 if plot_Hconfig == 1
-	figure(7)
+	figure
     
     plot_h = hconfig_best_az;
     

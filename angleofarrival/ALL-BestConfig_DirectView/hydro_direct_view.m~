@@ -71,32 +71,39 @@ function [h_view] = hydro_direct_view(R, ri, w, q)
         h_view = [h_view 5]; %hydro in y negative axis (yz plan)
     end 
 
-    
     %---------rotate before evaluate-----------
-    % 6 rotates to position of H 2 
+    % pôr 6 -> 2 
     %hydrohphone 6
-    if (s_rot_x > 0 && s_rot_z >= -(w/q)*s_rot_x + w) || (s_rot_x <= 0 && s_rot_z > rot_r6(3,1))
+    if (s_rot_x <= 0 && s_rot_z >= -s_rot_y + w*sqrt(2)) || ...
+       (s_rot_x > 0 && s_rot_z >= (sqrt(2)/2)*w * (-(1/q)*s_rot_x + 1)) || ...
+       (s_rot_x > 0 && s_rot_y >= (sqrt(2)/2)*w * (-(1/q)*s_rot_x + 1))
 
         h_view = [h_view 6]; %hydro in 45º (yz plan)
     end 
 
-   % 7 rotates to position of H 4 
+        % pôr 7 -> 4 
    %hydrohphone 7
-    if (s_rot_x > 0 && s_rot_y >= -(w/q)*s_rot_x + w) || (s_rot_x <= 0 && s_rot_y > rot_r7(2,1))
+    if (source_x <= 0 && source_z <= source_y - w*sqrt(2)) || ...
+       (source_x > 0 && source_z <= (sqrt(2)/2)*w * ((1/q)*source_x - 1)) || ...
+       (source_x > 0 && source_y >= (sqrt(2)/2)*w * (-(1/q)*source_x + 1))
 
         h_view = [h_view 7]; %hydro in -45º (yz plan)
     end 
 
-    % 8 rotates to position of H 5 
+        % pôr 8 -> 5 
     %hydrohphone 8
-    if (s_rot_x > 0 && s_rot_y <= (w/q)*s_rot_x - w) || (s_rot_x <= 0 && s_rot_y < rot_r8(2,1))
+    if (source_x <= 0 && source_z >= source_y + w*sqrt(2)) || ...
+       (source_x > 0 && source_z >= (sqrt(2)/2)*w * (-(1/q)*source_x + 1)) || ...
+       (source_x > 0 && source_y <= (sqrt(2)/2)*w * ((1/q)*source_x - 1))
 
         h_view = [h_view 8]; %hydro in 135º (yz plan)
     end 
 
-    % 9 rotates to position of H 3 
+    % pôr 9 -> 3 
     %hydrohphone 9
-    if (s_rot_x > 0 && s_rot_z <= (w/q)*s_rot_x - w) || (s_rot_x <= 0 && s_rot_z < rot_r9(3,1))
+    if (source_x <= 0 && source_z <= -source_y - w*sqrt(2)) || ...
+       (source_x > 0 && source_z <= (sqrt(2)/2)*w * ((1/q)*source_x - 1)) || ...
+       (source_x > 0 && source_y <= (sqrt(2)/2)*w * ((1/q)*source_x - 1))
 
         h_view = [h_view 9]; %hydro in -135º (yz plan)
     end 

@@ -28,7 +28,7 @@
 \contentsline {subsection}{\numberline {2.4.4}Inverted Systems}{15}{subsection.2.4.4}% 
 \contentsline {section}{\numberline {2.5}Commercial Solutions}{15}{section.2.5}% 
 \contentsline {section}{\numberline {2.6}Angle of arrival determination}{16}{section.2.6}% 
-\contentsline {section}{\numberline {2.7}Methods for optimizing sensor configurations }{16}{section.2.7}% 
+\contentsline {section}{\numberline {2.7}Optimization of sensor configurations}{16}{section.2.7}% 
 \contentsline {subsection}{\numberline {2.7.1}Cr\IeC {\'a}mer-Rao lower bound}{16}{subsection.2.7.1}% 
 \contentsline {subsection}{\numberline {2.7.2}Optimal design and optimality criteria}{17}{subsection.2.7.2}% 
 \contentsline {subsubsection}{\numberline {2.7.2.1}D-optimality}{18}{subsubsection.2.7.2.1}% 
@@ -41,32 +41,42 @@
 \contentsline {section}{\numberline {3.3}Validation Methods}{21}{section.3.3}% 
 \contentsline {chapter}{\numberline {4}Ultra-Short Baseline System}{23}{chapter.4}% 
 \contentsline {section}{\numberline {4.1}HDL Module Architecture}{23}{section.4.1}% 
-\contentsline {subsection}{\numberline {4.1.1}Hilbert Filter}{23}{subsection.4.1.1}% 
-\contentsline {subsection}{\numberline {4.1.2}Cordic}{24}{subsection.4.1.2}% 
-\contentsline {subsection}{\numberline {4.1.3}phasediff}{24}{subsection.4.1.3}% 
-\contentsline {subsection}{\numberline {4.1.4}phasemean}{24}{subsection.4.1.4}% 
-\contentsline {subsection}{\numberline {4.1.5}Phase Ambiguity}{24}{subsection.4.1.5}% 
-\contentsline {section}{\numberline {4.2}Position Estimator}{26}{section.4.2}% 
-\contentsline {subsection}{\numberline {4.2.1}Preliminary considerations}{26}{subsection.4.2.1}% 
-\contentsline {subsubsection}{\numberline {4.2.1.1}Number of sensors}{26}{subsubsection.4.2.1.1}% 
-\contentsline {subsubsection}{\numberline {4.2.1.2}Position in relation to ToA}{27}{subsubsection.4.2.1.2}% 
-\contentsline {subsubsection}{\numberline {4.2.1.3}ToA approximation}{27}{subsubsection.4.2.1.3}% 
-\contentsline {subsection}{\numberline {4.2.2}Methodological Approach}{28}{subsection.4.2.2}% 
-\contentsline {subsection}{\numberline {4.2.3}Precision analysis}{31}{subsection.4.2.3}% 
-\contentsline {subsection}{\numberline {4.2.4}Simulations and Conclusions}{33}{subsection.4.2.4}% 
-\contentsline {subsubsection}{\numberline {4.2.4.1}Influence of quantization on precision}{33}{subsubsection.4.2.4.1}% 
-\contentsline {subsubsection}{\numberline {4.2.4.2}Influence of ToA measurement on position estimation}{35}{subsubsection.4.2.4.2}% 
-\contentsline {subsubsection}{\numberline {4.2.4.3}Influence of displacing a specific hydrophone}{35}{subsubsection.4.2.4.3}% 
+\contentsline {subsection}{\numberline {4.1.1}Module components}{23}{subsection.4.1.1}% 
+\contentsline {subsubsection}{\numberline {4.1.1.1}Hilbert Filter}{24}{subsubsection.4.1.1.1}% 
+\contentsline {subsubsection}{\numberline {4.1.1.2}Cordic}{24}{subsubsection.4.1.1.2}% 
+\contentsline {subsubsection}{\numberline {4.1.1.3}phasediff}{24}{subsubsection.4.1.1.3}% 
+\contentsline {subsubsection}{\numberline {4.1.1.4}phasemean}{24}{subsubsection.4.1.1.4}% 
+\contentsline {subsection}{\numberline {4.1.2}Analysis}{24}{subsection.4.1.2}% 
+\contentsline {section}{\numberline {4.2}Position Estimator}{25}{section.4.2}% 
+\contentsline {subsection}{\numberline {4.2.1}Preliminary considerations}{25}{subsection.4.2.1}% 
+\contentsline {subsubsection}{\numberline {4.2.1.1}Number of sensors}{25}{subsubsection.4.2.1.1}% 
+\contentsline {subsubsection}{\numberline {4.2.1.2}Phase Ambiguity}{25}{subsubsection.4.2.1.2}% 
+\contentsline {subsubsection}{\numberline {4.2.1.3}Hydrophone position in relation to ToA}{27}{subsubsection.4.2.1.3}% 
+\contentsline {subsubsection}{\numberline {4.2.1.4}ToA approximation}{27}{subsubsection.4.2.1.4}% 
+\contentsline {subsubsection}{\numberline {4.2.1.5}Doppler Effect}{28}{subsubsection.4.2.1.5}% 
+\contentsline {subsection}{\numberline {4.2.2}Methodological Approach}{29}{subsection.4.2.2}% 
+\contentsline {subsection}{\numberline {4.2.3}Precision analysis}{32}{subsection.4.2.3}% 
+\contentsline {subsection}{\numberline {4.2.4}Simulations}{33}{subsection.4.2.4}% 
+\contentsline {subsubsection}{\numberline {4.2.4.1}Influence of quantization on precision}{35}{subsubsection.4.2.4.1}% 
+\contentsline {subsubsection}{\numberline {4.2.4.2}Influence of ToA measurement on position estimation}{36}{subsubsection.4.2.4.2}% 
+\contentsline {subsubsection}{\numberline {4.2.4.3}Influence of displacing a specific hydrophone}{36}{subsubsection.4.2.4.3}% 
+\contentsline {subsection}{\numberline {4.2.5}Conclusions}{36}{subsection.4.2.5}% 
 \contentsline {chapter}{\numberline {5}Dynamic reconfigurable configuration method}{37}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Methodological approach}{37}{section.5.1}% 
-\contentsline {section}{\numberline {5.2}Systematic comparison of geometric configurations performance}{37}{section.5.2}% 
-\contentsline {subsection}{\numberline {5.2.1}Analytic Approach}{37}{subsection.5.2.1}% 
-\contentsline {subsubsection}{\numberline {5.2.1.1}Uncertainty Sphere}{39}{subsubsection.5.2.1.1}% 
-\contentsline {subsubsection}{\numberline {5.2.1.2}Uncertainty Ellipsoid}{40}{subsubsection.5.2.1.2}% 
-\contentsline {subsection}{\numberline {5.2.2}Simulation Results}{40}{subsection.5.2.2}% 
-\contentsline {subsubsection}{\numberline {5.2.2.1}Conclusions}{40}{subsubsection.5.2.2.1}% 
-\contentsline {chapter}{\numberline {6}Conclusions}{41}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}Summary}{41}{section.6.1}% 
-\contentsline {section}{\numberline {6.2}Contributions }{41}{section.6.2}% 
-\contentsline {section}{\numberline {6.3}Future Work}{41}{section.6.3}% 
-\contentsline {chapter}{References}{43}{section*.25}% 
+\contentsline {section}{\numberline {5.1}Monte Carlo Approach}{38}{section.5.1}% 
+\contentsline {subsection}{\numberline {5.1.1}Line of sight definition}{40}{subsection.5.1.1}% 
+\contentsline {subsection}{\numberline {5.1.2}Simulation results}{44}{subsection.5.1.2}% 
+\contentsline {subsection}{\numberline {5.1.3}Optimal solution based on range}{47}{subsection.5.1.3}% 
+\contentsline {subsubsection}{\numberline {5.1.3.1}Simulation results}{49}{subsubsection.5.1.3.1}% 
+\contentsline {section}{\numberline {5.2}Systematic comparison of geometric configurations performance}{49}{section.5.2}% 
+\contentsline {subsection}{\numberline {5.2.1}Cr\IeC {\'a}mer-Rao bound}{49}{subsection.5.2.1}% 
+\contentsline {subsubsection}{\numberline {5.2.1.1}Uncertainty Sphere}{51}{subsubsection.5.2.1.1}% 
+\contentsline {subsubsection}{\numberline {5.2.1.2}Uncertainty Ellipsoid}{51}{subsubsection.5.2.1.2}% 
+\contentsline {subsection}{\numberline {5.2.2}Comparison with Monte Carlo simulation}{51}{subsection.5.2.2}% 
+\contentsline {section}{\numberline {5.3}Conclusions}{52}{section.5.3}% 
+\contentsline {chapter}{\numberline {6}Conclusions}{53}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Summary}{53}{section.6.1}% 
+\contentsline {section}{\numberline {6.2}Contributions }{53}{section.6.2}% 
+\contentsline {section}{\numberline {6.3}Future Work}{53}{section.6.3}% 
+\contentsline {chapter}{\numberline {A}Complementary Information}{55}{appendix.A}% 
+\contentsline {section}{\numberline {A.1}Hydrophone configurations numeration}{55}{section.A.1}% 
+\contentsline {chapter}{References}{59}{section*.56}% 

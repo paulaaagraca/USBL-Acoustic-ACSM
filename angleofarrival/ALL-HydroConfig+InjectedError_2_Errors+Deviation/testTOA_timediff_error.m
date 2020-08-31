@@ -36,15 +36,15 @@ e = sqrt(2)/2 * w;
 ri = [0.02  0.02   0      0;
       0     0      0.1    -0.1;
       0.1   -0.1   0      0];
+  
+ri = [0.2  0    0     0;
+      0    0.2  -0.2  0;
+      0    0    0     0.2];
+  
 %__B__  
 % ri = [0.1  0     0     0;
 %       0    0    -e     e;
 %       0    0.1  -e    -e];  
-
-%__C__
-% ri = [0.1  0     0.1    0.2;
-%       0    0     -e     e;
-%       0    0.1   -e    -e];
 
 % define range of azimuth
 t_azimuth_deg = -180:1:180;                 % azimuth values in degrees
@@ -61,7 +61,7 @@ t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 
 %--------------------------------------------------------------------------
 
-norm = [1000]; % norm values to be tested (row)
+norm = [100]; % norm values to be tested (row)
 
 count = 1;     % size of vector s +1
 count_sph = 1; % size of vector spherical +1

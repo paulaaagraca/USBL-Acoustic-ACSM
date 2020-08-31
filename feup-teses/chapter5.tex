@@ -7,10 +7,12 @@ The system will be presented in two distinct sections. The first component is th
 
 The system which is proposed to be implemented in this research work has as input 4 signals which are received by each hydrophone of the array, and outputs an average phase difference between all combinations of pairs of hydrophones. 
 
-- ver regras basicas de hardware development
-- sustema sincrono, available clock cycles globais
-- hardware limitations
+\note{
+- regras basicas de hardware development\\
+- sistema sincrono, available clock cycles globais\\
+- hardware limitations\\
 - tamanho das entradas
+arg}
 
 
 \begin{enumerate}
@@ -20,8 +22,11 @@ The system which is proposed to be implemented in this research work has as inpu
 	\item phasemean
 \end{enumerate}
 
-\subsection{Hilbert Filter}
+\subsection{Module components}
 
+apresentar esquema global menos pormenorizado
+
+\subsubsection{Hilbert Filter}
 
 \begin{eqnarray}
 H(f)(t) = \frac{1}{\pi}\int_{-\infty}^{\infty}\frac{f(\tau)}{t-\tau}d\tau
@@ -38,37 +43,48 @@ H(f)(t) = \frac{1}{\pi}\int_{-\infty}^{\infty}\frac{f(\tau)}{t-\tau}d\tau
 \label{eq:hilbert_reeq}
 \end{eqnarray}
 
-- matematica brevemente, equação base, resposta impulsional, ganho, coeficientes e ordem usada
-\\
-- schematics 
-\\
-- explicar design decisions
-\\
+\note{
+- matematica brevemente, equação base, resposta impulsional, ganho, coeficientes e ordem usada \\
+- schematics  \\
+- explicar design decisions \\
 - descrever brevemente flow do sinal no hardware
+}
 
-\subsection{Cordic}
-- descriçao do que faz, matematica (?)
-\\
+\subsubsection{Cordic}
+\note{
+- descriçao do que faz \\
 - entradas e saídas, clocks, ROM
+}
 
-\subsection{phasediff}
--pequeno esquema 
-\\
+\subsubsection{phasediff}
+\note{
+-pequeno esquema \\
 - 1 sub
+}
 
-\subsection{phasemean}
-- pequeno esquema
-\\
-- N accumulated
-\\
----------
-\\
-apresentar esquema global menos pormenorizado
+\subsubsection{phasemean}
+- pequeno esquema \\
+- N accumulated \\
+
+\subsection{Analysis}
+
+\note{present used resources\\ overall achievement}
 
 
-\subsection{Phase Ambiguity}
+\section{Position Estimator} \label{subsec:AoA}
 
-When the information about the time of flight of a signal is available, it is relatively easy to estimate the range of the communication since there can be a direct conversion between them. However, when dealing with phase differences, there is no exact time notion, so it is necessary to start by defining a reference point. 
+The proposed position estimator uses vector algebra, the phase differences obtained from the system described in \ref{subchap:HDL module}, synchronization elements and additional mechanisms that will be further explained in the present section.
+
+\subsection{Preliminary considerations}
+
+\subsubsection{Number of sensors}
+For the estimation of the position in 3D space, a multilateration approach was used. As explained in \ref{subsec:multilateration}, the concept of multilateration combines the information of the relative distances between multiple sensors and a target in order to locate it. 
+
+In the present case, a total of four sensors are needed so that it is possible to define the position of target. Using only two sensors, two possibility spheres are formed around these sensors whose intersection originates a circle that contains the location possible solutions. By adding a third sensor, this circle is intersected by another sphere which originates only two location possibilities. Finally, a fourth sensor is added so that it is possible to exactly differentiate which one of the two final solutions is the accurate location solution. 
+
+\subsubsection{Phase Ambiguity}
+
+When the information about the time of arrival of a signal is available, it is relatively easy to estimate the range of the communication since there can be a direct conversion between them. However, when dealing with phase differences, there is no exact time notion, so it is necessary to start by defining a reference point. 
 
 Considering sinusoidal signals, when we have an array with four hydrophones spatially placed to form a 3D layout, the signal that is arriving to each  hydrophone in different times consequently have different phases. However, since sinusoidal signals are periodic, this means that for different signal periods the same phase value is observed, i.e. the phase is ambiguous. It is possible to observe this phenomenon in figure \ref{fig:phasediff}. In this illustration, $\alpha$ represents the observable phase difference of hydrophone $H_4$ to the reference point $H_1$. However, the actual phase difference which is intended to obtain, $\Delta p_4$, is one period of the signal, $\lambda$, added to the observable phase $\alpha$.
 
@@ -102,20 +118,7 @@ In order to compensate this phase ambiguity, a simple relation was developed whi
 \label{eq:phase-amb}
 \end{eqnarray}
 
-
-\section{Position Estimator} \label{subsec:AoA}
-
-The proposed position estimator uses vector algebra, the phase differences obtained from the system described in \ref{subchap:HDL module}, synchronization elements and additional mechanisms that will be further explained in the present section.
-
-\subsection{Preliminary considerations}
-
-\subsubsection{Number of sensors}
-For the estimation of the position in 3D space, a multilateration approach was used. As explained in \ref{subsec:multilateration}, the concept of multilateration combines the information of the relative distances between multiple sensors and a target in order to locate it. 
-
-In the present case, a total of four sensors are needed so that it is possible to define the position of target. Using only two sensors, two possibility spheres are formed around these sensors whose intersection originates a circle that contains the location possible solutions. By adding a third sensor, this circle is intersected by another sphere which originates only two location possibilities. Finally, a fourth sensor is added so that it is possible to exactly differentiate which one of the two final solutions is the accurate location solution. 
-
-\subsubsection{Position in relation to ToA}
-%---Hyperbole------------------------------
+\subsubsection{Hydrophone position in relation to ToA}
 To better understand the location estimation of an acoustic source in relation to the position of a pair of hydrophones, we can initially adopt the two dimensional scenario of figure \ref{fig:hyper}. 
 
 Considering two hydrophones at known relative positions $(-f,0)$ and $(f,0)$, we can model all possible acoustic source locations for a specific ToA through hyperbolas. This is due to the fact that, by definition, the sum of the distances from the focus of each hyperbole, where each hydrophone is placed, to any point of the hyperbolic geometry corresponds to a constant value. 
@@ -141,9 +144,23 @@ This is to say that for two sensors with known relative positions where hydropho
 \label{eq:dist_to_target}
 \end{eqnarray}
 
-Therefore, the same logic can be applied for multiple hydrophones. In the present work, in which it is considered a system with four hydrophones, a synchronization mechanism allows to determine the signals' ToA between the transceiver and the hydrophones. However, in order to simplify the synchronicity and decrease errors that arise from it, the module that precisely computes the phase differences of the received signal in the hydrophones is used so that is possible to apply the relationship in \ref{eq:dist_to_target}. Consequently, a better angle of arrival estimation can be achieved when using this approximation than if all four times of flight are used for the same purpose.
+Therefore, the same logic can be applied for multiple hydrophones. In the present work, in which it is considered a system with four hydrophones, a synchronization mechanism allows to determine the signals' ToA between the transceiver and the hydrophones. However, in order to simplify the synchronicity and decrease errors that arise from it, the module that precisely computes the phase differences of the received signal in the hydrophones is used so that is possible to apply the relationship in \ref{eq:dist_to_target}. Consequently, a better angle of arrival estimation can be achieved when using this approximation than if all four times of arrival are used for the same purpose.
 
-\subsection{Methodological Approach}
+\subsubsection{Doppler Effect}
+
+The implemented process uses the information of the operating frequency of the transmitted signal in order to compute the phase differences and determine the overall times of arrival. However, the frequency is only completely stationary in a theoretical situation. In real scenarios, the environmental conditions and additional factors can change this frequency from the source to the receiver. In the present study, since the vehicle is predominantly moving then the Doppler effect could influence the signal's frequency, leading to erroneous calculations.
+
+In order to evaluate if the Doppler effect influences the present system, it is possible to calculate which would be the frequency deviation observed for a known relative speed. Considering that the relative speed between the transmitter and the receiver takes a value of $relative\_speed$, using a fixed sound speed, $c_s$, and knowing the frequency of the transmitted signal, the relation \ref{eq:doppler} can be established. 
+
+%\begin{eqnarray}
+%&freq\_deviation = \frac{relative\_speed}{c_s} \times signal\_freq
+%\label{eq:doppler}
+%\end{eqnarray}
+
+\note{desprezavel}
+\note{frequency detector can be integrated}
+
+\subsection{Methodological Approach} \label{subsec:estimator}
 
 The goal of the proposed system is to estimate the position of an acoustic source in relation to known positions of a configuration of sensors, in a system of geometric axes with a defined origin. For this purpose, the logic employed is based on vector algebra with other physical considerations, detailed in the present subsection. 
 
@@ -218,7 +235,7 @@ c_s^{2} (t_i-t_0) - r_i^{T} r_i
 \label{eq:AoA-matrix}
 \end{eqnarray}
  
-In order to resolve this system of equations and isolate $r$, the least squares method is applied. If \ref{eq:AoA-matrix} is extended to the four considered hydrophones, we obtain matrix $A$ represented as \ref{eq:A} and $Y$ equivalent to \ref{eq:Y}. Then the least squares method is expressed as  \ref{eq:least-square}, where $X$, $\mathbb{R}^{4}$, holds the Cartesian result of $r$. As the method formulates four equations that are meant to calculate only three coordinates, $X$ will contain a fourth element that consists on a nonlinear component to $||r||^{2}$. This causes the estimator to be considered not efficient.
+In order to resolve this system of equations and isolate $r$, the least squares method is applied. If \ref{eq:AoA-matrix} is extended to the four considered hydrophones, we obtain matrix $A$ represented as \ref{eq:A} and $Y$ equivalent to \ref{eq:Y}. It is important to notice that the $A$ matrix has to be invertible, thus the rows which contain the chosen hydrophone configuration have to be linearly independent. The least squares method is then expressed as \ref{eq:least-square}, where $X$, $\mathbb{R}^{4}$, holds the Cartesian result of $r$. As the method formulates four equations that are meant to calculate only three coordinates, $X$ will contain a fourth element that consists on a nonlinear component to $||r||^{2}$. This causes the estimator to be considered not efficient.
 
 \begin{eqnarray}
 & A = 
@@ -247,33 +264,41 @@ c_s^{2}\: (t_4-t_0)^2 - r_4^{T} r_4\\
 \label{eq:least-square}
 \end{eqnarray}
 
-It is important to notice that the $A$ matrix has to be invertible, thus the rows which contain the chosen hydrophone configuration have to be linearly independent.
-
 After infer the Euclidean vector $r$, it is possible to obtain both the bearing trough its direction, $\hat{\boldsymbol{r}}$, and the range through its magnitude, $||r||$.
 
 \subsection{Precision analysis}  \label{subchap:precision-analy}
 
+\note{accuracy or precision?}
 A methodology was formulated in order to evaluate the precision that the estimator can achieve in defined circumstances. For this initial approach to the study, the following conditions are considered: 
 
 \begin{enumerate}[label=\alph*)]
+	%--------------------
 	\item \textbf{Sensor Configuration}  
 	
 	Each hydrophone configuration is analyzed individually. It is a parameter to be always defined and known from the begging of each simulation.
 	
+	%--------------------
 	\item \textbf{Reference axis}
 	
 	 The origin of the reference axis is defined at the center of mass of the structure where the hydrophones are fixed, which in this case is the AUV.
 	
-	\item \textbf{Acoustic source position} 
-	
-	The considered positions for the acoustic source are defined in spherical coordinates. Thus the source's range is selected in accordance with the norm, $n$, whereas the azimuth, $\phi$, and elevation, $\theta$, define the angle of arrival of the received signal. Moreover, the azimuth component covers the interval [-180$^{\circ}$, 180$^{\circ}$] in steps of one and the elevation component covers the interval [-90$^{\circ}$ to 90$^{\circ}$] in steps of one, forming spheres with the selected norm around the reference axis' origin.
-
+	%--------------------
 	\item \textbf{Injected error} 
 	
 	In order to make the study more realistic, an $e_i$ error is added to the time differences of arrival, $ \Delta t_{ij}$. These errors are mutually independent and follow a Gaussian distribution with zero mean and a configurable variance of $\sigma^{2}$, i.e., $e_i \sim \mathcal{N}(0,\,\sigma^{2})$. 
 	
 	 For the simulations performed in this project, a deviation of 5$^{\circ}$,or a window of $[-2.5^{\circ},2.5^{\circ}]$, in the angle of arrival estimation was considered to be reasonable for an underwater navigation scenario. Therefore, since the specified period of the signal is $T = \frac{1}{24400}$ and one period corresponds to a 360$^{\circ}$ phase shift, then the 5$^{\circ}$ will be equivalent to $\frac{5^{\circ}}{360^{\circ}}*T$ which is approximately a deviation of $0.5\mu s$. Hence the considered standard deviation $\sigma$ of the error $e_i$ in the computed time differences of arrival is equal to $0.5\mu s$.
+	 
+	 %--------------------
+	 \item \textbf{Acoustic source position} 
+	 
+	 The considered positions for the acoustic source are defined in spherical coordinates. Thus the norm, $n$, corresponds to the source's range, whereas the azimuth, $\phi$, and elevation, $\theta$, define the angle of arrival of the received signal.
+	 
+	 Recalling the definition of spherical coordinates, it is known that for elevations of -90$^{\circ}$ or 90$^{\circ}$, the azimuth angle is meaningless and should not be considered. Since this system is affected by a Gaussian error, then the estimated azimuth angle is expected to return large errors not only for the absolute mentioned elevation values but for a considerable interval around it, dependent on the injected deviation. For that reason, the elevation values are limited to an interval between -80$^{\circ}$ and 80$^{\circ}$ so that the evaluated metrics present a result that is not so reflective of the errors originated from this phenomenon.
+	 
+	 The positions to be estimated are contained in a matrix with a number of columns equal to the number of positions and three rows consisting of its spherical coordinates. The matrix is arranged so that for each defined norm, the elevation component covers the interval [-80$^{\circ}$ to 80$^{\circ}$] in steps of one and, for each elevation value, the azimuth component covers the interval [-180$^{\circ}$, 180$^{\circ}$] in steps of one, forming partial spheres around the reference axis' origin.
 
+	%--------------------
 	\item \textbf{Propagation speed}
 	
 	In all performed simulations, the considered speed of sound is $1500 \; m/s$, which corresponds to the underwater propagation velocity of waves in typical conditions.
@@ -303,18 +328,16 @@ The metrics used to evaluate the quality of the estimator were :
 \begin{itemize}
 	\item \textbf{Mean squared error} (MSE): Incorporates both the variance and the bias of the estimator and indicates its overall quality
 	\item \textbf{Standard deviation of the error} ($\sigma$) : Indicates how disperse are the estimates from the expected value
-	\item \textbf{Minimum error ($min(e_i)$)} : Indicates the minimum error that is obtained by the estimator
-%	\item \textbf{Maximum error ($max(e_i)$)} : Indicates the maximum error that is obtained by the estimator
+	\item \textbf{Minimum error ($min(e_i)$)} : Indicates the minimum error that is obtained by the estimator, thus the best absolute precision achieved
 \end{itemize} 
 
-\subsection{Simulations and Conclusions}
+\subsection{Simulations}
 
 A series of simulations were performed in order to understand the behavior and capabilities of the estimator and analyze its overall precision.
-%such as a vehicle is moving towards an acoustic signal transmitter,
 
 To illustrate a scenario where this estimator is applicable, we can consider that a vehicle is moving towards an acoustic signal transmitter whose position is unknown. Imagining that the target is at a considerable distance, then the main focus is to achieve an optimal bearing estimation which provides a more direct path and saves resources. The range estimation serves as secondary measurement that indicates how near the vehicle is from the destination, so that it is possible to make control decisions such as moderate the navigation speed in the proximity of the target. For the reasons outlined, the study that follows presents a more thorough analysis of the azimuth and elevation errors. 
 
-In these simulations, two different hydrophone configurations are considered , A and B defined in \ref{tab:configs_test1}, where the columns $r_{Ai}$ and $r_{Bi}$ contain the position's coordinates of each hydrophones $i$.
+In this section, two different hydrophone configurations are considered, A and B defined in \ref{tab:configs_test1}, where the columns $r_{Ai}$ and $r_{Bi}$ contain the position's coordinates of each hydrophones $i$.
 
 \begin{table}[!htbp] %use H to adjust
 	\begin{center}
@@ -329,10 +352,10 @@ In these simulations, two different hydrophone configurations are considered , A
 			& 0.02 & 0.02 & 0 & 0 & 0.1 & 0 & 0 & 0 \\
 			%\hline 
 			\multirow{1}{0.5em}{y} 
-			& 0 & 0 & 0.1 & -0.1 & 0 & 0 & 0.05 & -0.05\\
+			& 0 & 0 & 0.1 & -0.1 & 0 & 0 & -0.0707 & 0.0707\\
 			%\hline 
 			\multirow{1}{0.5em}{z} 
-			& 0.1 & -0.1  & 0 & 0 & 0 & 0.1 & -0.1 & -0.1\\
+			& 0.1 & -0.1  & 0 & 0 & 0 & 0.1 & -0.0707  & -0.0707\\
 			\bottomrule 
 		\end{tabular}
 		\caption{Hydrophone configurations for precision tests}
@@ -340,9 +363,7 @@ In these simulations, two different hydrophone configurations are considered , A
 	\end{center}
 \end{table}
 
-Considering the conditions previously presented, tests were ran in order to understand the error magnitudes that are achieved in different scenarios by the position estimator.
-
-For the first simulation, configuration A is tested according to the acoustic source positions consideration described in the previous subsection.
+For the first simulation, configuration A is tested for the acoustic source positions previously described, in a total of 58121. The obtained plots are illustrated in \ref{fig:s1-A-n10}, where it is represented the error obtained by this specific configuration for all positions of the acoustic source.
 
 \begin{figure}[!htbp]
 	
@@ -352,13 +373,18 @@ For the first simulation, configuration A is tested according to the acoustic so
 	\label{fig:s1-A-n10}
 \end{figure}
 
+Some conclusions can be drawn about configuration A from the obtained results :
+\begin{itemize}
+	\item A deviation in the estimate for positions with elevation close to its range limits causes:
+	\begin{itemize}
+				\item a higher azimuth error, since 
+				\item a higher elevation error, since the configuration has a shorter baseline along the xx axis, between the pairs of hydrophone that are aligned in the yy and zz axis, then the elevation is more precisely estimated in positions that are approximated perpendicular line that passes in the middle of the configuration.
+				
+	\end{itemize}
+	\item
+\end{itemize}
 
-%However, in reality when elevation is -90$^{\circ}$ or 90$^{\circ}$, the azimuth angle has no significance and should not be considered. For that reason, in these simulations the elevation values are limited to an interval between -80$^{\circ}$ and 80$^{\circ}$ so that the metrics to be analyzed present a result that is not influenced by the errors originated from this phenomenon.
-
-%It should be pointed out that while analyzing these parameters, it is expected that for position's elevations in the surroundings of -90$^{\circ}$ and 90$^{\circ}$, large azimuth errors are returned. This is explained  elevation is maximum, the azimuth component has no significance.
-
-%it is expected that in cases where the position's azimuth is in the surroundings of -180$^{\circ}$ and 180$^{\circ}$, the returned error is large since the subtraction between the estimated and the real values can reach near $360^{\circ}$. This happens due to the deviations in the estimate provoked by the injected error, however a correction to this issue was implemented so that the real difference . It is also
-
+\note{Add all conclusions}
 
 Therefore, tables \ref{tab:azimuth-test1}  and \ref{tab:elevation-test1} illustrate the achieved results of azimuth error for several chosen norms.
 
@@ -419,10 +445,30 @@ Since the time differences of arrival have magnitudes around microseconds, then 
 
 Finally after the truncation, the value is converted again to seconds to be used in the algorithm.
 
+\note{Dar um exemplo de erro antes e erro depois da truncação}
 
 \subsubsection{Influence of ToA measurement on position estimation}
 
- \note{ por simulação, conclui que para distancias muito longe (quantizar) não faz diferença ter o TOA e basta os }
+ \note{ por simulação, conclui que para distancias muito longe (quantizar) não faz diferença ter o TOA e basta os TDOA}
 
 \subsubsection{Influence of displacing a specific hydrophone}
 
+The goal of this test is to understand what is the influence of moving one hydrophone along a certain direction in the overall error.
+
+\note{-considerar uma configuração\\
+- analysar evolução do erro\\
+-concluir que aumentar baseline é melhor até o erro manter-se constante}
+
+\subsection{Conclusions}
+
+%Since this analysis is incident on a specific configuration, not all observations are generalizable.
+However there are conclusions that can be taken from the inspection of multiple configurations, such as : 
+\begin{itemize}
+	\item incresed baseline (até certo ponto) outputs best results ; when baseline for a specific hydrophone or pair is too large, then it will decrease the angle vision for the shorter baselines
+	\item the higher the range, the bigger the errors
+	\item in higher ranges, the small angle variations can still indicate a big deviation of estimation from the original point in Cartesian coordinates
+\end{itemize}
+
+\note{- tenho sistema que estima os MSE, erro de azimute e elevação, para certas configuração consegue-se perceber padroes nos erros (e.g. erro aumenta com afastamento da source -> ao longe variações pequenas de angulo podem indicar deslocação da estimação grande )}
+
+\note{escrever conclusoes gerais}

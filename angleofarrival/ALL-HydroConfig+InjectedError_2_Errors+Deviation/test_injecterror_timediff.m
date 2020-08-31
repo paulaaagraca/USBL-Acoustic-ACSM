@@ -12,7 +12,7 @@
 clear
 
 %------options-------------------------------------------------------------
-source_pos_single = 1;  %plot single position of source with injected error
+source_pos_single = 0;  %plot single position of source with injected error
 plot_mse_deviation = 1; %plot deviation and MSE plots
 plot_Hconfig = 0;       %plot single hydrophone configuration
 %------parameters----------------------------------------------------------
@@ -38,9 +38,12 @@ for max_dev=0.5e-6 %0.1e-6:0.1e-6:0.5e-6
 
         % hydrophones configuration [r1 r2 r3 r4];
         % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
-        ri = [init_r1  0    0     0;
-              0        0.2  -0.2  0;
-              0        0    0     0.2];
+%         ri = [init_r1  0    0     0;
+%               0        0.2  -0.2  0;
+%               0        0    0     0.2];
+        ri = [0.1  0     0     0;
+              0    0    -e     e;
+              0    0.1  -e    -e];
 
         %Function: returns mean MSE and mean deviation for ri configuration
         [mse(i),deviation_azimuth(i),deviation_elevation(i)] = ...
@@ -54,9 +57,9 @@ for max_dev=0.5e-6 %0.1e-6:0.1e-6:0.5e-6
 
         % hydrophones configuration [r1 r2 r3 r4];
         % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
-        ri = [0.2  0        0     0;
-              0    init_r2  -0.2  0;
-              0    0        0     0.2];
+%         ri = [0.2  0        0     0;
+%               0    init_r2  -0.2  0;
+%               0    0        0     0.2];
 
         %Function: returns mean MSE and mean deviation for ri configuration
         [mse(i),deviation_azimuth(i),deviation_elevation(i)] = ...
@@ -70,9 +73,9 @@ for max_dev=0.5e-6 %0.1e-6:0.1e-6:0.5e-6
 
         % hydrophones configuration [r1 r2 r3 r4];
         % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
-        ri = [0.2  0    0        0;
-              0    0.2  init_r3  0;
-              0    0    0        0.2];
+%         ri = [0.2  0    0        0;
+%               0    0.2  init_r3  0;
+%               0    0    0        0.2];
 
         %Function: returns mean MSE and mean deviation for ri configuration
         [mse(i),deviation_azimuth(i),deviation_elevation(i)] = ...
@@ -87,9 +90,9 @@ for max_dev=0.5e-6 %0.1e-6:0.1e-6:0.5e-6
 
         % hydrophones configuration [r1 r2 r3 r4];
         % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
-        ri = [0.2  0    0     0;
-              0    0.2  -0.2  0;
-              0    0    0     init_r4];
+%         ri = [0.2  0    0     0;
+%               0    0.2  -0.2  0;
+%               0    0    0     init_r4];
 
         %Function: returns mean MSE and mean deviation for ri configuration
         [mse(i),deviation_azimuth(i),deviation_elevation(i)] = ...
@@ -102,10 +105,10 @@ for max_dev=0.5e-6 %0.1e-6:0.1e-6:0.5e-6
     config_cnt = 4*n_slide_samples + 1; %number of hydrophone configurations              
     
     %--4 hydro spiral from nose to the back-----------------------------
-    ri = [0.2   0.1    0     -0.1;
-          0     0      0.2   0;
-          0     0.2    0     -0.2];
-    
+%     ri = [0.2   0.1    0     -0.1;
+%           0     0      0.2   0;
+%           0     0.2    0     -0.2];
+
     %Function: returns mean MSE and mean deviation for ri configuration
     [mse(config_cnt),deviation_azimuth(config_cnt),deviation_elevation(config_cnt)] = ...
             hydroconfig_to_mse(ri,max_dev,source_pos_single, accum_samples);              
@@ -117,7 +120,7 @@ for max_dev=0.5e-6 %0.1e-6:0.1e-6:0.5e-6
     
     %plot a specific hydrophone configuration
     if plot_Hconfig == 1
-        figure(7)
+        figure
 
         %4 hydro spiral from nose to the back
         ri = [0.2   0.1    0      -0.1;
@@ -147,7 +150,7 @@ for max_dev=0.5e-6 %0.1e-6:0.1e-6:0.5e-6
     %----------------------------------------------------------------------
     %plot MSE and deviation in azimuth and elevation for every configuration
     if plot_mse_deviation == 1
-        figure(n_error_test)
+        figure
 
         subplot(1,3,1)
         plot(mse)

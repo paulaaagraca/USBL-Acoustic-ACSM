@@ -11,12 +11,12 @@ clear
 plot_Hconfig = 0;
 plot_mse_deviation = 0;
 plot_dev_overlaid = 0;
-plot_vec_Restimations = 1;
+plot_vec_Restimations = 0;
 
-rotation_ptcloud = 1;
+rotation_ptcloud = 0;
 
 %-----parameters-----------------------------------------------------------
-accum_samples = 10000;   %nº accumulated samples w/ random error for same position
+accum_samples = 1000;   %nº accumulated samples w/ random error for same position
 max_dev = 0.5e-6;      %max deviation of injected error in time differences
                        %0.5us => [-2.5º,2.5º]
 %--------------------------------------------------------------------------
@@ -46,7 +46,7 @@ ri = [q   0   0    0    0    0   0    0    0  ;
       0   w   -w   0    0    e   -e   e    -e];
 %-------------------------------------------------------------------------- 
 
-s = [1000;0;0]; %single source position for test
+s = [10;10;10]; %single source position for test
 
 [rownum,n_samples] = size(s); %number of samples to compute
 
@@ -94,6 +94,8 @@ for gen_test=1:10
 
                     %calculate real spherical coordinates
                     [real_azimuth,real_elevation,real_norm] = cart2sph(s(1,i),s(2,i),s(3,i));
+                     real_azimuth_d = real_azimuth*180/pi;
+                     real_elevation_d = real_elevation*180/pi;
 
                     for k=1:accum_samples
 
@@ -231,25 +233,25 @@ for gen_test=1:10
 
     cnt_comb = 1;
     
-    %************__EXTRACT (MEAN) BEST CONFIGURATION__*************************
-    %best MSE
-    [sets_config_mse] = extract_mean_best_config(gen_hconfig_best_mse,index_view);
-    
-    %best azimuth deviation
-    [sets_config_d_az] = extract_mean_best_config(gen_hconfig_best_az,index_view);
-    
-    %best elevation deviation
-    [sets_config_d_el] = extract_mean_best_config(gen_hconfig_best_el,index_view);
-    
 end
+
+%************__EXTRACT (MEAN) BEST CONFIGURATION__*************************
+%best MSE
+[sets_config_mse] = extract_mean_best_config(gen_hconfig_best_mse,index_view);
+
+%best azimuth deviation
+[sets_config_d_az] = extract_mean_best_config(gen_hconfig_best_az,index_view);
+
+%best elevation deviation
+[sets_config_d_el] = extract_mean_best_config(gen_hconfig_best_el,index_view);
 
 % -----------------------------------------------------------------
 %mean MSE of each configuration
-mean_mse_per_config = gen_mse/col_hcomb;
+mean_mse_per_config = gen_mse/gen_test; %col_hcomb
 %mean azimuth deviation of each configuration
-mean_dev_azimuth_per_config = gen_dev_azimuth/col_hcomb;
+mean_dev_azimuth_per_config = gen_dev_azimuth/gen_test;
 %mean elevation deviation of each configuration
-mean_dev_elevation_per_config = gen_dev_elevation/col_hcomb;
+mean_dev_elevation_per_config = gen_dev_elevation/gen_test;
 
 mse_view = zeros(1);
 dev_azimuth_view = zeros(1);
@@ -294,10 +296,15 @@ end
 ind_min_both_dev = index_view(ind_min_both_dev);
 
 
+pd_mse_view = min_mse_view;
+pa_dev_azimuth_view = dev_az_mse_view;
+pb_dev_elevation_view = dev_el_mse_view;
+pc_min_both_dev = min_both_dev;
+
 %//////////////////_PLOT OPTIONS_//////////////////////////////////////////
 %plot MSE and deviation in azimuth and elevation for every configuration
 if plot_mse_deviation == 1
-    figure
+    f2 = figure;
     
     subplot(1,3,1)
     plot(mean_mse_per_config)
@@ -306,7 +313,7 @@ if plot_mse_deviation == 1
     hold on
     plot(ind_min_mse_view,min_mse_view,'Marker','*','Color','g','MarkerSize',9)
     title('MSE');
-    xlabel('Test Number');
+    xlabel('Config Number');
     ylabel('MSE');
     
     subplot(1,3,2)
@@ -316,7 +323,7 @@ if plot_mse_deviation == 1
     hold on
     plot(ind_dev_az_mse_view,dev_az_mse_view,'Marker','*','Color','g','MarkerSize',9)
     title('Azimuth deviation');
-    xlabel('Test Number');
+    xlabel('Config Number');
     ylabel('Azimuth Deviation (deg)');
 
     subplot(1,3,3)
@@ -326,13 +333,15 @@ if plot_mse_deviation == 1
     hold on
     plot(ind_dev_el_mse_view,dev_el_mse_view,'Marker','*','Color','g','MarkerSize',9)
     title('Elevation deviation');
-    xlabel('Test Number');
+    xlabel('Config Number');
     ylabel('Elevation Deviation (deg)');
+    
+    %saveas(f2,'plots/plot-[10,10,10]-1000s-errors','jpg')
 
 end
 
 if plot_dev_overlaid == 1
-    figure
+    f1 = figure;
 
     plot(mean_dev_azimuth_per_config,'Color','b','LineWidth',0.5)
     hold on 
@@ -349,9 +358,11 @@ if plot_dev_overlaid == 1
     plot(ind_min_both_dev,min_both_dev,'Marker','d','MarkerFaceColor','c','MarkerEdgeColor','c','MarkerSize',7)
     
     legend('Dev Az', 'View Az', 'BestView Az','Dev El', 'View El', 'BestView El');
-    title('Deviation in Az and Elev');
-    xlabel('Test Number');
+    title('Deviation in azimuth and elevation');
+    xlabel('Configuration Number');
     ylabel('Deviation (deg)');
+    
+    %saveas(f1,'plots/plot-[10,10,10]-1000s-both','jpg')
 
 end
     
@@ -441,21 +452,27 @@ if plot_vec_Restimations == 1
         %------------
         figure
         subplot(1,3,1)
-        scatter(R_estimations_rott(1,:),R_estimations_rott(3,:))
+        scatter(R_estimations_rott(1,:),R_estimations_rott(3,:),5)
         xlabel('x');
         ylabel('z');
+        hold on
+        scatter(s_rott(1,1),s_rott(3,1),30,'g','filled')
         axis equal
         
         subplot(1,3,2)
-        scatter(R_estimations_rott(2,:),R_estimations_rott(3,:))
+        scatter(R_estimations_rott(2,:),R_estimations_rott(3,:),5)
         xlabel('y');
         ylabel('z');
+        hold on
+        scatter(s_rott(2,1),s_rott(3,1),30,'g','filled')
         axis equal
         
         subplot(1,3,3)
-        scatter(R_estimations_rott(1,:),R_estimations_rott(2,:))
+        scatter(R_estimations_rott(1,:),R_estimations_rott(2,:),5)
         xlabel('x');
         ylabel('y');
+        hold on
+        scatter(s_rott(1,1),s_rott(2,1),30,'g','filled')
         axis equal
         %------------
         
@@ -494,13 +511,13 @@ if plot_vec_Restimations == 1
      hold on
      scatter3(s(1,1),s(2,1),s(3,1),40,'b','filled')
      hold on
-     scatter3(0,0,0,40,'b','filled')
-     hold on
-     scatter3([ri(1,ce(1)) ri(1,ce(2)) ri(1,ce(3)) ri(1,ce(4))],[ri(2,ce(1)) ri(2,ce(2)) ri(2,ce(3)) ri(2,ce(4))], [ri(3,ce(1)) ri(3,ce(2)) ri(3,ce(3)) ri(3,ce(4))],40,'k','filled')
+    % scatter3(0,0,0,40,'b','filled')
+    % hold on
+    % scatter3([ri(1,ce(1)) ri(1,ce(2)) ri(1,ce(3)) ri(1,ce(4))],[ri(2,ce(1)) ri(2,ce(2)) ri(2,ce(3)) ri(2,ce(4))], [ri(3,ce(1)) ri(3,ce(2)) ri(3,ce(3)) ri(3,ce(4))],40,'k','filled')
      
-%      xlim([560 660])
-%      ylim([150 250])
-%      zlim([-1100 -900])
+     xlim([560 660])
+     ylim([150 250])
+     zlim([-1100 -900])
 
      title('Estimated source position w/ injected error');
      xlabel('x');
@@ -509,5 +526,5 @@ if plot_vec_Restimations == 1
 end
 %end
 
-save('../study_Cramer-Rao/plots/clouds/estim_[1000,0,0]_1249_10000samp.mat', 'R_estimations_rott', '-mat')
+%save('../study_Cramer-Rao/plots/clouds/estim_[1000,0,0]_1249_10000samp.mat', 'R_estimations_rott', '-mat')
 

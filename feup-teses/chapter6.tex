@@ -1,21 +1,370 @@
 \chapter{Dynamic reconfigurable configuration method}  \label{chap:study}
 %Experiments on Localization Reliability and Improvement
 
+Having studied the estimator's behavior for several different configurations and conditions, there is still uncertainty about the best performance it can achieve. In the considered system, the hydrophone configuration has a decisive role on the achieved precision, as demonstrated. Therefore, a way to optimize the system's estimation would be to choose, for each position of the acoustic source, the configuration that returns the best estimation and thus the one that should be employed.
+
+In a field scenario where a vehicle is searching for an acoustic transmitter, as it is navigating and readjusting its trajectory, the relative direction that is being estimated in real time is changing. Therefore, the system's performance can vary and arises the necessity of having different angles of vision from the hydrophones to the target. To resolve this issue, the proposed method assumes that the used USBL system integrates more than four hydrophones placed in known positions. This way, it is possible to dynamically reconfigure which four hydrophones are used at a time leading to an estimation that is optimal for the available sensors. 
+
+Another possibility is to determine through the same techniques which configuration of four hydrophones, tested in various positions along the vehicle, is the overall best for short and long range estimation. This can lead to a moderate compromise of the estimate precision, however decreases the number sensors that are employed and therefore the cost of the system.
+
+This chapter is dedicated to explaining the methodological approach, the main findings and conclusions that were driven from the formulated dynamic reconfigurable configuration method.
+
+\note{descrever mais detalhadamente os temas que vao ser abordados no capitulo}
+
+\note{- tendo em conta a posição do espaço, escolher a melhor configuração\\
+	- qual a melhor configuração (ou duas) para curto e longo alcance?\\
+	- tendo em conta a configuração qual é o local no espaço que consegue melhor resultados? (cramer rao)}
+
+\section{Monte Carlo Approach} \label{sec:config-perf}
+
+The developed algorithm serves as a tool to determine which is the best available hydrophone configuration for a certain target position. This approach uses a Monte Carlo method which is useful to solve problems that are deterministic in nature through repetition of and experiment with random parameter(s). Additionally,it makes use of the previously developed estimator, which is comprehensively explained in \ref{subsec:estimator}, to estimate the target position for each sensor configuration.
+		
+For this experiment, it is considered a total of nine hydrophones, whose positions are contained in $matrix_{r_{i}}$, defined by table \ref{tab:config-9h}. Each column expresses the coordinates of each hydrophone, $r_i$, where the value of $x_i$ is in the first row, the value of $y_i$ in the second row and the value of $z_i$ in the third row. Additionally, $q = 0.1$, $w = 0.1$ and $e = \frac{ \sqrt{2}}{2} * w$.
+
+\begin{table}[!htbp] %use H to adjust
+	\begin{center}
+		\begin{tabular}{c | c c c c c c c c c}
+			\toprule
+			& r1 & r2 & r3 & r4	& r5 & r6 & r7 & r8	& r9 \\ \hline 
+			\multirow{1}{0.5em}{x} 
+			& q & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+			\midrule 
+			\multirow{1}{0.5em}{y} 
+			& 0 & 0 & 0 & w & -w & e & e & -e & -e\\
+			\midrule 
+			\multirow{1}{0.5em}{z} 
+			& 0 & w & -w & 0 & 0 & e & -e & e & -e \\
+			\bottomrule 
+		\end{tabular}
+		\caption{Position coordinates for an implementation with 9 hydrophones}
+		\label{tab:config-9h}
+	\end{center}
+\end{table}
+
+These positions are arranged so that they can mimic a possible deployment in an AUV, as represented in figure \ref{fig:9h-config}, where hydrophone $r_1$ is placed in front of the vehicle and hydrophones $r_2$ to $r_9$ form a circle with a $10 cm$ radius around the vehicle.
+
+\begin{figure}[!htbp]
+	
+	\makebox[\textwidth][c]{\includegraphics[width=0.8\textwidth]{figures/9h-config}}
+	\captionsetup{justification=centering,margin=2cm}
+	\caption{Hydrophone positions for an implementation with 9 hydrophones}
+	\label{fig:9h-config}
+\end{figure}
+
+Since the used configuration has to be three dimensional, it is defined that hydrophone $r_1$ always integrates the configuration as it is the only one in a different plan. Accordingly, the number of possibilities is combinations of three out of eight, $C(8,3)$, making up a total of 56 combinations. Each of these configurations are associated with a number from 1 to 56 and the hydrophones that integrate each of them are outlined in table \ref{tab:long} for consultation when necessary.
+
+Having the system presented, the algorithm will be explained next. For the sake of clarity, the algorithm was outlined in pseudo code and separated into two main parts, where \ref{alg:alg1} is integrated in \ref{alg:alg2}.
+
+\begin{algorithm}
+	\setstretch{1.3} 	%increase space between lines
+	%\algsetup{linenosize=\scriptsize} 	%adapts font size
+	\scriptsize		%makes it smaller, idk
+	\caption{Determines the average azimuth errors, elevation errors and MSE for a set of hydrophone configurations}
+	\label{alg:alg1}
+	\begin{algorithmic}[1]
+		\FOR{\texttt{all k configurations}} %k = 1 \textbf{to} n\_config
+		\FOR{\texttt{all i estimation repetition}} %i = 1 \textbf{to} accum\_samples
+		\STATE\texttt{$estimator(s, config(k), error)$}
+		\COMMENT{returns estimate in Cartesian and spherical coordinates}
+		\STATE \texttt{accum\_estimate(i) $\gets$ result of the estimator in each repetition} 
+		\STATE \texttt{accum\_error\_azimuth(i) $\gets$ azimuth error in each repetition} 
+		\STATE \texttt{accum\_error\_elevation(i) $\gets$ elevation error in each repetition} 
+		\ENDFOR
+		\STATE $mean\_estimate \gets \dfrac{accum\_estimate}{accum\_samples}$
+		%\newline
+		%\STATE \texttt{Compute the mean and standard deviation of accum\_error\_elevation and accum\_error\_azimuth}
+		\STATE
+		\STATE $deviation\_azimuth(config) = std(accum\_error\_azimuth);$
+		\STATE $deviation\_elevation(config) = std(accum\_error\_elevation);$
+		%\newline
+		\STATE $error\_azimuth(config) = mean(accum\_error\_azimuth);$
+		\STATE $error\_elevation(config) = mean(accum\_error\_elevation);$
+		\STATE
+		\STATE $mse(config) = \sqrt{\rule{0pt}{8pt}error\_azimuth(config)^{2} + error\_elevation(config)^{2}};$
+		%				\newline
+		%				\IF {\texttt{$min\_mse > mse(config)$}} 
+		%				\STATE	$min\_mse\_config = config$  
+		%				\ENDIF
+		%				\IF {\texttt{$min\_error\_azimuth > deviation\_azimuth(config)$}} 
+		%				\STATE $min\_azimuth\_config = config$  
+		%				\ENDIF
+		%				\IF {\texttt{$min\_error\_elevation > deviation\_elevation(config)$}} 
+		%				\STATE $min\_elevation\_config = config$  
+		%				\ENDIF
+		\ENDFOR
+	\end{algorithmic}
+\end{algorithm}
+
+Algorithm \ref{alg:alg1} is dedicated to computing the average azimuth error, elevation error and MSE for each of the $k = 56$ hydrophone configuration, in order to understand which of them achieves the minimum deviations when estimating a specific position. In order to do so, for each possible hydrophone configuration, the chosen acoustic source position $s$ was estimated $i = 1000$ times (line 3), using the developed estimator, with an injected error to the TDoA that follows a Gaussian distribution with zero mean and a configurable variance of $\sigma^{2}$, i.e., $e_i \sim \mathcal{N}(0,\,\sigma^{2})$. The result of this repetition would be an estimate cloud around the absolute $s$ position, which indicates the estimation variation achieved by a certain configuration for a specific position in space. At each stage of the repetition, the estimate is accumulated and the errors of azimuth and elevation are calculated, similarly  to the process described in the precision analysis \ref{subchap:precision-analy} of the estimator. Therefore, after computing all estimation repetitions, it is possible to extract four essential parameters that define the quality of the estimation for each configuration: a mean estimate (line 8); the azimuth and elevation standard deviations (lines 10 and 11); the azimuth and elevation estimation errors (lines 12 and 13); the MSE (line 15).
+
+Finally, using the obtained parameters it is already possible to determine three configurations that lead to the best estimation regarding MSE, azimuth deviation and elevation deviation. However, there are two main issues that this simple algorithm does not take into account:
+
+\begin{enumerate}
+	
+	\item  For the considered system conditions, the error that is introduced is sufficient to originate different results every time the same position $s$ is tested with the same injected error.
+	
+	\item Assuming that the hydrophone system is deployed in an AUV, it is expected that every hydrophone has a blind spot, where the acoustic source can be located. Even though the transmitted signals could still be received by these hydrophones, they would be distorted and could lead to misinformation so they should not be considered. Consequently the hydrophones that do not have line of sight to the transmitter should be disregarded as well. 
+	
+\end{enumerate}
+
+In order to resolve both these problems, a second part of logic was developed, which is translated in pseudo code \ref{alg:alg2}.
+
+In order to turn this mechanism more robust and solve the first issue, it is considered that the experiment of algorithm 1 has to be reiterated a defined number of times to obtain coherent and conclusive answers. Having said this, algorithm \ref{alg:alg2} begins with a loop that reiterates $j = 10$ times the logic previously explained. Addressing the second issue, the \textit{line\_of\_sight} function (line 7) is called, serving as filter to determine which hydrophones have line of sight to the estimated position. The mathematical definitions and conditions included in this function as well as the inputs and outputs are better clarified in the next subsection \ref{subsec:lineofsight}. Thereafter, all the configurations that have full line of sight to the transmitter are extracted. Meanwhile, the azimuth deviations, elevation deviations and MSE are accumulated in each experiment reiteration (line 8 to 10) so that it is possible to obtain the definitive mean of these parameters for each configuration (line 12 to 14). At this stage, it is possible to know already which are the configurations that are considered to achieve the minimum errors in each $j$ reiteration and how many times each of them are chosen. However, these are still not filtered thus they can contain hydrophones that have not line of sight to the acoustic source. Next, only the configuration with full LOS are extracted and three matrices are formed with the azimuth deviations, elevation deviations and MSE of these configurations. Having all the final parameters calculated and filtered, the overall best configurations for each of the chosen parameters are given by the minimum of the matrices that contain said parameter (line 19 to 21), i.e. for all configurations with full LOS:
+
+\begin{itemize}
+	
+	\item  The minimum obtained MSE corresponds to the configuration that more precisely estimates the position $s$ in terms of MSE;
+	
+	\item The minimum obtained azimuth deviation corresponds to the configuration that more precisely estimates the position $s$ in terms of azimuth;
+	
+	\item The minimum obtained elevation deviation corresponds to the configuration that more precisely estimates the position $s$ in terms of elevation.
+	
+\end{itemize}
+
+\begin{algorithm}
+	\setstretch{1.3} 	%increase space between lines
+	%\algsetup{linenosize=\scriptsize} 	%adapts font size
+	\scriptsize		%makes it small, idk
+	\caption{Determines the overall best configuration for a specific position estimation considering: \\- multiple full experiments (Algorithm 1); \\ - only hydrophones with line of sight to the target.}
+	\label{alg:alg2}
+	\begin{algorithmic}[1]
+		\FOR{\texttt{all j experiment reiterations}} %j = 1 \textbf{to} n\_test
+		\STATE {\texttt{**************************}}
+		\STATE {\texttt{*** INSERT ALGORITHM 1 ***}}
+		\STATE {\texttt{**************************}}
+		\STATE
+		\STATE $line\_of\_sight(mean\_estimate, matrix_{r_{i}})$
+		\COMMENT{returns which hydrophones have line of sight to the target}
+		%\STATE {\texttt{Accumulates MSE, azimuth and elevation errors for each configuration in each test}} 
+		\STATE
+		\STATE \texttt{$reit\_mse = reit\_mse + mse$ }
+		\STATE \texttt{$reit\_dev\_azimuth = reit\_error\_azimuth + deviation\_azimuth$ } 
+		\STATE \texttt{$reit\_dev\_elevation = reit\_error\_elevation + deviation\_elevation$} 
+%		\STATE \texttt{reit\_MSE(j) $\gets$ MSE of all configurations in each reiteration} 
+%		\STATE \texttt{reit\_error\_azimuth(j) $\gets$ azimuth error of all configurations in each reiteration} 
+%		\STATE \texttt{reit\_error\_elevation(j) $\gets$ elevation error of all configurations in each reiteration} 
+		%\STATE {\texttt{Accumulates the best configuration obtained for each round of tests j}}
+		\ENDFOR
+		%\STATE {\texttt{Computes mean MSE, deviation of azimuth and elevation for each configuration}}
+		\STATE \texttt{$mean\_MSE = reit\_mse \div j$ }
+		\STATE \texttt{$mean\_dev\_azimuth = reit\_dev\_azimuth \div j$ } 
+		\STATE \texttt{$mean\_dev\_elevation = reit\_dev\_elevation \div  j$} 
+		\STATE
+		\STATE {\texttt{Extract the configurations that contain only hydrophones with line of sight}}  
+		\STATE {\texttt{Form matrix with errors of only the configurations with full line of slight}}
+		\STATE
+		\STATE $[best\_config\_for\_mse,\; \; overall\_min\_mse] = min(overall\_mse)$
+		\STATE $[best\_config\_for\_azimuth,\; \; overall\_min\_dev\_azimuth] = min(overall\_dev\_azimuth)$
+		\STATE $[best\_config\_for\_elevation,\; \; overall\_min\_dev\_elevation] = min(overall\_dev\_elevation)$
+	\end{algorithmic}
+\end{algorithm}
+
+Additionally, it is possible to obtain the best configuration in terms of azimuth and elevation simultaneously, by computing the mean between the deviation of azimuth and elevation in each of the selected configurations. The minimum value obtained corresponds to the configuration which can decrease more the deviation in both parameters at the same time.
+
+\subsection{Line of sight definition} \label{subsec:lineofsight}
+
+As briefly explained before, when considering a set of hydrophones placed in the surface of an AUV, there will be blind regions for each of the hydrophones. Nonetheless, when an acoustic source is positioned in a blind region of an hydrophone, it still can receive a transmitted signal through reflections on path objects or reverberation in the AUV's surface Since these signals would be distorted from the original, they could lead to misinformation after the processing if they were to be considered. For this reason, it is essential to exclusively consider configurations whose hydrophones have line of sight (LOS) to the transmitter. 
+
+In the present application, this feature is executed through function $line\_of\_sight$, which outputs a vector containing all the hydrophones that have line of sight to the inputted transmitter position, $mean\_estimate$, from the considered set $matrix_{r_{i}}$. 
+
+In order to define which hydrophones have LOS to a specific position in space, a region was defined for each hydrophone as its LOS region, $ls_i$. Thus, three simplifications were initially considered: 
+\begin{itemize}
+	\item The model for the vehicle is an approximation to a typical shape of an AUV using geometric shapes, as represented in \ref{fig:auv-geo}, composed by a cylinder as the body with $2*w$ of diameter and a cone in the front with a height of $q$;
+	
+	\begin{figure}[!htbp]
+		\makebox[\textwidth][c]{\includegraphics[width=0.4\textwidth]{figures/auv-geo}}
+		\captionsetup{justification=centering,margin=2cm}
+		\caption{Model of AUV used to calculate the LOS region}
+		\label{fig:auv-geo}
+	\end{figure}
+	
+	\item The regions for a $x \leq 0$ are defined as if the hydrophones were flat in the vehicle's surface, which leads to a simplified definition of the LOS region;
+	
+	\item Since hydrophone $r_1$ is integrated in every configuration, there is no necessity of defining its LOS region.
+
+\end{itemize}
+
+Having these relations into account, the LOS regions are then defined separately for $x \leq 0$ and $x > 0$. When $x \leq 0$, the second simplification previously mentioned is applied so all $ls_i$ are defined as the region greater/less or equal than the tangential to the position of hydrophone $i$ in plane yz. These tangential equations are defined as \ref{eq:los-s2} to \ref{eq:los-s9}.
+
+\begin{eqnarray}
+ls_2 \gets x \leq 0 \; \;  \wedge  \; \; z > r_{2_z} \\
+\label{eq:los-s2}
+ls_3 \gets x \leq 0 \; \;  \wedge  \; \; z < r_{3_z} \\
+\label{eq:los-s3}
+ls_4\gets x \leq 0 \; \;  \wedge  \; \; y > r_{4_y}  \\
+\label{eq:los-s4}
+ls_5\gets 	x \leq 0 \; \;  \wedge  \; \; y < r_{5_y} \\
+\label{eq:los-s5}
+ls_6 \gets	x \leq 0 \; \; \wedge  \; \; z \; \geq \; - y + w \sqrt{2} \\
+\label{eq:los-s6}
+ls_7 \gets	x \leq 0 \; \; \wedge  \; \; z \; \leq \; y - w \sqrt{2} \\
+\label{eq:los-s7}
+ls_8 \gets x \leq 0 \; \; \wedge  \; \;  z \; \geq \; y + w \sqrt{2} \\
+\label{eq:los-s8}
+ls_9 \gets 	x \leq 0 \; \; \wedge  \; \;  z \; \leq \; - y - w \sqrt{2}
+\label{eq:los-s9}
+\end{eqnarray}
+
+By evaluating these equations, it is possible to infer that the LOS regions for $x \leq 0$ intersect each other, as illustrated in figure \ref{fig:los-color-s0}. The projection is correspondent to the yz plane with an inverted yy axis, in accordance with the previously presented model of the USBL system. Additionally, each colored line corresponds to the LOS region covered by the hydrophone with the same color. For instance, if a transmitter is located in $(-10,-10,-10)$, by analysis of the schematic it is observable that this position is covered by $ls_3$, $ls_5$ and $ls_9$, thus in line of sight of hydrophones 3,5 and 9.
+
+\begin{figure}[!htbp]
+	\makebox[\textwidth][c]{\includegraphics[width=0.6\textwidth]{figures/los-color-regions-back-crop}}
+	\captionsetup{justification=centering,margin=2cm}
+	\caption{Line of sight regions in plane yz for x < 0}
+	\label{fig:los-color-s0}
+\end{figure}
+
+Analogously, when $x > 0$, all $ls_i$ are defined as the region greater/less or equal than the tangential to the position of hydrophone $i$ in planes xz or xy, depending on the hydrophone location. Dealing with the hydrophones positioned in the yy and zz axis, $r_2$, $r_3$, $r_4$ and $r_5$, it is possible to directly formulate equations that help defining $ls_2$, $ls_3$, $ls_4$ and $ls_5$ since the tangent plane to these hydrophones is perpendicular to referential planes. However, when considering hydrophones $r_6$, $r_7$, $r_8$ and $r_9$, which are not positioned in any referential axis, the tangential plane which passes through the hydrophone and the front limit of the cone is not parallel to any of the referential planes xy, xz or yz. Therefore, the equations that could define these planes require a rotation of the referential axis. In order to counter this issue, since the shape of the model projected in the yz plane is a circle , if hydrophones $r_6$, $r_7$, $r_8$ and $r_9$ are rotated a $45^{\circ}$ angle around the xx axis, they can become coincident with the positions of $r_2$, $r_4$, $r_5$ and $r_3$ respectively. Additionally, when considering this rotation, the position of the transmitter would also be rotated the same angle to maintain their relative positions. Overall, the used equations are defined by relations \ref{eq:los-b2} to \ref{eq:los-b5}, where the regarded $x,y,z$ coordinates are the original transmitter position for $ls_2$, $ls_3$, $ls_4$, $ls_5$, and the rotated transmitter position for $ls_6$, $ls_7$, $ls_8$, $ls_9$.
+
+\begin{eqnarray}
+ls_2, \;  ls_6  \gets x > 0 \; \;  \wedge  \; \; z \geq -\frac{w}{q} x + w  \\
+\label{eq:los-b2}
+ls_3, \;  ls_9 \gets x > 0 \; \;  \wedge  \; \; z \leq \frac{w}{q} x - w  \\
+\label{eq:los-b3}
+ls_4, \;  ls_7 \gets x > 0 \; \;  \wedge  \; \; y \geq -\frac{w}{q} x + w   \\
+\label{eq:los-b4}
+ls_5, \;  ls_8 \gets x > 0 \; \;  \wedge  \; \; y \leq \frac{w}{q} x - w  \\
+\label{eq:los-b5}
+\end{eqnarray}
+
+After evaluating these equations and the limiting planes that they form, the projected regions of LOS for $r_2$, $r_3$, $r_4$ and $r_5$ are illustrated in \ref{fig:los-color-b0}, where their intersection is evident. The LOS regions of $r_2$, $r_3$, $r_4$ and $r_5$ are naturally similar to these, with an additional rotation of $45^{\circ}$ around the xx axis.
+
+\begin{figure}[!htbp]
+	\makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{figures/projections-los}}
+	\captionsetup{justification=centering,margin=2cm}
+	\caption{Line of sight regions in plane yz for x $\geq$ 0}
+	\label{fig:los-color-b0}
+\end{figure}
+
+In summary, it is possible to deduce that there are a larger quantity of different configurations that cover the space for $x>0$ than for $x \leq 0$ due to the model of the AUV and the considerations described in the course of this subsection. Therefore it is expected a better estimation for positions of the acoustic source with an azimuth angle between $-90^{\circ}$ and $90^{\circ}$.
+%-------------------------------------------------------------------------
+%\subsection{Limitations of the system}
+
+%- considerations of the line of sight (mathematical approximations) - line of sight has to be defined for the model considered; if format changes, it has to be remade
+%-------------------------------------------------------------------------
+\subsection{Simulation results}
+
+\note{add real estimations and findings of best configurations\\
+	take a position and calculate best configuration and try to justify why it can be; show second  and third best and explain the difference is/is not substantial}
+
+For the purpose of demonstrating the functionality of the implemented system, various acoustic source positions were tested and the results analyzed.
+
+The first demonstration evaluates the achieved MSE, azimuth deviation and elevation deviation for $s(10,10,10)$. After simulating, plot \ref{fig:errors-101010} compiles the results, where the obtained parametric errors are illustrated for each of the 56 formulated configurations. Additionally, the configurations which are marked with a red circle are the ones whose hydrophones all have full line of sight to the transmitter and the green star indicates which is the configuration that achieves the lowest error. The results of this experiment are aggregated in table \ref{tab:montecarlo-best1}. For the present case, the hydrophones considered to have line of sight to the target are $r_2$, $r_4$, $r_6$, $r_7$ and $r_8$. The configuration with lowest MSE and azimuth deviation is number 8, composed by hydrophones $r_1$, $r_2$, $r_4$ and $r_6$, which are the directly closer to the target. The configuration that originates lowest elevation deviation is number 19, composed by $r_1$, $r_2$, $r_7$ and $r_8$, which maximizes the baseline of the sensors with line of sight.
+
+\begin{figure}[!htbp]
+	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth,height=0.45\textheight]{figures/plot-[10,10,10]-1000s-errors}}
+	\captionsetup{justification=centering,margin=2cm}
+	\caption{Errors obtained for all configurations when estimating position (10,10,10)}
+	\label{fig:errors-101010}
+\end{figure}
+
+Additionally, if the azimuth and elevation deviations are evaluated simultaneously, then the obtained plots can be overlaid to a clear comparison between results. Figure \ref{fig:both-101010} represents this situation where, as the label indicates, the azimuth deviation in degrees is represented by the blue line, the pink line is the elevation deviation in degrees, the red and green circles represent the configurations with line of sight to the target and the green star indicates, once again, the configurations which achieve the minimum deviations in azimuth and elevation. Additionally, the cyan diamond reveals which of the configurations leads to the minimum mean between the azimuth and the elevation deviations. In this case, this corresponds to configuration number 53 which reaches a mean deviation of 0.385 degrees. 
+
+\begin{figure}[!htbp]
+	\makebox[\textwidth][c]{\includegraphics[width=0.9\textwidth]{figures/plot-[10,10,10]-1000s-both}}
+	\captionsetup{justification=centering,margin=2cm}
+	\caption{Overlaid azimuth and elevation deviations for all configurations when estimating position (10,10,10)}
+	\label{fig:both-101010}
+\end{figure}
+
+In a second experiment, the position $s(100,100,100)$ is tested, which has the same azimuth and elevation angles as the previous position and a norm 10 times larger. For this case, the error range of azimuth and elevation estimation is approximated the same and the estimation of the norm presents an error approximately 10 times larger. Additionally, as expected the configurations that lead to the lowest errors are the same as for the first experiment.
+
+A set of tests were executed in order to compare the performance of various positions estimation and to extract behavior patterns for the chosen configurations. The collected data is present in table \ref{tab:montecarlo-best1}, where the position of the transmitter is given in Cartesian coordinates by ($s_x$, $s_y$, $s_z$) and for each of the performance parameters it is presented the obtained best configuration number and the minimum error achieved by it. It should also be noted that the notation $0_{+}$/ $0_{-}$ indicates that for a theoretical position with the respective coordinate equal to zero it was returned an estimate which is slightly positive/negative, due to the injected error.
 
 
-This chapter is dedicated to explaining the methodological approach and conclusions that were driven from 
+\begin{table}[!htbp] %use H to adjust
+	\begin{center}
+		\begin{tabular}{ c c c |c c | c c | c c | c c }
+			\toprule
+			\multicolumn{3}{c|}{} & \multicolumn{2}{c|}{\textbf{Azimuth}} & \multicolumn{2}{c|}{\textbf{Elevation}} & \multicolumn{2}{c|}{\textbf{Azimuth+Elevation}} & \multicolumn{2}{c}{\textbf{MSE}}   \\
+			\midrule
+			\multicolumn{1}{c}{$s_x$} & $s_y$ & $s_z$ & Config & Min  & Config & Min & Config & Min & Config & Min \\
+			\midrule
+			\multirow{1}{*}{10} & 10 & 10 & 8 & 0.377 & 19 & 0.278 &  53 & 0.385 & 8  & 0.434\\
+			\midrule
+			\multirow{1}{*}{-10} & -10 & -10 & 30 & 2.412 & 30 & 1.196 &  30 & 1.804 & 30  & 2.142\\
+			\midrule
+			\multirow{1}{*}{$0_{+}$} & -10 & -10 & 14 & 2.058 & 14 & 0.431 & 14 & 1.244  & 14  & 1.672 \\
+			\midrule
+			\multirow{1}{*}{100} & $0_{-}$ & $0_{-}$ & 47 & 0.177 & 32 & 0.177  & 11 & 0.284  & 11  & 0.330 \\
+			\midrule
+			\multirow{1}{*}{15} & -10 & 5 & 48 & 0.364 & 3 & 0.218 & 27 & 0.346 & 27 & 0.399 \\
+			\midrule
+			\multirow{1}{*}{$0_{+}$} & $0_{-}$ & 100 & 37 & 52.572  & 39  & 0.381 & 37  & 26.479  & 39 & 32.602 \\
+			\bottomrule 
+		\end{tabular}
+		\caption{Results of Monte Carlo simulation}
+		\label{tab:montecarlo-best1}
+	\end{center}
+\end{table}
 
-\section{Methodological approach} \label{sec:config-perf}
+Some conclusions can be taken upon the analysis of these results: 
+\begin{itemize}
+	\item The configurations that achieve the overall minimum errors tend to integrate the LOS hydrophones that attain the larger baseline between them;
+	
+	\item Transmitter positions that return a higher number of LOS hydrophones, have more possible configurations to choose from and therefore can be more optimized, presenting the lowest errors;
+		
+	\item The points directly behind the AUV that cover positions with $y$ and $z$ in the range [-w,w], are not contained in any line of sight region;
+	
+	\item When the transmitter positions have $x \leq 0$, they are in line of sight of less hydrophones than for $x > 0$, so there are fewer possible configurations and the returned best option for the various parameters are more consistent. Consequently, the returned minimum errors are usually higher than for $x > 0$;
+	
+	\item Transmitter positions that are located near the yy axis, almost in parallel with the circle of hydrophones, are usually covered by only four LOS regions, which correspond to the sensors that are directly closer to the target;
+	
+	\item For elevation angles close to $90^{\circ}$ and $-90^{\circ}$, the azimuth deviation is much larger than at any other position as expected, since in that region the azimuth angle is more influenced by the injected errors leading to increased deviations.
 
-The
+\subsection{Optimal solution based on range}
 
-- tenho sistema que estima os MSE, erro de azimute e elevação, para certas configuração consegue-se perceber padroes nos erros (e.g. erro aumenta com afastamento da source -> ao longe variações pequenas de angulo podem indicar deslocação da estimação grande )
-\\
-- de entre 8 hidrofones, escolher sempre 3 (+1 no nariz) que minimizam o erro de estimação
-\\
-- Configurações com vista direta: seccionar campo de visão para cada hidrofone
-\\
-- aumenta o ângulo de visão para posições no espaço (literature review de valores tipicos)
+After having a comprehensive understanding on the system that is capable of determining which is the best configuration of hydrophones to estimate a specific transmitter position, an alternate scenario can be explored. We now consider that the USBL system does not reconfigure which sensor configuration it should use in order to optimize the estimation  in real time. Instead, a performance study is conducted beforehand so that only two configurations are chosen to be deployed, corresponding to the ones which return the average best estimation of short and long range positions. This way, it would be possible to alternate which configuration is used depending solely on the distance to the target. Alternatively, it is also possible to define just one overall best configuration, in cases where there is the necessity of reducing the number of deployed hydrophones or if the obtained configurations do not have a significant difference in performance.
+
+For the development of this mechanism, there are some adjustments and similarities from the conditions established in the previous system. Firstly, it is assumed that the hydrophones are implemented in a structure shaped like an AUV with no physical form, thus all hydrophone positions have line of sight to any point in space. Additionally, the possibilities for the hydrophone locations are increased for a more extensive study. In order to simplify the arrangement of possible configurations, once again hydrophone $r_1$ is integrated in all configurations and a total of 24 possibilities are considered for the remnant three. These include the same 8 positions $r_2$ to $r_9$, established for the initial setup, to which are added positions $r_10$ to $r_25$ defined in table \ref{tab:config-25h}. This addition corresponds to two replicated circles from the initial one, that assume the same $y$ and $z$ coordinates but are deviated from each other a $d\_x$ equal to 20 centimeters. Figure \ref{fig:24h-config} illustrates all the considered possible positions for the hydrophone's deployment. Accordingly, the number of possibilities is not correspondent to combinations of three out of 24, $C(24,3)$, since these contain linearly dependent configurations when there are hydrophones' positions that only differ in the $x$ coordinate. Therefore, the total number of available combinations is 1512.
+
+\begin{table}[!htbp] %use H to adjust
+	\begin{center}
+		\makebox[\textwidth]{%
+		\begin{tabular}{c | c c c c c c c c c c c c c c c c}
+			\toprule
+			& r10 & r11 & r12 & r13	& r14 & r15 & r16 & r17	& r18 & r19 & r20 & r21 & r22 & r23 & r24 & r25 \\ \midrule 
+			\multirow{1}{0.5em}{x} 
+			& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 
+			& $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$\\
+			\midrule 
+			\multirow{1}{0.5em}{y} 
+			& 0 & 0 & w & -w & e & e & -e & -e
+			& 0 & 0 & w & -w & e & e & -e & -e\\
+			\hline 
+			\multirow{1}{0.5em}{z} 
+			& w & -w & 0 & 0 & e & -e & e & -e
+			& w & -w & 0 & 0 & e & -e & e & -e \\
+			\bottomrule 
+		\end{tabular}}
+		\caption{Additional coordinates for an implementation with 25 hydrophones}
+		\label{tab:config-25h}
+	\end{center}
+\end{table}
+
+\begin{figure}[!htbp]
+	\makebox[\textwidth][c]{\includegraphics[width=0.9\textwidth]{figures/24h-config}}
+	\captionsetup{justification=centering,margin=2cm}
+	\caption{Hydrophone possible positions for optimality study based on range}
+	\label{fig:24h-config}
+\end{figure}
+
+The applied algorithm is similar to the previously explained algorithms \ref{alg:alg1} and \ref{alg:alg2}, with the following variations:
+
+\begin{enumerate}
+	\item Similarly to the condition described in \ref{subchap:precision-analy}, the acoustic source positions, $s$, to be estimated are defined in spherical coordinates, where for each defined norm, the elevation component covers the interval [-90$^{\circ}$ to 90$^{\circ}$] in steps of one and, for each elevation value, the azimuth component covers the interval [-180$^{\circ}$, 180$^{\circ}$] in steps of one, forming partial spheres around the reference axis' origin. The norm covers a range between 1 and 10000 meters.
+	
+	\item An additional logical loop is added in algorithm \ref{alg:alg1} between lines 1 and 2, so that for each possible configuration all $s$ are estimated a number of $i = 1000$ iterations.
+	
+	\item the $line\_of\_sight$ function is no longer used, as it is considered that all hydrophones have line of sight to every position $s$.
+\end{enumerate}
+
+From here it is possible to analyze which are the best returned configurations, according to the chosen parameters MSE, azimuth deviation, elevation deviation and combined azimuth and elevation deviations. According to the numeric errors that are obtained, it is then possible to decide whether there is a single configuration that has evidently a better performance than the others or if there is a pair of configurations that can be used to obtain individually better estimations for short and long range.
+
+\subsubsection{Simulation results}
+
+
+\end{itemize}
 
 \section{Systematic comparison of geometric configurations performance} \label{sec:analysis_config_performance}
 
@@ -23,7 +372,7 @@ One of the aspects that can be studied to improve the localization estimation is
 
 The fundamental thought process and mathematical notation used in \ref{sec:cramer} are applied in the study that will be explained next.
 
-\subsection{Analytic Approach}  
+\subsection{Crámer-Rao bound}  
 
 Following the logical approach for the process, there are three essential steps that can be differentiated:
 
@@ -91,28 +440,7 @@ The final step is to calculate the determinant and find its relation to the volu
 
 \subsubsection{Uncertainty Sphere}
 
-Firstly, it is necessary to choose a set of hydrophone configurations to be tested by the developed simulation environment. Therefore, considering the geometry of an AUV it was formulated a matrix containing nine hydrophones, from which are chosen four at a time to compose the configuration. Matrix \ref{tab:config-9h} represents positions of the the nine hydrophones, where each column expresses the coordinates of each hydrophone, $r_i$, where the value of $x_i$ is in the first row, the value of $y_i$ in the second row and the value of $z_i$ in the third row. Since the configuration has to be three dimensional, it is considered that the hydrophone $r_1$, in the first column, always integrates the configuration since it is the only one in a different plan.
-
-\begin{table}[!htbp] %use H to adjust
-	\begin{center}
-		\begin{tabular}{|c| c c c c c c c c c|}
-			\hline
-			
-			& r1 & r2 & r3 & r4	& r5 & r6 & r7 & r8	& r9 \\ \hline 
-			\multirow{1}{0.5em}{x} 
-			& q & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
-			\hline 
-			\multirow{1}{0.5em}{y} 
-			& 0 & 0 & 0 & w & -w & e & e & -e & -e\\
-			\hline 
-			\multirow{1}{0.5em}{z} 
-			& 0 & w & -w & 0 & 0 & e & -e & e & -e \\
-			\hline 
-		\end{tabular}
-		\caption{Hydrophone geometric positions}
-		\label{tab:config-9h}
-	\end{center}
-\end{table}
+Firstly, it is necessary to choose a set of hydrophone configurations to be tested by the developed simulation environment. Therefore, considering the geometry of an AUV it was formulated a matrix containing nine hydrophones, from which are chosen four at a time to compose the configuration. 
 
 In order to evaluate the obtained determinant values, a way to give physical meaning to this result is to analyze it through the uncertainty volume. However, in an initial approach the ellipsoid was not considered and instead an uncertainty sphere was analyzed. The radius of the uncertainty sphere, $us$, is expressed as \ref{eq:det-sphere}, which translates the three ellipsoid axis into a single mean radius that originates a figure of the same volume.
 
@@ -125,7 +453,7 @@ By doing this, we know are looking to find the $argmin ur(d)$ which indicates th
 
 \subsubsection{Uncertainty Ellipsoid}
 
-- eigenvalues give the length of each axis of ellipsoid
+\note{eigenvalues give the length of each axis of ellipsoid}
 
 \begin{eqnarray}
 & u_{ellipsoid}(d) = \sqrt[2]{eig(I(d)^{-1})}
@@ -133,7 +461,7 @@ By doing this, we know are looking to find the $argmin ur(d)$ which indicates th
 \end{eqnarray}
 
 
-\subsection{Simulation Results}
+\subsection{Comparison with Monte Carlo simulation}
 
 All the concepts and notions before mentioned were applied in a simulated series of scenarios, where it is attempted to take conclusions about optimal positioning of the sensors for performance improvement. As such, the conditions of the simulation as well as the results of the study are hereinafter explained.
 
@@ -149,7 +477,6 @@ As mentioned before, the key to evaluate the performance when adopting this meth
 
 
 ... Layout some results ... 
-\\
 \\
 Ideias:
 \\
@@ -170,4 +497,12 @@ Ideias:
 \\
 plot do raio de incerteza para todas as posições no espaço de uma certa configuração
 
-\subsubsection{Conclusions}
+\note{plot da nuvem de pontos e eigen vectors sobrepostos}
+\note{comparar best configuration for short and long range}
+
+\note{analyze plane wavefront solution for estimator somwhere}
+
+\section{Conclusions}
+
+\note{-planar wavefront is more simillar to cramer rao for long range source position estimation (discards the non linear components as cramer rao, has some limitations)\\
+- cramer rao and monte carlo give different results because my estimator contains non linear components}
