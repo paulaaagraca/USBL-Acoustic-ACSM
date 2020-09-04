@@ -1,4 +1,4 @@
-function [max_det, min_det, std_det, pos_max_det, pos_min_det,eig_value,eig_vector] = fisher(ri,s)
+%function [max_det, min_det, std_det, pos_max_det, pos_min_det,eig_value,eig_vector] = fisher(ri,s)
 %--------------------------------------------------------------------------
 % Description: For a certain sensors configuration and a known acoustic
 % source positions matrix, it is calculated the Fisher Information Matrix 
@@ -10,15 +10,15 @@ function [max_det, min_det, std_det, pos_max_det, pos_min_det,eig_value,eig_vect
 %--------------------------------------------------------------------------
 % Author : Paula Graça (paula.graca@fe.up.pt), June 2020
 %--------------------------------------------------------------------------
-%clear
+clear
 
 %------options-------------------------------------------------------------
-plot_FIMdet_3view = 0; %plot fisher matrix determinant vs the azimuth and elevation
-plot_FIMdet = 1; %plot fisher matrix determinant vs the azimuth and elevation
+plot_FIMdet_3view = 1; %plot fisher matrix determinant vs the azimuth and elevation
+plot_FIMdet = 0; %plot fisher matrix determinant vs the azimuth and elevation
 plot_eigen = 0;  %plot maximum eigen value for each position
-not_function = 0;%use script not as a function(note: if 1,comment first line, 
+not_function = 1;%use script not as a function(note: if 1,comment first line, 
                                                          % uncomment 'clear')
-single_position = 1; %use single testing source position
+single_position = 0; %use single testing source position
 %--------------------------------------------------------------------------
 
 % Sound speed
@@ -28,18 +28,22 @@ cs = 1500;
 t0 = 0;
 
 if not_function == 1
-    w = 0.2;
+    w = 0.1;
     e = sqrt(2)/2 * w;
 
     %Sensors' configuration [r1 r2 r3 r4];
     %r1 -> front; r2 -> left; r3 -> right; r4 -> tcop;
-%     ri = [0.4    0       0       0;
-%           0      e       -e      0;
-%           0      -e      -e      w];
-%       
-%     ri = [2    0       0         0;
-%           0      e       -e      0;
-%           0      -e      -e      -w];
+% ri = [0.02  0.02   0      0;
+%       0     0      0.1    -0.1;
+%       0.1   -0.1   0      0];
+% %__B__  
+% ri = [0.1  0.1   0      0;
+%       0     0      0.1    -0.1;
+%       0.1   -0.1   0      0];
+%__C__  
+ri = [0.1  0     0     0;
+      0    0    -e     e;
+      0    0.1  -e    -e];  
 end
 %--------------------------------------------------------------------------
 %_____POSITIONS ARRAY TO BE TESTED_________________________________________
@@ -47,11 +51,11 @@ end
 if single_position == 0
 
     % define range of azimuth
-    t_azimuth_deg = -179:10:179;                 % azimuth values in degrees
+    t_azimuth_deg = -180:10:180;                 % azimuth values in degrees
     t_azimuth_rad = t_azimuth_deg * (pi/180);    % azimuth values in radians
 
     % define range of elevation
-    t_elevation_deg = -89:10:89;                 % elevation values in degrees
+    t_elevation_deg = -87:10:87;                 % elevation values in degrees
     t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 
     % save sizes of azimuth and elevation matrix 
@@ -59,7 +63,7 @@ if single_position == 0
     [rownum,n_samples_elevation] = size(t_elevation_rad); %number of elevation_positions
 
     %--------------------------------------------------------------------------
-    norm_s = [1000]; % norm values to be tested (row)
+    norm_s = [100]; % norm values to be tested (row)
     count = 1;      % size of vector s +1 
     count_sph = 1;  % size of vector spherical +1
 
@@ -164,42 +168,42 @@ for i=1:length_s
     determinant_fisher(i) = det(fisher_info^(-1))^(1/6);
     %determinant_fisher(i) = det(fisher_info^(-1));
     eig_vector = zeros(3,3);
-    %------------------------------------------------------
-    % E optimality - maximizes the minimum eigenvalue of the information matrix
-    % eigen values of the inverted fisher matrix gives the deviation error
-    % in each axis of the elipsoid.
-    %(max eigen value is the max deviation which corresponds to a specific axis)
-    %eig_value(:,i) = eig(fisher_info^(-1));
-    [eig_vector,eig_value] = eig(fisher_info^(-1));
-    eigen_fisher(i) = max(eig_value(:,i))^.5;
-    
-    %eig_value(:,i) = eig(fisher_info);
-    %eigen_fisher(i) = min(eig_value(:,i));
-    
-    %------------------------------------------------------
-    % A optimality - minimum trace of the inverse fisher matrix
-    inv_fisher_info = fisher_info^(-1);
-    trace_inf_A = 0;
-    [n_rows,n_col] = size(inv_fisher_info);
-    for i = 1:n_rows
-        diag_opposite(i) = inv_fisher_info(i,n_col-i+1);
-        trace_inf_A = trace_inf_A + diag_opposite(i);
-    end
-    
-    %------------------------------------------------------
-    % T optimality - max trace of the fisher matrix
-    trace_inf_T = 0;
-    [n_rows,n_col] = size(fisher_info);
-    for i = 1:n_rows
-        diag_opposite(i) = fisher_info(i,n_col-i+1);
-        trace_inf_T = trace_inf_T + diag_opposite(i);
-    end
-    
-    %------------------------------------------------------
-    % G optimality
-    fisher_info = s'.* fisher_info^(-1) .* s;
-    g_optimal_diagonal = diag(fisher_info);
-    g_optimal_max = max(g_optimal_diagonal);
+%     %------------------------------------------------------
+%     % E optimality - maximizes the minimum eigenvalue of the information matrix
+%     % eigen values of the inverted fisher matrix gives the deviation error
+%     % in each axis of the elipsoid.
+%     %(max eigen value is the max deviation which corresponds to a specific axis)
+%     %eig_value(:,i) = eig(fisher_info^(-1));
+%     [eig_vector,eig_value] = eig(fisher_info^(-1));
+%     eigen_fisher(i) = max(eig_value(:,i))^.5;
+%     
+%     %eig_value(:,i) = eig(fisher_info);
+%     %eigen_fisher(i) = min(eig_value(:,i));
+%     
+%     %------------------------------------------------------
+%     % A optimality - minimum trace of the inverse fisher matrix
+%     inv_fisher_info = fisher_info^(-1);
+%     trace_inf_A = 0;
+%     [n_rows,n_col] = size(inv_fisher_info);
+%     for i = 1:n_rows
+%         diag_opposite(i) = inv_fisher_info(i,n_col-i+1);
+%         trace_inf_A = trace_inf_A + diag_opposite(i);
+%     end
+%     
+%     %------------------------------------------------------
+%     % T optimality - max trace of the fisher matrix
+%     trace_inf_T = 0;
+%     [n_rows,n_col] = size(fisher_info);
+%     for i = 1:n_rows
+%         diag_opposite(i) = fisher_info(i,n_col-i+1);
+%         trace_inf_T = trace_inf_T + diag_opposite(i);
+%     end
+%     
+%     %------------------------------------------------------
+%     % G optimality
+%     fisher_info = s'.* fisher_info^(-1) .* s;
+%     g_optimal_diagonal = diag(fisher_info);
+%     g_optimal_max = max(g_optimal_diagonal);
     
 end 
 
@@ -220,7 +224,7 @@ end
 %eig_value_tot = eig_value(1,1) + eig_value(2,1) + eig_value(3,1);
 
 [max_det,ind_max_det] = max(determinant_fisher); %max radius of sphere
-[min_det,ind_min_det] = min(eigen_fisher); %min radius of sphere
+[min_det,ind_min_det] = min(determinant_fisher); %min radius of sphere
 std_det = std(determinant_fisher); %standard deviation
 
 
@@ -246,22 +250,23 @@ if plot_FIMdet == 1 && single_position == 0
 end
 
 if plot_FIMdet_3view == 1 && single_position == 0
-    figure(1)
+    f_fim = figure;
     
     % 3D (azimuth,elevation, determinant_fisher)
     subplot(1,3,1)
-    scatter3(spherical(1,:),spherical(2,:),determinant_fisher,40,'g','filled')
+    scatter3(spherical(1,:),spherical(2,:),determinant_fisher,20,'b','filled')
 
-    title('Uncertainty of Estimation (determinant)');
+    title('3D map of uncertainty radius');
     xlabel('Azimuth (deg)');
     ylabel('Elevation (deg)');
     zlabel('Radius (m)');
 
-     hold on
+    hold on
     
     % 2D (azimuth, determinant_fisher)
     subplot(1,3,2)
-    scatter(spherical(1,:),determinant_fisher,40,'g','filled');
+    scatter(spherical(1,:),determinant_fisher,20,'b','filled');
+    title('Uncertainty radius with respect to azimuth');
     xlabel('Azimuth (deg)');
     ylabel('Radius (m)');
 
@@ -269,9 +274,14 @@ if plot_FIMdet_3view == 1 && single_position == 0
     
     % 2D (elevation, determinant_fisher)
     subplot(1,3,3)
-     scatter(spherical(2,:),determinant_fisher,40,'g','filled');
+     scatter(spherical(2,:),determinant_fisher,20,'b','filled');
+     title('Uncertainty radius with respect to elevation');
      xlabel('Elevation (deg)');
      ylabel( 'Radius (m)');
+     
+    set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 1, 0.9, 0.6]);
+    
+    %saveas(f_fim,'plots/plot-FIM-allpos-norm100-A','jpg')
 end
 
 if plot_eigen == 1 && single_position == 0
@@ -285,4 +295,4 @@ if plot_eigen == 1 && single_position == 0
     zlabel('Maximum length of axis (m)');
     
 end
-end
+%end

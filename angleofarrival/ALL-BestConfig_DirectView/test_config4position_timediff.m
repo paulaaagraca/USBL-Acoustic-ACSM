@@ -11,9 +11,9 @@ clear
 plot_Hconfig = 0;
 plot_mse_deviation = 0;
 plot_dev_overlaid = 0;
-plot_vec_Restimations = 0;
+plot_vec_Restimations = 1;
 
-rotation_ptcloud = 0;
+rotation_ptcloud = 1;
 
 %-----parameters-----------------------------------------------------------
 accum_samples = 1000;   %nº accumulated samples w/ random error for same position
@@ -46,7 +46,7 @@ ri = [q   0   0    0    0    0   0    0    0  ;
       0   w   -w   0    0    e   -e   e    -e];
 %-------------------------------------------------------------------------- 
 
-s = [10;10;10]; %single source position for test
+s = [100;0;0]; %single source position for test
 
 [rownum,n_samples] = size(s); %number of samples to compute
 
@@ -336,7 +336,9 @@ if plot_mse_deviation == 1
     xlabel('Config Number');
     ylabel('Elevation Deviation (deg)');
     
-    %saveas(f2,'plots/plot-[10,10,10]-1000s-errors','jpg')
+    set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.3, 0.7, 0.5]);
+    
+    %saveas(f2,'plots/plot-[100,0,0]-1000s-errors','jpg')
 
 end
 
@@ -362,7 +364,7 @@ if plot_dev_overlaid == 1
     xlabel('Configuration Number');
     ylabel('Deviation (deg)');
     
-    %saveas(f1,'plots/plot-[10,10,10]-1000s-both','jpg')
+    %saveas(f1,'plots/plot-[-10,-10,-10]-1000s-both','jpg')
 
 end
     
@@ -450,7 +452,7 @@ if plot_vec_Restimations == 1
         
         s_rott = s_rot(1,1:3)';
         %------------
-        figure
+        f_est = figure;
         subplot(1,3,1)
         scatter(R_estimations_rott(1,:),R_estimations_rott(3,:),5)
         xlabel('x');
@@ -474,6 +476,9 @@ if plot_vec_Restimations == 1
         hold on
         scatter(s_rott(1,1),s_rott(2,1),30,'g','filled')
         axis equal
+        
+        %set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.3, 0.7, 0.5]);
+        saveas(f_est,'plots/plot-accum-[100,0,0]-1249-1000s','jpg')
         %------------
         
 %         for asd=1:3
@@ -482,8 +487,8 @@ if plot_vec_Restimations == 1
             hold on
             scatter3(s_rott(1,1),s_rott(2,1),s_rott(3,1),40,'b','filled')
             hold on
-            scatter3(0,0,0,40,'b','filled')
-            hold on
+            %scatter3(0,0,0,40,'b','filled')
+            %hold on
 %             if asd == 1
 %                 %zx
 %                 view(0,0)
@@ -515,14 +520,15 @@ if plot_vec_Restimations == 1
     % hold on
     % scatter3([ri(1,ce(1)) ri(1,ce(2)) ri(1,ce(3)) ri(1,ce(4))],[ri(2,ce(1)) ri(2,ce(2)) ri(2,ce(3)) ri(2,ce(4))], [ri(3,ce(1)) ri(3,ce(2)) ri(3,ce(3)) ri(3,ce(4))],40,'k','filled')
      
-     xlim([560 660])
-     ylim([150 250])
-     zlim([-1100 -900])
+     %xlim([560 660])
+     %ylim([150 250])
+     %zlim([-1100 -900])
 
      title('Estimated source position w/ injected error');
      xlabel('x');
      ylabel('y');
      zlabel('z');
+     axis equal
 end
 %end
 

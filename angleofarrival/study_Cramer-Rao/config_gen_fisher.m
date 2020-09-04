@@ -7,14 +7,15 @@
 clear
 
 plot_on = 0;
-plot_uncert_vec = 0;
+plot_uncert_vec = 1;
 rotation = 1;
+plot_montecarlo_fisher = 0;
 
 %--------------------------------------------------------------------------
 %_____TESTING CONFIGURATIONS_______________________________________________
 
 %parameters for sensor configuration
-q = 0.2; %distance from origin to nose hydrophone
+q = 0.1; %distance from origin to nose hydrophone
 w = 0.1;
 e = sqrt(2)/2 * w;
 
@@ -28,7 +29,7 @@ ri = [q   0   0    0    0    0   0    0    0;
       0   0   0    w    -w   e   e    -e   -e;
       0   w   -w   0    0    e   -e   e    -e];
 
-s=[0;1000;0]; %single source position for test
+s=[10;10;10]; %single source position for test
 
 h1 = ri(:,1); %h1 = nose hydrophone gives the 3rd dimension
 cnt_comb = 1;
@@ -269,6 +270,7 @@ if plot_on ==1
     xlabel('Config nº');
     ylabel('Radius of sphere(m)');
 end
+
 if plot_uncert_vec == 1
 %      %--plot connector vectors from origin to estimated source positions--
     figure
@@ -352,100 +354,100 @@ end
 %%
 %--------------------------------------------------------------------------
 %--------PRINT OVERLAID MONTE CARLO AND FISHER SIMULATION PLOTS------------
+if plot_montecarlo_fisher == 1
+    load('../study_Cramer-Rao/plots/clouds/estim_[0,1000,0]_1468best_10000samp.mat', 'R_estimations_rott');
 
-load('../study_Cramer-Rao/plots/clouds/estim_[0,1000,0]_1468best_10000samp.mat', 'R_estimations_rott');
+    figure
+    scatter3(R_estimations_rott(1,:),R_estimations_rott(2,:),R_estimations_rott(3,:),40,'r','filled')
 
-figure
-scatter3(R_estimations_rott(1,:),R_estimations_rott(2,:),R_estimations_rott(3,:),40,'r','filled')
+    figure
+         for asd = 1:3
+             subplot(1,3,asd)
+             if asd == 1   
+                 %xz
+                 scatter(R_estimations_rott(1,:),R_estimations_rott(3,:),'filled')     
+                 axis equal
+                 xlabel('x');
+                 ylabel('z');
+                 hold on
 
-figure
-     for asd = 1:3
-         subplot(1,3,asd)
-         if asd == 1   
-             %xz
-             scatter(R_estimations_rott(1,:),R_estimations_rott(3,:),'filled')     
+                 plot([uncert_vec1_posr(1,1),uncert_vec1_negr(1,1)],...
+                      [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'k')
+                 axis equal
+
+                 hold on
+
+                 plot([uncert_vec2_posr(1,1),uncert_vec2_negr(1,1)],...
+                      [uncert_vec2_posr(3,1),uncert_vec2_negr(3,1)],'g')
+                 axis equal
+
+                 hold on
+                 plot([uncert_vec3_posr(1,1),uncert_vec3_negr(1,1)],...
+                      [uncert_vec3_posr(3,1),uncert_vec3_negr(3,1)],'r')
+                 axis equal
+
+             end
+
+             if asd == 2
+                 %yz
+                 scatter(R_estimations_rott(2,:),R_estimations_rott(3,:),'filled')                   
+                 xlabel('y');
+                 ylabel('z');
+                 axis equal
+                 hold on
+
+                 plot([uncert_vec1_posr(2,1),uncert_vec1_negr(2,1)],...
+                      [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'k')
+                 axis equal
+
+                 hold on    
+
+                 plot([uncert_vec2_posr(2,1),uncert_vec2_negr(2,1)],...
+                      [uncert_vec2_posr(3,1),uncert_vec2_negr(3,1)],'g')
+                 axis equal
+
+                 hold on   
+                 plot([uncert_vec3_posr(2,1),uncert_vec3_negr(2,1)],...
+                      [uncert_vec3_posr(3,1),uncert_vec3_negr(3,1)],'r')
+                 axis equal
+
+
+             end
+
+             if asd == 3
+                 %xy
+                 scatter(R_estimations_rott(1,:),R_estimations_rott(2,:),'filled') 
+                 xlabel('x');
+                 ylabel('y');
+                 axis equal
+                 hold on
+
+                 plot([uncert_vec1_posr(1,1),uncert_vec1_negr(1,1)],...
+                      [uncert_vec1_posr(2,1),uncert_vec1_negr(2,1)],'k')
+                 axis equal
+
+                 hold on
+
+                 plot([uncert_vec2_posr(1,1),uncert_vec2_negr(1,1)],...
+                      [uncert_vec2_posr(2,1),uncert_vec2_negr(2,1)],'g')
+                 axis equal
+
+                 hold on
+
+                 plot([uncert_vec3_posr(1,1),uncert_vec3_negr(1,1)],...
+                      [uncert_vec3_posr(2,1),uncert_vec3_negr(2,1)],'r')
+                 axis equal
+             end
+
+             %hold on
+
+            % scatter3(s_rott(1,1),s_rott(2,1),s_rott(3,1),40,'b','filled')
+
              axis equal
-             xlabel('x');
-             ylabel('z');
-             hold on
 
-             plot([uncert_vec1_posr(1,1),uncert_vec1_negr(1,1)],...
-                  [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'k')
-             axis equal
-
-             hold on
-             
-             plot([uncert_vec2_posr(1,1),uncert_vec2_negr(1,1)],...
-                  [uncert_vec2_posr(3,1),uncert_vec2_negr(3,1)],'g')
-             axis equal
-
-             hold on
-             plot([uncert_vec3_posr(1,1),uncert_vec3_negr(1,1)],...
-                  [uncert_vec3_posr(3,1),uncert_vec3_negr(3,1)],'r')
-             axis equal
-
-         end
-
-         if asd == 2
-             %yz
-             scatter(R_estimations_rott(2,:),R_estimations_rott(3,:),'filled')                   
-             xlabel('y');
-             ylabel('z');
-             axis equal
-             hold on
-             
-             plot([uncert_vec1_posr(2,1),uncert_vec1_negr(2,1)],...
-                  [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'k')
-             axis equal
-
-             hold on    
-             
-             plot([uncert_vec2_posr(2,1),uncert_vec2_negr(2,1)],...
-                  [uncert_vec2_posr(3,1),uncert_vec2_negr(3,1)],'g')
-             axis equal
-
-             hold on   
-             plot([uncert_vec3_posr(2,1),uncert_vec3_negr(2,1)],...
-                  [uncert_vec3_posr(3,1),uncert_vec3_negr(3,1)],'r')
-             axis equal
-
-             
-         end
-
-         if asd == 3
-             %xy
-             scatter(R_estimations_rott(1,:),R_estimations_rott(2,:),'filled') 
-             xlabel('x');
-             ylabel('y');
-             axis equal
-             hold on
-             
-             plot([uncert_vec1_posr(1,1),uncert_vec1_negr(1,1)],...
-                  [uncert_vec1_posr(2,1),uncert_vec1_negr(2,1)],'k')
-             axis equal
-             
-             hold on
-             
-             plot([uncert_vec2_posr(1,1),uncert_vec2_negr(1,1)],...
-                  [uncert_vec2_posr(2,1),uncert_vec2_negr(2,1)],'g')
-             axis equal
-             
-             hold on
-             
-             plot([uncert_vec3_posr(1,1),uncert_vec3_negr(1,1)],...
-                  [uncert_vec3_posr(2,1),uncert_vec3_negr(2,1)],'r')
-             axis equal
-         end
-
-         %hold on
-
-        % scatter3(s_rott(1,1),s_rott(2,1),s_rott(3,1),40,'b','filled')
-         
-         axis equal
-
-         %legend('uncert_1','uncert_2','uncert_3');  
-         %title('Unertainty vectors around estimated position');
+             %legend('uncert_1','uncert_2','uncert_3');  
+             %title('Unertainty vectors around estimated position');
 
      end
-
+end
 %end

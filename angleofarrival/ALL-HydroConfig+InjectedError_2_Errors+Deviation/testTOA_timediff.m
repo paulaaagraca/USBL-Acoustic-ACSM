@@ -90,7 +90,7 @@ Tref = t0 + norm( s - (a - ri(:,ref_H) ) ) / cs; % + rand()/100/cs
 
 % For big distances between the AUV and the source, it can be used a
 % constant Tref value and substitute it for the calculation above
-%Tref = 10^6/cs; 
+%Tref = 10^3/cs; 
 
 
 % Define time difference to add to each hydrophone in relation to Tref of  

@@ -12,8 +12,8 @@ clear
 
 %---test options-----------------------------------------------------------
 plot_position_cloud = 0;    % plot 3D source positions
-plot_error_cartesian = 0;   % plot error in cartesian coordinates
-plot_error_spherical = 1;   % plot error in spherical coordinates
+plot_error_cartesian = 1;   % plot error in cartesian coordinates
+plot_error_spherical = 0;   % plot error in spherical coordinates
 plot_error3d_azimuth = 0;   % plot error of azimuth per azimuth(x) and elevation(y)
 plot_error3d_elevation = 0; % plot error of elevation per azimuth(x) and elevation(y)
 %--------------------------------------------------------------------------
@@ -36,12 +36,16 @@ e = sqrt(2)/2 * w;
 ri = [0.02  0.02   0      0;
       0     0      0.1    -0.1;
       0.1   -0.1   0      0];
+% %__B__  
+% ri = [0.1  0.1   0      0;
+%       0     0      0.1    -0.1;
+%       0.1   -0.1   0      0];
+%   
+% ri = [0.2  0    0     0;
+%       0    0.2  -0.2  0;
+%       0    0    0     0.2];
   
-ri = [0.2  0    0     0;
-      0    0.2  -0.2  0;
-      0    0    0     0.2];
-  
-%__B__  
+%__C__  
 % ri = [0.1  0     0     0;
 %       0    0    -e     e;
 %       0    0.1  -e    -e];  
@@ -61,7 +65,7 @@ t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 
 %--------------------------------------------------------------------------
 
-norm = [100]; % norm values to be tested (row)
+norm = [1000]; % norm values to be tested (row)
 
 count = 1;     % size of vector s +1
 count_sph = 1; % size of vector spherical +1
@@ -76,7 +80,7 @@ count_sph = 1; % size of vector spherical +1
 %               - spherical coordinates in 'spherical'
 for n = 1:n_samples_norm
     for i = 1:n_samples_elevation
-        for k = 1:n_samples_azimuth
+            for k = 1:n_samples_azimuth
 
             % convert spherical to cartesian coordinates
             [x, y, z] = sph2cart(t_azimuth_rad(k), t_elevation_rad(i), norm(n));
@@ -192,7 +196,7 @@ end
 
 %-----plot error in cartesian coordinates: x, y and z----------------------
 if plot_error_cartesian == 1
-    figure
+    f1=figure;
     
     subplot(1,3,1)
     plot(errorx)    %error of x
@@ -214,6 +218,9 @@ if plot_error_cartesian == 1
     
     %position window in screen
     set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.3, 0.7, 0.5]);
+    
+    %saveas(f1,'../../feup-teses/figures/plots/plot-cart-A-n1000-title','jpg')
+   
 end
 
 %-----plot error in spherical coordinates: azimuth, elevation and norm-----
@@ -241,10 +248,7 @@ if plot_error_spherical == 1
     %position window in screen
     set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 1, 0.7, 0.6]);
     
-    %saveas(f,'../../feup-teses/figures/plots/plot-s1-A-n1','jpg')
-    
-    
-   
+    %saveas(f,'../../feup-teses/figures/plots/plot-s1-A-n10-inv','jpg')
 end
 
 %-----plot error of azimuth (per azimuth and elevation) in 3D--------------
@@ -261,10 +265,13 @@ end
 %-----plot error of elevation (per azimuth and elevation) in 3D------------
 if plot_error3d_elevation == 1  
     figure
-    scatter3(spherical(1,:),spherical(2,:),error_elevation,40,'g','filled')
+    scatter3(spherical(1,:),spherical(2,:),error_elevation,10,'g','filled')
     
     title('Error of Elevation (deg)');
     xlabel('Azimuth (deg)');
     ylabel('Elevation (deg)');
     zlabel('Error Elevation');
 end
+
+figure
+scatter3([0.2 0.2 0 0 1],[0 0 0.1 -0.1 1],[0.1 -0.1 0 0 1])

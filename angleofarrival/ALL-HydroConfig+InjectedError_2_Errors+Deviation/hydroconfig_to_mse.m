@@ -31,7 +31,7 @@ function [mse_config,deviation_azimuth_config,deviation_elevation_config] = ...
 
 %----test options----------------------------------------------------------
 % test for single source position
-plot_vectors = 1;     %plot estimated vectors for 1 source position 
+plot_vectors = 0;     %plot estimated vectors for 1 source position 
                       %(defined in execution loop)
 index_sourcepos = 1;  %index of source position for which is plotted estimated diff values
 
@@ -70,7 +70,7 @@ t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 [rownum,n_samples_elevation] = size(t_elevation_rad); %number of elevation_positions
 
 %--------------------------------------------------------------------------
-norm = [10000]; % norm values to be tested (row)
+norm = [100]; % norm values to be tested (row)
 count = 1;     % size of vector s +1 
 count_sph = 1; % size of vector spherical +1
 
@@ -97,6 +97,9 @@ for n = 1:n_samples_norm
             spherical(:,count_sph) = [t_azimuth_deg(k),t_elevation_deg(i), norm(n)]';
             count_sph = count_sph + 1;
 
+            if y == 0 && z==0
+                index_sourcepos = count-1;
+            end
         end
     end
 end
@@ -151,7 +154,14 @@ for i=1:n_samples
     error_i_elevation = abs(error_i_elevation);
     %elevation error for a single source position
     error_elevation(i) = mean(error_i_elevation);
-    
+%     
+%     %----------------------------------------------
+%     %-------------accum=0---------------------------------
+%     deviation_azimuth(i) = error_i_azimuth;
+%     %standard deviation of elevation
+%     deviation_elevation(i) = error_i_elevation;
+%     %----------------------------------------------
+%     %----------------------------------------------    
 end
 
 %mean error
@@ -166,6 +176,16 @@ deviation_azimuth_config = mean(deviation_azimuth);
 %calculate mean of standard deviation of elevation
 deviation_elevation_config = mean(deviation_elevation);
 
+%     
+%     %----------------------------------------------
+%     %--------------accum=100--------------------------------
+deviation_azimuth_config = mean_azimuth;
+%calculate mean of standard deviation of elevation
+deviation_elevation_config = mean_elevation;
+
+%     %----------------------------------------------
+%     %----------------------------------------------  
+
 
 %************************** PLOT OPTIONS **********************************
 
@@ -179,26 +199,29 @@ if source_pos_single == 1
          figure(1)
 
          for i=1:n_samples_Raccum
-             plot3([R_accum(1,i),0],[R_accum(2,i),0],[R_accum(3,i),0],'g')
+             plot3([R_accum(1,i),0],[R_accum(2,i),0],[R_accum(3,i),0],'b')
              hold on
          end
 
-         plot3([s(1,index_sourcepos),0],[s(2,index_sourcepos),0],[s(3,index_sourcepos),0],'b')   
+         plot3([s(1,index_sourcepos),0],[s(2,index_sourcepos),0],[s(3,index_sourcepos),0],'g')   
          title('Estimated Vectors w/ injected error');
-         xlabel('y');
-         ylabel('x');
+         xlabel('x');
+         ylabel('y');
          zlabel('z');
+         axis equal
 
          %--plot estimated source positions------------------------------
-         figure(2)
+         f2 = figure(2);
 
-         scatter3(R_accum(1,:),R_accum(2,:),R_accum(3,:),40,'g','filled')
+         scatter3(R_accum(1,:),R_accum(2,:),R_accum(3,:),40,'b','filled')
          hold on
-         scatter3(s(1,index_sourcepos),s(2,index_sourcepos),s(3,index_sourcepos),40,'b','filled')
-         title('Estimated source position w/ injected error');
-         xlabel('y');
-         ylabel('x');
+         scatter3(s(1,index_sourcepos),s(2,index_sourcepos),s(3,index_sourcepos),40,'g','filled')
+         title('Dispersion of estimate w/ injected error');
+         xlabel('x');
+         ylabel('y');
          zlabel('z');
+         axis equal
+         saveas(f2,'plots/plot-dispersion-dev01-100s','jpg')
     end   
 end
 

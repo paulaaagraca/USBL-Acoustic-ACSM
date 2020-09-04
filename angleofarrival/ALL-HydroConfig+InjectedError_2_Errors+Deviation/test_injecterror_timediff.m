@@ -18,17 +18,20 @@ plot_Hconfig = 0;       %plot single hydrophone configuration
 %------parameters----------------------------------------------------------
 max_dev = 0.5e-6;      %max deviation of injected error in time differences
                        %0.5us => [-2.5º,2.5º]
-deviation = 0.1;       %slide deviation between iterations
-accum_samples = 10;    %nº accumulated samples w/ random error for same position
+deviation = 0.01;       %slide deviation between iterations - 0.01
+accum_samples = 100;    %nº accumulated samples w/ random error for same position
 
-init_r1 = 0.2;         %initial position of r1
-init_r2 = 0.2;         %initial position of r2
+init_r1 = 0.1;         %initial position of r1
+init_r2 = 0.1;         %initial position of r2
 init_r3 = -0.2;        %initial position of r3
 init_r4 = 0.2;         %initial position of r4
-n_slide_samples = 10;  % number of samples to slide on axis
+n_slide_samples = 200;  % number of samples to slide on axis
 %--------------------------------------------------------------------------
 
 n_error_test = 1;   %init counter for max_dev cycle
+
+w = 0.1;
+e = sqrt(2)/2 * w;
 
 % Loop: runs algorithm for various injected errors 
 for max_dev=0.5e-6 %0.1e-6:0.1e-6:0.5e-6
@@ -41,82 +44,85 @@ for max_dev=0.5e-6 %0.1e-6:0.1e-6:0.5e-6
 %         ri = [init_r1  0    0     0;
 %               0        0.2  -0.2  0;
 %               0        0    0     0.2];
-        ri = [0.1  0     0     0;
-              0    0    -e     e;
-              0    0.1  -e    -e];
+%         ri = [init_r1  0     0     0;
+%               0        0    -e     e;
+%               0        0.1  -e    -e];
+         ri = [0.1    0        0     0;
+              0      0        -e     e;
+              0      init_r2  -e    -e];
 
         %Function: returns mean MSE and mean deviation for ri configuration
         [mse(i),deviation_azimuth(i),deviation_elevation(i)] = ...
             hydroconfig_to_mse(ri,max_dev,source_pos_single, accum_samples);
 
-        init_r1 = init_r1 + deviation; %increments deviation for next loop
-    end
-
-    %--Loop: positive slide of r2 in y axis------------------------------
-    for i = (n_slide_samples+1) : 2*n_slide_samples
-
-        % hydrophones configuration [r1 r2 r3 r4];
-        % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
-%         ri = [0.2  0        0     0;
-%               0    init_r2  -0.2  0;
-%               0    0        0     0.2];
-
-        %Function: returns mean MSE and mean deviation for ri configuration
-        [mse(i),deviation_azimuth(i),deviation_elevation(i)] = ...
-            hydroconfig_to_mse(ri,max_dev,source_pos_single, accum_samples);
-
+        %init_r1 = init_r1 + deviation; %increments deviation for next loop
         init_r2 = init_r2 + deviation; %increments deviation for next loop
     end
-
-    %--Loop: negative slide of r3 in y axis------------------------------
-    for i = (2*n_slide_samples+1) : 3*n_slide_samples
-
-        % hydrophones configuration [r1 r2 r3 r4];
-        % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
-%         ri = [0.2  0    0        0;
-%               0    0.2  init_r3  0;
-%               0    0    0        0.2];
-
-        %Function: returns mean MSE and mean deviation for ri configuration
-        [mse(i),deviation_azimuth(i),deviation_elevation(i)] = ...
-            hydroconfig_to_mse(ri,max_dev,source_pos_single, accum_samples);
-
-        init_r3 = init_r3 - deviation; %increments deviation for next loop
-
-    end
-    
-    %--Loop: positive slide of r4 in z axis------------------------------
-    for i = (3*n_slide_samples+1) : 4*n_slide_samples
-
-        % hydrophones configuration [r1 r2 r3 r4];
-        % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
-%         ri = [0.2  0    0     0;
-%               0    0.2  -0.2  0;
-%               0    0    0     init_r4];
-
-        %Function: returns mean MSE and mean deviation for ri configuration
-        [mse(i),deviation_azimuth(i),deviation_elevation(i)] = ...
-            hydroconfig_to_mse(ri,max_dev,source_pos_single, accum_samples);     
-
-        init_r4 = init_r4 + deviation; %increments deviation for next loop
-
-    end
-    
-    config_cnt = 4*n_slide_samples + 1; %number of hydrophone configurations              
-    
-    %--4 hydro spiral from nose to the back-----------------------------
-%     ri = [0.2   0.1    0     -0.1;
-%           0     0      0.2   0;
-%           0     0.2    0     -0.2];
-
-    %Function: returns mean MSE and mean deviation for ri configuration
-    [mse(config_cnt),deviation_azimuth(config_cnt),deviation_elevation(config_cnt)] = ...
-            hydroconfig_to_mse(ri,max_dev,source_pos_single, accum_samples);              
-    
-    %---------------------------------------------------------------------
-    %**** ADD HYDRO CONFIGURATIONS HERE ****
-    %config_cnt = config_cnt+1;
-    %---------------------------------------------------------------------
+% 
+%     %--Loop: positive slide of r2 in y axis------------------------------
+%     for i = (n_slide_samples+1) : 2*n_slide_samples
+% 
+%         % hydrophones configuration [r1 r2 r3 r4];
+%         % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
+%         ri = [0.1    0        0     0;
+%               0      0        -e     e;
+%               0      init_r2  -e    -e];
+%         %Function: returns mean MSE and mean deviation for ri configuration
+%         [mse(i),deviation_azimuth(i),deviation_elevation(i)] = ...
+%             hydroconfig_to_mse(ri,max_dev,source_pos_single, accum_samples);
+% 
+%         init_r2 = init_r2 + deviation; %increments deviation for next loop
+%     end
+% % 
+%     %--Loop: negative slide of r3 in y axis------------------------------
+%     for i = (2*n_slide_samples+1) : 3*n_slide_samples
+% 
+%         % hydrophones configuration [r1 r2 r3 r4];
+%         % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
+% %         ri = [0.2  0    0        0;
+% %               0    0.2  init_r3  0;
+% %               0    0    0        0.2];
+% 
+%         %Function: returns mean MSE and mean deviation for ri configuration
+%         [mse(i),deviation_azimuth(i),deviation_elevation(i)] = ...
+%             hydroconfig_to_mse(ri,max_dev,source_pos_single, accum_samples);
+% 
+%         init_r3 = init_r3 - deviation; %increments deviation for next loop
+% 
+%     end
+%     
+%     %--Loop: positive slide of r4 in z axis------------------------------
+%     for i = (3*n_slide_samples+1) : 4*n_slide_samples
+% 
+%         % hydrophones configuration [r1 r2 r3 r4];
+%         % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
+% %         ri = [0.2  0    0     0;
+% %               0    0.2  -0.2  0;
+% %               0    0    0     init_r4];
+% 
+%         %Function: returns mean MSE and mean deviation for ri configuration
+%         [mse(i),deviation_azimuth(i),deviation_elevation(i)] = ...
+%             hydroconfig_to_mse(ri,max_dev,source_pos_single, accum_samples);     
+% 
+%         init_r4 = init_r4 + deviation; %increments deviation for next loop
+% 
+%     end
+%     
+%     config_cnt = 4*n_slide_samples + 1; %number of hydrophone configurations              
+%     
+%     %--4 hydro spiral from nose to the back-----------------------------
+% %     ri = [0.2   0.1    0     -0.1;
+% %           0     0      0.2   0;
+% %           0     0.2    0     -0.2];
+% 
+%     %Function: returns mean MSE and mean deviation for ri configuration
+%     [mse(config_cnt),deviation_azimuth(config_cnt),deviation_elevation(config_cnt)] = ...
+%             hydroconfig_to_mse(ri,max_dev,source_pos_single, accum_samples);              
+%     
+%     %---------------------------------------------------------------------
+%     %**** ADD HYDRO CONFIGURATIONS HERE ****
+%     %config_cnt = config_cnt+1;
+%     %---------------------------------------------------------------------
     
     %plot a specific hydrophone configuration
     if plot_Hconfig == 1
@@ -150,26 +156,35 @@ for max_dev=0.5e-6 %0.1e-6:0.1e-6:0.5e-6
     %----------------------------------------------------------------------
     %plot MSE and deviation in azimuth and elevation for every configuration
     if plot_mse_deviation == 1
-        figure
+        f=figure;
 
         subplot(1,3,1)
         plot(mse)
         title('Mean Square Error');
-        xlabel('Number of test');
+        xlabel('Test number');
         ylabel('MSE');
+        
+        ylim([0.2 0.25]);
 
         subplot(1,3,2)
         plot(deviation_azimuth)
-        title('Azimuth deviation');
-        xlabel('Number of test');
-        ylabel('Azimuth Deviation (deg)');
+        title('Azimuth devation');
+        xlabel('Test number');
+        ylabel('Azimuth devation (deg)');
 
+        ylim([0.18 0.23]);
+        
         subplot(1,3,3)
         plot(deviation_elevation)
-        title('Elevation deviation');
-        xlabel('Number of test');
-        ylabel('Elevation Deviation (deg)');
+        title('Elevation devation');
+        xlabel('Test number');
+        ylabel('Elevation devation (deg)');
         
+        ylim([0.06 0.11]);
+        
+        set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 1, 0.7, 0.5]);
+        saveas(f,'plots/plot-Hbaseline-dev001-100accum-100s-2','jpg')
+        %saveas(f,'plots/plot-accum100-dev0-100times','jpg')
     end
 
     n_error_test = n_error_test+1; %increment counter for max_dev
