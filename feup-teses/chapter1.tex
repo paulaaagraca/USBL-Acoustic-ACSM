@@ -8,37 +8,35 @@ Today, the deep blue ocean still represents a relevant topic of research in the 
 
 Robotic autonomous underwater vehicles (AUVs) are great means for diverse applications in underwater exploration using variable resource requirements and duration, such as monitoring structures installed in shallow waters or exploring the deep ocean floor for scientific purposes. Particularly in long-term missions, the AUV is usually deployed using a docking system and it navigates underwater until the end of the mission, when it returns to the base station. Thus far, the data that is being collected is typically not accessible by any processing system or researchers. 
 
-A method that is used to resolve this limitation is employing additional mule AUVs, whose goal is to travel near the survey AUV, collect its data during the mission's term and return in a relatively short time period. This allows the data to be periodically processed during the mission, which facilitates the definition of future courses for the mission, such as shortening its duration or sending additional commands. In the mentioned localization system, high accuracy is key, as it avoids high energy consumption, saves up time in the inherently slow global process and avoids missing the AUV's underwater localization.
+A method that is used to resolve this limitation is employing additional mule AUVs, whose goal is to travel near the survey AUV, collect its data during the mission's term and return in a relatively short time period. This allows the data to be periodically processed during the mission, which facilitates the definition of future courses for the mission, such as shortening its duration or sending additional commands. In the mentioned localization system, high accuracy is key as it lowers the resource consumption, saves up time in the inherently slow global process and avoids missing the AUV's underwater localization.
 
-The described process can only be achieved if the mule AUV is able to locate the other AUV and draw near it. For that reason, a USBL (Ultra Short Base-Line) system will be implemented using an array of four hydrophones as acoustic receiver. This makes it possible to explore the difference among times of arrival of an acoustic signal to many hydrophones, allowing the calculation of the angle of arrival of the acoustic signal and thus the direction that the mule AUV should navigate. Additionally, using a synchronized transmission from the AUV being located, the mule AUV can also determine the distance to the acoustic source located in the survey AUV and thus its relative position to the mule AUV.
+The described process can only be achieved if the mule AUV is able to locate the other vehicle and draw near it. For that reason, a USBL (Ultra-Short Baseline) system is used to receive the transmitted signals and calculate the angle of arrival of the acoustic signal, thus the direction that the mule AUV should navigate. Additionally, using a synchronization mechanism, the mule is also able to determine the distance to the acoustic source and thus the vehicles' relative positions.
 
+In such scenario, the USBL system needs to meet specific requirements to assure a reliable localization. Since the acoustic source can be located anywhere, it is essential that the estimation is accurate for both short and long range distances. Additionally, the system needs to have line of sight in any direction, which is compromised from the start by deploying the sensors on an opaque AUV. Typically, the available USBL commercial solutions have a limited range for these characteristics, so the development of such system constitutes a technological challenge.
 
-%_______________________________________________
+Therefore, this dissertation intends to explore a method that assumes the deployment of multiple hydrophones in a vehicle, from which only four are used simultaneously for the angle of arrival estimation. This allows to dynamically optimize the used sensor configuration according to which returns the lowest estimation error, so it is possible to always have line of sight to the target, independently of navigation maneuvers, and improving the estimation accuracy. Overall, this mechanism intends to rectify issues that arise from classic USBL systems, such as the before mentioned. 
 
-This dissertation intends to continue the work developed previously \cite{afonso-thesis}, in which a platform was created to acquire and process data from four hydrophones. The system to be implemented is carefully explained in the present document.
- 
-%based on the determination of the time of arrival to each hydrophone. This is achieved by integrating correlation processes (already implemented in previous dissertations) and subsequent refinement of the difference in time of arrival between each pair of hydrophones, using the phase analysis of the received signals.
-%Four hydrophones will be placed in the body of the Autonomous Underwater Vehicle in order to determine the relative position in real time of an acoustic source connected to another AUV. This method allows for the data to be fed to the navigation and control systems in order ensure the approximation of the two vehicles.
+In the course of this document, the dynamically reconfigurable configuration method is detailed and refined, determining its limitations and capabilities. Additionally, all the contemplated tools and complementary modules are carefully explained.
 
 This research work falls under the scope of activities developed by the Center of Robotics and Autonomous Systems of INESC TEC. It is integrated in the GROW project which focuses on exploring the use of AUVs as data mules for long duration missions.
 
 
 \section{Objectives} \label{sec:objective}
 
-The work aims to implement a system capable of determining the angle of arrival of known encoded acoustic signal and study processes to correct errors resulting from the deformation of propagation direction of the acoustic waves. In order to achieve that, it is proposed the implementation and validation of a digital signal processing system for FPGA technology, which determines the difference between the times of arrival of an encoded acoustic signal to four hydrophones. Thereafter, a software script will be able to take the system's output in order to estimate the intended angle of arrival. The system is then analyzed and methods are studied in order to improve the estimation process. Finally, the implemented system is validated experimentally with field tests.
+The goal of the present work is to study and propose a dynamically reconfigurable configuration method, which assumes the integration of several hydrophones in a USBL system to allow selecting the set of sensors that minimizes the estimation error. This aims to achieve high estimate accuracy for both short and long range distances and provide full line of sight from the chosen hydrophones to the target that can be located anywhere. In order to attain this, a comparative study is developed on tools that allow to compare the performance of sensors configurations in order to select the most reliable option. Then, the proposed system is presented in detail and validated with comprehensive simulations.
+
+In addition to the main objective, it is intended to implement and validate a digital signal processing system for FPGA technology, which calculates the difference between the times of arrival of an encoded acoustic signal to four hydrophones.  Thereafter, a estimator is developed which is be able to take the time differences of arrival in order to estimate the intended angle of arrival.
 
 \section{Document Structure}
 
-The present document is partitioned into x chapters, which are summarized in this section.
+The present document is partitioned into six chapters, which are summarized in this section.
 
-%Chapter \ref{chap:fundamentals} contains the fundamental concepts to be considered to fully apprehend the developed research work.
+Chapter \ref{chap:sota} offers an overview on background concepts about underwater acoustics, localization estimation and positioning systems, followed by USBL available commercial solutions and developed technology for a similar purpose. Then it focuses on angle of arrival determination methods and optimization mechanisms that are typically employed.
 
-%Chapter \ref{chap:sota} offers an overview on the existent research about the addressed topic as well as existent solutions and developed technology for a similar purpose.
+After getting in touch with the terms and reviewing the literature, chapter \ref{chap:problem} intends to clarify the problem that is being resolved in this thesis. The research hypothesis is stated as well as the research questions that are discussed and indented to be further explored. The chapter ends with the clarification of the used validation methods for the work. 
 
-%After getting in touch with the terms and reviewing the literature, Chapter \ref{chap:problem} intends to clarify the problem that is to be resolved in this thesis.
+Chapter \ref{chap:proposed_sys} presents and explains the developed hardware design for the phase difference calculation. Then, three different approaches are presented for systematic comparison between the performance of a sensor configuration. These are supported with simulation experiments which allow to draw conclusions on the preferred approach.
 
-%Chapter \ref{chap:proposed_sys} presents and explains the proposed system, as well as the methodologies adopted in its development.
+Chapter \ref{chap:study} details the developed dynamically reconfigurable configuration method. The theoretical specifics and thought process are laid out and the mechanism is then validated through simulations.
 
-%Chapter \ref{chap:study} describes the further investigation which was made around the improvement of the localization system.
-
-%Lastly, chapter \ref{chap:conclusion} gives the final remarks about the developed work and mentions research work which should be further developed in the future.  
+Lastly, chapter \ref{chap:conclusion} gives the final remarks about the developed work and mentions research work which could be further developed in the future.  

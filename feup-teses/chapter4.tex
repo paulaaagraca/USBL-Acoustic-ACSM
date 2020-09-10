@@ -1,39 +1,40 @@
 \chapter{Research Problem} \label{chap:problem}
 
-This chapter intends to clarify the problem addressed by the present dissertation. 
+This chapter intends to clarify the problem addressed by the present dissertation. Section \ref{sec:prob-state} presents details and motive behind the research work as well as the problems it intends to solve. Having this clear, the dissertation hypothesis is stated in section \ref{sec:hypoth-rq} along with the research questions that are the main issues that are being explained with the present document. Lastly, the used validation methods are specified in section \ref{sec:validation}.
 
 \section{Problem Statement} \label{sec:prob-state}
 
-As previously mentioned in chapter \ref{chap:intro}, it is considered a scenario where an AUV is taking part on a long-term underwater mission. When it is in course, the moving survey AUV periodically sends known signals to the surface with a pinger, so it can be identified. The mule AUV, which is provided with a three dimensional array of hydrophones, receives the signal and estimates the position of the other AUV to navigate near it. The described communication system is illustrated in figure \ref{fig:auv_scene}. 
-
-\note{redefinir}
+The Ultra-Short Baseline system is among the most deployed positioning methods using underwater acoustics. There is a vast knowledge of its function and capabilities, therefore its implementation does not constitute a technological innovation nowadays. 
+In the considered scenario, previously mentioned in chapter \ref{chap:intro}, an AUV is taking part on a long-term underwater mission in which it periodically sends known signals to the surface with a pinger. In such case, the mule AUV needs to be provided with an USBL system to receive the signal and estimate the position of the other AUV to navigate near it. The simplified communication system is illustrated in figure \ref{fig:auv_scene}. 
 
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=0.7\textwidth]{figures/proposed-solution}
+	\includegraphics[width=0.8\textwidth]{figures/proposed-solution}
 	\caption{Communication System}
 	\label{fig:auv_scene}
 \end{figure}
 
-This partial system was developed in previous dissertations and research work, which can be better understood in \cite{afonso-thesis}. Briefly, the system consists on a transducer of four hydrophones forming a 3D array deployed on the mule AUV. This array will receive the same signal wave front. The system then calculates the cross-correlation between the received and expected signals, which is a BPSK modulated binary sequence. The cross-correlation peak indicates the distance between AUVs and it is calculated with timing resolution corresponding to 1 sampling period of the acquired signal, which in the developed systems corresponds approximately to 6mm (with a sampling frequency of 244kHz).
+This partial USBL system was developed in previous dissertations and research work, which can be better understood in \cite{afonso-thesis}. Briefly, the system consists on a transducer of four hydrophones forming a 3D array deployed on the mule AUV. The distance between AUVs is given by the cross-correlation between the received and expected signals. Since the operation frequency range is around hundreds of $kHz$, then the signal's wavelength is expected to be smaller then the hydrophones' baseline but not sufficient to accurately estimate the angle of arrival. Therefore, this measurement is intended to be refined with an additional phase difference calculation of the arriving signals to each hydrophone.
 
-Since we are referring to an USBL system and due to the limitations in dimension of the AUV that will integrate this system, the hydrophones have to be placed within a few centimeters from each other. For this reason, the obtained time resolution by using only the cross-correlation, corresponding to a maximum distance accuracy of approximately 6mm, will not be enough for the calculation of the angle of arrival of the sound wave. Thus, in this thesis it is intended to refine this measurement by additionally calculating the phase differences of the arriving signals to each hydrophone. 
+Considering that the survey AUV navigates freely trough undisclosed locations, the USBL system to be employed needs to fulfill particular requirements that common commercial solutions do not comply. 
 
-Upon having this measurement refined, the information of the phase difference between hydrophones, as well as additional data from modules already implemented, will serve as base to develop a software mechanism that estimates the angle of arrival of the received signal to the hydrophone array.
+Firstly, the system needs to be able to cover both short and long range distances, going from few centimeters to tens of kilometers between the receiver and the transmitter, with the best estimation accuracy possible. For long range positions, the accuracy of the estimation affects how direct is the path for the mule AUV to reach the acoustic source. This influences the overall resource consumption, duration of navigation search and can affect the reliability of the process. For short range position, an accurate estimate allows to avoid collisions and correctly establish chosen relative positions between vehicles. Additionally, a sampling frequency increase would also facilitate the achievement of more robust estimations. The available market systems usually offer multiple solutions with different limited operation ranges, which would force to employ more than one system to achieve the mentioned range requirement.
 
-Finally, as an effort to improve the underwater localization system, a set of tests have to be performed in order to evaluate the robustness and estimation accuracy of the developed system. This study intends to prove the hypothesis declared in \ref{sec:hypoth-rq} and consequently respond to some of the defined research questions.
+Secondly, the USBL system needs to be capable of detecting incoming signals from any position in space, since the localization detection is solely based on the received signals. Since the system is composed by various sensors, it is expected that they are arranged in varied positions and with different viewing angles so they can cover a wider area. However, considering they are supposed to be employed on an AUV, the vehicle's body represents an opaque obstacle to signals. Therefore, with only four fixed hydrophones, it is not possible to detect positions with full viewing angle, as intended, since not all hydrophones would have line of sight to the transmitter at all times.
+
+The system that is proposed by this dissertation, it intended to resolve this technological gap with a system that satisfies the described requirements. Since using only four hydrophones constitutes a limitation for the viewing angle of the system, the suggested method implies deploying multiple sensors in the vehicle. From the available sensors, only four would be used simultaneously to receive the signals and feed them to the processing system. By adopting this concept, a main issue that arises is where to place the hydrophones within the vehicle. This constitutes the main research topic conducted in the present thesis.
+
+Considering that the mentioned mechanism is meant to be applied in moving vehicles with changing environment conditions, it is useful to integrate it in a system which is responsive in real time. Accordingly, the process that selects four hydrophones among the available set can be transformed into a dynamically reconfigurable system which enables the hydrophones commutation according to the sensors' configuration that minimizes the estimation error.
+
+The study conducted in the scope of this dissertation intends to prove the functionality of the developed method, validate the hypothesis declared in \ref{sec:hypoth-rq} and draw conclusions on the research questions.
 
 
 \section{Hypothesis and Research Questions} \label{sec:hypoth-rq}
 
-This dissertation intends to complement previous research work by adding the design of an integral hardware model and respond to a core research hypothesis which serves as fundamental investigation purpose.
-
-The first part of the developed work focuses on the practical implementation of a HDL model which has as premise the following idea: \textit{"Implementing a system that utilizes the phase differences between the arriving signals to an array of hydrophones, increases the accuracy of the time of arrival determination of the current system, which consequently improves the angle of arrival estimation."}
-
-The second part of the research work focuses on the study and experimentation with methods that improve the localization accuracy for underwater applications. This research hypothesis can be stated as:
+This dissertation intends to complement previous research work and respond to a core research hypothesis which serves as fundamental investigation purpose. This research hypothesis can be stated as:
 \\
 
-\textit{"Using a real-time dynamic reconfigurable hydrophone array improves the underwater localization accuracy"}
+\textit{"Using a USBL system which dynamically reconfigures the hydrophone selection leads to an improvement on the underwater localization accuracy, allows to have a wider viewing angle and makes it suitable for both short and long range estimation."}
 \\
 
 Attending the proposed hypothesis, the topics that are intended to be explored and discussed in this thesis's work can be summarized in the following research questions:
@@ -41,13 +42,13 @@ Attending the proposed hypothesis, the topics that are intended to be explored a
 %Research Questions
 \begin{itemize}
 
-	\item \textbf{RQ1: }\textit{How should a system be implemented so it is capable of calculating phase differences between arriving signals at four different hydrophones and, simultaneously, be compatible with the available space in the FPGA?}
+	\item \textbf{RQ1: }\textit{What method should be adopted in order to efficiently compare the performance of hydrophone configurations?}
 	
-	\item \textbf{RQ2: }\textit{What method should be adopted in order to efficiently estimate the angle of arrival of a signal to an array of four hydrophones?}
+	\item \textbf{RQ2: }\textit{What decision metric(s) should be used to evaluate the optimal hydrophone configuration for a specific angle of arrival?}
 	
-	\item \textbf{RQ3: }\textit{What metrics should be used to evaluate which hydrophone configuration is optimal for a certain angle of arrival?}
+	\item \textbf{RQ3: }\textit{How should the system be developed in order to have a broad viewing angle of the space?}
 	
-	\item \textbf{RQ4: }\textit{How should the system be developed in order to improve the vision angle of the hydrophone array?}
+	\item \textbf{RQ2: }\textit{Are there distinct best hydrophone configurations for short and long range estimation?}
 	
 \end{itemize}
 
@@ -71,5 +72,6 @@ The validation of scientific work is a key factor to demonstrate how reliable an
 	\item \textbf{Field experiments}
 	
 	After having the analytical methods and simulations coherent, it is essential then to test the system in a real environment in order to understand if the system still works correctly when real conditions are added. By testing it in a real application it is possible to take conclusions about its robustness and consider improvements or refinements for the system.
-	
+	In the present work, only the developed hardware design was subjected to field tests.
+
 \end{itemize}

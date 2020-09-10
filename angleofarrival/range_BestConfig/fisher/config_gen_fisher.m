@@ -87,14 +87,17 @@ for i_h2 = 1:length(ri_shift_tot) - 2
             %can be consulted associating the collumn index to a calculated error
             hydro_comb(:,cnt_comb) = [0 i_h2 i_h3 i_h4]; 
                 
-            [min_det, min_eig, std_det, pos_min_det, pos_min_eig, eig_value, eig_vector] = ...
+            [mean_det, mean_eig, mean_trace, std_det, eig_value, eig_vector] = ...
                 fisher(hconfig,s);
-
-            vec_min_det(cnt_comb) = min_det;
-            vec_min_eig(cnt_comb) = min_eig;
+            
+            eig_value = sqrt(eig_value);
+            
+            vec_min_det(cnt_comb) = mean_det;
+            vec_min_eig(cnt_comb) = mean_eig;
+            vec_min_trace(cnt_comb) = mean_trace;
             vec_std_det(cnt_comb) = std_det;
-            vec_pos_max_det(:,cnt_comb) = pos_min_det;
-            vec_pos_min_det(:,cnt_comb) = pos_min_eig;
+%            vec_pos_max_det(:,cnt_comb) = pos_min_det;
+%            vec_pos_min_det(:,cnt_comb) = pos_min_eig;
 
             cnt_comb = cnt_comb + 1;
 
@@ -198,6 +201,7 @@ end
 %best config = minimum radius of sphere
 [best_rad_det,best_rad_det_ind] = min(vec_min_det);
 [best_rad_eig,best_rad_eig_ind] = min(vec_min_eig);
+[best_rad_trace,best_rad_trace_ind] = min(vec_min_trace);
 [best_rad_std,best_rad_std_ind] = min(vec_std_det);
 
 

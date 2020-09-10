@@ -20,7 +20,7 @@ The natural limitations of acoustic channels combined with the properties of an 
 
 The oceanic environment has a complex sound propagation model, as it comprises many variants in order to realistically represent underwater acoustics.
 
-Acoustic signals' propagation speed is mainly related with two factors: compressibility and density. The water density can be characterized by the temperature, salinity and pressure,which is associated with depth. Figure \ref{fig:spd-sound} exhibits a generic sound speed profile in relation to depth. The water surface is commonly a mixed layer which results in an approximately constant sound speed. After this layer, it suffers a significative decrease, usually reaching the lower tangible speed, which results from the variation of temperature that characterizes the thermocline layer. From that point forward, pressure is the greatest influencer on the speed of sound, so it increases relatively proportionally to depth .
+Acoustic signals' propagation speed is mainly related with two factors: compressibility and density. The water density can be characterized by the temperature, salinity and pressure,which is associated with depth. Figure \ref{fig:spd-sound} exhibits a generic sound speed profile in relation to depth. The water surface is commonly a mixed layer which results in an approximately constant sound speed. After this layer, it suffers a significant decrease, usually reaching the lower tangible speed, which results from the variation of temperature that characterizes the thermocline layer. From that point forward, pressure is the greatest influencer on speed of sound, so it increases relatively proportionally to depth .
 
 \begin{figure}[!htbp]
 	\centering
@@ -38,16 +38,30 @@ c = 1449.2 + 4.6T - 0.055T^2 + 0.00029T^3 + (1.34 - 0.01T)(S-35) + 0.016z
 
 \subsection{Multipath} \label{subsec:multipath}
 
-Multipath occurs when a transmitting signal suffers reflection or refraction in a surface (e.g. water surface, ocean floor, dock's wall), leading to a change in its original characteristics. This phenomenon can affect the propagation speed, the energy and the total distance that the signal was predicted to travel. These altered signals in conjunction with constant movement of the receiver makes it more complicated to accurately estimate the distance between the transmitter and the receiver, as well as determine the line-of-sight signal. 
+Multipath occurs when signals suffer distortion which originate multiple propagation paths, leading to a change in their original characteristics. This phenomenon is originated by diverse factors that cause distortion in the underwater channels, typically affecting the water composition, such as water temperature and depth. The signal distortions caused by multipath include signal fading, which is usually modeled by Rayleigh fading channel theory, varying operation frequency, time-variant propagation delays, among others.
+
+The multipath behavior can be distinguished depending on depth, in shallow water paths and deep water paths since they demonstrate distinct propagation effects: 
+
+\paragraph{Shallow water paths} In shallow water, the acoustic signals can be reflected or refracted on the surface, where attenuation is generally little, and on the bottom of the ocean, where it suffers a higher attenuation depending on the soil material, frequency and incidence angle. Figure \ref{fig:mpath} represent a typical multipath caused by reflection on the sea surface and bottom. 
 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.7\textwidth]{figures/multipath}
-	\caption{Multipath}
+	\caption{Illustrative example of shallow water multipath}
 	\label{fig:mpath}
 \end{figure}
 
-In consequence, the underwater acoustic channel is qualified as a non-minimum phase system because it produces time-variant output responses.
+
+\paragraph{Deep water paths} In deep water, there are essentially six types of propagation paths, detailed bellow, whose channel model equations can be consulted in \cite{multipath-rayleigh-models}. These rely on the notion that signals are bent towards the characteristics that lead to a slower propagation speed, such as a temperature and depth decrease.
+
+\begin{itemize}
+	\item \textit{Surface reflection}: the signal is reflected on the sea surface, where the attenuation depends on its acoustic roughness.
+	\item \textit{Surface duct}: the signal gets confined in a surface layer, where the sound velocity increases with depth, due to varied thermal conditions in deeper layers, which causes it to reflect on the surface and bounce back when reaching the subsequent layer.
+	\item \textit{Bottom bounce}: the signal is reflected on the bottom of the ocean, suffering attenuation dependent on the reached material.
+	\item \textit{Convergence zone}: it depends on the sound speed profile and water depth that characterizes the channel. When the temperature decreases the signal has a tendency to bent downwards, however when an increase in pressure is reached the signal tends to bent upwards again, originating convergence locations.
+	\item \textit{Deep sound channel}: it is originated in levels which are surrounded by layers with characteristics highly dependent on depth. So, the signal is constantly bent according to the depth that leads to a minimum speed. 
+	\item \textit{Reliable acoustic path}: this path occurs when the transmitter is positioned in very deep water and the receiver is near the surface. Although the signal is bent downwards due to decreased temperature, when reaches a certain depth it is bent upwards making the communication channel reliable.
+\end{itemize}
 
 \subsection{Doppler Effect} \label{subsec:doppler}
 
@@ -414,7 +428,7 @@ Additionally, it is possible to detail this information by calculating the actua
 
 Further explanation about the methods used in a deeper exploration of the Crámer-Rao lower bound can be consulted in \cite{bishop-cramer-rao}, which serves as guide to investigate other scenarios of application of this theorem. However, the mentioned concepts were all the necessary for the approach on this dissertation .
 
-This same process is adopted in this dissertation. All steps specifically taken for this study are declared in section \ref{sec:cramer-rao-b} of the present document.
+This same process is adopted in this dissertation. All steps specifically taken for this study are declared in section \ref{sucsec:FIM} of the present document.
 
 %_______________________________________________________________________________
 %_______________________________________________________________________________
@@ -442,3 +456,7 @@ The most relevant category for the present work is the information-based criteri
 %--------------------------
 
 \subsection{Particle Swarm Optimization}
+
+\note{PAPER: Optimal-receiver-config-short-baseline-localization-systems-using-particle-swarm-opt }
+
+Optimal-receiver-config-short-baseline-localization-systems-using-particle-swarm-opt : \cite{particle-swarm-opt}

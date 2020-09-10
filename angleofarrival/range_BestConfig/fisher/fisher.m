@@ -1,4 +1,4 @@
-function [min_det, min_eig, std_det, pos_min_det, pos_min_eig,eig_value,eig_vector] = fisher(ri,s)
+function [mean_det, mean_eig, mean_trace, std_det, eig_value,eig_vector] = fisher(ri,s)
 %--------------------------------------------------------------------------
 % Description: For a certain sensors configuration and a known acoustic
 % source positions matrix, it is calculated the Fisher Information Matrix 
@@ -42,11 +42,11 @@ if not_function == 1
 %           0      -e      -e      -w];
 end
 
-figure
-t = 1:0.1:30;
-a = cos(t);
-plot(a,'k','LineWidth',2) %
-ylim([-2,2])
+% figure
+% t = 1:0.1:30;
+% a = cos(t);
+% plot(a,'k','LineWidth',2) %
+% ylim([-2,2])
 
 
 %--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ if single_position == 0
     [rownum,n_samples_elevation] = size(t_elevation_rad); %number of elevation_positions
 
     %--------------------------------------------------------------------------
-    norm_s = [500]; % norm values to be tested (row)
+    norm_s = [10000]; % norm values to be tested (row)
     count = 1;      % size of vector s +1 
     count_sph = 1;  % size of vector spherical +1
 
@@ -228,18 +228,24 @@ end
 %eig_value_tot = eig_value(1,1) + eig_value(2,1) + eig_value(3,1);
 
 %CHANGEDCHANGEDCHANGEDCHANGEDCHANGEDCHANGEDCHANGEDCHANGEDCHANGEDCHANGED
-[min_det,ind_min_det] = min(determinant_fisher); %max radius of sphere
-[min_eig,ind_min_eig] = min(eigen_fisher); %min radius of sphere
+% [min_det,ind_min_det] = min(determinant_fisher); %max radius of sphere
+% [min_eig,ind_min_eig] = min(eigen_fisher); %min radius of sphere
+% std_det = std(determinant_fisher); %standard deviation
+% [min_trace,ind_min_trace] = min(trace_inf_A); %min radius of sphere
+
+mean_det = mean(determinant_fisher); %max radius of sphere
+mean_eig = mean(eigen_fisher); %min radius of sphere
+mean_trace = mean(trace_inf_A); %min radius of sphere
 std_det = std(determinant_fisher); %standard deviation
 
 
-if single_position == 0
-    pos_min_det = spherical(:,ind_min_det);
-    pos_min_eig = spherical(:,ind_min_eig);
-else
-    pos_min_det = NaN;
-    pos_min_eig = NaN;
-end
+% if single_position == 0
+%     pos_min_det = spherical(:,ind_min_det);
+%     pos_min_eig = spherical(:,ind_min_eig);
+% else
+%     pos_min_det = NaN;
+%     pos_min_eig = NaN;
+% end
 
 %************************** PLOT OPTIONS **********************************
 if plot_FIMdet == 1 && single_position == 0

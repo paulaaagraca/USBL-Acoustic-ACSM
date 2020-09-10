@@ -9,7 +9,7 @@ clear
 plot_on = 0;
 plot_uncert_vec = 1;
 rotation = 1;
-plot_montecarlo_fisher = 0;
+plot_montecarlo_fisher = 1;
 
 %--------------------------------------------------------------------------
 %_____TESTING CONFIGURATIONS_______________________________________________
@@ -29,7 +29,7 @@ ri = [q   0   0    0    0    0   0    0    0;
       0   0   0    w    -w   e   e    -e   -e;
       0   w   -w   0    0    e   -e   e    -e];
 
-s=[10;10;10]; %single source position for test
+s=[0;1000;0]; %single source position for test
 
 h1 = ri(:,1); %h1 = nose hydrophone gives the 3rd dimension
 cnt_comb = 1;
@@ -74,7 +74,7 @@ cnt_comb = 1;
                 
                 %----------------------------------------------------------
                 %------choose config for uncertainty plot------------------
-                ce = [1 4 6 8];
+                ce = [1 2 7 9];
                 if isequal(hconfig_ind, ce)
                     uncert_vec1_pos_org = eig_vector(:,1) * (eig_value(1,1)/2);
                     uncert_vec2_pos_org = eig_vector(:,2) * (eig_value(2,2)/2);
@@ -274,7 +274,6 @@ end
 if plot_uncert_vec == 1
 %      %--plot connector vectors from origin to estimated source positions--
     figure
-
      %plot3([R_estimations(1,i),0],[R_estimations(2,i),0],[R_estimations(3,i),0],'g')
      plot3([uncert_vec1_pos(1,1),uncert_vec1_neg(1,1)],...
            [uncert_vec1_pos(2,1),uncert_vec1_neg(2,1)],...
@@ -294,7 +293,7 @@ if plot_uncert_vec == 1
      axis equal
      hold on
      scatter3(s(1,1),s(2,1),s(3,1),40,'r','filled')  
-       
+     %hold on  
      %legend('uncert_1','uncert_2','uncert_3');  
      %title('Unertainty vectors around estimated position');
      xlabel('x');
@@ -302,28 +301,28 @@ if plot_uncert_vec == 1
      zlabel('z');
      
      if rotation == 1  
-         figure
+         f_rot_s = figure;
          for asd = 1:3
              %hold on
              subplot(1,3,asd)
              plot3([uncert_vec1_posr(1,1),uncert_vec1_negr(1,1)],...
                    [uncert_vec1_posr(2,1),uncert_vec1_negr(2,1)],...
                    [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'g')
-
+             
              hold on
 
              plot3([uncert_vec2_posr(1,1),uncert_vec2_negr(1,1)],...
                    [uncert_vec2_posr(2,1),uncert_vec2_negr(2,1)],...
                    [uncert_vec2_posr(3,1),uncert_vec2_negr(3,1)],'r')
-
+            
              hold on    
 
              plot3([uncert_vec3_posr(1,1),uncert_vec3_negr(1,1)],...
                    [uncert_vec3_posr(2,1),uncert_vec3_negr(2,1)],...
                    [uncert_vec3_posr(3,1),uncert_vec3_negr(3,1)],'b')
-
+             
              hold on
-             scatter3(s_rott(1,1),s_rott(2,1),s_rott(3,1),40,'b','filled') 
+             scatter3(s_rott(1,1),s_rott(2,1),s_rott(3,1),20,'b','filled') 
 
              %legend('uncert_1','uncert_2','uncert_3');  
              %title('Unertainty vectors around estimated position');
@@ -333,110 +332,119 @@ if plot_uncert_vec == 1
 
              if asd == 1     
              %zx
+             title('Side view');
              axis equal
              view(0,0)
              end
 
              if asd == 2
              %zy
+             title('Front view');             
              axis equal
              view(90,0)
              end
 
              if asd == 3
              %yx
+             title('Upper view');             
              axis equal
              view(0,90)
              end
-         end    
+         end   
+         set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.3, 0.7, 0.5]);
+         saveas(f_rot_s,'plots/plot-fim-[10,0,10]-C','jpg')
+         
      end
 end
 %%
 %--------------------------------------------------------------------------
 %--------PRINT OVERLAID MONTE CARLO AND FISHER SIMULATION PLOTS------------
 if plot_montecarlo_fisher == 1
-    load('../study_Cramer-Rao/plots/clouds/estim_[0,1000,0]_1468best_10000samp.mat', 'R_estimations_rott');
+    load('../study_Cramer-Rao/plots_show/clouds/estim_[0,1000,0]_1279_10000samp.mat', 'R_estimations_rott');
 
     figure
-    scatter3(R_estimations_rott(1,:),R_estimations_rott(2,:),R_estimations_rott(3,:),40,'r','filled')
+    scatter3(R_estimations_rott(1,:),R_estimations_rott(2,:),R_estimations_rott(3,:),5,'r','filled')
 
-    figure
+    f_est=figure;
          for asd = 1:3
              subplot(1,3,asd)
              if asd == 1   
                  %xz
-                 scatter(R_estimations_rott(1,:),R_estimations_rott(3,:),'filled')     
+                 scatter(R_estimations_rott(1,:),R_estimations_rott(3,:),5,'filled')     
                  axis equal
                  xlabel('x');
                  ylabel('z');
                  hold on
 
                  plot([uncert_vec1_posr(1,1),uncert_vec1_negr(1,1)],...
-                      [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'k')
+                      [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'r')
                  axis equal
 
                  hold on
 
                  plot([uncert_vec2_posr(1,1),uncert_vec2_negr(1,1)],...
-                      [uncert_vec2_posr(3,1),uncert_vec2_negr(3,1)],'g')
+                      [uncert_vec2_posr(3,1),uncert_vec2_negr(3,1)],'k')
                  axis equal
 
                  hold on
                  plot([uncert_vec3_posr(1,1),uncert_vec3_negr(1,1)],...
-                      [uncert_vec3_posr(3,1),uncert_vec3_negr(3,1)],'r')
+                      [uncert_vec3_posr(3,1),uncert_vec3_negr(3,1)],'g')
                  axis equal
+                 title("Side View")
 
              end
 
              if asd == 2
                  %yz
-                 scatter(R_estimations_rott(2,:),R_estimations_rott(3,:),'filled')                   
+                 scatter(R_estimations_rott(2,:),R_estimations_rott(3,:),5,'filled')                   
                  xlabel('y');
                  ylabel('z');
                  axis equal
                  hold on
 
                  plot([uncert_vec1_posr(2,1),uncert_vec1_negr(2,1)],...
-                      [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'k')
+                      [uncert_vec1_posr(3,1),uncert_vec1_negr(3,1)],'r')
                  axis equal
 
                  hold on    
 
                  plot([uncert_vec2_posr(2,1),uncert_vec2_negr(2,1)],...
-                      [uncert_vec2_posr(3,1),uncert_vec2_negr(3,1)],'g')
+                      [uncert_vec2_posr(3,1),uncert_vec2_negr(3,1)],'k')
                  axis equal
 
                  hold on   
                  plot([uncert_vec3_posr(2,1),uncert_vec3_negr(2,1)],...
-                      [uncert_vec3_posr(3,1),uncert_vec3_negr(3,1)],'r')
+                      [uncert_vec3_posr(3,1),uncert_vec3_negr(3,1)],'g')
                  axis equal
-
+                 title("Front View")
 
              end
 
              if asd == 3
                  %xy
-                 scatter(R_estimations_rott(1,:),R_estimations_rott(2,:),'filled') 
+                 scatter(R_estimations_rott(1,:),R_estimations_rott(2,:),5,'filled') 
                  xlabel('x');
                  ylabel('y');
                  axis equal
                  hold on
 
                  plot([uncert_vec1_posr(1,1),uncert_vec1_negr(1,1)],...
-                      [uncert_vec1_posr(2,1),uncert_vec1_negr(2,1)],'k')
+                      [uncert_vec1_posr(2,1),uncert_vec1_negr(2,1)],'r')
                  axis equal
 
                  hold on
 
                  plot([uncert_vec2_posr(1,1),uncert_vec2_negr(1,1)],...
-                      [uncert_vec2_posr(2,1),uncert_vec2_negr(2,1)],'g')
+                      [uncert_vec2_posr(2,1),uncert_vec2_negr(2,1)],'k')
                  axis equal
 
                  hold on
 
                  plot([uncert_vec3_posr(1,1),uncert_vec3_negr(1,1)],...
-                      [uncert_vec3_posr(2,1),uncert_vec3_negr(2,1)],'r')
+                      [uncert_vec3_posr(2,1),uncert_vec3_negr(2,1)],'g')
                  axis equal
+                 
+                 title("Upper View")
              end
 
              %hold on
@@ -447,7 +455,8 @@ if plot_montecarlo_fisher == 1
 
              %legend('uncert_1','uncert_2','uncert_3');  
              %title('Unertainty vectors around estimated position');
-
+        set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.3, 0.7, 0.5]);
+        saveas(f_est,'plots/plot-fisher-monte-overlaid-0,1000,0-C','jpg')
      end
 end
 %end

@@ -13,7 +13,7 @@ clear
 %---test options-----------------------------------------------------------
 plot_position_cloud = 0;    % plot 3D source positions
 plot_error_cartesian = 1;   % plot error in cartesian coordinates
-plot_error_spherical = 0;   % plot error in spherical coordinates
+plot_error_spherical = 1;   % plot error in spherical coordinates
 plot_error3d_azimuth = 0;   % plot error of azimuth per azimuth(x) and elevation(y)
 plot_error3d_elevation = 0; % plot error of elevation per azimuth(x) and elevation(y)
 %--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 
 %--------------------------------------------------------------------------
 
-norm = [1000]; % norm values to be tested (row)
+norm = [10]; % norm values to be tested (row)
 
 count = 1;     % size of vector s +1
 count_sph = 1; % size of vector spherical +1
@@ -249,12 +249,13 @@ if plot_error_spherical == 1
     set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 1, 0.7, 0.6]);
     
     %saveas(f,'../../feup-teses/figures/plots/plot-s1-A-n10-inv','jpg')
+      
 end
 
 %-----plot error of azimuth (per azimuth and elevation) in 3D--------------
 if plot_error3d_azimuth == 1
     figure
-    scatter3(spherical(1,:),spherical(2,:),error_azimuth,40,'g','filled')
+    scatter3(spherical(1,:),spherical(2,:),error_azimuth,20,'g','filled')
     
     title('Error of Azimuth (deg)');
     xlabel('Azimuth (deg)');
@@ -265,7 +266,7 @@ end
 %-----plot error of elevation (per azimuth and elevation) in 3D------------
 if plot_error3d_elevation == 1  
     figure
-    scatter3(spherical(1,:),spherical(2,:),error_elevation,10,'g','filled')
+    scatter3(spherical(1,:),spherical(2,:),error_elevation,2,'g','filled')
     
     title('Error of Elevation (deg)');
     xlabel('Azimuth (deg)');
@@ -273,5 +274,5 @@ if plot_error3d_elevation == 1
     zlabel('Error Elevation');
 end
 
-figure
-scatter3([0.2 0.2 0 0 1],[0 0 0.1 -0.1 1],[0.1 -0.1 0 0 1])
+%figure
+%scatter3([0.2 0.2 0 0 1],[0 0 0.1 -0.1 1],[0.1 -0.1 0 0 1])

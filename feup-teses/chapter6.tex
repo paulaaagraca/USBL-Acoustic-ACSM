@@ -11,10 +11,6 @@ This chapter is dedicated to explaining the methodological approach, the main fi
 
 \note{descrever mais detalhadamente os temas que vao ser abordados no capitulo}
 
-\note{- tendo em conta a posição do espaço, escolher a melhor configuração\\
-	- qual a melhor configuração (ou duas) para curto e longo alcance?\\
-	- tendo em conta a configuração qual é o local no espaço que consegue melhor resultados? (cramer rao)}
-
 \section{Monte Carlo Approach} \label{sec:config-perf}
 
 The developed algorithm serves as a tool to determine which is the best available hydrophone configuration for a certain target position. This approach uses a Monte Carlo method which is useful to solve problems that are deterministic in nature through repetition and application of random parameters. Additionally, it makes use of the developed estimator, which is comprehensively explained in \ref{subsec:estimator}, to estimate the target position for each sensor configuration.
@@ -36,7 +32,7 @@ For this experiment, it is considered a total of nine hydrophones, whose positio
 			& 0 & w & -w & 0 & 0 & e & -e & e & -e \\
 			\bottomrule 
 		\end{tabular}
-		\caption{Position coordinates for an implementation with 9 hydrophones}
+		\caption{Position coordinates for the implementation using 9 hydrophones}
 		\label{tab:config-9h}
 	\end{center}
 \end{table}
@@ -47,7 +43,7 @@ These positions are arranged so that they can mimic a possible deployment in an 
 	
 	\makebox[\textwidth][c]{\includegraphics[width=0.8\textwidth]{figures/9h-config}}
 	\captionsetup{justification=centering,margin=2cm}
-	\caption{Hydrophone positions for an implementation with 9 hydrophones}
+	\caption{Hydrophone positions for the implementation using 9 hydrophones}
 	\label{fig:9h-config}
 \end{figure}
 
@@ -234,7 +230,7 @@ After evaluating these equations and the limiting planes that they form, the pro
 \begin{figure}[!htbp]
 	\makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{figures/projections-los}}
 	\captionsetup{justification=centering,margin=2cm}
-	\caption{Line of sight regions in plane yz for x $\geq$ 0}
+	\caption{Line of sight regions in plane yx and zx for x $\geq$ 0}
 	\label{fig:los-color-b0}
 \end{figure}
 
@@ -244,7 +240,10 @@ In summary, it is possible to deduce that there is a larger quantity of differen
 
 %- considerations of the line of sight (mathematical approximations) - line of sight has to be defined for the model considered; if format changes, it has to be remade
 %-------------------------------------------------------------------------
-\subsection{Simulation results}
+
+\section{Comprehensive study of geometric configurations performance} \label{sec:analysis_config_performance}
+
+%Upon having full comprehension of the developed tool for determining the best configuration, it is interesting to compare its performance with widely used techniques. Therefore, the Crámer-Rao lower bound method was additionally implemented to do a systematic study on the performance of several hydrophone configurations.
 
 For the purpose of demonstrating the functionality of the implemented system, various acoustic source positions were tested and the results analyzed.
 
@@ -253,7 +252,7 @@ The first demonstration evaluates the achieved MSE, azimuth deviation and elevat
 \begin{figure}[!htbp]
 	\makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{figures/plot-[10,10,10]-1000s-errors}}
 	\captionsetup{justification=centering,margin=2cm}
-	\caption{Errors obtained for all configurations when estimating position (10,10,10)}
+	\caption{Errors obtained for all configurations when estimating position $s_{cart}(10,10,10)$}
 	\label{fig:errors-101010}
 \end{figure}
 
@@ -262,7 +261,7 @@ Additionally, if the azimuth and elevation deviations are evaluated simultaneous
 \begin{figure}[!htbp]
 	\makebox[\textwidth][c]{\includegraphics[width=0.9\textwidth]{figures/plot-[10,10,10]-1000s-both}}
 	\captionsetup{justification=centering,margin=2cm}
-	\caption{Overlaid azimuth and elevation deviations for all configurations when estimating position (10,10,10)}
+	\caption{Overlaid azimuth and elevation deviations for all configurations when estimating position $s_{cart}(10,10,10)$}
 	\label{fig:both-101010}
 \end{figure}
 
@@ -293,7 +292,7 @@ A set of tests were executed in order to compare the performance of various posi
 			\multirow{1}{*}{15} & -10 & 5 & 48 & 0.364 & 3 & 0.218 & 27 & 0.346 & 27 & 0.399 \\
 			\bottomrule 
 		\end{tabular}
-		\caption{Results of Monte Carlo simulation}
+		\caption{Summary of best configurations obtained by Monte Carlo simulation}
 		\label{tab:montecarlo-best1}
 	\end{center}
 \end{table}
@@ -303,7 +302,7 @@ Some conclusions can be taken upon the analysis of these results:
 	\item Configurations that achieve the overall minimum errors tend to integrate the LOS hydrophones that attain the larger baseline between them;
 	
 	\item Transmitter positions that return a higher number of LOS hydrophones, have more possible configurations to choose from and therefore can be more optimized, presenting the lowest errors;
-		
+	
 	\item The points directly behind the AUV that cover positions with $y$ and $z$ in the range [-w,w], are not contained in any line of sight region;
 	
 	\item When the transmitter positions have $x \leq 0$, they are in line of sight of less hydrophones than for $x > 0$, so there are fewer possible configurations and the returned best option for the various parameters are more consistent. Consequently, the returned minimum errors are usually higher than for $x > 0$;
@@ -322,7 +321,7 @@ The first position to be tested is $s(-10,-10,-10)$ which inherently has less hy
 \begin{figure}[!htbp]
 	\makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{figures/plot-[-10,-10,-10]-1000s-errors}}
 	\captionsetup{justification=centering,margin=2cm}
-	\caption{Errors obtained for all configurations when estimating position (-10,-10,-10)}
+	\caption{Errors obtained for all configurations when estimating position $s_{cart}(-10,-10,-10)$}
 	\label{fig:errors-10-10-10}
 \end{figure}
 
@@ -366,12 +365,30 @@ Lastly, an extensive verification process was held in order to ensure that the r
 			\multicolumn{1}{c|}{$8^{th}$ octant} & \multirow{1}{*}{-1} & -100 & -10 & 3, 5, 8, 9 \\
 			\bottomrule 
 		\end{tabular}
-		\caption{Hydrophones with line of sight for various positions}
+		\caption{Hydrophones with line of sight for several $s$ positions}
 		\label{tab:LOS-var-pos}
 	\end{center}
 \end{table}
-	
-\subsection{Optimal solution based on range} \label{subsec:opt-range}
+
+
+\subsection{Comparison with Crámer-Rao lower bound}
+
+Although the Monte Carlo approach and the Crámer-Rao bound method use distinct decision metrics,  it is still worth to understand the practical differences between the implementations regarding the developed dynamic reconfigurable method.
+
+A simulation was performed in which position $s_{cart}(0,1000,0)$ is estimated by both methods, obtaining the estimate cloud by the Monte Carlo approach and the uncertainty axis in Crámer-Rao bound. Figure \ref{fig:compare-cramer-monte-0,1000,0-C} illustrates both data overlaid, using configuration C.
+
+\begin{figure}[!htbp]
+	\makebox[\textwidth][c]{\includegraphics[width=1\textwidth]{figures/plot-fisher-monte-overlaid-0,1000,0-C}}
+	\captionsetup{justification=centering,margin=2cm}
+	\caption{Errors obtained for all configurations when estimating position (100,0,0)}
+	\label{fig:compare-cramer-monte-0,1000,0-C}
+\end{figure}
+
+The plot reveals that the results are clearly not coherent, which is justified by the fact that the Crámer-Rao bound assumes any linear and unbiased estimator for the configuration's evaluation, while the Monte Carlo method is a non-linear estimator, due to the least squares equation that leads to the estimation in \ref{subsec:estimator}.
+
+Therefore, to avoid lack of generalization, once more it is considered that the preferable mechanism to be used for analyzing the estimation accuracy is the FIM along with the desired optimality criteria.
+
+\section{Optimal solution based on range} \label{subsec:opt-range}
 
 After having a comprehensive understanding on the system that is capable of determining which is the best configuration of hydrophones to estimate a specific transmitter position, an alternate scenario can be explored. We now consider that the USBL system does not reconfigure which sensor configuration it should use in order to optimize the estimation  in real time. Instead, a performance study is conducted beforehand so that only two configurations are chosen to be deployed, corresponding to the ones which return the average best estimation of short and long range positions. This way, it would be possible to alternate which configuration is used depending solely on the distance to the target. Alternatively, it is also possible to define just one overall best configuration, in cases where there is the necessity of reducing the number of deployed hydrophones or if the two obtained configurations do not have a significant difference in performance.
 
@@ -380,21 +397,21 @@ In the development of this mechanism, there are some adjustments and similaritie
 \begin{table}[!htbp] %use H to adjust
 	\begin{center}
 		\makebox[\textwidth]{%
-		\begin{tabular}{c | c c c c c c c c c c c c c c c c}
-			\toprule
-			& $r_{10}$ & $r_{11}$ & $r_{12}$ & $r_{13}$	& $r_{14}$ & $r_{15}$ & $r_{16}$ & $r_{17}$	& $r_{18}$ & $r_{19}$ & $r_{20}$ & $r_{21}$ & $r_{22}$ & $r_{23}$ & $r_{24}$ & $r_{25}$ \\ \midrule 
-			\multirow{1}{0.5em}{x} 
-			& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 
-			& $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$\\
-			\midrule 
-			\multirow{1}{0.5em}{y} 
-			& 0 & 0 & w & -w & e & e & -e & -e
-			& 0 & 0 & w & -w & e & e & -e & -e\\
-			\hline 
-			\multirow{1}{0.5em}{z} 
-			& w & -w & 0 & 0 & e & -e & e & -e
-			& w & -w & 0 & 0 & e & -e & e & -e \\
-			\bottomrule 
+			\begin{tabular}{c | c c c c c c c c c c c c c c c c}
+				\toprule
+				& $r_{10}$ & $r_{11}$ & $r_{12}$ & $r_{13}$	& $r_{14}$ & $r_{15}$ & $r_{16}$ & $r_{17}$	& $r_{18}$ & $r_{19}$ & $r_{20}$ & $r_{21}$ & $r_{22}$ & $r_{23}$ & $r_{24}$ & $r_{25}$ \\ \midrule 
+				\multirow{1}{0.5em}{x} 
+				& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 
+				& $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$ & $d\_x$\\
+				\midrule 
+				\multirow{1}{0.5em}{y} 
+				& 0 & 0 & w & -w & e & e & -e & -e
+				& 0 & 0 & w & -w & e & e & -e & -e\\
+				\hline 
+				\multirow{1}{0.5em}{z} 
+				& w & -w & 0 & 0 & e & -e & e & -e
+				& w & -w & 0 & 0 & e & -e & e & -e \\
+				\bottomrule 
 		\end{tabular}}
 		\caption{Additional coordinates for an implementation with 25 hydrophones}
 		\label{tab:config-25h}
@@ -411,7 +428,7 @@ In the development of this mechanism, there are some adjustments and similaritie
 The applied algorithm is similar to the previously explained algorithms \ref{alg:alg1} and \ref{alg:alg2}, with the following variations:
 
 \begin{enumerate}
-	\item Similarly to the condition described in \ref{subchap:acc-analy}, the acoustic source positions, $s$, to be estimated are defined in spherical coordinates, where for each defined norm, the elevation component covers the interval [-90$^{\circ}$ to 90$^{\circ}$] in steps of one and, for each elevation value, the azimuth component covers the interval [-180$^{\circ}$, 180$^{\circ}$] in steps of one, forming partial spheres around the reference axis' origin. The norm covers a range between 1 and 10000 meters.
+	\item Similarly to the condition described in \ref{subsec:perform-compar-meth}, the acoustic source positions, $s$, to be estimated are defined in spherical coordinates, where for each defined norm, the elevation component covers the interval [-90$^{\circ}$ to 90$^{\circ}$] in steps of one and, for each elevation value, the azimuth component covers the interval [-180$^{\circ}$, 180$^{\circ}$] in steps of one, forming partial spheres around the reference axis' origin. The norm covers a range between 1 and 10000 meters.
 	
 	\item An additional logical loop is added in algorithm \ref{alg:alg1} between lines 1 and 2, so that for each possible configuration all $s$ are estimated a number of $i = 1000$ iterations.
 	
@@ -420,164 +437,152 @@ The applied algorithm is similar to the previously explained algorithms \ref{alg
 
 From here it is possible to analyze which are the best returned configurations, according to the chosen parameters MSE, azimuth deviation, elevation deviation and combined azimuth and elevation deviations. According to the numeric errors that are obtained, it is then possible to decide whether there is a single configuration that has evidently a better performance than the others or if there is a pair of configurations that can be used to obtain individually better estimations for short and long range.
 
-\subsubsection{Simulation results}
+\subsection{Simulation results}
 
-\note{conditions of the test - numeros iniciais \\
-		 fez se o teste ao longo de x normas, de entre 1 e 1000\\
-	 	 concluiu-se que ha discrepancias e nao ha uma configuração fixa que é a melhor para curto e/ou longo alcance\\
- 	 	 ao analisar os resultados, eu diria que a config x é a melhor para curto e a y  é melhor para longo\\
-  	 	  grafico de evolução dos std \\
-   	  	  tabela de configs para todas as ranges ?}
-
-\section{Systematic comparison of geometric configurations performance} \label{sec:analysis_config_performance}
-
-Upon having full comprehension of the developed tool for determining the best configuration, it is interesting to compare its performance with widely used techniques. Therefore, the Crámer-Rao lower bound method was additionally implemented to do a systematic study on the performance of several hydrophone configurations.
-
-The fundamental thought process and mathematical notation previously used in \ref{sec:cramer} are applied in the study that will be explained next.
-
-\subsection{Crámer-Rao bound}  \label{sec:cramer-rao-b}
-
-The implementation of the Crámer-Rao bound method can be essentially partitioned in three steps:
-
-\begin{enumerate}
-	
-	\item Formulate the observations vector
-	\item Calculate the Fisher Information Matrix (FIM)
-	\item Calculate the determinant of FIM and draw conclusions
-	
-\end{enumerate}
-
-In this thesis, the number of used hydrophones per estimation is four, so all expressions will be presented for this case.
-
-Firstly, the observation vectors are formulated based on an initial time of arrival $t_0$, which is given by a synchrony mechanism integrated in the global communication system, and the time of arrival based on the vectors that connect the hydrophone positions, $r_i$, to the transmitter, $s$. For a more realistic approach, it is also considered an added noise component that can be approximated to a Gaussian distribution $n_i \sim \mathcal{N}(\mu,\,\sigma^{2})$. 
-
-The four observations vectors are then expressed as \ref{eq:obs-my1} to \ref{eq:obs-my4}.
-
-\begin{eqnarray}
-t_1 = t_0 + \frac{s - r_1}{c} + n_1 \\
-\label{eq:obs-my1}
-t_2 = t_0 + \frac{s - r_2}{c} + n_2 \\
-\label{eq:obs-my2}
-t_3 = t_0 + \frac{s - r_3}{c} + n_3 \\
-\label{eq:obs-my3}
-t_4 = t_0 + \frac{s - r_4}{c} + n_4 
-\label{eq:obs-my4}
-\end{eqnarray}
-
-Then, addressing the second step, all conditions are set to calculate the FIM,  $I(d) \in \mathbb{R}^{3x3}$. In order to do so, if d$_{i}$ = $|| s - r_{i} ||$ is the distance between each sensor and the source, the gradient of the observations vector can be expressed as shown in \ref{eq:grad_fisher}.
-
-\begin{eqnarray}
-\nabla_{d}t(d) = \frac{1}{c} 
-\begin{bmatrix}
-\frac{d_1^T}{||d_1||} \\ 
-\addlinespace
-\frac{d_2^T}{||d_2||} \\
-\vdots \\
-\addlinespace
-\frac{d_N^T}{||d_N||}
-\end{bmatrix}
-\label{eq:grad_fisher}
-\end{eqnarray}
-
-Additionally, the added noise component is present in the covariance matrix, represented as \ref{eq:covariance}, which integrates the FIM equation.
-
-\begin{eqnarray}
-& \Sigma = 
-\begin{bmatrix}
-\sigma_1^2 & 0 & 0 & 0 \\
-0 & \sigma_2^2 & 0 & 0 \\
-0 & 0  & \sigma_3^2  & 0 \\
-0 & 0 & 0 & \sigma_4^2 
-\end{bmatrix}
-\label{eq:covariance}
-\end{eqnarray}
-
-Overall, the conditions to obtain the FIM matrix are established and, after some mathematical formulation, it can be expressed as \ref{eq:final-fisher}. This function can be validated by a similar study made on TOA based optimal positioning \cite{cramer-bruno}.
-
-\begin{eqnarray}
-I(d) = \frac{1}{c^2} 
-\begin{bmatrix}
-\sum_{n=1}^{N} \frac{d_i d_i^T}{||d_i||^2} \frac{1}{\sigma_i^2}\\
-\end{bmatrix}
-\label{eq:final-fisher}
-\end{eqnarray}
-
-The final step is to calculate the determinant and find its relation to the volume of the \textit{uncertainty ellipsoid}. As mentioned before, in \ref{sec:cramer}, the Fisher Information Matrix determinant returns a deterministic value that represents the quantity of information which can be obtained and, therefore, the objective is to maximize it by respecting the condition $argmax \; det(I(d))$.
-
-
-In order to evaluate the obtained determinant values, they should be associated with a physical meaning, more specifically an uncertainty volume. In an initial approach the ellipsoid was not considered and instead an uncertainty sphere was analyzed. The radius of the uncertainty sphere, $u_{sphere}$, is expressed as \ref{eq:det-sphere}, which relates the three ellipsoid axis into a single mean radius that originates a figure of the same volume.
-
-\begin{eqnarray}
-	& u_{sphere}(d) = \sqrt[2]{\sqrt[3]{det(I(d)^{-1})}}
-	\label{eq:det-sphere}
-\end{eqnarray}
-
-In this situation, the optimization objective is expressed as $argmin u_{sphere}(d)$, which indicates that the error that originates a certain uncertainty radius is minimal.
-
-In a further analysis, the uncertainty ellipsoid is also calculated, using \ref{eq:det-ellip}. The squared eigenvalues of the inverse of the FIM indicate the length of each of the three ellipsoid axis and the eigenvectors give the direction of each axis. An eigenvector that is associated with the smaller eigenvalue indicates the direction in which there is less uncertainty and, equivalently, an eigenvector whose eigenvalue is the larger represents the direction in which there is the biggest uncertainty. Consequently, the goal in this case is to minimize the maximum squared eigenvalue of the FIM inverse, $argmin \; max(\sqrt{eigenvalue})$.
-
-\begin{eqnarray}
-	& u_{ellipsoid}(d) = \sqrt[2]{eig(I(d)^{-1})}
-	\label{eq:det-ellip}
-\end{eqnarray}
-
-\subsection{Comparison with Monte Carlo approach}
-
-In order to demonstrate the functionality of the described method, a first simulation was conducted in which a chosen configuration is tested for various positions $s$, returning the uncertainty sphere radius, in meters, that is obtained for each position. Similarly to what was considered before in \ref{subsec:opt-range}, for each defined norm, the elevation component covers the interval [-90$^{\circ}$ to 90$^{\circ}$] in steps of one and, for each elevation value, the azimuth component covers the interval [-180$^{\circ}$, 180$^{\circ}$] in steps of one, forming partial spheres around the reference axis' origin. In this section, all $s$ coordinates will be presented in spherical coordinates. The simulation was conducted using configuration C, which is represented in \ref{tab:config-fim} where the columns $r_{Ci}$ contain the position's coordinates of each hydrophone $i$.
+The previously defined method was tested through a series of simulations, in which all 1512 defined configurations repeatedly estimate all positions that compose spheres of defined norms. Then, the configurations that reveals lower estimation errors are selected as the most accurate in terms of azimuth angle, elevation angle, both angles simultaneously or MSE.
 
 \begin{table}[!htbp] %use H to adjust
 	\begin{center}
-		\begin{tabular}{ c | c c c c}
-			\toprule
-			% \cline{2-9}
-			\multicolumn{1}{c|}{} &$r_{C1}$& $r_{C2}$ & $r_{C3}$ & $r_{C4}$ \\
-			\midrule
-			\multirow{1}{0.5em}{x} & 0.1 & 0 & 0 & 0  \\
-			%\hline 
-			\multirow{1}{0.5em}{y} & 0 & 0 & -0.0707 & 0.0707 \\
-			%\hline 
-			\multirow{1}{0.5em}{z} & 0 & 0.1 & -0.0707  & -0.0707\\
-			\bottomrule 
-		\end{tabular}
-		\caption{Hydrophone configuration used for FIM simulations}
-		\label{tab:config-fim}
+		\makebox[\textwidth]{%
+			\begin{tabular}{ c | c c | c c | c c | c c}
+				\toprule
+				\multicolumn{1}{c|}{\textbf{}} & 
+				\multicolumn{2}{c|}{\textbf{Azimuth}} & \multicolumn{2}{c|}{\textbf{Elevation}} & \multicolumn{2}{c|}{\textbf{Azimuth+Elevation}} & 
+				\multicolumn{2}{c}{\textbf{MSE}}  \\
+				\midrule
+				\multicolumn{1}{c|}{Norm} & Config & Min  & Config & Min & Config & Min & Config & Min \\
+				\midrule
+				\multirow{1}{*}{1} & 792 & 0.4730 & 220 & 0.1758 & 862 & 0.3554 & 862 & 0.4654\\
+				\midrule
+				\multirow{1}{*}{2} & 792 & 0.4771 & 220 & 0.1738 & 827 & 0.3905 & 827 & 0.4549 \\
+				\midrule
+				\multirow{1}{*}{3} & 792 & 0.4820 & 220 & 0.1752 & 827 & 0.3921 & 860 & 0.4571\\
+				\midrule
+				\multirow{1}{*}{10} & 792 & 0.4796 & 260 & 0.1702 & 827 & 0.3918 & 827 & 0.4572\\
+				\midrule
+				\multirow{1}{*}{20} & 827 & 0.4893 & 260 & 0.1702 & 827 & 0.3905 & 827 & 0.4537\\
+			%	\midrule
+			%	\multirow{1}{*}{30} & 827 & 0.4875 & 260 & 0.1714 & 827 & 0.3913 & 827 & 0.4545\\
+			%	\midrule
+			%	\multirow{1}{*}{40} &  &  &  &  &  &  &  & \\
+				\midrule
+				\multirow{1}{*}{50} & 792 & 0.4940 & 220 & 0.1705 & 860 & 0.3947 & 860 & 0.4615\\
+				\midrule
+				\multirow{1}{*}{100} & 860 & 0.4881 & 260 & 0.1707 & 827 & 0.3913 & 860 & 0.4538\\
+				\midrule
+				\multirow{1}{*}{200} & 827 & 0.4853 & 260 & 0.1706 & 827 & 0.3889 & 827 & 0.4511\\
+			%	\midrule
+			%	\multirow{1}{*}{300} & 792 & 0.4879 & 260 & 0.1698 & 844 & 0.3937 & 844 & 0.4582\\
+			%	\midrule
+			%	\multirow{1}{*}{400} & 827 & 0.4864 & 260 &  0.1699 & 827 & 0.3883 & 827 & 0.4524\\
+				\midrule
+				\multirow{1}{*}{500} & 792 & 0.4886 & 260 & 0.1722 & 929 & 0.3935 & 862 & 0.4606\\
+				\midrule
+				\multirow{1}{*}{1000} & 827 & 0.4846 & 260 & 0.1709 & 827 & 0.3899  & 827 & 0.4524\\
+				\midrule
+				\multirow{1}{*}{10000} & 792 & 0.4810 & 260 & 0.1724 & 862 & 0.3920  & 827 & 0.4554\\
+				\bottomrule 
+		\end{tabular}}
+		\caption{Results of Monte Carlo simulation for range based estimation}
+		\label{tab:montecarlo-best-all}
 	\end{center}
 \end{table}
 
-The results are illustrated in figure \ref{fig:fim-100-C}, which show the obtained uncertainty sphere radius for each of the $s$ positions, with respect to azimuth and elevation angles. The first plot represents the 3D map of each radius in relation to both angles, the second plot is a 2D view of the uncertainty with respect to the azimuth angle  in degrees and the third plot is the 2D view of the uncertainty with respect to elevation angle in degrees.
+The overall results do not demonstrate a specific configuration to be the clear best in short or long range for the chosen parameters. In order to associate the obtained configuration numbers to the actual hydrophone placement, figure \ref{fig:config-images} gathers the most relevant representations for the simulations based on range. 
+
+For performance based on azimuth, configuration number 792 shows best results for norms between 1 and 10 meters. However, for longer range the results do not tends to a specific configuration, alternating between three options. 
+
+Regarding performance based on elevation, configuration 220 is indicated for 1 to 3 meters, while for ranges going from 10 to 10000 meters, configuration 260 is the clear preferred. As can be observed in the illustration, these are structurally similar.
+
+When evaluating azimuth and elevation accuracy simultaneously or MSE, the results are not clear and many configurations are alternated, where number 827 is the most frequent.
+
+Additionally, it should be noted that throughout all simulated norms, for each evaluated metrics the worse performance for every position corresponded to the same configurations.
 
 \begin{figure}[!htb]
-	\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{figures/plot-FIM-allpos-norm100-C}}
+	\makebox[\textwidth][c]{\includegraphics[width=0.8\textwidth]{figures/best-config-fim}}
 	\captionsetup{justification=centering,margin=2cm}
-	\caption{Uncertainty radius for all $s$ positions using configuration C}
-	\label{fig:fim-100-C}
+	\caption{Illustration of relevant hydrophone configurations for range based estimation}
+	\label{fig:config-images}
 \end{figure}
 
-In this specific case, it is noticeable that this configuration is capable of better estimations for low elevation angles and has an increasing error for elevation angles closer to the limits. Then the error has a tendency to increase for azimuth angles around $-90^{\circ}$ and $90^{\circ}$. Overall, for a norm equal to $100 m$, the standard deviation of all estimations is $0.0029m$ and the best estimation occurred for position $s(100,-180,3)$ in spherical coordinates, with an uncertainty radius of $0.0532m$.
+To conclude, the obtained data do not show a clear tendency of two specific configurations being overall best for short and long range. This can be a result of the Monte Carlo simulation nature which originates results that do not have a clear sequence as expected. Therefore, this same experiment is repeated in the next subsection using the Fisher Information Matrix integrated in the Crámer-Rao bound method.
 
-%Although the Monte Carlo approach and the Crámer-Rao bound method use a decision factor distinct from the developed dynamic reconfigurable method, it is still worth to understand the differences between the implementations.
+\subsection{FIM simulation}
 
-\note{estimator is considered not efficient,` à partida vao dar resultados diferentes}
+Since the Fisher Information Matrix is a reliable and well know tool for evaluating a configuration's performance, then a simulation was executed for determining the best configuration for short and long range estimations.
+Therefore, the method was integrated in a Monte Carlo approach that tests all 1512 configurations defined previously described in this section, which integrate a total of 25 different hydrophones. For each configuration, all $s$ positions that make up a sphere with a defined norm are used to calculate the FIM and evaluate the desired criteria. Among all, the configurations that demonstrate the preferred results correspond to the best performance in each specific criteria.
+
+Table \ref{tab:fim-best1} summarizes the obtained results for a norm range between 1 and 10000 meters. A standard metric and three optimality criteria were observed and for each of them, the table indicates the configuration number that proved to have the best performance and the respective achieved values: 
+
+\begin{itemize}
+	\item In E-optimality, the Eigenvalue column contains the minimum larger eigenvalue found among all configurations
+	
+	\item In D-optimality, the Determinant column includes the minimum computed determinant of the inverse of the FIM for all configurations
+	
+	\item In A-optimality, the Trace column comprises the minimum sum of eigenvalues of the FIM among all configurations
+\end{itemize}
+
+\begin{table}[!htbp] %use H to adjust
+	\begin{center}
+		\makebox[\textwidth]{%
+		\begin{tabular}{ c | c c | c c | c c }
+			\toprule
+			\multicolumn{1}{c|}{\textbf{}} & 
+			\multicolumn{2}{c|}{\textbf{E-optimality}} & \multicolumn{2}{c|}{\textbf{D-Optimality}} & \multicolumn{2}{c|}{\textbf{A-Optimality}} \\
+			\midrule
+			\multicolumn{1}{c|}{Norm} & Config & Eigenvalue  & Config & Determinant & Config & Trace \\
+			\midrule
+			\multirow{1}{*}{1} & 1248 & 6.2$\times10^{-3}$ & 1503 & 1.6$\times10^{-3}$ & 600 & 2.3$\times10^{-5}$ \\
+			\midrule
+			\multirow{1}{*}{2} & 1248 & 0.012 & 1503 & 2.5$\times10^{-3}$ & 1426 & 9.2$\times10^{-5}$  \\
+			\midrule
+			\multirow{1}{*}{3} & 1248 & 0.018 & 1503 & 3.3$\times10^{-3}$ & 1426 & 2.1$\times10^{-4}$  \\
+			\midrule
+			\multirow{1}{*}{10} & 1502 & 0.061 & 1503 & 7.4$\times10^{-3}$ & 1426 & 2.4$\times10^{-3}$ \\
+			\midrule
+			\multirow{1}{*}{20} & 1502 & 0.121 & 1503 & 0.012 & 1426 & 9.6$\times10^{-3}$\\
+		%	\midrule
+		%	\multirow{1}{*}{30} & 1502 & 0.182 & 1503 & 0.015 & 1426 & 0.022 & 68 & 9.1$\times10^{-4}$ \\
+		%	\midrule
+		%	\multirow{1}{*}{40} & 1502 & 0.242 & 1503 & 0.019 & 1426 & 0.039 & 68 & 1.1$\times10^{-3}$ \\
+			\midrule
+			\multirow{1}{*}{50} & 1502 & 0.303 & 1503 & 0.022 & 1426 & 0.061   \\
+			\midrule
+			\multirow{1}{*}{100} & 1502 & 0.061 & 1503 & 0.034 & 1426 & 0.242 \\
+			\midrule
+			\multirow{1}{*}{200} & 1502 & 1.212 & 1503 & 0.054 & 1426 & 0.968  \\
+		%	\midrule
+		%	\multirow{1}{*}{300} & 1502 & 1.818 & 1503 & 0.071 & 1426 & 2.180 & 68 & 4.2$\times10^{-3}$  \\
+		%	\midrule
+		%	\multirow{1}{*}{400} & 1502 & 2.424 & 1503 & 0.087 & 1426 & 3.875 & 68 & 5.1$\times10^{-3}$  \\
+			\midrule
+			\multirow{1}{*}{500} & 1502 & 3.029 & 1503 & 0.100 & 1426 & 6.055  \\
+			\midrule
+			\multirow{1}{*}{1000} & 1502 & 6.059 & 1503 & 0.159 & 1426 & 24.226 \\
+			\midrule
+			\multirow{1}{*}{10000} & 1502 & 60.587 & 1503 & 0.737 & 1426 & 2.42$\times10^{3}$ \\
+			\bottomrule 
+		\end{tabular}}
+		\caption{Results of FIM simulation for range based estimation}
+		\label{tab:fim-best1}
+	\end{center}
+\end{table}
+
+The overall results do not demonstrate a specific configuration to be the clear best in short or long range for the chosen parameters. In order to associate the obtained configuration numbers to the actual hydrophone placement, figure \ref{fig:config-images} gathers the most relevant representations for the simulations based on range. 
+
+By inspection, it is possible to understand that for each criterion there is a clear best configuration for short and long range. The hydrophone placement of the mentioned configuration numbers are illustrated in figure \ref{fig:config-images} for a more practical interpretation. 
+
+Therefore, in terms of E-optimality configuration, an approximately constant error of 0.6\% is visible, where number 1248 shows the best performance for range between 1 and 3 meters, while from 10 to 10000 meters configuration 1502 is considered the best.
+
+For D-optimality, a single configuration, number 1503, was considered the best for all defined ranges, which corresponds to an hydrophone placement that maximizes the baseline between the fixed sensor and the other three.
+
+Finally, in terms of A-optimality configuration number 600 is indicated for norm equal to 1 meters and, for the remaining ranges, number 1426 is chosen as the preferable option.
+
+\section{Summary and Discussion}
+
+\note{escrever melhor, reunir mais ideias}
 
 
-- tabela que para cada posição de 4 hidrofones, indica:
-\\
-- raio de incerteza maximo e posição no espaço onde ocorreu
-\\
--raio de incerteza minimo e posição no espaço onde ocorreu
-\\
-- desvio padrao de todos os pontos no espaço
-\\
-- uncertainty ellipsoid 
-\\
-plot do raio de incerteza para todas as posições no espaço de uma certa configuração
+Considering that the E-optimality is the most relevant criterion for this application, two configurations could be deployed, 1248 for short range and 1502 for long range, achieving an approximately constant error of 0.6\%.
 
-\note{plot da nuvem de pontos e eigen vectors sobrepostos}
-\note{comparar best configuration for short and long range}
-
-\note{analyze plane wavefront solution for estimator somwhere}
-
-\section{Conclusions}
-
-\note{-planar wavefront is more simillar to cramer rao for long range source position estimation (discards the non linear components as cramer rao, has some limitations)\\
-- cramer rao and monte carlo give different results because my estimator contains non linear components}
+This system can be applied to a dynamic reconfigurable configuration mechanism that allows the USBL system to be optimized in real time .

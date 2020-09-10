@@ -1,17 +1,21 @@
 \babel@toc {english}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Overview of commercial solutions\relax }}{16}{table.caption.13}% 
+\contentsline {table}{\numberline {2.1}{\ignorespaces Overview of commercial solutions\relax }}{19}{table.caption.17}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Hydrophone configurations used for accuracy tests\relax }}{34}{table.caption.25}% 
-\contentsline {table}{\numberline {4.2}{\ignorespaces Comparison of obtained errors for different configurations\relax }}{37}{table.caption.32}% 
+\contentsline {table}{\numberline {4.1}{\ignorespaces Hydrophone configurations used for accuracy tests\relax }}{41}{table.caption.31}% 
+\contentsline {table}{\numberline {4.2}{\ignorespaces Azimuth and elevation errors slope tendency for configuration A\relax }}{44}{table.caption.32}% 
+\contentsline {table}{\numberline {4.3}{\ignorespaces Obtained errors for configurations A,B and C by TDoA estimator\relax }}{46}{table.caption.34}% 
+\contentsline {table}{\numberline {4.4}{\ignorespaces Obtained errors for configurations A,B and C by plane wavefront estimator\relax }}{52}{table.caption.45}% 
+\contentsline {table}{\numberline {4.5}{\ignorespaces Obtained errors for configurations A,B and C by Cr\IeC {\'a}mer-Rao lower bound\relax }}{54}{table.caption.49}% 
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Position coordinates for an implementation with 9 hydrophones\relax }}{44}{table.caption.39}% 
-\contentsline {table}{\numberline {5.2}{\ignorespaces Results of Monte Carlo simulation\relax }}{52}{table.caption.46}% 
-\contentsline {table}{\numberline {5.3}{\ignorespaces Hydrophones with line of sight for various positions\relax }}{54}{table.caption.49}% 
-\contentsline {table}{\numberline {5.4}{\ignorespaces Additional coordinates for an implementation with 25 hydrophones\relax }}{55}{table.caption.50}% 
-\contentsline {table}{\numberline {5.5}{\ignorespaces Hydrophone configuration used for FIM simulations\relax }}{59}{table.caption.53}% 
+\contentsline {table}{\numberline {5.1}{\ignorespaces Position coordinates for the implementation using 9 hydrophones\relax }}{58}{table.caption.52}% 
+\contentsline {table}{\numberline {5.2}{\ignorespaces Summary of best configurations obtained by Monte Carlo simulation\relax }}{66}{table.caption.59}% 
+\contentsline {table}{\numberline {5.3}{\ignorespaces Hydrophones with line of sight for several $s$ positions\relax }}{68}{table.caption.62}% 
+\contentsline {table}{\numberline {5.4}{\ignorespaces Additional coordinates for an implementation with 25 hydrophones\relax }}{70}{table.caption.64}% 
+\contentsline {table}{\numberline {5.5}{\ignorespaces Results of Monte Carlo simulation for range based estimation\relax }}{72}{table.caption.66}% 
+\contentsline {table}{\numberline {5.6}{\ignorespaces Results of FIM simulation for range based estimation\relax }}{74}{table.caption.68}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces Configurations for the Monte Carlo approach with 9 employed hydrophones\relax }}{63}{table.A.1}% 
+\contentsline {table}{\numberline {A.1}{\ignorespaces Configurations for the Monte Carlo approach with 9 employed hydrophones\relax }}{79}{table.A.1}% 

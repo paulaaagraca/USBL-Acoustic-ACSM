@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.19)  4 SEP 2020 10:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.19)  10 SEP 2020 01:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -894,21 +894,21 @@ LaTeX Info: Redefining \addtolength on input line 81.
 (./appendix1.aux))
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 81.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 82.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -989,7 +989,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box55
-Package hyperref Info: Link coloring ON on input line 81.
+Package hyperref Info: Link coloring ON on input line 82.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -999,9 +999,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count192
 )
-LaTeX Info: Redefining \ref on input line 81.
-LaTeX Info: Redefining \pageref on input line 81.
-LaTeX Info: Redefining \nameref on input line 81.
+LaTeX Info: Redefining \ref on input line 82.
+LaTeX Info: Redefining \pageref on input line 82.
+LaTeX Info: Redefining \nameref on input line 82.
 
 (./thesis.out) (./thesis.out)
 \@outlinefile=\write4
@@ -1010,15 +1010,15 @@ LaTeX Info: Redefining \nameref on input line 81.
  ABD: EveryShipout initializing macros
 \@crestbox=\box56
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 122.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 123.
 LaTeX Font Info:    Font shape `T1/ptm/bx/sc' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/sc' tried instead on input line 122.
+(Font)              Font shape `T1/ptm/b/sc' tried instead on input line 123.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 122.
-<figures/uporto-feup.pdf, id=280, 338.26375pt x 126.4725pt>
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 123.
+<figures/uporto-feup.pdf, id=284, 338.26375pt x 126.4725pt>
 File: figures/uporto-feup.pdf Graphic file (type pdf)
 <use figures/uporto-feup.pdf>
-Package pdftex.def Info: figures/uporto-feup.pdf  used on input line 122.
+Package pdftex.def Info: figures/uporto-feup.pdf  used on input line 123.
 (pdftex.def)             Requested size: 204.85983pt x 76.59618pt.
  [-3
 
@@ -1027,13 +1027,13 @@ Package pdftex.def Info: figures/uporto-feup.pdf  used on input line 122.
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./figur
 es/uporto-feup.pdf>]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 122.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 123.
 
  (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 122.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 123.
 
 [-2
 
@@ -1041,6 +1041,9 @@ LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
 \openout2 = `abstract.aux'.
 
  (./abstract.tex
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
+ine 3.
+
 Underfull \hbox (badness 1629) in paragraph at lines 6--7
 \T1/ptm/m/n/10.95 en-tre AUVs através do método \T1/ptm/m/it/10.95 Ultra-Short 
 Base-line \T1/ptm/m/n/10.95 (USBL). Esta téc-nica baseia-se na
@@ -1133,400 +1136,450 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 Chapter 1.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <20.74> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 1.
-
-Underfull \vbox (badness 4266) has occurred while \output is active []
-
- [1
+[1
 
 
 ]
-Underfull \hbox (badness 1394) in paragraph at lines 28--29
-\T1/ptm/m/n/10.95 or-der to im-prove the es-ti-ma-tion pro-cess. Fi-nally, the 
-im-ple-mented sys-tem is val-i-dated
+Underfull \hbox (badness 1902) in paragraph at lines 19--20
+\T1/ptm/m/n/10.95 de-tailed and re-fined, de-ter-min-ing its lim-i-ta-tions and
+ ca-pa-bil-i-ties. Ad-di-tion-ally, all the
  []
 
-) [2]
+
+Underfull \hbox (badness 1242) in paragraph at lines 26--27
+[]\T1/ptm/m/n/10.95 The goal of the present work is to study and pro-pose a dy-
+nam-i-cally re-con-fig-urable
+ []
+
+
+Underfull \hbox (badness 2689) in paragraph at lines 34--35
+[]\T1/ptm/m/n/10.95 Chapter [][]2[][] of-fers an overview on back-ground con-ce
+pts about un-der-wa-ter acous-tics,
+ []
+
+
+Underfull \hbox (badness 1178) in paragraph at lines 34--35
+\T1/ptm/m/n/10.95 lo-cal-iza-tion es-ti-ma-tion and po-si-tion-ing sys-tems, fo
+l-lowed by USBL avail-able com-mer-cial
+ []
+
+[2]) [3]
 \openout2 = `chapter2.aux'.
 
- (./chapter2.tex
+ (./chapter2.tex [4
+
+
+
+]
 Chapter 2.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 19.
-[3
-
-
-
-]
-<figures/sound-profile.png, id=512, 412.54124pt x 394.47375pt>
+[5]
+<figures/sound-profile.png, id=546, 412.54124pt x 394.47375pt>
 File: figures/sound-profile.png Graphic file (type png)
 <use figures/sound-profile.png>
 Package pdftex.def Info: figures/sound-profile.png  used on input line 27.
 (pdftex.def)             Requested size: 256.07741pt x 244.86613pt.
- [4 <./figures/sound-profile.png>]
-<figures/multipath.png, id=524, 564.1075pt x 256.96pt>
+ [6 <./figures/sound-profile.png>]
+<figures/multipath.png, id=558, 564.1075pt x 256.96pt>
 File: figures/multipath.png Graphic file (type png)
 <use figures/multipath.png>
-Package pdftex.def Info: figures/multipath.png  used on input line 45.
+Package pdftex.def Info: figures/multipath.png  used on input line 49.
 (pdftex.def)             Requested size: 298.75264pt x 136.0862pt.
-
-Underfull \hbox (badness 1442) in paragraph at lines 72--73
+ [7 <./figures/multipath.png>]
+Underfull \hbox (badness 1442) in paragraph at lines 86--87
 []\T1/ptm/m/n/10.95 When con-sid-er-ing un-der-wa-ter com-mu-ni-ca-tion sys-tem
 s, it is es-sen-tial to quan-tify the
  []
 
-
-Underfull \vbox (badness 3078) has occurred while \output is active []
-
- [5 <./figures/multipath.png>] [6] [7] [8]
-<figures/triangulation.png, id=582, 306.14375pt x 242.9075pt>
+[8] [9] [10] [11]
+<figures/triangulation.png, id=625, 306.14375pt x 242.9075pt>
 File: figures/triangulation.png Graphic file (type png)
 <use figures/triangulation.png>
-Package pdftex.def Info: figures/triangulation.png  used on input line 193.
+Package pdftex.def Info: figures/triangulation.png  used on input line 207.
 (pdftex.def)             Requested size: 170.71393pt x 135.44905pt.
-<figures/geotriang.png, id=583, 530.98375pt x 392.46625pt>
+<figures/geotriang.png, id=626, 530.98375pt x 392.46625pt>
 File: figures/geotriang.png Graphic file (type png)
 <use figures/geotriang.png>
-Package pdftex.def Info: figures/geotriang.png  used on input line 206.
+Package pdftex.def Info: figures/geotriang.png  used on input line 220.
 (pdftex.def)             Requested size: 213.39568pt x 157.72629pt.
- [9] [10 <./figures/triangulation.png> <./figures/geotriang.png>] [11]
-<figures/lblsblusbl.png, id=621, 1164.35pt x 872.25874pt>
+ [12 <./figures/triangulation.png>] [13 <./figures/geotriang.png>]
+<figures/lblsblusbl.png, id=656, 1164.35pt x 872.25874pt>
 File: figures/lblsblusbl.png Graphic file (type png)
 <use figures/lblsblusbl.png>
-Package pdftex.def Info: figures/lblsblusbl.png  used on input line 265.
+Package pdftex.def Info: figures/lblsblusbl.png  used on input line 279.
 (pdftex.def)             Requested size: 426.79135pt x 319.72272pt.
- [12 <./figures/lblsblusbl.png>] [13]
-<figures/usbl-config.png, id=649, 447.6725pt x 419.5675pt>
+ [14] [15 <./figures/lblsblusbl.png>] [16]
+<figures/usbl-config.png, id=690, 447.6725pt x 419.5675pt>
 File: figures/usbl-config.png Graphic file (type png)
 <use figures/usbl-config.png>
-Package pdftex.def Info: figures/usbl-config.png  used on input line 317.
+Package pdftex.def Info: figures/usbl-config.png  used on input line 331.
 (pdftex.def)             Requested size: 213.39568pt x 200.00085pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [14 <./figures/usbl-config.png>]
-Overfull \hbox (3.03284pt too wide) in paragraph at lines 359--359
+ [17 <./figures/usbl-config.png>]
+Overfull \hbox (3.03284pt too wide) in paragraph at lines 373--373
 []|\T1/ptm/m/n/10.95 Sonardyne|  
  []
 
 
-Overfull \hbox (3.668pt too wide) in paragraph at lines 366--366
+Overfull \hbox (3.668pt too wide) in paragraph at lines 380--380
 []|\T1/ptm/m/n/10.95 Kongsberg|  
  []
 
 
-Overfull \hbox (6.14186pt too wide) in paragraph at lines 348--370
+Overfull \hbox (6.14186pt too wide) in paragraph at lines 362--384
 [][] 
  []
 
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 381.
-
-Underfull \vbox (badness 1019) has occurred while \output is active []
-
- [15]
-[16] [17]) [18]
+[18] [19] [20]) [21]
 \openout2 = `chapter4.aux'.
 
- (./chapter4.tex
+ (./chapter4.tex [22
+
+
+
+]
 Chapter 3.
-<figures/proposed-solution.png, id=707, 898.35625pt x 524.96124pt>
+<figures/proposed-solution.png, id=759, 1028.84375pt x 524.96124pt>
 File: figures/proposed-solution.png Graphic file (type png)
 <use figures/proposed-solution.png>
-Package pdftex.def Info: figures/proposed-solution.png  used on input line 11.
-(pdftex.def)             Requested size: 298.75264pt x 174.57545pt.
-[19
-
-
-
- <./figures/proposed-solution.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 31--33
-
- []
-
-
+Package pdftex.def Info: figures/proposed-solution.png  used on input line 12.
+(pdftex.def)             Requested size: 341.43437pt x 174.215pt.
+[23] [24 <./figures/proposed-solution.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 34--36
 
  []
 
 
-Underfull \vbox (badness 1776) has occurred while \output is active []
+Underfull \hbox (badness 10000) in paragraph at lines 37--39
 
- [20])
-[21]
+ []
+
+
+Underfull \hbox (badness 1137) in paragraph at lines 51--52
+[]\T1/ptm/b/n/10.95 RQ2: \T1/ptm/m/it/10.95 Are there dis-tinct best hy-drophon
+e con-fig-u-ra-tions for short and long range
+ []
+
+[25]) [26]
 \openout2 = `chapter5.aux'.
 
- (./chapter5.tex [22
+ (./chapter5.tex
+Chapter 4.
+[27
 
 
 
 ]
-Chapter 4.
-[23]
-Underfull \hbox (badness 10000) in paragraph at lines 66--68
+Underfull \hbox (badness 10000) in paragraph at lines 73--75
 
  []
 
-[24]
-<figures/phase-diff.png, id=756, 2666.96375pt x 1090.0725pt>
+[28] [29]
+<figures/phase-diff.png, id=813, 2666.96375pt x 1090.0725pt>
 File: figures/phase-diff.png Graphic file (type png)
 <use figures/phase-diff.png>
-Package pdftex.def Info: figures/phase-diff.png  used on input line 95.
+Package pdftex.def Info: figures/phase-diff.png  used on input line 115.
 (pdftex.def)             Requested size: 512.14832pt x 209.32813pt.
 
-Overfull \hbox (85.35696pt too wide) in paragraph at lines 95--96
+Overfull \hbox (85.35696pt too wide) in paragraph at lines 115--116
  [][] 
  []
 
-[25]
-Underfull \hbox (badness 1097) in paragraph at lines 106--107
+
+Underfull \hbox (badness 1097) in paragraph at lines 124--125
 []\T1/ptm/m/n/10.95 One pos-si-bil-ity to solve phase am-bi-gu-ity in this sys-
 tem would be to place the four
  []
 
-[26 <./figures/phase-diff.png>]
-<figures/ambiguity.png, id=773, 942.52126pt x 765.86125pt>
+[30 <./figures/phase-diff.png>]
+<figures/ambiguity.png, id=824, 942.52126pt x 765.86125pt>
 File: figures/ambiguity.png Graphic file (type png)
 <use figures/ambiguity.png>
-Package pdftex.def Info: figures/ambiguity.png  used on input line 112.
+Package pdftex.def Info: figures/ambiguity.png  used on input line 130.
 (pdftex.def)             Requested size: 256.07741pt x 208.08246pt.
-<figures/hyperbole-dist.png, id=776, 2508.37125pt x 1887.05pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [31 <./figures/ambiguity.png>]
+<figures/hyperbole-dist.png, id=833, 2508.37125pt x 1887.05pt>
 File: figures/hyperbole-dist.png Graphic file (type png)
 <use figures/hyperbole-dist.png>
-Package pdftex.def Info: figures/hyperbole-dist.png  used on input line 131.
+Package pdftex.def Info: figures/hyperbole-dist.png  used on input line 149.
 (pdftex.def)             Requested size: 341.43437pt x 256.84273pt.
+ [32 <./figures/hyperbole-dist.png>]
+Underfull \vbox (badness 4378) has occurred while \output is active []
 
-Underfull \vbox (badness 4899) has occurred while \output is active []
-
- [27 <./figures/ambiguity.png>] [28 <./figures/hyperbole-dist.png>] [29]
-<figures/AoA-init.png, id=804, 1239.63126pt x 547.04375pt>
+ [33]
+<figures/AoA-init.png, id=854, 1239.63126pt x 547.04375pt>
 File: figures/AoA-init.png Graphic file (type png)
 <use figures/AoA-init.png>
-Package pdftex.def Info: figures/AoA-init.png  used on input line 179.
+Package pdftex.def Info: figures/AoA-init.png  used on input line 200.
 (pdftex.def)             Requested size: 341.43437pt x 150.66704pt.
 
-Underfull \hbox (badness 1571) in paragraph at lines 192--193
-\T1/ptm/m/n/10.95 com-bi-na-tions of two among four hy-drophones, mak-ing up a 
-to-tal of six com-bi-na-tions.
- []
+[34 <./figures/AoA-init.png>] [35] [36]
+<figures/plane-wavefront.png, id=894, 585.18625pt x 393.47pt>
+File: figures/plane-wavefront.png Graphic file (type png)
+<use figures/plane-wavefront.png>
+Package pdftex.def Info: figures/plane-wavefront.png  used on input line 302.
+(pdftex.def)             Requested size: 298.75264pt x 200.88318pt.
 
-[30 <./figures/AoA-init.png>] [31]
-Underfull \hbox (badness 1147) in paragraph at lines 292--293
-[]\T1/ptm/m/n/10.95 For the sim-u-la-tions per-formed in this project, a de-vi-
-a-tion of 5$[]$, or a win-dow of
- []
 
-[32] [33] [34]
-<figures/plot-s1-A-n10.jpg, id=860, 1874.00125pt x 851.18pt>
-File: figures/plot-s1-A-n10.jpg Graphic file (type jpg)
-<use figures/plot-s1-A-n10.jpg>
-Package pdftex.def Info: figures/plot-s1-A-n10.jpg  used on input line 382.
-(pdftex.def)             Requested size: 469.47139pt x 231.43217pt.
-<figures/plot-cart-A-n10.jpg, id=862, 1874.00125pt x 683.55376pt>
-File: figures/plot-cart-A-n10.jpg Graphic file (type jpg)
-<use figures/plot-cart-A-n10.jpg>
-Package pdftex.def Info: figures/plot-cart-A-n10.jpg  used on input line 395.
-(pdftex.def)             Requested size: 469.47139pt x 198.37154pt.
- [35 <./figures/plot-s1-A-n10.jpg>]
-<figures/plot-cartesian-range.png, id=869, 394.8351pt x 170.3163pt>
+LaTeX Warning: Reference `subchap:acc-analy' on page 37 undefined on input line
+ 308.
+
+
+Underfull \vbox (badness 6825) has occurred while \output is active []
+
+ [37 <./figures/plane-wavefront.png>] [38] [39] [40] [41] [42] [43]
+
+LaTeX Warning: Reference `tab:azimuth-test1' on page 44 undefined on input line
+ 606.
+
+[44]
+<figures/plot-cartesian-range.png, id=977, 391.4625pt x 168.3891pt>
 File: figures/plot-cartesian-range.png Graphic file (type png)
 <use figures/plot-cartesian-range.png>
-Package pdftex.def Info: figures/plot-cartesian-range.png  used on input line 4
-08.
-(pdftex.def)             Requested size: 426.79135pt x 184.11037pt.
+Package pdftex.def Info: figures/plot-cartesian-range.png  used on input line 6
+14.
+(pdftex.def)             Requested size: 426.79135pt x 183.59698pt.
 
-Underfull \hbox (badness 1371) in paragraph at lines 426--427
+Underfull \hbox (badness 1371) in paragraph at lines 623--624
 \T1/ptm/m/n/10.95 ar-range-ment de-sign, it is de-sir-able to com-pare it with 
 dif-fer-ent hy-drophone place-ments.
  []
 
-[36 <./figures/plot-cart-A-n10.jpg>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [37 <./figures/plot-cartesian-range.png>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [38]
-<figures/plot-accum0-dev0-100times.jpg, id=895, 1874.00125pt x 683.55376pt>
+[45 <./figures/plot-cartesian-range.png>] [46]
+<figures/plot-accum0-dev0-100times.jpg, id=995, 1874.00125pt x 683.55376pt>
 File: figures/plot-accum0-dev0-100times.jpg Graphic file (type jpg)
 <use figures/plot-accum0-dev0-100times.jpg>
 Package pdftex.def Info: figures/plot-accum0-dev0-100times.jpg  used on input l
-ine 487.
+ine 684.
 (pdftex.def)             Requested size: 384.1096pt x 140.09813pt.
-<figures/plot-accum100-dev0-100times.jpg, id=896, 1874.00125pt x 683.55376pt>
+<figures/plot-accum100-dev0-100times.jpg, id=996, 1874.00125pt x 683.55376pt>
 File: figures/plot-accum100-dev0-100times.jpg Graphic file (type jpg)
 <use figures/plot-accum100-dev0-100times.jpg>
 Package pdftex.def Info: figures/plot-accum100-dev0-100times.jpg  used on input
- line 494.
+ line 691.
 (pdftex.def)             Requested size: 384.1096pt x 140.09813pt.
-
-[39 <./figures/plot-accum0-dev0-100times.jpg>]
-<figures/plot-Hbaseline-dev001-100accum-100s-1.jpg, id=904, 1874.00125pt x 683.
-55376pt>
+ [47] [48 <./figures/plot-accum0-dev0-100times.jpg> <./figures/plot-accum100-de
+v0-100times.jpg>]
+<figures/plot-Hbaseline-dev001-100accum-100s-1.jpg, id=1010, 1874.00125pt x 683
+.55376pt>
 File: figures/plot-Hbaseline-dev001-100accum-100s-1.jpg Graphic file (type jpg)
 
 <use figures/plot-Hbaseline-dev001-100accum-100s-1.jpg>
 Package pdftex.def Info: figures/plot-Hbaseline-dev001-100accum-100s-1.jpg  use
-d on input line 511.
+d on input line 708.
 (pdftex.def)             Requested size: 469.47308pt x 171.24265pt.
- [40 <./figures/plot-accum100-dev0-100times.jpg> <./figures/plot-Hbaseline-dev0
-01-100accum-100s-1.jpg>]
-<figures/plot-Hbaseline-dev001-100accum-100s-2.jpg, id=910, 1874.00125pt x 683.
-55376pt>
+<figures/plot-Hbaseline-dev001-100accum-100s-2.jpg, id=1012, 1874.00125pt x 683
+.55376pt>
 File: figures/plot-Hbaseline-dev001-100accum-100s-2.jpg Graphic file (type jpg)
 
 <use figures/plot-Hbaseline-dev001-100accum-100s-2.jpg>
 Package pdftex.def Info: figures/plot-Hbaseline-dev001-100accum-100s-2.jpg  use
-d on input line 520.
+d on input line 717.
 (pdftex.def)             Requested size: 469.47308pt x 171.24265pt.
- [41 <./figures/plot-Hbaseline-dev001-100accum-100s-2.jpg>]) [42]
-\openout2 = `chapter6.aux'.
+ [49 <./figures/plot-Hbaseline-dev001-100accum-100s-1.jpg>] [50 <./figures/plot
+-Hbaseline-dev001-100accum-100s-2.jpg>]
+<figures/plot-wavefront-[0,100,0]-A.jpg, id=1024, 1874.00125pt x 683.55376pt>
+File: figures/plot-wavefront-[0,100,0]-A.jpg Graphic file (type jpg)
+<use figures/plot-wavefront-[0,100,0]-A.jpg>
+Package pdftex.def Info: figures/plot-wavefront-[0,100,0]-A.jpg  used on input 
+line 754.
+(pdftex.def)             Requested size: 469.47308pt x 171.24265pt.
 
- (./chapter6.tex
-Chapter 5.
-
-Underfull \hbox (badness 2150) in paragraph at lines 20--21
-\T1/ptm/m/n/10.95 ran-dom pa-ram-e-ters. Ad-di-tion-ally, it makes use of the d
-e-vel-oped es-ti-ma-tor, which is
+Underfull \hbox (badness 2435) in paragraph at lines 762--763
+[]\T1/ptm/m/n/10.95 After an-a-lyz-ing this spe-cific case, a sec-ond sim-u-la-
+tion in-tends to achieve a more
  []
 
+[51 <./figures/plot-wavefront-[0,100,0]-A.jpg>]
+<figures/plot-FIM-allpos-norm100-C.jpg, id=1033, 2409.0pt x 851.18pt>
+File: figures/plot-FIM-allpos-norm100-C.jpg Graphic file (type jpg)
+<use figures/plot-FIM-allpos-norm100-C.jpg>
+Package pdftex.def Info: figures/plot-FIM-allpos-norm100-C.jpg  used on input l
+ine 802.
+(pdftex.def)             Requested size: 512.14832pt x 180.96101pt.
+ [52]
+<figures//plot-fim-[10,0,0]-C.jpg, id=1041, 1874.00125pt x 683.55376pt>
+File: figures//plot-fim-[10,0,0]-C.jpg Graphic file (type jpg)
+<use figures//plot-fim-[10,0,0]-C.jpg>
+Package pdftex.def Info: figures//plot-fim-[10,0,0]-C.jpg  used on input line 8
+15.
+(pdftex.def)             Requested size: 426.79135pt x 155.67038pt.
+ [53 <./figures/plot-FIM-allpos-norm100-C.jpg> <./figures//plot-fim-[10,0,0]-C.
+jpg>] [54]) [55]
+\openout2 = `chapter6.aux'.
 
-Underfull \vbox (badness 7576) has occurred while \output is active []
 
- [43
+(./chapter6.tex [56
 
 
 
 ]
-<figures/9h-config.png, id=929, 823.075pt x 363.3575pt>
+Chapter 5.
+
+Underfull \hbox (badness 2150) in paragraph at lines 16--17
+\T1/ptm/m/n/10.95 ran-dom pa-ram-e-ters. Ad-di-tion-ally, it makes use of the d
+e-vel-oped es-ti-ma-tor, which is
+ []
+
+[57]
+<figures/9h-config.png, id=1069, 823.075pt x 363.3575pt>
 File: figures/9h-config.png Graphic file (type png)
 <use figures/9h-config.png>
-Package pdftex.def Info: figures/9h-config.png  used on input line 48.
+Package pdftex.def Info: figures/9h-config.png  used on input line 44.
 (pdftex.def)             Requested size: 341.43437pt x 150.72955pt.
-
-[44 <./figures/9h-config.png>]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 62.
+put line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 65.
-LaTeX Font Info:    Try loading font information for T1+pcrs on input line 65.
-
-(/usr/local/texlive/2019/texmf-dist/tex/latex/courier-scaled/t1pcrs.fd
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 61.
+LaTeX Font Info:    Try loading font information for T1+pcrs on input line 61.
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/courier-scaled/t1pcrs.fd
 File: t1pcrs.fd 2004/07/09 scalable font definitions for T1/pcrs.
 )
 LaTeX Font Info:    Font shape `T1/pcrs/m/n' will be
-(Font)              scaled to size 7.59998pt on input line 65.
+(Font)              scaled to size 7.59998pt on input line 61.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 67.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 63.
 
-[45]
-Underfull \hbox (badness 1127) in paragraph at lines 118--118
+
+LaTeX Warning: Reference `subchap:acc-analy' on page 58 undefined on input line
+ 94.
+
+[58 <./figures/9h-config.png>] [59]
+Underfull \hbox (badness 1127) in paragraph at lines 114--114
 []\T1/ptm/b/n/10.95 Algorithm 2 \T1/ptm/m/n/10.95 De-ter-mines the over-all bes
 t con-fig-u-ra-tion for a spe-cific po-si-tion es-ti-ma-tion
  []
 
 LaTeX Font Info:    Font shape `T1/pcrs/m/n' will be
-(Font)              scaled to size 5.69998pt on input line 130.
+(Font)              scaled to size 5.69998pt on input line 126.
 LaTeX Font Info:    Font shape `T1/pcrs/m/n' will be
-(Font)              scaled to size 4.74998pt on input line 130.
-[46]
-<figures/auv-geo.png, id=996, 377.4903pt x 196.8153pt>
+(Font)              scaled to size 4.74998pt on input line 126.
+
+Underfull \vbox (badness 1895) has occurred while \output is active []
+
+ [60]
+<figures/auv-geo.png, id=1136, 377.4903pt x 196.8153pt>
 File: figures/auv-geo.png Graphic file (type png)
 <use figures/auv-geo.png>
-Package pdftex.def Info: figures/auv-geo.png  used on input line 177.
+Package pdftex.def Info: figures/auv-geo.png  used on input line 173.
 (pdftex.def)             Requested size: 170.71393pt x 89.00752pt.
- [47]
-<figures/los-color-regions-back-crop.png, id=1005, 427.5975pt x 427.5975pt>
+
+[61 <./figures/auv-geo.png>]
+<figures/los-color-regions-back-crop.png, id=1145, 427.5975pt x 427.5975pt>
 File: figures/los-color-regions-back-crop.png Graphic file (type png)
 <use figures/los-color-regions-back-crop.png>
 Package pdftex.def Info: figures/los-color-regions-back-crop.png  used on input
- line 213.
+ line 209.
 (pdftex.def)             Requested size: 256.07741pt x 256.07765pt.
- [48 <./figures/auv-geo.png>]
-<figures/projections-los.png, id=1015, 546.04pt x 317.185pt>
+ [62]
+<figures/projections-los.png, id=1155, 546.04pt x 317.185pt>
 File: figures/projections-los.png Graphic file (type png)
 <use figures/projections-los.png>
-Package pdftex.def Info: figures/projections-los.png  used on input line 235.
+Package pdftex.def Info: figures/projections-los.png  used on input line 231.
 (pdftex.def)             Requested size: 298.75264pt x 173.54239pt.
 
-Underfull \vbox (badness 1694) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [49 <./figures/los-color-regions-back-crop.png>]
-Underfull \hbox (badness 1163) in paragraph at lines 251--252
+ [63 <./figures/los-color-regions-back-crop.png>]
+Underfull \hbox (badness 1163) in paragraph at lines 250--251
 []\T1/ptm/m/n/10.95 The first demon-stra-tion eval-u-ates the achieved MSE, az-
 imuth de-vi-a-tion and el-e-va-tion
  []
 
 
-Underfull \hbox (badness 2080) in paragraph at lines 251--252
+Underfull \hbox (badness 2080) in paragraph at lines 250--251
 \T1/ptm/m/n/10.95 ob-tained para-met-ric er-rors are il-lus-trated for each of 
 the 56 for-mu-lated con-fig-u-ra-tions.
  []
 
-<figures/plot-[10,10,10]-1000s-errors.jpg, id=1024, 1874.00125pt x 683.55376pt>
+<figures/plot-[10,10,10]-1000s-errors.jpg, id=1163, 1874.00125pt x 683.55376pt>
 
 File: figures/plot-[10,10,10]-1000s-errors.jpg Graphic file (type jpg)
 <use figures/plot-[10,10,10]-1000s-errors.jpg>
 Package pdftex.def Info: figures/plot-[10,10,10]-1000s-errors.jpg  used on inpu
-t line 254.
+t line 253.
 (pdftex.def)             Requested size: 554.83005pt x 202.37672pt.
-[50 <./figures/projections-los.png>]
-<figures/plot-[10,10,10]-1000s-both.jpg, id=1031, 1171.37625pt x 878.28125pt>
+<figures/plot-[10,10,10]-1000s-both.jpg, id=1165, 1171.37625pt x 878.28125pt>
 File: figures/plot-[10,10,10]-1000s-both.jpg Graphic file (type jpg)
 <use figures/plot-[10,10,10]-1000s-both.jpg>
 Package pdftex.def Info: figures/plot-[10,10,10]-1000s-both.jpg  used on input 
-line 263.
+line 262.
 (pdftex.def)             Requested size: 384.1096pt x 287.99771pt.
- [51 <./figures/plot-[10,10,10]-1000s-errors.jpg> <./figures/plot-[10,10,10]-10
-00s-both.jpg>]
+[64 <./figures/projections-los.png>] [65 <./figures/plot-[10,10,10]-1000s-error
+s.jpg> <./figures/plot-[10,10,10]-1000s-both.jpg>]
 
-Package mathptmx Warning: There are no bold math fonts on input line 277.
+Package mathptmx Warning: There are no bold math fonts on input line 276.
 
 
-Overfull \hbox (9.53186pt too wide) in paragraph at lines 275--296
+Overfull \hbox (9.53186pt too wide) in paragraph at lines 274--295
  [] 
  []
 
 
-Underfull \hbox (badness 1400) in paragraph at lines 303--304
+Underfull \hbox (badness 1400) in paragraph at lines 302--303
 []\T1/ptm/m/n/10.95 Configurations that achieve the over-all min-i-mum er-rors 
 tend to in-te-grate the LOS
  []
 
-[52]
-<figures/plot-[-10,-10,-10]-1000s-errors.jpg, id=1042, 1874.00125pt x 683.55376
+[66]
+<figures/plot-[-10,-10,-10]-1000s-errors.jpg, id=1182, 1874.00125pt x 683.55376
 pt>
 File: figures/plot-[-10,-10,-10]-1000s-errors.jpg Graphic file (type jpg)
 <use figures/plot-[-10,-10,-10]-1000s-errors.jpg>
 Package pdftex.def Info: figures/plot-[-10,-10,-10]-1000s-errors.jpg  used on i
-nput line 323.
+nput line 322.
 (pdftex.def)             Requested size: 554.83005pt x 202.37672pt.
-<figures/plot-[100,0,0]-1000s-errors.jpg, id=1044, 1874.00125pt x 683.55376pt>
+<figures/plot-[100,0,0]-1000s-errors.jpg, id=1184, 1874.00125pt x 683.55376pt>
 File: figures/plot-[100,0,0]-1000s-errors.jpg Graphic file (type jpg)
 <use figures/plot-[100,0,0]-1000s-errors.jpg>
 Package pdftex.def Info: figures/plot-[100,0,0]-1000s-errors.jpg  used on input
- line 332.
+ line 331.
 (pdftex.def)             Requested size: 554.83005pt x 202.37672pt.
- [53 <./figures/plot-[-10,-10,-10]-1000s-errors.jpg>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+ [67 <./figures/plot-[-10,-10,-10]-1000s-errors.jpg>] [68 <./figures/plot-[100,
+0,0]-1000s-errors.jpg>]
+<figures/plot-fisher-monte-overlaid-0,1000,0-C.jpg, id=1197, 1469.49pt x 674.52
+pt>
+File: figures/plot-fisher-monte-overlaid-0,1000,0-C.jpg Graphic file (type jpg)
 
- [54 <./figures/plot-[100,0,0]-1000s-errors.jpg>]
-<figures/24h-config.png, id=1059, 811.03pt x 382.42876pt>
+<use figures/plot-fisher-monte-overlaid-0,1000,0-C.jpg>
+Package pdftex.def Info: figures/plot-fisher-monte-overlaid-0,1000,0-C.jpg  use
+d on input line 381.
+(pdftex.def)             Requested size: 426.79135pt x 195.90427pt.
+ [69 <./figures/plot-fisher-monte-overlaid-0,1000,0-C.jpg>]
+<figures/24h-config.png, id=1206, 812.03375pt x 379.4175pt>
 File: figures/24h-config.png Graphic file (type png)
 <use figures/24h-config.png>
-Package pdftex.def Info: figures/24h-config.png  used on input line 405.
-(pdftex.def)             Requested size: 384.1096pt x 181.12451pt.
- [55] [56 <./figures/24h-config.png>]
-[57] [58]
-<figures/plot-FIM-allpos-norm100-C.jpg, id=1110, 2409.0pt x 851.18pt>
-File: figures/plot-FIM-allpos-norm100-C.jpg Graphic file (type jpg)
-<use figures/plot-FIM-allpos-norm100-C.jpg>
-Package pdftex.def Info: figures/plot-FIM-allpos-norm100-C.jpg  used on input l
-ine 550.
-(pdftex.def)             Requested size: 512.14832pt x 180.96101pt.
- [59]) [60 <./figures/plot-FIM-allpos-norm100-C.jpg>]
+Package pdftex.def Info: figures/24h-config.png  used on input line 422.
+(pdftex.def)             Requested size: 384.1096pt x 179.47255pt.
+ [70 <./figures/24h-config.png>]
+<figures/best-config-fim.png, id=1217, 478.78876pt x 690.58pt>
+File: figures/best-config-fim.png Graphic file (type png)
+<use figures/best-config-fim.png>
+Package pdftex.def Info: figures/best-config-fim.png  used on input line 502.
+(pdftex.def)             Requested size: 341.43437pt x 492.46486pt.
+ [71]
+Underfull \hbox (badness 3199) in paragraph at lines 512--514
+\T1/ptm/m/n/10.95 con-fig-u-ra-tion's per-for-mance, then a sim-u-la-tion was e
+x-e-cuted for de-ter-min-ing the best
+ []
+
+[72] [73 <./figures/best-config-fim.png>]
+Underfull \hbox (badness 1960) in paragraph at lines 573--574
+\T1/ptm/m/n/10.95 con-fig-u-ra-tion for short and long range. The hy-drophone p
+lace-ment of the men-tioned
+ []
+
+) [74] [75]
 \openout2 = `chapter7.aux'.
 
- (./chapter7.tex
+ (./chapter7.tex [76
+
+
+
+]
 Chapter 6.
 
 Underfull \hbox (badness 1057) in paragraph at lines 24--25
@@ -1534,14 +1587,10 @@ Underfull \hbox (badness 1057) in paragraph at lines 24--25
 op-ti-mal hy-drophone ar-ray
  []
 
-) [61
-
-
-
-]
+) [77]
 \openout2 = `appendix1.aux'.
 
- (./appendix1.tex [62
+ (./appendix1.tex [78
 
 
 
@@ -1551,7 +1600,7 @@ Appendix A.
 Underfull \vbox (badness 10000) detected at line 64
  []
 
-[63] [64]) [65] [66
+[79] [80]) [81] [82
 
 
 ] (./thesis.bbl
@@ -1560,7 +1609,7 @@ Underfull \hbox (badness 2035) in paragraph at lines 4--8
 -mapped/. [Ac-cessed Oct.
  []
 
-[67
+[83
 
 ]
 Underfull \hbox (badness 3118) in paragraph at lines 90--93
@@ -1580,26 +1629,30 @@ Underfull \hbox (badness 4859) in paragraph at lines 117--121
 ON-ING,'' 2016.
  []
 
-) [68]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 171.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 171.
+) [84] [85]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 172.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 172.
  (./thesis.aux (./abstract.aux) (./abbrevs.aux) (./chapter1.aux)
 (./chapter2.aux) (./chapter4.aux) (./chapter5.aux) (./chapter6.aux)
 (./chapter7.aux) (./appendix1.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 171.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 171.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 172.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 172.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 68C8306628577258A9C988FE49CD886D;4564.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 171.
+(rerunfilecheck)             Checksum: 1DDACEA226DAF4D416F553FBBFB74AE0;4751.
+
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 172.
  ) 
 Here is how much of TeX's memory you used:
- 23049 strings out of 492616
- 412849 string characters out of 6129480
- 512350 words of memory out of 5000000
- 26015 multiletter control sequences out of 15000+600000
+ 23118 strings out of 492616
+ 414283 string characters out of 6129480
+ 514062 words of memory out of 5000000
+ 26043 multiletter control sequences out of 15000+600000
  87085 words of font info for 127 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,16n,89p,1617b,872s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 66i,16n,89p,1617b,972s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -1614,10 +1667,10 @@ xlive/2019/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/local/texlive/20
 times/utmb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmr
 8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></u
 sr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (82 pages, 3005228 bytes).
+Output written on thesis.pdf (99 pages, 3118588 bytes).
 PDF statistics:
- 1286 PDF objects out of 1440 (max. 8388607)
- 1113 compressed objects within 12 object streams
- 353 named destinations out of 1000 (max. 500000)
- 750 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1424 PDF objects out of 1440 (max. 8388607)
+ 1228 compressed objects within 13 object streams
+ 389 named destinations out of 1000 (max. 500000)
+ 773 words of extra memory for PDF output out of 10000 (max. 10000000)
 

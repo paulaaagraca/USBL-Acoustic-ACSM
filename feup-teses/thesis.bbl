@@ -6,11 +6,6 @@ J.~Liang, ``Fifteen percent of ocean floor now mapped,'' Jun 2019.
   https://www.deeperblue.com/fifteen-percent-of-ocean-floor-now-mapped/.
   [Accessed Oct. 28, 2019].
 
-\bibitem{afonso-thesis}
-A.~M. Bonito, ``{Acoustic system for ground truth underwater positioning in
-  DEEC’s test tank},'' Master's thesis, {Faculty of Engineering of the
-  University of Porto}, Porto, jul 2019.
-
 \bibitem{survey-tech-chall}
 H.~P. Tan, R.~Diamant, W.~K.~G. Seah, and M.~Waldmeyer, ``{A survey of
   techniques and challenges in underwater localization},'' {\em {Ocean
@@ -20,6 +15,11 @@ H.~P. Tan, R.~Diamant, W.~K.~G. Seah, and M.~Waldmeyer, ``{A survey of
 F.~B. Jensen, W.~A. Kuperman, M.~B. Porter, and H.~Schmidt, ``{Fundamentals of
   Ocean Acoustics},'' in {\em {Computational Ocean Acoustics}}, pp.~3--17,
   Springer Science \& Business Media, second~ed., 2011.
+
+\bibitem{multipath-rayleigh-models}
+M.~C. Domingo, ``Overview of channel models for underwater wireless
+  communication networks,'' {\em Physical Communication}, vol.~1, no.~3,
+  pp.~163--182, 2008.
 
 \bibitem{commchan}
 M.~Stojanovic and J.~Preisig, ``{Underwater Acoustic Communication Channels:
@@ -127,6 +127,21 @@ A.~N. Bishop, B.~Fidan, B.~D.~O. Anderson, K.~Do{\u{g}}an{\c{c}}ay, and P.~N.
 \bibitem{compare-optimality-crit}
 E.~Rady, M.~M. E.~A. El-Monsef, and M.~M. Seyam, ``Relationships among several
   optimality criteria,'' {\em Interstat}, vol.~15, no.~6, pp.~1--11, 2009.
+
+\bibitem{particle-swarm-opt}
+C.~Tholen, T.~A. El-Mihoub, L.~Nolle, O.~Ralle, and R.~Rofallski, ``Optimal
+  receiver configuration of short-baseline localisation systems using particle
+  swarm optimisation.,'' in {\em ECMS}, pp.~25--31, 2020.
+
+\bibitem{afonso-thesis}
+A.~M. Bonito, ``{Acoustic system for ground truth underwater positioning in
+  DEEC’s test tank},'' Master's thesis, {Faculty of Engineering of the
+  University of Porto}, Porto, jul 2019.
+
+\bibitem{estim-plane-wavefront}
+J.~Reis, M.~Morgado, P.~Batista, P.~Oliveira, and C.~Silvestre, ``Design and
+  experimental validation of a usbl underwater acoustic positioning system,''
+  {\em Sensors}, vol.~16, no.~9, p.~1491, 2016.
 
 \bibitem{cramer-bruno}
 B.~Ferreira, A.~Matos, and N.~Cruz, ``{Optimal positioning of autonomous marine
