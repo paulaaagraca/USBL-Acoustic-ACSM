@@ -19,7 +19,7 @@ t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 [rownum,n_samples_elevation] = size(t_elevation_rad); %number of elevation_positions
 
 %--------------------------------------------------------------------------
-norm_p = [0.5]; % norm values to be tested (row)
+norm_p = [1]; % norm values to be tested (row)
 count = 1;      % size of vector s +1 
 count_sph = 1;  % size of vector spherical +1
 
@@ -65,9 +65,9 @@ e = sqrt(2)/2 * w;
 %       0     0      0.1    -0.1;
 %       0.1   -0.1   0      0];
 % %__B__  
-%         ri = [0.1  0.1   0      0;
-%               0     0      0.1    -0.1;
-%               0.1   -0.1   0      0];
+% ri = [0.1  0.1   0      0;
+%       0     0      0.1    -0.1;
+%       0.1   -0.1   0      0];
 %__C__  
 ri = [0.1  0     0     0;
       0    0    -e     e;
