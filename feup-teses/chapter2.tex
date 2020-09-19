@@ -4,27 +4,31 @@ This chapter presents the fundamental concepts of underwater acoustics engineeri
 
 \section{Underwater acoustic channel} \label{subsec: acoustic-channel}
 
-Although satellite based navigation systems are the most commonly used for positioning and localization at the earth surface, the used radio signals are highly absorbed by the water and thus inappropriate for underwater localization and also for communications. Therefore, the state of the art solutions for long range localization and communications rely on the propagation of acoustic signals.
+Although satellite based navigation systems are the most commonly used for positioning and localization at the earth surface, the used radio signals are highly absorbed by the water and thus inappropriate for underwater localization and communications. Therefore, the state of the art solutions for long range localization and communications in the underwater environment rely on the propagation of acoustic signals.
 
 The natural limitations of acoustic channels combined with the properties of an underwater environment, result in challenges and limitations in developing communication and localization systems \cite{survey-tech-chall}:
 \begin{itemize}
-	\item Long propagation delays;
-	\item Variable speed of the acoustic signals;
-	%\item Reference nodes may have different drifting rates from each other due to water currents, which leads to uncertainties on the definition of absolute times and synchronization;
-	\item Limited bandwith
-	\item Signals are bent due to sound speed variation along the water column and occluded in many different surfaces, which may lead to the incorrect detection of the line-of-sight (LOS) signal;
+	\item Long propagation delays make it unmanageable for underwater acoustic networks to employ some common data networks' mechanisms, such as acknowledgment-based protocols;
+	
+	\item Variable speed of the acoustic signals due to variations in temperature and density;
+	
+	\item Limited bandwidth, as the attenuation of acoustic waves increases with frequency;
+	
+	\item The path of acoustic signals is not a straight line since the sound waves are bent due to sound speed variation along the water column and reflected or blocked in many different surfaces and objects, which may lead to the incorrect detection of the line-of-sight (LOS) signal;
+	
 	\item Attenuation and asymmetric signal-to-noise ratio, which arises from SNR depending on depth and frequency with complex behaviors that depend on the characteristics of the environment;
 \end{itemize}
 
-It is necessary to take into consideration these conditions in order to achieve an effective communication system that uses the underwater acoustic channel. Additionally, when developing a system, it is not always possible to tackle all these constraints, so different priorities should be defined depending on the operation circumstances and application purpose. 
 
-In this section, a detailed overview is presented on various concepts that affect the underwater communication channels, such as the sound speed, multipath phenomena, the Doppler effect, signal attenuation and signal-to-noise ratio.
+Underwater localization systems based on acoustic signals are the only effective way to work in distance ranges up to a few kilometers, as opposed to optical or radio-frequency based systems. However, these always unreliable characteristics lead to a significant degree of uncertainty as, in practice it is impossible to know the exact speed and path of a sound wave along the path it actually travels.
+
+This section presents hereinafter a more detailed overview on various concepts that affect the underwater communication channels, such as the sound speed, multipath phenomena, the Doppler effect, signal attenuation and signal-to-noise ratio.
 
 \subsection{Speed of sound} \label{subsec: speed-sound}
 
 The oceanic environment has a complex sound propagation model, as it comprises many variants.
 
-Acoustic signals' propagation speed is mainly related to two factors: compressibility and density. The water density can be characterized by the temperature, salinity and pressure,which is associated with depth \cite{ocean-acoust}. Figure \ref{fig:spd-sound} exhibits a generic sound speed profile in relation to depth. The water surface is commonly a mixed layer which results in an approximately constant sound speed. After this layer, it suffers a significant decrease, usually reaching the lower tangible speed, which results from the variation of temperature that characterizes the thermocline layer. From that point forward, pressure is the greatest influencer on speed of sound, so it increases relatively proportionally to depth.
+Acoustic signals' propagation speed is mainly related to two factors: compressibility and density. The water density can be characterized by the temperature, salinity and pressure,which is associated with depth \cite{ocean-acoust}. Figure \ref{fig:spd-sound} exhibits a generic sound speed profile in relation to depth. The water surface is commonly a mixed layer that results in an approximately constant sound speed. After this layer, it suffers a significant decrease, usually reaching the lower tangible speed, which results from the variation of temperature that characterizes the thermocline layer. From that point forward, pressure is the greatest influencer on speed of sound, so it increases relatively proportionally to depth.
 
 \begin{figure}[!htbp]
 	\centering
@@ -43,11 +47,11 @@ The varying sound speed throughout the water column causes the signals not to pr
 
 \subsection{Multipath} \label{subsec:multipath}
 
-Multipath occurs when signals suffer distortion which originate multiple propagation paths, leading to a change in their original characteristics. This phenomenon is originated by diverse factors that cause distortion in the underwater channels, typically affecting the water composition, such as water temperature and depth. The signal distortions caused by multipath include signal fading, which is usually modeled by Rayleigh fading channel theory \cite{multipath-rayleigh-models}, varying operation frequency, time-variant propagation delays, among others.
+Multipath occurs when signals suffer distortion that originate multiple propagation paths, leading to a change in their original characteristics. This phenomenon is originated by diverse factors that cause distortion in the underwater channels, typically affecting the water composition, such as water temperature and depth. The signal distortions caused by multipath include signal fading, which is usually modeled by Rayleigh fading channel theory \cite{multipath-rayleigh-models}, varying operation frequency, time-variant propagation delays, among others.
 
 The multipath behavior can be distinguished depending on depth, in shallow water paths and deep water paths since they demonstrate distinct propagation effects: 
 
-\paragraph{Shallow water paths} In shallow water, the acoustic signals can be reflected or refracted on the surface, where attenuation is generally smaller then at the bottom of the ocean, where it suffers a higher attenuation depending on the soil material, frequency and incidence angle. Figure \ref{fig:mpath} represent a typical multipath caused by reflection on the sea surface and bottom. 
+\paragraph{Shallow water paths} In shallow water, the acoustic signals can be reflected or refracted on the surface, where attenuation is generally weaker then at the bottom of the ocean. There it suffers a higher attenuation depending on the soil material, frequency and incidence angle. Figure \ref{fig:mpath} represent a typical multipath caused by reflection on the sea surface and bottom. 
 
 \begin{figure}[!htbp]
 	\centering
@@ -62,13 +66,13 @@ The multipath behavior can be distinguished depending on depth, in shallow water
 \begin{itemize}
 	\item \textit{Surface reflection}: the signal is reflected on the sea surface, where the attenuation depends on its acoustic roughness.
 	
-	\item \textit{Surface duct}: the signal gets confined in a surface layer, where the sound velocity increases with depth, due to varied thermal conditions in deeper layers, which causes it to reflect on the surface and bounce back when reaching the subsequent layer.
+	\item \textit{Surface duct}: the signal gets confined in a surface layer, where the sound velocity increases with depth, due to varied thermal conditions in deeper layers, which causes it to bend the wave path to the surface and bounce back when reaching the subsequent layer.
 	
 	\item \textit{Bottom bounce}: the signal is reflected on the bottom of the ocean, suffering attenuation dependent on the soil material.
 	
 	\item \textit{Convergence zone}: it depends on the sound speed profile and water depth that characterizes the channel. When the temperature decreases the signal has a tendency to bent downwards, however when an increase in pressure is reached the signal tends to bent upwards again, originating convergence locations.
 	
-	\item \textit{Deep sound channel}: it is originated in levels which are surrounded by layers with characteristics highly dependent on depth. So, the signal is constantly bent according to the depth that leads to a minimum speed. 
+	\item \textit{Deep sound channel}: it is originated in levels that are surrounded by layers with characteristics highly dependent on depth. So, the signal is constantly bent according to the depth that leads to a minimum speed. 
 	
 	\item \textit{Reliable acoustic path}: this path occurs when the transmitter is positioned in very deep water and the receiver is near the surface. Although the signal is bent downwards due to decreased temperature, when it reaches a certain depth it is bent upwards making the communication channel reliable.
 \end{itemize}
@@ -88,6 +92,9 @@ The magnitude of the generated frequency shift can be expressed as a ratio \ref{
 
 Autonomous Underwater Vehicles (AUVs) usually move with velocities in the order of few meters per second. Therefore, the \(a\) factor mentioned above has a significant value and needs to be considered when implementing synchronization systems, as well as developing estimation algorithms.
 
+\note{dúvida - relatively low sound speed propagation ??}
+%In acoustic underwater environment this is aggravated by the relatively low sound speed propagation, which makes relevant the Doppler effect due to the relative movement of the systems [AUVs?]
+
 In certain localization and communication systems, it is critical to correct the Doppler effect because data can be compromised (e.g. FSK modulated signals, in which information is codified into frequency changes). A simple Doppler compensation process was proposed in \cite{thesis-joao}, with the intent of integrating it in a system that detects phase-modulated binary sequences using cross-correlation.
 
 This phenomenon can also be explored to determine the relative velocity between two devices, by measuring the frequency deviation with respect to the frequency expected to be received.
@@ -96,99 +103,117 @@ The Doppler effect can influence the USBL system's performance since the computa
 
 \subsection{Attenuation and signal-to-noise ratio} \label{subsec:snr}
 
-When considering underwater communication systems, it is essential to quantify the attenuation of the channel, i.e. the part of the signal's energy that is absorbed by the involving surrounding. In underwater channels, this absorbance is frequency variable and it is also dependent on physical characteristics of the water, as salinity and temperature. 
+When considering underwater communication systems, it is essential to quantify the attenuation of the channel, i.e. the part of the signal's energy that is absorbed by the surroundings. In underwater channels, this absorbance is frequency variable and also depends on physical characteristics of the water, as salinity and temperature. 
 
 The underwater acoustic channel has a particular model that describes its attenuation path loss \(A(d,f)\), given in logarithmic scale by equation \ref{eq:attenuationdb} \cite{pathloss}. 
 \begin{eqnarray}
-&10\ log(A(d,f)) = 10\ k\ log(d) + d\ 10\ log(a(f))
+&10\ log(A(d,f)) = 10\ k\ log(d) + d \times 10\ log(a(f))
 \label{eq:attenuationdb}
 \end{eqnarray}
-From the equation, \(d\) is the distance from the transmitter to the receiver in kilometers (Km), \(f\) is the operating frequency in kilohertz (KHz), \(10klog(d)\) represents the spreading loss which describes how the sound level (in decibel, dB) decreases as the sound wave spreads, \(d10log(a(f))\) is the absorption loss that a signal suffers during its propagation path, \(k\) is the spreading factor which is related with the considered configuration (e.g. cylindrical, spheric, etc.), \(a(f)\) is the absorption coefficient that can be obtained through the equation in \cite{pathloss}.
+From the equation, \(d\) is the distance from the transmitter to the receiver in kilometers (Km), \(f\) is the operating frequency in kilohertz (KHz), \(10klog(d)\) represents the spreading loss that describes how the sound level (in decibel, dB) decreases as the sound wave spreads, \(d \times 10 \ log(a(f))\) is the absorption loss that a signal suffers during its propagation path, \(k\) is the spreading factor that is related with the considered configuration (e.g. cylindrical, spherical, etc.), \(a(f)\) is the absorption coefficient that can be obtained through the equation in \cite{pathloss}.
 
-Noise is another factor that is considered when analyzing a real underwater acoustic channel, as it defines the signal-to-noise ratio (SNR) that characterizes the channel. The SNR depends on the attenuation level which increases with frequency, and the noise which decays with frequency. Consequently, the SNR varies over the signal bandwidth and it is asymmetric. The equation \ref{eq:snr} \cite{commchan} expresses this relationship, where \(S_{d}(f)\) represents the power spectral density of the transmitted signal.
+Noise is another factor that is considered when analyzing a real underwater acoustic channel, as it defines the signal-to-noise ratio (SNR) that characterizes the channel. The SNR depends on the attenuation level, which increases with frequency, and the noise, which decays with frequency. Consequently, the SNR varies over the signal bandwidth and it is asymmetric. The equation \ref{eq:snr} \cite{commchan} expresses this relationship, where \(S_{d}(f)\) represents the power spectral density of the transmitted signal.
 \begin{eqnarray}
 &SNR(d,f) = \frac{S_{d}(f)}{(A(d,f))\ N(f)}
 \label{eq:snr}
 \end{eqnarray}
 
-Signals that are heavily attenuated can become an issue when dealing with acoustic positioning systems, such as USBL systems. If the transmitted signals suffer high attenuation then it can be unfeasible to rigorously detect the signal in the receiver, therefore compute the range or angle of arrival of the transmitter.
+Signals that are heavily attenuated can become an issue when dealing with acoustic positioning systems, such as USBL systems. If the transmitted signals suffer high attenuation then it can be unfeasible to rigorously detect the signal in the receiver, therefore compute the range or angle of arrival of the transmitter. Additionally, in case of having a noisy environment it can be difficult to identify the intended acoustic signal, since it can be blended with the noise and not be distinguishable. 
 
 %________________________________________________________
 
-\section{Range estimation for underwater localization}
+\section{Underwater localization estimation}
 
-Underwater localization takes into consideration the distance between the target object to track and the reference point. As consequence, it is always relevant to apply methods which easily and effectively determine this range.
+This section focuses on two categories of the underwater localization estimation, namely methods based on range estimation and algorithms of position estimation based on reference nodes.
+
+\subsection{Range estimation}
+
+Underwater localization takes into consideration the distance between the target object to track and the reference point. As consequence, it is relevant to apply methods that effectively determine this range.
 
 There are two main types of techniques that are used to achieve such objective: the Received Signal Strength Indicator (RSSI) and the Time Delay Estimation (TDE).
 
+\subsubsection{Received Signal Strength Indicator}
 
-\subsection{Received Signal Strength Indicator}
+The Received Signal Strength Indicator (RSSI) method is based on the strength of the signal that reaches the target. It determines the distance between the target and the reference node by analyzing the received signal strength and comparing it with an underwater attenuation model that is range dependent \cite{ocean-acoust}. 
 
-The Received Signal Strength Indicator (RSSI) method is based on the strength of the signal that reaches the target. It determines the distance between the target and the reference node by analyzing the received signal strength and comparing it with an underwater attenuation model which is range dependent \cite{ocean-acoust}. 
+Since the underwater acoustic channel suffers from multipath, time variance and high overall path loss, the RSSI technique is typically not adequate for long range underwater applications. However, in short range communications such effects can be sufficiently attenuated for this technique to be used.
 
-Since the underwater acoustic channel suffers from multipath, time variance and high overall path loss, the RSSI technique is not adequate for underwater applications.
+\subsubsection{Time Delay Estimation}
+Time Delay Estimation (TDE) mechanisms imply a pair of nodes, the transmitter and the receiver, to measure the range between them. This distance is based on the time that it takes for a signal to travel from the reference point to the target. The accuracy of these techniques depends mainly on the environment conditions, which include the water properties and the surrounding reflection surfaces that cause multipath. Therefore, the mechanisms are susceptible of variable errors according to the location and characteristics of its employment.
 
-\subsection{Time Delay Estimation}
-Time Delay Estimation (TDE) mechanisms use a pair of nodes, the target and the reference point, to measure the range between them. This distance is based on the time that it takes for a signal to travel from the reference point to the target.
+There are three main categories that divide TDE methods, which are Time of Arrival (ToA), Time of Flight (ToF) and  Time Difference of Arrival (TDoA).
 
-There are three main categories that devide TDE methods, which are Time Difference of Arrival (TDoA), Time of Arrival (ToA) and Time of Flight (ToF).
+\paragraph{Time of Arrival}
 
-\subsubsection{Time of Arrival}
+Time of Arrival (ToA) is interpreted as the time delay between the transmission of a signal in the reference node until its reception on the target node. Although this is the conceptually simplest method to employ, it requires synchronization between the nodes since the target entity needs to know the instant when the signal was sent to be able to calculate the difference.
 
-Time of Arrival (ToA) is interpreted as the time delay between the transmission of a signal in the reference node until its reception on the target node. Although this is the conceptually simplest method to employ, it requires synchronization between the nodes since the target entity needs to know the instance when the signal was sent to be able to calculate the difference.
-
-Considering a generic transmitted signal \textit{s(t)}, the received signal can be expressed as \ref{eq:toa}, where $\tau$ represents the time of arrival and \textit{n(t)} is white noise with zero mean \cite{wirelesscomm}. 
+Considering a generic transmitted signal \textit{s(t)}, the received signal can be expressed as (\ref{eq:toa}), where $\tau$ represents the time of arrival and \textit{n(t)} is white noise with zero mean \cite{wirelesscomm}. 
 
 \begin{eqnarray}
 & r(t) = s(t - \tau) + n(t)
 \label{eq:toa}
 \end{eqnarray}
 
-\subsubsection{Time of Flight}
+\paragraph{Time of Flight}
 
-Time of Flight (ToF) measures essentially the round-trip time communication between two nodes. The target node sends a signal to the reference node, which has an integrated transponder that responds transmitting a signal back to the target. The ToF is then estimated as the time interval from the moment the first signal is transmitted until the moment the second signal is received by the same node. 
+Time of Flight (ToF) measures essentially the round-trip travel time between two nodes. The transmitter node sends a query signal to the receiver node, which has an integrated transponder that responds transmitting a signal back within a know time delay. The ToF is then estimated as the time interval from the moment the first signal is transmitted until the moment the second signal is received by the same node. 
 
-This method may be used without additional synchronization systems as it assumes that the response signal is sent immediately after the received one and the intrinsic transmitting delays are known.
+This method may be used without additional synchronization systems as it assumes that the response signal is sent after the received one and the intrinsic transmitting delays are known.
 
-The accuracy of this technique depends mainly on the environment conditions, which include the water properties and the surrounding reflection surfaces which cause multipath. Therefore, the mechanism is susceptible of variable errors according to the location and characteristics of its employment.
+\paragraph{Time Difference of Arrival}
 
-\subsubsection{Time Difference of Arrival}
-
-The Time Difference of Arrival (TDoA) is a technique that compares the time of arrival of a signal to different hydrophones in order to estimate the angle of arrival of the acoustic signal. The array of reception hydrophones have known determined positions among them so that is is possible to compare the different times of arrival or phase differences. This method can be employed using a uni-directional signal or a round trip communication.
+The Time Difference of Arrival (TDoA) is a technique that compares the time of arrival of a signal to different hydrophones in order to estimate the angle of arrival of the acoustic signal. The array of reception hydrophones have known relative positions among them so that is is possible to compare the different times of arrival or phase differences. This method can be employed using a uni-directional signal or a round trip communication.
 
 There are several algorithms and mathematical models that can be employed to execute the TDoA method, such as Cross-Correlation and Maximum Likelihood.
 
 \begin{itemize}
-	\item \textbf{Generalized Cross-Correlation}
-
-The Generalized Cross-Correlation (GCC) method is used to generically represent the relationship strength between two signals.
-
-Considering two distanced hydrophones in the same environment and an acoustic source \textit{s(t)}, \textit{x1(t)} and \textit{x2(t)} are the signals received by each of the two hydrophones. The equations \ref{eq:gcc1} and \ref{eq:gcc2} \cite{crosscorr} express the mentioned signals in relation to \textit{w1(t)} and \textit{w2(t)} which are Gaussian noise coefficients uncorrelated with the source, $\tau$ that represent the delay and $\alpha$ which is an attenuation function.
-\begin{eqnarray}
-&x1(t) = s(t) + w1(t)
-\label{eq:gcc1}\\
-&x2(t) = \alpha s(t - \tau) + w2(t)
-\label{eq:gcc2}\\
-\end{eqnarray}
-
-From these expressions, the generalized cross-correlation function between signals \textit{x1(t)} and \textit{x2(t)} is given by \ref{eq:gcc3}. The $G_{x1x2}(f)$ is the spectrum of the cross-correlation. The $\psi(f)$ represents a prefilter and it is essentially the distinctive parameter that originate various different methods of cross-correlation, since it should depend on different environments and properties as SNR. 
-\begin{eqnarray}
-& R_{x1x2}(\tau) = \int_{-\infty}^{\infty} \psi(f) G_{x1x2}(f)\ e^{i2\pi f\tau} df
-\label{eq:gcc3}\\
-& T = \tau_{max} [ R_{x1x2}(\tau) ]
-\label{eq:gcc4}
-\end{eqnarray}
-
-Finally, the maximum value of $R_{x1x2}(\tau)$, expressed in \ref{eq:gcc4}, is the so called correlation peak and provides information about the time delay $\tau$ which is the main matter of Time Delay Estimation. 
-
-
+	%----------------------------------------------------
 	\item \textbf{Cross-Correlation}
 
-After approaching the generalized method of cross-correlation, it is possible to better understand the Cross-Correlation (CC) method. There are two main variations of CC \cite{crosscorr}, which are the slow cross-correlation in the  time domain and the fast cross-correlation in the frequency domain. The second approach is based on the Fast Fourier Transform as it locates the peak by analyzing frequency similarities between the signals. 
+The Cross-Correlation (CC) method  is used to represent the strength relationship between two signals. 
 
-Th Cross-Correlation technique uses a prefilter $\psi(f)$ equal to 1, as it is the simplest method of its kind.
+Considering two distanced hydrophones in the same environment and an acoustic signal \textit{s(t)}, \textit{$x_1$(t)} and \textit{$x_2$(t)} are the signals received by each of the two hydrophones. Equations (\ref{eq:gcc1}) and (\ref{eq:gcc2})\cite{crosscorr-76} express the mentioned signals in relation to \textit{$w_1$(t)} and \textit{$w_2$(t)} that are Gaussian noise coefficients uncorrelated with the source, the delay $\tau$ and an attenuation function $\alpha$.
+\begin{eqnarray}
+	&x_1(t) = s(t) + w_1(t)
+	\label{eq:gcc1}\\
+	&x_2(t) = \alpha \ s(t - \tau) + w_2(t)
+	\label{eq:gcc2}
+\end{eqnarray}
 
-	\item \textbf{Maximum Likelihood}
+In order to determine the time delay, $\tau$, between signals, the cross-correlation function can be calculated as (\ref{eq:cc-def}). The estimate of the time delay between two signals, $\tau$, is given by $arg max_{\ t\in R^+} Rx_1x_2(\tau)$, which represents the maximum correlation value and it is the main outcome of Time Delay Estimation. 
+
+\begin{eqnarray}
+&R_{x_1x_2}(\tau) = E[x_1(t) \ x_2(t- \tau)]
+\label{eq:cc-def}
+\end{eqnarray}
+
+However, since the observation time is finite then function $R_{x_1x_2}$ can only be estimated, originating equation (\ref{eq:cc-def-estim}) where $T$ expresses the observation interval.
+
+\begin{eqnarray}
+&\widehat R_{x_1x_2}(\tau) = \frac{1}{T - \tau} \ \mathlarger{\int_{\tau}^{T} x_1(t)x_2(t - \tau)} dt
+\label{eq:cc-def-estim}
+\end{eqnarray}
+	
+There are two main variations of CC \cite{crosscorr}, which are the slow cross-correlation in the  time domain, as before mentioned, and the fast cross-correlation in the frequency domain, which is based on the Fast Fourier Transform as it locates the peak by analyzing frequency similarities between the signals. 
+	
+	%----------------------------------------------------
+	\item \textbf{Generalized Cross-Correlation}
+
+After presenting the cross-correlation method, it is easier to understand the Generalized Cross-Correlation (GCC) method, which is extensively explained in \cite{eq:cc-def-estim}. Recalling the equations that define the CC, the GCC is achieved by prefiltering the $x_1$ and $x_2$ prior to the integration in (\ref{eq:cc-def-estim}), using filters $H_1$ and $H_2$. Then the obtained filtered signals $y_1$ and $y_2$ are multiplied and integrated in a period of time $T$ until detecting the function peak.
+
+Then the GCC between $x_1(t)$ and $x_2(t)$ is given by (\ref{eq:gcc3}), where the $G_{x_1x_2}(f)$ represents the cross power spectrum between the filter inputs. 
+
+\begin{eqnarray}
+	& R_{y_1y_2}(\tau) = \int_{-\infty}^{\infty} \psi(f) G_{x_1x_2}(f)\ e^{i2\pi f\tau} df
+	\label{eq:gcc3}\\
+	& \psi(f) = H_1(f)H_2^*(f)
+	\label{eq:gcc4}	
+\end{eqnarray}
+
+The function $\psi(f)$ (\ref{eq:gcc4}), with $*$ denoting the complex conjugate, represents the prefilter and it is essentially the distinctive parameter that originate different methods of cross-correlation, since it should depend on different environments and properties, as SNR. The CC technique uses a prefilter $\psi(f)$ equal to 1, being the simplest method of its kind.
+
+%----------------------------------------------------
+\item \textbf{Maximum Likelihood}
 
 The Maximum Likelihood (ML) method is a variation of Cross-Correlation which uses the prefilter $\psi(f)$ represented mathematically by \ref{eq:ml1}, where $\gamma_{12}(f)$ is a function of spectrum of cross-correlation $G_{x1x2}(f)$ and spectrum of auto-correlations $G_{x1x1}(f)$, $G_{x2x2}(f)$ as expressed in \ref{eq:ml2} \cite{crosscorr}.
 
@@ -204,88 +229,65 @@ There is also a version of ML that uses the power spectral densities of the sign
 
 %________________________________________________________
 
-\section{Localization estimation}
+\subsection{Position estimation with reference nodes}
 
-In networks with multiple nodes is typical to use localization estimation to establish position relationships between elements. The operation principal is usually to have a set of reference nodes with known positions so that it is possible to determine the relative positions between each reference node and the target. 
+In networks with multiple nodes it is typical to use localization estimation to establish relative positions between elements. This is usually achieved by establishing reference nodes with known positions so that it is possible to determine relative positions based on them.
 
-An extensive comparison of different localization schemes for underwater sensors networks can be consulted in \cite{suvey-loc}.
+Two of the most commonly used methods for underwater acoustic positioning are Triangulation, which is based on the angles between nodes and the object to be located,  and Lateration, which is based on the range between the element to be located and each node \cite{triang-later}. These methods present two common restrictions: both need of a minimum of three visible nodes for 2D localization or four beacons for 3D localization and both fail to determine the unknown position if the nodes and the position to be estimated are all placed in the same circumference.
 
-\subsection{Triangulation}
+An extensive comparison of different localization schemes for underwater sensors networks can be consulted in \cite{suvey-loc}. 
 
-Triangulation is a method of localization based on the measurement of angles which are related to the reference beacons and the target object. 
+\subsubsection{Triangulation}
 
-\subsubsection{Three-Object Triangulation}
-The simplest method of this category is the Three-Object Triangulation, which considers a configuration as illustrated in figure \ref{fig:tri1}. It is assumed that the location of the beacons is pre-configured and the environment is obstacle-free. $\lambda_{12}$ is the angle formed by the intersection of the straight lines [O,1] and [O,2]. Similarly, $\lambda_{31}$ is the angle formed by the intersection of the straight lines [O,1] and [O,3]. Using these two sets of nodes, we can trace circumferences that include their coordinates and as a consequence their intersection will correspond to the location of the target.
+Triangulation is a method widely used in mobile robot localization so various algorithms have been proposed. In \cite{class-triang}, triangulation methods are divided into four categories: 
+
+\begin{itemize}
+	\item Geometric Triangulation: comprises methods based on geometric relations and trigonometry;
+	
+	\item Geometric Circle Interaction: the algorithms calculate the radius and center of two circles that pass through the nodes and the object to be localized, so that the intersection between them gives the unknown localization;
+		
+	\item Iterative methods: includes algorithms that iteratively estimate the position by linearization of trigonometric relations;
+	
+	\item Multiple Beacons Triangulation: the methods use more than three angles to localize an object, which is usually used in scenarios with corrupted angle measurements.
+\end{itemize}
+
+Since this method was not adopted in the present dissertation, only a brief overview on the existing algorithms was made.
+
+\subsubsection{Lateration} \label{subsubsec:lateration}
+
+The most typically employed lateration technique is the multilateration, which is used in this dissertation. As mentioned before, it relies on the range between the object to be localized and multiple reference nodes. In this method, the employment of \textit{n+1} nodes allows to determine \textit{n} coordinates \cite{arch_localiz}. For instance, determining the position $(x,y,z)$ of an object requires to resolve a system of equations using (\ref{eq:mult}), where $(x_{i}, y_{i}, z_{i})$ are the coordinates of the node and $d_{i}$ is the distance between the node and the object.
+
+\begin{eqnarray}
+	& (x - x_{i})^2 + (y - y_{i})^2 + (z - z_{i})^2 = d_{i}^2 
+	\label{eq:mult}
+\end{eqnarray}
+
+Figure \ref{fig:trilateration} illustrates a specific case of trilateration, which implies the use of three reference nodes 1, 2 and 3. The object $O$ corresponds to the position to be localized that is determined by calculating the intersection between the three circumferences, generated by knowing the relative positions and ranges, $d_1$, $d_2$ and $d_3$, between all elements.
 
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=0.4\textwidth]{figures/triangulation}
-	\caption{Three-Object Triangulation}
-	\label{fig:tri1}
+	\includegraphics[width=0.5\textwidth]{figures/trilateration}
+	\caption{Localization using trilateration}
+	\label{fig:trilateration}
 \end{figure}
-
-Although this is a very straightforward technique to implement, it does not cover all possible scenarios, namely when the three beacons and the object are all placed in the same circumference or when the environment has obstacles between nodes.
-
-\subsubsection{Geometric Triangulation algorithm}
-
-A more complex method relies on the Geometric Triangulation algorithm. 
-
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=0.5\textwidth]{figures/geotriang}
-	\caption{Geometric Triangulation algorithm}
-	\label{fig:tri2}
-\end{figure}
-
-
-Considering a Cartesian plane with defined lengths L1, L12 and L31, as shown in image \ref{fig:tri2}, it is possible to establish trigonometrical relationships that estimate the location of the object within the created triangular areas. The position of the target is given by coordinates (xT,yT) and can be calculated through equations \ref{eq:tri1} and \ref{eq:tri2}. (x1,y1) represents the location of beacon 1 and L1 is the distance between this beacon and the object. The trigonometric relationships for calculating the mentioned variables can be consulted in \cite{triangalgo}.
-
-\begin{eqnarray}
-& xT = x1 - L1 * cos(\phi + \tau)
-\label{eq:tri1}\\
-& yT = y1 - L1 * sin(\phi + \tau)
-\label{eq:tri2}
-\end{eqnarray}
-
-\subsection{Trilateration}
-
-Trilateration is a technique that does not rely on calculations using angles but instead it uses distances to locate an object.
-
-Considering a scenario with three reference beacons, the distance between the target and each one of the beacons is taken as the radius of a circumference. By doing this, it is possible to obtain three circumferences that intersect each other. With only two circumferences, there are two possible locations for the object, however, when added the third circumference the exact location is obtained. The 2D coordinates are obtained by solving systems of equations with the circle equation \ref{eq:circle} \cite{trilat}, where $(x_{i}, y_{i})$ is the beacon coordinates and $r_{i}$ is the distance between the beacon and the object.
-
-\begin{eqnarray}
-& (x - x_{i})^2 + (y - y_{i})^2 = r_{i}^2 
-\label{eq:circle}
-\end{eqnarray}
-
-Trilateration is commonly used in underwater acoustic localization, as it used to find a relative position of the target in two dimensions and additionally determines the depth as third dimension, by using a pressure sensor with high accuracy.
-
-\subsection{Multilateration} \label{subsec:multilateration}
-
-Multilateration is a generalization of the trilateration technique, as it uses the same conceptual principal with multiple reference beacons instead of exactly three. In this method, the employment of \textit{n+1} nodes will allow to determine \textit{n} coordinates \cite{arch_localiz}. For example, determining the position (x,y,z) of a target, would require to resolve a system of equations using \ref{eq:mult}. $(x_{i}, y_{i}, z_{i})$ is the coordinates of the beacon and $d_{i}$ is the distance between the beacon and the target.
-
-\begin{eqnarray}
-& (x - x_{i})^2 + (y - y_{i})^2 + (z - z_{i})^2 = d_{i}^2 
-\label{eq:mult}
-\end{eqnarray}
 
 Distributed mechanisms, such as multilateration, are usually divided in three phases of positioning \cite{suvey-loc}:
 \begin{itemize}
-	\item Distance estimation between the reference nodes and target object, usually using TDoA or ToF mechanisms;
-	\item Position estimation, usually obtained by solving a system of linear equations through mathematical efficient techniques;
+	\item Distance estimation between the reference nodes and the target object, usually using TDoA or ToF mechanisms;
+	\item Position estimation, obtained by solving a system of linear equations through mathematical techniques or sensor fusion using an estimator, since the solutions are usually approximated due to noise or non-linearities;
 	\item Final refinement of the measurement in order to improve accuracy.
 \end{itemize}
 
-As an alternative to solve localization issues using circumferences, multilateration can also take advantage of a hyperbola-based localization method. Considering a target at (x,y) and three reference beacon with coordinates $(x_{i},y_{i})$,  $(x_{j},y_{j})$ and  $(x_{k},y_{k})$, we have that the difference between times of arrival $t_{i}$ and $t_{j}$ to nodes $i$ and $j$, respectively, can be related to the distance between nodes, as expressed in \ref{eq:hyper} \cite{arch_localiz}. $d_{i}$ and $d_{j}$ are the distance from node $i$ and $j$, respectively, to the target object. 
+As an alternative to solve localization issues using circumferences, multilateration can also take advantage of a hyperbola-based localization method. Considering a target at (x,y) and three reference beacon with coordinates $(x_{i},y_{i})$,  $(x_{j},y_{j})$ and  $(x_{k},y_{k})$, we have that the difference between times of arrival $t_{i}$ and $t_{j}$ to nodes $i$ and $j$, respectively, can be related to the distance between nodes, as expressed in (\ref{eq:hyper}) \cite{arch_localiz}. $d_{i}$ and $d_{j}$ are the distance from node $i$ and $j$, respectively, to the target object. 
 
 \begin{eqnarray}
-& d_{i} - d_{j} = c * (t_{i} - t_{j}) = \sqrt{(x - x{i})^2 + y - y{i})^2} - \sqrt{(x - x{k})^2 + y - y{k})^2}
-\label{eq:hyper}
+	& d_{i} - d_{j} = c * (t_{i} - t_{j}) = \sqrt{(x - x{i})^2 + y - y{i})^2} - \sqrt{(x - x{k})^2 + y - y{k})^2}
+	\label{eq:hyper}
 \end{eqnarray}
 
 %________________________________________________________
 
-\section{Positioning Systems}
+\section{Underwater Acoustic Positioning Systems}
 
 Positioning systems are used to track the underwater position of a vehicle or other object, in relation to reference structures of transponders called \textit{baseline stations}. These systems are classified based on the distance between the baseline stations. The configurations that will be explained are Long Baseline (LBL), Short Baseline (SBL), Ultra-Short Baseline (USBL) and the inverted versions of all above.
 
@@ -296,40 +298,35 @@ Positioning systems are used to track the underwater position of a vehicle or ot
 	\label{fig:lblsblusbl}
 \end{figure}
 
-\subsection{Long Baseline (LBL)}
+\subsection{Long Baseline (LBL) and Short Baseline (SBL)}
 
-Long Baseline systems use a positioning method with large distances between baseline stations, with range typically from 50m to more than 2000m  and usually similar to the distance between object and transponders \cite{crosscorr}. A typical LBL configuration is represented in figure a) \ref{fig:lblsblusbl}.
+Long Baseline (LBL) and Short Baseline (SBL) systems are characterized by different ranges and transponder deployment, however they share the same operating procedure.
 
-The LBL method uses at least three transponder stations deployed usually on the sea floor, allowing to execute trilateration. Additionally, a transducer is integrated on the object to be tracked. 
+Long Baseline systems use a positioning method with large distances between baseline stations, with a range typically from $50m$ to more than $2000m$ and usually similar to the distance between the receiver and the transponders \cite{crosscorr}. A typical LBL configuration is represented in illustration a) of \ref{fig:lblsblusbl}. It uses at least three transponder stations deployed usually on the sea floor.
 
-A complete localization procedure starts with the vehicle sending an acoustic signal which is received by the transponders. Thereafter the transponders transmit a response and, by analyzing the Time of Flight of the communication, the system can determine the distance between the vehicle and each base station. Then the relative position of the vehicle is determined through trilateration. Additionally, if the transponders have known geographic positions, it is possible to infer the vehicle geographic position. 
+Short Baseline systems are characterized by having distances around $20m$ to $50m$ between baseline stations \cite{survey-tech-chall} and uses transponders usually placed in a moving platform, assuring fixed relative position between them. A typical SBL configuration is represented in illustration b) of \ref{fig:lblsblusbl}.
 
-As this technique presents large distances between the object and the base stations, the typical 1m to few centimeters accuracy is considered to be high because it will not compromise the localization of the vehicle. 
-
-
-\subsection{Short Baseline (SBL)}
-
-Short Baseline systems are characterized by having distances around 20m to 50m between baseline stations \cite{survey-tech-chall} and use an operation procedure similar to the LBL method. However, the transponders are usually placed in a moving platform, which assures a fixed relative position between them. A typical SBL configuration is represented in figure b) \ref{fig:lblsblusbl}.
-
-The position of the vehicle to be tracked can be determined by translating the Time of Flight between the multiple transponders and the object into a distance value, which is achieved by equation \ref{eq:sbl} \cite{sbl}. The $t_{i}$ corresponds to the propagation time of the signal from the vehicle to the \textit{i}th transponder, \textit{c} is the speed of sound, [$x_{b_{i}}$, $y_{b_{i}}$ and $z_{b_{i}}$] is the coordinate position of the transponder.
+For both LBL and SBL, a complete localization procedure starts with the vehicle sending an acoustic signal which is received by the transponders. Thereafter the transponders transmit a response and, by analyzing the Time of Flight of the communication,it is possible to determine the distance between the vehicle and each transponder. Then the relative position of the vehicle is determined through trilateration. Considering $t_{i}$ the propagation time of the signal from the vehicle to the \textit{i}th transponder, $c_s$ the speed of sound and ($x_{b_{i}}$, $y_{b_{i}}$, $z_{b_{i}}$) as the coordinate position of the transponder, then equation (\ref{eq:sbl}) \cite{sbl} expresses the position of the vehicle. Additionally, if the transponders have known geographic positions, it is possible to infer the vehicle's absolute geographic position. 
 
 \begin{eqnarray}
-&\sqrt{ (x_{b_{i}}-x)^2 + (y_{b_{i}}-y)^2 + (z_{b_{i}}-z)^2 } = c\ *\ t_{i}
-\label{eq:sbl}
+	&\sqrt{ (x_{b_{i}}-x)^2 + (y_{b_{i}}-y)^2 + (z_{b_{i}}-z)^2 } = c_s\ *\ t_{i}
+	\label{eq:sbl}
 \end{eqnarray}
 
-In a SBL system, when the distance between baseline stations is increased the accuracy improves and, contrarily, when the mentioned distance decreases the accuracy deteriorates, which can raise some deployment challenges.
+
+The accuracy of these methods depend on several factors, such as the range of communication and transponders configuration, and it typically fluctuates between tens of centimeters and a few meters.
+
 
 \subsection{Ultra-Short Baseline (USBL)}
 
-Ultra-short baseline systems are composed essentially by one baseline station, with an array consisting of several traducers distanced typically less than the wavelength \cite{lblsblusbl}, and a transponder integrated on the object to be tracked. It is usually used in underwater positioning in shallow areas of the sea, as represented in figure c) \ref{fig:lblsblusbl}.
+Ultra-short baseline systems are composed essentially by one baseline station, with an array consisting of several traducers distanced typically less than the wavelength \cite{lblsblusbl}, and a transponder integrated on the vehicle. It is usually represented as illustration c) of \ref{fig:lblsblusbl}.
 
 Similarly to the previously mentioned procedures, the USBL positioning method relies on the Time of Flight of the exchanged signals. However, the traducers are too spatially close from each other to execute an accurate trilateration. Instead, it is measured the phase difference or time-delay difference of the received signal between every traducer, in order to estimate the azimuth and distance to the acoustic source. 
 
-Assuming a three dimensional scenario for the positioning system, as represented in figure \ref{fig:usblgeo}, the object's coordinates are given by equations \ref{eq:usblgeo1}, \ref{eq:usblgeo2} and \ref{eq:usblgeo3} \cite{usbl-new}. The $\lambda$ corresponds to the wavelength of the of the transmitted signal which depends on its operation frequency, \textit{f}, and it is affected by the speed of sound \textit{c}, as represented equation \ref{eq:cfw}.
+Assuming a three dimensional scenario for the positioning system, as represented in figure \ref{fig:usblgeo}, the object's coordinates are given by equations (\ref{eq:usblgeo1}), (\ref{eq:usblgeo2}) and (\ref{eq:usblgeo3}) \cite{usbl-new}. The $\lambda$ corresponds to the wavelength of the of the transmitted signal which depends on its operation frequency, \textit{f}, and it is affected by the speed of sound \textit{c}, as represented equation (\ref{eq:cfw}).
 The \textit{d} represents the distance between hydrophones, $\psi_{12}$ and $\psi_{22}$ are the phase difference between H2 and the other two hydrophones, \textit{H} is the height of the target object, \textit{X} is the distance of the target along the x-axis direction, \textit{Y} is the distance of the target along the y-axis direction and \textit{l} is the slant distance of the target to the hydrophone.
 \begin{eqnarray}
-& c = f * \lambda
+& \lambda = \frac{c}{f}
 \label{eq:cfw}
 \end{eqnarray}
 \begin{eqnarray}
@@ -348,37 +345,38 @@ The \textit{d} represents the distance between hydrophones, $\psi_{12}$ and $\ps
 	\label{fig:usblgeo}
 \end{figure}
 
-This is a broadly used technique due to its convenient set up, which allows to have predefined measurements in the order of tens of centimeters and does not require AUV navigation area for the deployment. However it presents the lowest accuracy, comparatively with LBL and SBL, since an error of few centimeters can be realistically corresponding to an inaccuracy of several meters in the position of the object to be tracked.
+This is a broadly used technique due to its convenient set up, which allows to have predefined measurements in the order of tens of centimeters and does not require the deployment of support infrastructures in the intended navigation area of the target AUV. However, since the USBL is based on bearing determination it needs high accuracy in order to achieve efficient localization estimations.. 
 
-\subsection{Inverted Systems}
 
-All the previously mentioned positioning techniques use a configuration in which the vehicle to be tracked has a single transducer and there is an external set of transponder to determine the positioning of the said object. However, there is the possibility to benefit from the inverse configuration in some applications. Therefore, there are also the iLBL, iSBL and iUSBL methods, which have the same operation principals as LBL, SBL and USBL, respectively.
+%\subsection{Inverted Systems}
+%
+%All the previously mentioned positioning techniques use a configuration in which the vehicle to be tracked has a single transducer and there is an external set of transponder to determine the positioning of the said object. However, there is the possibility to benefit from the inverse configuration in some applications. Therefore, there are also the iLBL, iSBL and iUSBL methods, which have the same operation principals as LBL, SBL and USBL, respectively.
 
 %_________________________________________________________
 
 
 \section{Commercial Solutions}
 
-There are several commercial solutions for underwater positioning using the ultra-short baseline method. In this section, it will be presented some of the available devices in the market, indicating their main properties and capabilities. Table \ref{tab:solutions} summarizes the systems with most relevance to the present work. The Medium Frequency (MF) bandwidth is attributed to devices whose manufacturer did not specified the actual frequency range.
+There are several commercial solutions for underwater positioning using the ultra-short baseline method. In this section, some of the available devices in the market will be presented, indicating their main properties and capabilities. Table \ref{tab:solutions} summarizes the systems with most relevance to the present work. The Medium Frequency (MF) bandwidth is attributed to devices whose manufacturer did not specified the actual frequency range.
 
-\textit{Evologics} produces the S2C R USBL series of acoustic modems \cite{evologics1}, with Sweep Spread Carrier (S2C) technology \cite{evologics2} which uses a broad frequency range to propagate over large distances with reduced noise. The devices have a fixed 0.01m slant range accuracy and a 0.1 degree bearing resolution. These are essentially divided into two groups:
+\textit{Evologics} produces the S2C R USBL series of acoustic modems \cite{evologics1}, with Sweep Spread Carrier (S2C) technology \cite{evologics2} which uses a broad frequency range to propagate over large distances with reduced noise. The devices have a fixed 0.01m slant range precision and a 0.1 degree bearing resolution. These are essentially divided into two groups:
 \begin{itemize}
-	\item High speed mid-range devices: contains the 18/34 transceivers family \cite{evologics3}, which presents various options for the USBL antenna beam pattern and it is optimal for transmission in horizontal channels.
-	\item Depth rated long-range devices: includes the 12/24 transceiver \cite{evologics4}, which have a directional (70 degrees) USBL antenna  and it is optimal for transmission in vertical channels.
+	\item High speed mid-range devices: contains the 18/34 transceivers family \cite{evologics3}, which presents various options for the USBL antenna beam pattern and it is designed for transmission in horizontal channels.
+	\item Depth rated long-range devices: includes the 12/24 transceiver \cite{evologics4}, which have a directional (70 degrees) USBL antenna  and it is designed for transmission in vertical channels.
 \end{itemize}
 
-\textit{Sonardyne} markets the Ranger 2 systems. The Micro-Ranger 2 \cite{sonardyne1} is very easy to use without previous experience and it is appropriate for shallow waters, achieving accuracy of 0.2\%. The Mini-Ranger 2 is ideal for nearshore missions and it is  used for simultaneous tracking of various mobile targets, whose position is updated every 3 seconds.
+\textit{Sonardyne} markets the Ranger 2 systems. The Micro-Ranger 2 \cite{sonardyne1} is appropriate for shallow waters, achieving accuracy of 0.2\%. The Mini-Ranger 2 is intended for nearshore missions and it is  used for simultaneous tracking of various mobile targets, whose position is updated every 3 seconds.
 
 \textit{Applied Acoustics} offers the Easytrak USBL Systems, which includes the processing software for estimating the position. The Alpha Portable 2655 consists in a very compact structure that includes an array transducer and is capable of reaching a 10cm slant range resolution and a 2 degree RMS.
 
-\textit{Kongsberg} produces the HiPAP family of transducers \cite{hipap_hardw}, which can use the Cymbal acoustic protocol (PSK) or the frequency shift (FSK) modulation technique. Particularly the HiPAP 352 is the model with higher number of active transducers and is able to reaches 0.02m of range accuracy.
+\textit{Kongsberg} produces the HiPAP family of transducers \cite{hipap_hardw}, which can use the Cymbal acoustic protocol (PSK) or the frequency shift (FSK) modulation technique. Particularly the HiPAP 352 is the model with higher number of active transducers and is able to reaches 0.02m of range precision.
 
 \begin{table}[!htbp] %use !htbp to adjust
 	\begin{center}
 	\makebox[\textwidth]{
-	\begin{tabular}{l|l l l l}
+	\begin{tabular}{l|l l l l l l}
 		\toprule
-		\textbf{Company} & \textbf{System} & \textbf{Bandwidth(kHz)} &\textbf{Connection(kbps)} & \textbf{Range(m)} \\ 
+		\textbf{Company} & \textbf{System} & \textbf{Bandwidth(kHz)} &\textbf{Connection(kbps)} & \textbf{Range(m)} & Precision() & Update frequency \\ 
 		\midrule
 		\multirow{2}{4em}{Evologics} 
 		& S2C R 18/34D USBL & 18-34 & up to 13.9 & 3500\\
@@ -409,26 +407,27 @@ There are several commercial solutions for underwater positioning using the ultr
 \section{Angle of arrival determination}
 \note{methods for calculating signal's angle of arrival }
 
+
 \section{Optimization of sensor configurations}
 
-When dealing with a localization system which integrates a multiple sensor configuration, it is essential to understand how can the sensor layout be designed so that the estimation is optimized. This section is dedicated to explore some commonly employed methodologies which evaluate the performance of sensor layouts considering determined parameters.
+When dealing with positioning systems, such as USBL, it is necessary to deploy sensors in the vehicle that is intended to locate a transmitter emitting acoustic signals. Therefore, it is considered that four hydrophones are needed to measure the time difference of arrival of the transmitted acoustic signal so its direction can be calculated. These hydrophones can be located in any position, so it is essential to understand how can the sensor layout be designed, namely in terms of its physical distribution along the body of an underwater structure, in order to achieve the best possible estimation. This section is dedicated to explore some commonly employed methodologies which evaluate the performance of sensor layouts considering determined parameters.
 
 \subsection{Crámer-Rao lower bound}	\label{sec:cramer}
 
-The Crámer-Rao bound is a tool which analyzes the variance of a sensor configuration and determines the minimum bound it can achieve independently from the used estimator. This method assumes the usage of an efficient estimator, which is an optimal estimator for the chosen parameter, and an unbiased estimator, i.e. the real value of the parameter is equal to the expected value.
+The Crámer-Rao bound is a tool which analyzes the variance of a sensor configuration and determines the minimum bound it can achieve independently from the used estimator. This method assumes the usage of an efficient estimator, which is an optimal estimator for the chosen parameter, and an unbiased estimator, i.e. the real value of the parameter which is equal to the expected value.
 
-In this thesis, it is conducted a study based on the Crámer-Rao lower bound, which is generally used to generate a \textit{so-called uncertainty ellipse} \cite{bishop-cramer-rao} that represents the spatial variance distribution of the estimated position. The overall desired result is to find the minimum variance that is related to the chosen configuration geometry, which indicates that it is the optimal solution for estimating a certain position. This method utilizes the Fisher Information matrix (FIM), which measures the quantity of information that can be extracted from an observation vector about a certain parameter.
+In this thesis, it is conducted a study based on the Crámer-Rao lower bound, which is generally used to generate a \textit{so-called uncertainty ellipse} \cite{bishop-cramer-rao} that represents the spatial distribution or the spatial variance distribution of the estimated position. The overall desired result is to find the minimum variance that is related to the chosen configuration geometry, which indicates that it is the optimal solution for estimating a certain position. This method utilizes the Fisher Information matrix (FIM) as explained next, which measures the quantity of information that can be extracted from an observation vector about a certain parameter.
 
 In order to avoid loss of generality, it is considered a set of N sensors and a settled position for the acoustic source, defined by $s$ = [$x_{s}$, $y_{s}$, $z_{s}$]$^T$. In addition, the position of each sensor is defined as $r_{i}$ = [$x_{r_{i}}$, $y_{r_{i}}$, $z_{r_{i}}$] and, consequently, the measurement of distance between each sensor and the source is defined as d$_{i}$ = $|| s - r_{i} ||$.
 
-Thereafter, the observations vector will be formulated containing the observed times-of-arrival (ToA) of the signal from the acoustic source to each one of the hydrophones, considering their geometric position. These times contain a noise vector component, which can be approximated to to a Gaussian distribution $n_i \sim \mathcal{N}(\mu,\,\sigma^{2})$. The samples can be calculated through the expression \ref{eq:obs_vec}, where it is considered an initial time of arrival $t_0$. Additionally, c represents the sound speed underwater.
+Thereafter, the observations vector will be formulated containing the observed times-of-arrival (ToA) of the signal from the acoustic source to each one of the hydrophones, considering their geometric position. These times contain a noise vector component, which can be approximated to a Gaussian distribution $n_i \sim \mathcal{N}(\mu,\,\sigma^{2})$. The samples can be calculated through the expression \ref{eq:obs_vec}, where it is considered an initial time of emission $t_0$. Additionally, c represents the sound speed underwater.
 
 \begin{eqnarray}
 	t_i = t_0 + \frac{||d_i||}{c} + n_i
 	\label{eq:obs_vec}
 \end{eqnarray}
 
-After having the observations matrix, it is established the condition to formulate the Fisher Information matrix, $I(d)$ , which results into equation \ref{eq:fisher}.
+After having the observations matrix, the condition to formulate the Fisher Information matrix, $I(d)$ , is established which results into equation \ref{eq:fisher}.
 
 \begin{eqnarray}
 	I(d) = \nabla_{d}t(d)^T \; \Sigma^{-1} \; \nabla_{d}t(d)
@@ -437,11 +436,11 @@ After having the observations matrix, it is established the condition to formula
 
 $\nabla_{d}t(d)$ is the gradient matrix of the observations vector regarding $d_i$, whereas $\Sigma$ is the covariance matrix, in which the diagonal contains the standard deviation of the components of each noise vector, construed as $(\sigma_1^2 , \sigma_2^2 , ... , \sigma_N^2)$ .
 
-After formulated, the Fisher Information Matrix it will indicate the quantity of information that a certain sensor configuration can give about a position in space. Hence the goal is to obtain the maximum achievable information. By calculating the determinant of FIM it is possible to deduce the minimum \textit{uncertainty ellipsoid} and therefore the configuration's best possible performance. Therefore, the optimal solution is given by the maximum output of the determinant of FIM.
+The Fisher Information Matrix quantifies the information that a certain sensor configuration can give about a position in space. Hence the goal is to obtain the maximum achievable information. By calculating the determinant of FIM it is possible to deduce the minimum \textit{uncertainty ellipsoid} and therefore the configuration's best possible performance. Therefore, the optimal solution is given by the maximum output of the determinant of FIM.
 
 Additionally, it is possible to detail this information by calculating the actual size of the axis that compose the \textit{uncertainty ellipsoid}. This is achieved by calculating the square mean root of the eigenvalues of $I(d)$, which correspond to each axis size.
 
-Further explanation about the methods used in a deeper exploration of the Crámer-Rao lower bound can be consulted in \cite{bishop-cramer-rao}, which serves as guide to investigate other scenarios of application of this theorem. However, the mentioned concepts were all the necessary for the approach on this dissertation .
+Therefore, the Crámer-Rao lower bound is widely used as a metric to evaluate the performance of sensor configurations. Further explanation about the methods used in a deeper exploration of the Crámer-Rao lower bound can be consulted in \cite{bishop-cramer-rao}. However, the mentioned concepts were all the necessary for the approach on this dissertation .
 
 This same process is adopted in this dissertation. All steps specifically taken for this study are declared in section \ref{sucsec:FIM} of the present document.
 
@@ -450,7 +449,7 @@ This same process is adopted in this dissertation. All steps specifically taken 
 
 \subsection{Optimal design and optimality criteria}	\label{sec:optimaldesign}
 
-When contemplating system designs, the optimal solution for a problem is generally a subjective matter which depends on the chosen principal. Following this idea, we can define optimal designs as experimentally generated designs of various types of systems which are usually optimal for a targeted statistical model and are modelled by a specific optimality criterion. These criteria can be organized in four distinct groups \cite{compare-optimality-crit}:
+When contemplating system designs, the optimal solution for a problem is generally a subjective matter which depends on the chosen criterion. Following this idea, we can define optimal designs as experimentally generated designs of various types of systems which are usually optimal for a targeted statistical model and are modeled by a specific optimality criterion. These criteria can be organized in four distinct groups \cite{compare-optimality-crit}:
 \begin{itemize}
 	\item \textbf{Information-based} : comprehends all criteria that are related to the Fisher information matrix $X'X$. Some of the criteria which fits into this category are A, D, E and G-optimality.
 	\item \textbf{Distance-based} : includes criteria which depends on the distance $d(x,A)$ from a point $x$ in the Euclidean space $\mathbb{R}^{p}$ to a set $A \subset \mathbb{R}^{p}$. U and S-optimality are integrated in this category.

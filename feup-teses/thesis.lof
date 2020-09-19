@@ -3,40 +3,36 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Generic sound speed profile\relax }}{6}{figure.caption.7}% 
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Illustrative example of shallow water multipath\relax }}{7}{figure.caption.9}% 
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Three-Object Triangulation\relax }}{13}{figure.caption.11}% 
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Geometric Triangulation algorithm\relax }}{13}{figure.caption.12}% 
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Generic configuration of: a) LBL; b) SBL; c) USBL\relax }}{16}{figure.caption.13}% 
-\contentsline {figure}{\numberline {2.6}{\ignorespaces USBL system configuration\relax }}{18}{figure.caption.14}% 
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Localization using trilateration\relax }}{14}{figure.caption.15}% 
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Generic configuration of: a) LBL; b) SBL; c) USBL\relax }}{15}{figure.caption.16}% 
+\contentsline {figure}{\numberline {2.5}{\ignorespaces USBL system configuration\relax }}{17}{figure.caption.17}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Communication System\relax }}{24}{figure.caption.18}% 
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Communication System\relax }}{24}{figure.caption.22}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Top level architecture\relax }}{28}{figure.caption.19}% 
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Hilbert Filter circular shifting register chain\relax }}{30}{figure.caption.20}% 
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Hilbert Filter block diagram\relax }}{30}{figure.caption.21}% 
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Phase difference to reference point and phase ambiguity\relax }}{34}{figure.caption.23}% 
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Ambiguity correction through correlation and phase difference\relax }}{35}{figure.caption.24}% 
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Hyperbolic representation of acoustic source position possibilities in relation to ToA to two hydrophones\relax }}{36}{figure.caption.25}% 
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Considered scheme for angle of arrival estimation\relax }}{38}{figure.caption.26}% 
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Angle of arrival relation considering a plane wavefront\relax }}{41}{figure.caption.27}% 
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Evolution of error in Cartesian coordinates for increasing norm\relax }}{49}{figure.caption.30}% 
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Obtained error for a single configuration with no accumulated samples\relax }}{52}{figure.caption.35}% 
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Obtained error for a single configuration with 100 accumulated samples\relax }}{52}{figure.caption.36}% 
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Error evolution with increasing baseline for $r_{C1}$\relax }}{53}{figure.caption.38}% 
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Error evolution with increasing baseline for $r_{C2}$\relax }}{54}{figure.caption.39}% 
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Estimation of position $s_{cart}(0,100,0)$ using the plane wavefront estimator with configuration A\relax }}{55}{figure.caption.41}% 
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Uncertainty radius obtained by configuration C for all sphere positions\relax }}{57}{figure.caption.44}% 
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Eigenvectors obtained for configuration C when estimation position $s_{cart}(10,0,0)$ \relax }}{57}{figure.caption.45}% 
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Top level architecture\relax }}{30}{figure.caption.29}% 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Hilbert Filter circular shifting register chain\relax }}{32}{figure.caption.30}% 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Hilbert Filter block diagram\relax }}{32}{figure.caption.31}% 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Phase difference to reference point and phase ambiguity\relax }}{35}{figure.caption.33}% 
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Ambiguity correction through correlation and phase difference\relax }}{36}{figure.caption.34}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Hydrophone positions for the implementation using 9 hydrophones\relax }}{62}{figure.caption.49}% 
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Model of AUV used to calculate the LOS region\relax }}{66}{figure.caption.50}% 
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Line of sight regions in plane yz for x < 0\relax }}{67}{figure.caption.51}% 
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Line of sight regions in plane yx and zx for x $\geq $ 0\relax }}{68}{figure.caption.52}% 
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Errors obtained for all configurations when estimating position $s_{cart}(10,10,10)$\relax }}{69}{figure.caption.53}% 
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Overlaid azimuth and elevation deviations for all configurations when estimating position $s_{cart}(10,10,10)$\relax }}{69}{figure.caption.54}% 
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Errors obtained for all configurations when estimating position $s_{cart}(-10,-10,-10)$\relax }}{71}{figure.caption.56}% 
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Errors obtained for all configurations when estimating position (100,0,0)\relax }}{72}{figure.caption.57}% 
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Errors obtained for all configurations when estimating position (100,0,0)\relax }}{73}{figure.caption.59}% 
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Hydrophone possible positions for optimality study based on range\relax }}{74}{figure.caption.61}% 
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Illustration of relevant hydrophone configurations for range based estimation\relax }}{77}{figure.caption.63}% 
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Considered scheme for angle of arrival estimation\relax }}{40}{figure.caption.35}% 
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Angle of arrival relation considering a plane wavefront\relax }}{43}{figure.caption.36}% 
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Estimate dispersion obtained with GBE for position $s_{cart}(100,0,0)$ using configuration C\relax }}{48}{figure.caption.38}% 
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Estimate dispersion obtained with PWE for position $s_{cart}(100,0,0)$ using configuration C\relax }}{49}{figure.caption.39}% 
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Estimate dispersion obtained with FIM for position $s_{cart}(100,0,0)$ using configuration C\relax }}{49}{figure.caption.40}% 
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Error evolution with increasing baseline for $r_{C1}$\relax }}{53}{figure.caption.50}% 
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Error evolution with increasing baseline for $r_{C2}$\relax }}{54}{figure.caption.51}% 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Hydrophone positions for the implementation using 9 hydrophones\relax }}{58}{figure.caption.55}% 
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Model of AUV used to calculate the LOS region\relax }}{62}{figure.caption.57}% 
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Line of sight regions in plane yz for x < 0\relax }}{63}{figure.caption.58}% 
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Line of sight regions in plane yx and zx for x $\geq $ 0\relax }}{64}{figure.caption.59}% 
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Errors obtained for all configurations when estimating position $s_{cart}(10,10,10)$\relax }}{65}{figure.caption.60}% 
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Overlaid azimuth and elevation deviations for all configurations when estimating position $s_{cart}(10,10,10)$\relax }}{65}{figure.caption.61}% 
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Errors obtained for all configurations when estimating position $s_{cart}(-10,-10,-10)$\relax }}{67}{figure.caption.63}% 
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Errors obtained for all configurations when estimating position (100,0,0)\relax }}{68}{figure.caption.64}% 
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Errors obtained for all configurations when estimating position (100,0,0)\relax }}{69}{figure.caption.66}% 
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Hydrophone possible positions for optimality study based on range\relax }}{70}{figure.caption.68}% 
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Illustration of relevant hydrophone configurations for range based estimation\relax }}{73}{figure.caption.70}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }

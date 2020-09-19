@@ -2,6 +2,7 @@
 
 This chapter intends to specify the context of the present dissertation, describing the considered scenario, technologies and conditions in which the proposed solution is useful. Based on this, the two main goals of the present research work are established. Lastly, it is explained how the document is structured, including a concise summary of each chapter's content.
 
+%-------------------------------------------------------------------------------------------
 \section{Context and Motivation} \label{sec:context}
 
 Today, the deep blue ocean still represents a relevant topic of research in the scientific community as it constantly rises new unexplained mysteries. Up to now, only 15\% of the entire ocean floor is mapped based on collected data \cite{deeperblue}. As such, it seems essential to create efficient research tools to improve the discovery of information.
@@ -14,19 +15,18 @@ The described process can only be achieved if the mule AUV is able to locate the
 
 In such scenario, the USBL system needs to meet specific requirements to assure a reliable localization. Since the acoustic source can be located anywhere, it is essential that the estimation is accurate for both short and long range distances. Additionally, the system needs to have line of sight in any direction, which is compromised from the start by deploying the sensors on an AUV. Typically, the available USBL commercial solutions do not tackle these issues simultaneously, so the development of such system constitutes a technological challenge.
 
-Therefore, this dissertation intends to explore a method that assumes the deployment of multiple hydrophones in a vehicle, from which only four are used simultaneously for the angle of arrival estimation. This allows to select the optimal sensor configuration for a specific transmitter position, which corresponds to the one returning the lowest estimation error. Additionally, it would allow to exclusively consider configuration whose hydrophones have line of sight to the target in order to improve the estimation accuracy. Overall, this mechanism intends to rectify issues that arise from classic USBL systems, such as the before mentioned. 
-
-In the course of this document, the optimal reconfiguration method is detailed and refined, determining its limitations and capabilities. Additionally, all the contemplated tools and complementary modules are carefully explained.
+Therefore, this dissertation intends to develop a method that improves relative localization of AUVs using reconfigurable USBL systems. All the contemplated tools and complementary mechanisms are carefully explained throughout the document. 
 
 This research work falls under the scope of activities developed by the Center of Robotics and Autonomous Systems of INESC TEC. It is integrated in the GROW project which focuses on exploring the use of AUVs as data mules for long duration missions.
 
-
+%-------------------------------------------------------------------------------------------
 \section{Objectives} \label{sec:objective}
 
 The goal of the present work is to study and propose an adaptive configuration selection method, which assumes the integration of several hydrophones in a USBL system to allow selecting the set of sensors that minimizes the estimation error. This aims to achieve high estimate accuracy for both short and long range distances and continuously provide a set of hydrophones that have line of sight with the target, which can be located anywhere. In order to attain this, a comparative study is developed on tools that allow to compare the performance of sensors configurations in order to select the most reliable option. Then, the proposed system is presented in detail and validated with comprehensive simulations.
 
-Building upon previous developments on the USBL system, it is also intended to achieve a more rigorous calculation of the TDoA to enable a more precise localization. By associating this improved calculation with the correlation measurement already implemented, it is possible to obtain a more precise ToA measurement. 
+Building upon previous developments on the USBL system, it is also intended to achieve a more rigorous calculation of the TDoA to enable a more precise localization. By associating this improved calculation with the correlation measurement already implemented, it is expected to obtain a more precise ToA measurement. 
 
+%-------------------------------------------------------------------------------------------
 \section{Document Structure}
 
 The present document is partitioned into six chapters, which are summarized in this section.

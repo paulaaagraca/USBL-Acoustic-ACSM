@@ -118,7 +118,7 @@ for k=1:6   %for each tdoa index
         if (hydro_comb(2,k) == ref_H || hydro_comb(2,k) == 1)
             % update ToA of hydro 1 
             % injected error (in seconds) between -max_dev/2 and max_dev/2
-            T(1) = T(1)+tdoa_abs(k)+rand()*max_dev-(max_dev/2);
+            T(1) = T(1)+tdoa_abs(k)+rand()*max_dev;
         end 
     end
     
@@ -127,7 +127,7 @@ for k=1:6   %for each tdoa index
         if (hydro_comb(2,k) == ref_H || hydro_comb(2,k) == 2)
             % update ToA of hydro 2 
             % injected error (in seconds) between -max_dev/2 and max_dev/2
-            T(2) = T(2)+tdoa_abs(k)+rand()*max_dev-(max_dev/2);
+            T(2) = T(2)+tdoa_abs(k)+rand()*max_dev;
         end
     end
     
@@ -136,7 +136,7 @@ for k=1:6   %for each tdoa index
         if (hydro_comb(2,k) == ref_H || hydro_comb(2,k) == 3)
             % update ToA of hydro 3
             % injected error (in seconds) between -max_dev/2 and max_dev/2
-            T(3) = T(3)+tdoa_abs(k)+rand()*max_dev-(max_dev/2);
+            T(3) = T(3)+tdoa_abs(k)+rand()*max_dev;
         end
     end
  
@@ -145,7 +145,7 @@ for k=1:6   %for each tdoa index
         if (hydro_comb(2,k) == ref_H || hydro_comb(2,k) == 4)
             % update ToA of hydro 4 
             % injected error (in seconds) between -max_dev/2 and max_dev/2
-            T(4) = T(4)+tdoa_abs(k)+rand()*max_dev-(max_dev/2);
+            T(4) = T(4)+tdoa_abs(k)+rand()*max_dev;
         end
     end
 end

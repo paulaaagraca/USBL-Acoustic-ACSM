@@ -1,280 +1,10 @@
-\chapter{Ultra-Short Baseline System} \label{chap:proposed_sys}
-
-This chapter is dedicated to the presentation of the developed USBL system, which can be divided in two essential sections. 
-
-In the first part, the developed hardware module is introduced which receives acoustic signals from the hydrophones and computes the phase differences between them. The design decisions are explained along with some mathematical notions and block diagrams that represent the projected system. 
-
-In a second section, a study is conducted on three different methods in order to determine which tool is the preferred to evaluate the performance of diverse sensor configurations. First, a theoretical approach to the methods is provided followed by a functional demonstration through diverse simulation scenarios, in order to understand the behavior of the mechanisms as well as compare the performance evaluation achieved by each of them. The conclusion includes an analysis to the preferred methods for specific conditions and the overall most suitable method for the present USBL application is indicated.
- 
-\section{HDL Module Architecture} \label{subchap:HDL module}
-
-The USBL system was developed in previous dissertations and research work, which can be better understood in \cite{afonso-thesis}. Briefly, the system consists on a transducer of four hydrophones forming a 3D array deployed on the mule AUV. This array will receive the same signal wave front. The system then calculates the cross-correlation between the received and expected signals, which is a BPSK modulated binary sequence. The cross-correlation peak indicates the distance between AUVs and it is calculated with timing resolution corresponding to 1 sampling period of the acquired signal, which in the developed systems corresponds approximately to 6mm (with a sampling frequency of 244kHz).
-
-Since we are referring to an USBL system and due to the limitations in dimension of the AUV that will integrate this system, the hydrophones have to be placed within a few centimeters from each other. For this reason, the obtained time resolution by using only the cross-correlation, corresponding to a maximum distance accuracy of approximately 6mm, will not be enough for the calculation of the angle of arrival of the sound wave. Thus, in this thesis it is intended to refine this measurement by additionally calculating the phase differences of the arriving signals to each hydrophone. Upon having this measurement refined, the phase differences, as well as additional data from modules already implemented, will serve as input in a software mechanism that estimates the angle of arrival of the received signal to the hydrophone array.
-
-The proposed module receives 4 inputs, which correspond to the received signals in each hydrophone, and outputs the average phase difference between all combinations of hydrophone pairs. This model was developed using Verilog, which is a commonly used hardware description language, and all designed components were validated with testbenches through simulations.
-
-The module is a synchronous system, since all elements are synchronized by a global clock. It follows a sequential logic, so it is time dependent and contains memory elements. All sub components receive an input from a memory element triggered by the clock and originates an output which is also saved in a memory element triggered by the clock, in order to avoid capturing unstable signals.
-
-\subsection{Module components}
-
-The overall system is composed by four main functional blocks, represented in \ref{fig:module-all}. The hydrophone array, composed by hydrophones $i$ with $i=\{1,2,3,4\}$, receives the signals in each sensor and sends them to an Analog to Digital Converter (ADC). The generated digital signals are then input of a module based on a Hilbert transform, which converts the real signal to a complex representation. These are then multiplexed so each pair of real, $Re_i$, and imaginary, $Im_i$, components are input in a CORDIC \cite{cordic-def} block, responsible for computing the signal's phase, $phase_i$. Afterwards, it is possible to calculate the phase differences for all combinations of pairs, $diff_{ij}$ with $i \neq j$, which are finally averaged in order to obtain a more stable phase difference, $\Delta phase_{ij}$.
-
-The module receives a global clock and reset which are connected to all registers, as well as an enable signal which allows the sub modules to capture new inputs and release the outputs synchronically.
-
-\begin{figure}[!htbp]
-	\makebox[\textwidth][c]{\includegraphics[width=1\textwidth]{figures/hdl-diagram-all}}
-	\captionsetup{justification=centering,margin=2cm}
-	\caption{Top level architecture}
-	\label{fig:module-all}
-\end{figure}
-
-Considering that the ADC receives signals at a frequency of $244 kHz$ and outputs at a frequency of $125MHz$, then the system received a new input every 512 clock cycles. Assuming that a latency of a few inputs is tolerable, then each sub component can use up to 512 clock cycles since receiving an input until generating an output. As the performed calculations are fairly simple, the available clock cycles are more than enough to originate the outputs, therefore this architecture does not involve time constraints. Instead, it focuses on minimizing the used area since it is part of a complex system that already uses a substantial part of the FPGA resources.
-
-In order to describe the efforts to minimize the used area, all module sub components are detailed next, namely the Hilbert filter, CORDIC, Phase difference and Mean phase.
-
-\subsubsection{Hilbert Filter}
-
-The signals coming from the ADC are purely real so they need to be converted to their analytic representation. This is achieved by using a module based on a Hilbert FIR filter, which derives the complex representation by comprehending the original real signal and its Hilbert transform. 
-
-The Hilbert transform definition is given by \ref{eq:hilbert_integral} \cite{hilbert-def}, where $x(t)$ is the original signal and $P$ is the Cauchy principal value.
-
-\begin{eqnarray}
-	H(x)(t) = \frac{1}{\pi} \ P \int_{-\infty}^{\infty}\frac{x(\tau)}{t-\tau}d\tau
-	\label{eq:hilbert_integral}
-\end{eqnarray}
-
-The notation for a digital N-th order FIR filter can be expressed by equation 1 in \cite{hilbert-fpga}. Assuming a eighth-order filter that can be approximated with alternated zero coefficients, then equation \ref{eq:hilbert_imeq} represents the imaginary part of the signal, $Imag_0$, for a sample $x_{0}$ received in the present moment , assuming $x_{-i}$ as the input samples received $i$ sampling periods before. Then, \ref{eq:hilbert_reeq} represents the real part of the signal for the same sample, which simply consists on delaying four sampling periods the original signal.
-
-\begin{eqnarray}
-&Imag_0 = a_{1} \ x_{-1} +a_{3} \ x_{-3} + a_{5} \ x_{-5} + a_{7} \ x_{-7} \\
-\label{eq:hilbert_imeq}
-&Real_0 = x_{-4} 
-\label{eq:hilbert_reeq}
-\end{eqnarray}
-
-The eighth-order coefficients can be obtained through a design tool, such as the \textit{designfilt} function on MATLAB, and respect an odd anti-symmetry, i.e. $a_{1} = - a_{7}$ and $a_{3} = - a_{5}$.
-
-In order to implement this filter, the most common approach is to use a chain of registers that integrate multiple adders and multipliers, so that the calculations take less clock cycles to obtain a valid result, similarly to the work in \cite{hilbert-fpga}. However, since the goal of this implementation is to minimize area, then an alternative approach was formulated which uses only one multiplier and one adder. As can be observed in the filter equation, all odd samples need to be multiplied by a coefficient and summed with each other. Therefore, by using a circular shifting register chain \ref{fig:hilbert-chai} for each arriving signal, it is possible to position each of the buffer chain's samples in register $x_8$, which is used for external calculations.
-
-\begin{figure}[!htbp]
-	\makebox[\textwidth][c]{\includegraphics[width=0.9\textwidth]{figures/hilbert-filt-chain}}
-	\captionsetup{justification=centering,margin=2cm}
-	\caption{Hilbert Filter circular shifting register chain}
-	\label{fig:hilbert-chai}
-\end{figure}
-
-In a more comprehensive view, the register chains $HF_{Ci}$ are integrated with the remaining block elements as represented in \ref{fig:hilbert-all}. The module receives four signals as input and outputs the real and imaginary components, $Real_i$ and $Imag_i$, for each of them.
-
-\begin{figure}[!htbp]
-	\makebox[\textwidth][c]{\includegraphics[width=0.9\textwidth]{figures/hilbert-filt-all}}
-	\captionsetup{justification=centering,margin=2cm}
-	\caption{Hilbert Filter block diagram}
-	\label{fig:hilbert-all}
-\end{figure}
-
-The implementation contains a series of design decisions that lead to decreased area occupation, presented as follows :
-
-\begin{itemize}
-	\item The four register chains are multiplexed so that the module needs only one multiplier and one adder to calculate the Hilbert transform for all signals;
-	
-	\item Since the coefficients have odd symmetric pairs, then only two variables and their symmetric value are needed, which will be referred as $c_a$, $c_b$, -$c_a$ and -$c_b$. For even samples, associated with coefficients equal to zero, a controller unit is responsible for skipping the multiplication, which saves energy. For odd samples, the control unit alternates between the positive and negative coefficients to be multiplied. The control unit settings are summarized in table \ref{tab:coeffs-control-unit} for each register chain sample. 
-	
-	\begin{table}[!htbp] %use H to adjust
-		\begin{center}
-			\makebox[\textwidth]{
-				\begin{tabular}{ c | c  c  }
-					%\hline
-					\toprule
-					\multicolumn{1}{c|}{} & Multiplier Coefficient  & Adder mode\\	
-					\midrule
-					\multicolumn{1}{c|}{$a_0$} &  0 & -\\
-					\midrule
-					\multicolumn{1}{c|}{$a_1$} &  -$c_a$ & -\\
-					\midrule
-					\multicolumn{1}{c|}{$a_2$} &  0 & -\\
-					\midrule
-					\multicolumn{1}{c|}{$a_3$} &  -$c_b$ & -\\
-					\midrule
-					\multicolumn{1}{c|}{$a_4$} & 0 & +\\
-					\midrule
-					\multicolumn{1}{c|}{$a_5$} &  $c_b$ & +\\
-					\midrule
-					\multicolumn{1}{c|}{$a_6$} & 0 &+ \\
-					\midrule
-					\multicolumn{1}{c|}{$a_7$} &  $c_a$ & +\\
-					\midrule
-					\multicolumn{1}{c|}{$a_8$} & 0 &+ \\
-					\bottomrule 
-			\end{tabular}}
-			\caption{Hilbert filter control unit settings for each processed sample}
-			\label{tab:coeffs-control-unit}
-		\end{center}
-	\end{table}
-	
-	\item The negative coefficients are achieved by subtracting the result of $a_{i} \ x_{-i}$, i.e. negating the adder, so only one adder block is necessary;
-	
-	\item A register is placed after the adder so that it interactively accumulates the value that is correspondent to the imaginary component $Im_i$ after the full chain circle shifting.
-
-\end{itemize}
-
-Having cleared the implementation details, it is possible to deduce that each $HF_{Ci}$ takes 9 clock cycles to be processed. Therefore, the entire calculation takes $9 \times 4$ clock cycles plus one additional cycle to update the outputs.
-
-An additional detail can be pointed out regarding the impulse response of the Hilbert filter. For high filter orders, the impulse response does not suffer substantial attenuation. However, for an eighth-order filter there is a visible gain attenuation and overflow, which leads to wrong results if the dynamic range is not adequate. Therefore, it is possible to create a mechanism that applies variable gain to the filter output depending on the frequency so that it is possible to make it constant and avoid this issue.
-
-\subsubsection{CORDIC}
-
-The CORDIC algorithm is used for real-time trigonometric and exponential calculations, as well as polar to rectangular conversions and vice-versa, using iterative vector rotations. 
-
-The implemented CORDIC module has a sequential structure, as it occupies the least area, and it is responsible for receiving the real and imaginary components of a signal and outputting its phase. There are two possible modes of operation from which it is used the vectoring mode (VM), whose algorithm computes the magnitude and phase of the input vector ($(x_0, y_0)$) from the x-axis \cite{cordic-def}. This is achieved by iteratively approximating the phase through angle microrotations of $\alpha_i = \pm atan(2^{-i})$ which are summed originating an approximated phase. The result is given in a 16 bit value, which is composed by 9 bits for the integer part and 7 bits that represent the fractional portion. 
-
-The CORDIC iterations are expressed by \ref{eq:cordic-iter-x}, \ref{eq:cordic-iter-y} and \ref{eq:cordic-iter-z} for $d_i$ belonging to \{-1,1\}.
-
-\begin{eqnarray}
-& x_{i+1} = x_i - d_i \ 2^{-1} \ y_i
-\label{eq:cordic-iter-x}  \\
-& y_{i+1} = y_i + d_i \ 2^{-1} \ x_i
-\label{eq:cordic-iter-y} \\
-& z_{i+1} = z_i - d_i \ \alpha_i
-\label{eq:cordic-iter-z}
-\end{eqnarray}
-
-The CORDIC logic uses a 16 element ROM (Read-Only Memory) that stores the $atan(2^{-1})$ values required for the algorithm. Additionally, another sub component provides a binary counter that defines the number of performed iterations and it is also responsible for generating the address to access the ROM. 
-
-Considering that the CORDIC module uses 16 clock cycles to run through the entire ROM and one additional cycle to update the outputs, there are still many remaining clock cycles from the 512 available. Therefore, the design uses only one CORDIC module with multiplexed inputs so the process takes $17 \times 4$ plus one, to update the global outputs, in a total of 69 clock cycles.
-
-\subsubsection{Phase difference}
-
-This sub module is responsible for computing the phase differences between the previously determined signals' phases, $phase_i$. For four inputs $phase_i$, it is generated the difference between all combinations of hydrophones, resulting in six pairs: 12, 13, 14, 23, 24 and 34.
-
-This is achieved using a single subtractor which has multiplexed inputs so that the calculations can be executed within the 512 clock cycles with only one block of hardware, instead of dedicated subtractor for each calculation. 
-
-The result is given in a 16 bit value, which is composed by 10 bits for the integer part and 6 bits that represent the fractional portion. 
-
-\subsubsection{Mean phase}
-
-Finally, the last sub module is responsible for accumulating N samples of the phase difference $diff_{ij}$ and calculate a mean phase difference, so that the value is less affected by variations.  Parameter N depends on a customizable input $k$ where $2^k = N$. 
-
-The averaged phase differences is given in a 16 bit value, which is composed by 10 bits for the integer part and 6 bits that represent the fractional portion. 
-
-\subsection{Performance and resource analysis}
-
-The module that computed the phase differences is intended to decrease the used area, thus the used components, in order to improve an existing version of a design with the same purpose. The previous version used approximately 10k slice registers and 6k slice LUTs, whereas the present architecture reduced these numbers to 1216 and 1432, respectively, consisting of a successful improvement.
-
-This module was integrated in the global complex system which was subjected to field tests in the water. Although the ground truth was not rigorous, after processing the results, it was roughly estimated that the phase differences do not vary more than $15^{\circ}$, which corresponds to approximately $2.5mm$. Comparatively to the previous $6mm$ of time resolution achieved through correlation, this result constitutes an improvement. Therefore, after this initial analysis, it is considered that the process which uses the phase differences along with the correlation is expected to improve the angle of arrival estimation precision.
-
-%-------------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------------
-\section{Methods for configuration performance evaluation} \label{subsec:AoA}
+\chapter{Sensor configuration performance evaluation} \label{chap:proposed_sys}
 
 As previously declared, the present dissertation ultimately intends to develop a reliable method that determines the optimal configuration to minimize the estimation error. For this purpose, it is necessary to employ a complementary mechanism which is able to perform experiments on sensor configurations in order to quantify their performance based on chosen decision parameters.
 
-Therefore, three different methods will be presented in this section as potential tools to be used. Firstly, a theoretical approach will be detailed, followed by a functional exemplification of each process. Lastly, a practical comparison between them will be presented in order to disclose the preferred option for this application.
+Therefore, three different methods will be presented in this section as potential tools to be used. Firstly, a theoretical approach will be detailed, followed by a functional exemplification of each process. Lastly, a practical comparison between them will be presented in order to disclose the preferred option for this application. The first two methods are based on the estimates dispersion given by Monte Carlo simulations of a position estimator, namely a geometry based estimator based (GBE) and an estimator that assumes a plane wavefront (PWE), while the third is based on the Fisher Information Matrix.
 
-The chosen methods are a Monte Carlo estimator based on TDoA, a Monte Carlo estimator based on a plane wavefront and the Fisher Information Matrix.
-
-\subsection{Preliminary considerations}
-
-In order to better understand the used mechanisms for estimating positions, some preliminary considerations are laid out. These contemplate system definitions, deductions about system's phenomena and considered approximations. The following topics are discussed: 
-
-\begin{itemize}
-	\item the number of used sensors for the estimation;
-	\item a phase ambiguity issue that affects the ToA determination;
-	\item the relation between the phase differences of hydrophones in known relative positions and the possible location of the transmitter;
-	\item an approximation used for the ToA measurement;
-	\item the influence of the Doppler effect in the system.
-\end{itemize}
-
-\subsubsection{Number of sensors}
-For the estimation of the position in 3D space, a multilateration approach was used. As explained in \ref{subsec:multilateration}, the concept of multilateration combines the information of the relative distances between multiple sensors and a target in order to locate it. 
-
-In the present case, a total of four sensors are needed so that it is possible to define the position of target. Using only two sensors, two possibility spheres are formed around these sensors whose intersection originates a circle that contains the location possible solutions. By adding a third sensor, this circle is intersected by another sphere which originates only two location possibilities. Finally, a fourth sensor is added so that it is possible to exactly differentiate which one of the two final solutions is the accurate location solution. 
-
-\subsubsection{Phase Ambiguity}
-
-When the information about the time of arrival of a signal is available, it is relatively easy to estimate the range of the communication since there can be a direct conversion between them. However, when dealing with phase differences, there is no exact time notion, so it is necessary to start by defining a reference point. 
-
-Considering sinusoidal signals, when we have an array with four hydrophones spatially placed to form a 3D layout, the signal that is arriving to each  hydrophone in different times consequently have different phases. However, since sinusoidal signals are periodic, this means that for different signal periods the same phase value is observed, i.e. the phase is ambiguous. It is possible to observe this phenomenon in figure \ref{fig:phasediff}. In this illustration, $\alpha$ represents the observable phase difference of hydrophone $H_4$ to the reference point $H_1$. However, the actual phase difference which is intended to obtain, $\Delta p_4$, is one period of the signal, $\lambda$, added to the observable phase $\alpha$.
-
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=1.2\textwidth]{figures/phase-diff}
-	\caption{Phase difference to reference point and phase ambiguity}
-	\label{fig:phasediff}
-\end{figure}
-
-For this reason, it is crucial to consider that the phase difference is given by the obtained phase value added by the number of periods ahead from the considered reference period.
-
-In the system under study, the sent signals work with a operation frequency of 24.4 $kHz$. The corresponding signal period is $T = \frac{1}{24400} $ seconds which, considering the underwater acoustic speed \textit{c} equal to a standard 1500 $m/s$, the wavelength is approximately equal to $\lambda = \frac{T}{c} = 6.1 cm$. Having this into consideration, after obtaining the time of arrival to each hydrophone given by the cross correlation instances, besides the reference one, it is possible to conclude if the phase shift is superior to one period by analyzing if the time difference is greater than the duration of one period \textit{T}. In figure \ref{fig:phasediff}, each mentioned time difference between $H_1$ and $H_2$, $H_3$ and $H_4$ is converted to the corresponding phase differences $\Delta p_2$, $\Delta p_3$ and $\Delta p_4$.
-
-One possibility to solve phase ambiguity in this system would be to place the four hydrophones with a baseline spacing inferior to $\frac{1}{2}$ of a wavelength, since the maximum reached by phase difference is 180 degrees. This way it would be possible to immediately deduce the phase difference since it would always be contained in one period. However, positioning the hydrophones closer together leads to smaller  values,causing a consequent increase on the estimation error due to varying environment conditions (briefly enumerated in \ref{subsec: acoustic-channel}). Additionally, since the hydrophones to be used in this system have a corresponding diameter of roughly half of a wavelength, they would not allow to execute the mentioned configuration and so this possibility will not be contemplated.
-
-In order to compensate this phase ambiguity, a simple relation was developed which allows to calculate the absolute time difference between the moment a signal is received by hydrophone A, $T_A$, and when the same signal is received by a further hydrophone B, $T_B$. Figure \ref{fig:ambiguity} illustrates this association, where the represented sinusoidal waves correspond to the same signal arriving at hydrophones A and B. This correspondence uses the time stamps obtained by the correlation peaks combined with the calculated phase difference, that is determined in parallel, so that the measurement is more accurate. Equation \ref{eq:phase-amb} translates this relation, where $t_1$ and $t_2$ are the correlation peaks obtained from the signal arriving at hydrophone A and B, respectively, and so by rounding for the next integer number the difference between the correlation peaks, $t_2 - t_1$, we will obtain in which period, $T$, of signal in A will the signal in B arrive. Then the measurement is improved by subtracting a phase difference, $\theta_B - \theta_A$, so that the instant in which the signal is detected in hydrophone B can be defined. 
-
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=0.6\textwidth]{figures/ambiguity}
-	\captionsetup{justification=centering,margin=2cm}
-	\caption{Ambiguity correction through correlation and phase difference}
-	\label{fig:ambiguity}
-\end{figure}
-
-\begin{eqnarray}
-& T_B - T_A = round(\frac{t_2-t_1}{T}) - (\theta_B - \theta_A)
-\label{eq:phase-amb}
-\end{eqnarray}
-
-\subsubsection{Hydrophone position in relation to ToA}
-To better understand the location estimation of an acoustic source in relation to the position of a pair of hydrophones, we can initially adopt the two dimensional scenario of figure \ref{fig:hyper}. 
-
-Considering two hydrophones at known relative positions $(-f,0)$ and $(f,0)$, we can model all possible acoustic source locations for a specific ToA through hyperbolas. This is due to the fact that, by definition, the sum of the distances from the focus of each hyperbole, where each hydrophone is placed, to any point of the hyperbolic geometry corresponds to a constant value. 
-This means that, in figure \ref{fig:hyper}, any point $(x,y)$ that is contained in the hyperbole corresponds to a constant $|d_2-d_1|$ value which, after some formulation, is in fact equal to $2*v$ or the distance between the vertexes of each hydrophone's hyperbola. Therefore, it is possible to trace a hyperbole that represents the positions of the target in space both based on their distance and the signal's ToA. In the exceptional case where $d_3=d_4$, we can observe that the possible positions are represented by an equidistant straight line to each hydrophone, such as the y axis.
-
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=0.8\textwidth]{figures/hyperbole-dist}
-	\captionsetup{justification=centering,margin=2cm}
-	\caption{Hyperbolic representation of acoustic source position possibilities in relation to ToA to two hydrophones}
-	\label{fig:hyper}
-\end{figure}
-
-\subsubsection{ToA approximation} \label{subsubsec:toa-approx}
-
-In order to estimate the location of an acoustic source we take into account the phase differences between each pair of hydrophones, carefully explained in section \ref{subchap:HDL module}. These phase differences can be translated into periods of the signal which combined with the ToA obtained from correlation of arriving acoustic signals are equivalent to relative distances.
-
-Following the previous idea, it is possible to model the distance of one sensor to the target based on the known distance of a second sensor to the same target. 
-This is to say that for two sensors with known relative positions where hydrophone 1 is the closer to the target, the distance from hydrophone i to the target, $D_i$, can be expressed as the distance of hydrophone j to the target, $D_j$, added by the time difference of arrival, $\Delta t_{ij}$, multiplied by the propagation velocity, $c_s$. Overall, this relationship is declared in equation \ref{eq:dist_to_target}.
-
-\begin{eqnarray}
-& D_i = D_j + \Delta t_{ij} * c_s
-\label{eq:dist_to_target}
-\end{eqnarray}
-
-Therefore, the same logic can be applied for multiple hydrophones. In the present work, in which it is considered a system with four hydrophones, a synchronization mechanism allows to determine the signals' ToA between the transceiver and the hydrophones. However, in order to simplify the synchronicity and decrease errors that arise from it, the module that precisely computes the phase differences of the received signal in the hydrophones is used so that is possible to apply the relationship in \ref{eq:dist_to_target}. Consequently, a better angle of arrival estimation can be achieved when using this approximation than if all four times of arrival are used for the same purpose.
-
-\subsubsection{Doppler Effect}
-
-The implemented process uses the information of the transmitted signal's operating frequency in order to compute the phase differences and determine the overall times of arrival. However, in real scenarios the environmental conditions can distort this frequency between the source and the receiver. In the present study, since the vehicle is predominantly moving, then the Doppler effect could influence the signal's frequency, leading to erroneous calculations.
-
-In order to evaluate if the Doppler effect influences the system, it is possible to calculate which is be the frequency deviation observed for a known relative speed between vehicles. Considering that the relative speed between the transmitter and the receiver is denoted as $relative\_speed$ and using a fixed sound speed, $c_s$, with a determined frequency of the transmitted signal, the relation \ref{eq:doppler} can be established. 
-
-\begin{eqnarray}
-&freq\_deviation = \frac{relative\_speed}{c_s} \times signal\_freq
-\label{eq:doppler}
-\end{eqnarray}
-
-Therefore, considering the frequency of the signal equal to $24.4kHz$ and a $c_s$ of $1500 m/s$, it is observable that the frequency deviation will be dependent on the relative speed. Considering a transmitter that is static and a typical value for the navigation velocity of an AUV around $2 m/s$, which results in a frequency deviation of approximately $32.5Hz$. This allows to consider the Doppler effect negligible in this case.
-
-A way to prevent this deviation is to integrate a frequency detector which senses the relative navigation speed in real time and adapts the used frequency. This mechanism is not integrated in the present research work.
-
-%-------------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------------
-
-\subsection{Monte Carlo estimator based on TDoA} \label{subsec:estimator}
-
-The goal of the first proposed method is to estimate the position of an acoustic source in relation to known positions of a configuration of sensors, in a system of geometric axes with a defined origin. For this purpose, the logic employed is based on vector algebra with other physical considerations, detailed in the present subsection. 
-
-Figure \ref{fig:AoA-init} represents the schematic of a considered scenario, where four hydrophones are placed in known relative positions in space and the origin of the axis is set on the body of the AUV or an alternative fixed structure. Then $r_i$ is defined as the vector that connects the origin of the axis to hydrophone $i$ and $rr_i$ defines the vector that connects hydrophone $i$ to the acoustic source. The black cross represents the acoustic source which is located somewhere in space. At last, the subtraction of the mentioned vectors is equal to $r$, according to \ref{eq:sum-vec}, which corresponds to the position of the acoustic source in relation to the origin of the axis and, overall, it is the variable that the method aims to determine.
+For all methods, the same scenario is considered which is illustrated in \ref{fig:AoA-init}. It is assumed four hydrophones placed in known relative positions in space and the origin of the axis is set on the body of the AUV or an alternative fixed structure. Then $r_i$ is defined as the vector that connects the origin of the axis to hydrophone $i$ and $rr_i$ defines the vector that connects hydrophone $i$ to the acoustic source. The black cross represents the acoustic source which is located somewhere in space. At last, the subtraction of the mentioned vectors is equal to $r$, according to (\ref{eq:sum-vec}), which corresponds to the position of the acoustic source in relation to the origin of the axis.
 
 \begin{eqnarray}
 	& r_i = r + rr_i
@@ -289,14 +19,28 @@ Figure \ref{fig:AoA-init} represents the schematic of a considered scenario, whe
 	\label{fig:AoA-init}
 \end{figure}
 
-Then we can define the times of arrival to each hydrophone as \ref{eq:toa-4h}, where $t_0$ is the absolute time of emission, $c_s$ is the underwater sound speed and $\rho_i$ is the norm of $rr_i$, \ref{eq:rho}, which translates to the distance from hydrophone $i$ to the acoustic source. 
+%---------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
+
+\section{Geometry based position estimator} \label{subsec:estimator}
+
+The goal of the first proposed method is to estimate the position of an acoustic source in relation to known positions of a configuration of sensors, in a system of geometric axes with a defined origin. For this purpose, the logic employed is based on vector algebra with other physical considerations, detailed in the present subsection. 
+
+Considering the presented scenario in \ref{fig:AoA-init}, this explanation starts by defining the times of arrival to each hydrophone as (\ref{eq:toa-4h}). $t_0$ is the absolute time of emission, $c_s$ is the underwater sound speed and $\rho_i$ is the norm of $rr_i$, (\ref{eq:rho}), which translates to the distance from hydrophone $i$ to the acoustic source.
 
 \begin{eqnarray}
 	& t_i = t_0 +  \frac{\rho_i}{c_s}
 	\label{eq:toa-4h}
 \end{eqnarray}
 
-However, as explained previously, instead of using the absolute ToA in each hydrophone by computing the expression \ref{eq:toa-4h} for each of them, it can be expressed as a function of a single reference ToA. A simple logic was applied in order to determine this reference hydrophone, which starts by identifying the closest to the acoustic source. This allows to obtain all relative times of arrival by adding the defined reference time to each  between a hydrophone and the reference one. This is achieved by analyzing the  of each pair, $ \Delta t_{ij}$, for all possible combinations of two among four hydrophones, making up a total of six combinations. Considering each hydrophone pair $ij$ with $i, j= \{1,2,3,4\}$ :
+However, instead of computing the absolute ToA of each hydrophone with (\ref{eq:toa-4h}), they can be expressed as a function of a single reference ToA, which allows to rely less on the synchronization mechanism. Therefore, for two sensors with known relative positions, the time of arrival from a transmitter to hydrophone $j$ is given by a reference time of arrival, $t_{i}$, added by the time difference of arrival $\Delta t_{ij}$ (\ref{eq:toa-approx}) and an injected error $e_i$ according to \ref{sec:premises}. 
+
+\begin{eqnarray}
+& t_j = t_{i} + \Delta t_{ij} + e_i
+\label{eq:toa-approx}
+\end{eqnarray}
+
+A simple logic was applied in order to determine the mentioned reference hydrophone, which starts by identifying the closest to the acoustic source. This allows to obtain all relative times of arrival by adding the defined reference time to each TDoA between a hydrophone and the reference one, $ \Delta t_{ij}$. This is achieved by analyzing the of each pair of possible combinations of two among four hydrophones, making up a total of six combinations. Considering each hydrophone pair $ij$ with $i, j= \{1,2,3,4\}$ :
 
 \begin{itemize}
 	\item if $ \Delta t_{ij}$ is positive, then hydrophone $i$ is closer to the acoustic source
@@ -306,18 +50,7 @@ However, as explained previously, instead of using the absolute ToA in each hydr
 
 Considering these relations, it is possible to compose a vector that accumulates the closer hydrophone between each pair for a certain position of the acoustic source. Extracting the mode of this vector will then return the chosen hydrophone in most cases and therefore the overall closer to the acoustic source. If the closer hydrophones are the equidistant to the source, then it is indifferent which one is selected.  
 
-Thereafter, recalling expression \ref{eq:dist_to_target}, it is possible to write \ref{eq:toa_relation2}, \ref{eq:toa_relation3} and \ref{eq:toa_relation4} which translate the used relations, where  the chose reference sensor is hydrophone 1, for the purpose of exemplification.
-
-\begin{eqnarray}
-	& T_2 = T_1 + \Delta t_{12} * c_s
-	\label{eq:toa_relation2}\\
-	& T_3 = T_1 + \Delta t_{13} * c_s
-	\label{eq:toa_relation3}\\
-	& T_4 = T_1 + \Delta t_{14} * c_s
-	\label{eq:toa_relation4}
-\end{eqnarray}
-
-If then the distance $\rho_i$ is raised to the power of two, we know that $||rr_i||^2 = r_i^{T}r_i$, which allows to deduce equation \ref{eq:rho1} after some mathematical manipulation. Considering $\rho_i$ a physical distance, it is also possible to express it trough equation \ref{eq:rho2}, which uses the speed of propagation underwater multiplied by the ToA of the signal from the acoustic source to hydrophone $i$.
+If then the distance $\rho_i$ is raised to the power of two, we know that $||rr_i||^2 = r_i^{T}r_i$, which allows to deduce equation (\ref{eq:rho1}) after some mathematical manipulation. Considering $\rho_i$ a physical distance, it is also possible to express it trough equation (\ref{eq:rho2}), which uses the speed of propagation underwater multiplied by the ToA of the signal from the acoustic source to hydrophone $i$.
 
 \begin{eqnarray}
 	& \rho_i = ||rr_i|| 
@@ -345,15 +78,12 @@ Since two distinct relations are defined for $\rho_i^{2}$, then it is possible t
 	\label{eq:AoA-matrix}
 \end{eqnarray}
 
-In order to resolve this system of equations and isolate $r$, the least squares method is applied. If \ref{eq:AoA-matrix} is extended to the four considered hydrophones, we obtain matrix $A$ represented as \ref{eq:A} and $Y$ equivalent to \ref{eq:Y}. It is important to notice that the $A$ matrix has to be invertible, thus the rows which contain the chosen hydrophone configuration have to be linearly independent. The least squares method is then expressed as \ref{eq:least-square}, where $X \in \mathbb{R}^{4}$ holds the Cartesian result of $r$. As the method formulates four equations that are meant to calculate only three coordinates, $X$ will contain a fourth element that consists on a nonlinear component equivalent to $||r||^{2}$.
+In order to resolve this system of equations and isolate $r$, the least squares method is applied. If (\ref{eq:AoA-matrix}) is extended to the four considered hydrophones, we obtain matrix $A$ represented as (\ref{eq:A}) and $Y$ equivalent to (\ref{eq:Y}). It is important to notice that $(A^TA)$ has to be invertible, thus the rows which contain the chosen hydrophone configuration have to be linearly independent. The least squares method is then expressed as (\ref{eq:least-square}), where $X \in \mathbb{R}^{4}$ holds the Cartesian result of $r$. As the method formulates four equations that are meant to calculate only three coordinates, $X$ will contain a fourth element that consists on a nonlinear component equivalent to $||r||^{2}$.
 
 \begin{eqnarray}
 	& A = 
 	\begin{bmatrix}
-		1 & 2\: r_1^{T}\\
-		1 & 2\: r_2^{T}\\
-		1 & 2\: r_3^{T}\\
-		1 & 2\: r_4^{T}
+		1 & 2\: r_i^{T}
 	\end{bmatrix}
 	\label{eq:A}
 \end{eqnarray}
@@ -361,16 +91,13 @@ In order to resolve this system of equations and isolate $r$, the least squares 
 \begin{eqnarray}
 	& Y = 
 	\begin{bmatrix}
-		c_s^{2}\: (t_1-t_0)^2 - r_1^{T} r_1\\
-		c_s^{2}\: (t_2-t_0)^2 - r_2^{T} r_2\\
-		c_s^{2}\: (t_3-t_0)^2 - r_3^{T} r_3\\
-		c_s^{2}\: (t_4-t_0)^2 - r_4^{T} r_4\\
+		c_s^{2}\: (t_i-t_0)^2 - r_i^{T} r_i
 	\end{bmatrix}
 	\label{eq:Y}
 \end{eqnarray}
 
 \begin{eqnarray}
-	& X = (A^{T}*A)^{-1}*A^{T}*Y
+	& X = (A^{T}A)^{-1}A^{T}Y
 	\label{eq:least-square}
 \end{eqnarray}
 
@@ -378,11 +105,11 @@ After inferring the Euclidean vector $r$, it is possible to obtain both the bear
 
 %-------------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------------
-\subsection{Monte Carlo estimator based on a plane wavefront}
+\section{Plane wavefront based position estimator}
 
-The second explored method for evaluating sensor configurations' performance is a simpler approach than the previously proposed. It consists on an estimator which assumes that the signals' propagation can be approximated by a plane wavefront. When considering a planar wavefront approximation, it is assumed that the acoustic source is at a distance which is sufficiently larger than the relative distances between the hydrophones, for the signal to be considered to have a planar wavefront, thus the angle of arrival to each hydrophone being the same. This estimator is posteriorly integrated in a Monte Carlo approach to evaluate the configurations based on the obtained variance given different acoustic source positions.
+The second explored method for evaluating sensor configurations' performance is a simpler approach than the previously proposed. It consists on an estimator which assumes that the signals' propagation can be approximated by a plane wavefront. When considering a plane wavefront approximation, it is assumed that the acoustic source is at a distance which is sufficiently larger than the relative distances between the hydrophones for the planar wavefront approximation to be adequate, thus the angle of arrival to each hydrophone being the same. This estimator is posteriorly integrated in a Monte Carlo approach to evaluate the configurations based on the obtained variance given different acoustic source positions.
 
-Using a plane wavefront approximation means that, for signals arriving to the USBL system, it is assumed that the wavefront is coincident with a plane perpendicular to the direction of propagation, thus perpendicular to the angle of arrival as well. Figure \ref{fig:plane-wavefront} is illustrative of a plane wavefront arriving at two sensors. As represented, the angle or arrival is considered the same for every sensor, since the wavefront is the same as well, and it is possible to deduce the time of arrival to an hydrophone 1 by using the ToA to hydrophone 2 added by the time difference of arrival between 1 and 2. Therefore, it is also possible to obtain the estimation of the range, as it will be presented next.
+Using a plane wavefront approximation means that, for signals arriving to the USBL system, it is assumed that the wavefront is coincident with a plane perpendicular to the direction of propagation, thus perpendicular to the angle of arrival as well. Figure \ref{fig:plane-wavefront} is illustrative of a plane wavefront arriving at two sensors. As represented, knowing the angle of arrival is considered the same for every sensor, since the wavefront is the same, it is possible to deduce the time of arrival to an hydrophone 1 by using the ToA to hydrophone 2 added by the time difference of arrival between 1 and 2. Under the assumption that at least four non-coplanar hydrophones can detect the time of arrival, the inverse problem is solvable.
 
 \begin{figure}[!htbp]
 	\makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{figures/plane-wavefront}}
@@ -391,28 +118,27 @@ Using a plane wavefront approximation means that, for signals arriving to the US
 	\label{fig:plane-wavefront}
 \end{figure}
 
-The estimator considers a USBL system composed by four sensors whose positions are previously defined. The time of arrival, $t_i$, to each hydrophone, $i$, is represented by expression \ref{eq:toa-planewave}. The considered $t_0$ is the absolute time of emission of the signal, which is acquired through a synchronization mechanism, the $s$ is the position of the transmitter, $a$ is referent to the mass center of the USBL's position, $r_i$ is the Cartesian coordinates of the hydrophone's position, $c_s$ is the sound speed and $e_i$ is an injected error that have the same characteristics expressed previously in \ref{subchap:acc-analy}.
+The estimator considers a USBL system composed by four sensors whose positions are previously defined. The time of arrival, $t_i$, to each hydrophone, $i$, is represented by expression (\ref{eq:toa-planewave}). The considered $t_0$ is the absolute time of emission of the signal, which is acquired through a synchronization mechanism, the $s$ is the position of the transmitter, $a$ is referent to the mass center of the USBL's position, $r_i$ is the Cartesian coordinates of the hydrophone's position, $c_s$ is the sound speed and $e_i$ is an injected error that have the same characteristics expressed previously in \ref{sec:premises}.
 
 \begin{eqnarray}
-& t_i = t_0 + \frac{ ||s (a - r_i)|| }{c_s} + e_i
+& t_i = t_0 + \frac{ ||s - (a - r_i)|| }{c_s} + e_i
 \label{eq:toa-planewave}
 \end{eqnarray}
 
-Due to the considered approximation to the plane wavefront, it is possible to calculate the range estimation, $\rho$, as a mean all propagation times multiplied by the sound speed,$c_s$, as in equation \ref{eq:range-planewave}. The $N$ represents the number of hydrophones.
+Due to the considered approximation to the plane wavefront, it is possible to calculate the range estimation, $\rho$, as a mean all propagation times multiplied by the sound speed, $c_s$, as in equation (\ref{eq:range-planewave}). The $N$ represents the number of hydrophones.
 
 \begin{eqnarray}
 & \rho = c_s\ \frac{1}{N} \displaystyle\sum_{i=1}^{N} t_{i} - t_0
 \label{eq:range-planewave}
 \end{eqnarray}
 
-Then a matrix $S$ is formulated as \ref{eq:S}, whose rows are the difference between the position of hydrophone 1 and the remaining three, and a $\Delta$ vector is expressed as \ref{eq:delta}, containing all combinations of TDOA between hydrophone 1 and the remaining.
+Then a matrix $S$ is formulated as (\ref{eq:S}), whose rows are the difference between the position of hydrophone $i$ and the remaining three, and a $\Delta$ vector is expressed as (\ref{eq:delta}), containing all combinations of TDOA between hydrophone $i$ and the remaining.
 
 \begin{eqnarray}
 	& S = 
 	\begin{bmatrix}
-		r_1 - r_2\\
-		r_1 - r_3\\
-		r_1 - r_4
+		r_i - r_j \\
+		\cdots 
 	\end{bmatrix}
 	\label{eq:S}
 \end{eqnarray}
@@ -420,61 +146,39 @@ Then a matrix $S$ is formulated as \ref{eq:S}, whose rows are the difference bet
 \begin{eqnarray}
 	& \Delta = 
 	\begin{bmatrix}
-		t_1 - t_2 \\
-		t_1 - t_3 \\
-		t_1 - t_4 
+		t_i - t_j \\
+		\cdots 
 	\end{bmatrix}
 	\label{eq:delta}
 \end{eqnarray}
 
-Taking into account the defined $S$ and $\Delta$, the signal's angle of arrival can be calculated from the direction of the signal, $d$, obtained from the least squares expression \ref{eq:direction-plane-wavefront} \cite{estim-plane-wavefront}. Since there are only three equations to estimate three coordinates, then the expression is linear. 
+Taking into account the defined $S$ and $\Delta$, the signal's angle of arrival can be calculated from the direction of the signal, $d$, obtained from the least squares expression (\ref{eq:direction-plane-wavefront}) \cite{estim-plane-wavefront}. Since there are only three equations to estimate three coordinates, then the expression is linear. It is important to notice that $(S^TS)$ has to be invertible, thus the rows which contain the chosen hydrophone configuration have to be linearly independent.
 
 \begin{eqnarray}
 & d = c_s \; (S^{T}S)^{-1} \; S^{T} \Delta
 \label{eq:direction-plane-wavefront}
 \end{eqnarray}
 
-Having calculated the range $\rho$ and the direction $d$, the estimate of the transmitter position is given by the multiplication of these variables.
+Having calculated the range $\rho$, given by the mean of the $rr_i$ magnitudes in figure \ref{fig:AoA-init}, and the direction $d$, the estimate of the transmitter position is given by the multiplication of these variables.
 
 Finally, the plane wavefront estimator was integrated in a Monte Carlo method in order to execute multiple estimations of various transmitter positions, $s$, for a specific sensor configuration, so that it is possible to draw conclusions on its performance.
 
 %------------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------------
-\subsection{Fisher Information Matrix} \label{sucsec:FIM}
+\section{Fisher Information Matrix} \label{sucsec:FIM}
 
-The Fisher Information Matrix (FIM) serves to quantify the information that an observable variable is capable of returning to an estimator. This concept is then integrated in the Crámer-Rao lower bound, which is a method that expresses the variance lower bound that a sensor configuration is capable of achieving. Unlike the two previously presented processes, the Crámer-Rao bound is independent from the used estimator, as it assumes a linear estimator that is efficient and unbiased.
+The Fisher Information Matrix (FIM) serves to quantify the information that an observable variable is capable of returning to an estimator. This concept is intrinsically linked with the Crámer-Rao lower bound, which is a method that expresses the variance lower bound that a sensor configuration is capable of achieving, i.e. the best possible estimation precision it can achieve. Unlike the two previously presented processes, the Crámer-Rao bound is independent from the used estimator, as it assumes a linear estimator that is efficient and unbiased.
 
-The fundamental thought process and mathematical notation previously used in \ref{sec:cramer} are applied in the procedure that will be explained next.
+The fundamental process and mathematical notation previously used in \ref{sec:cramer} are applied in the procedure that will be explained next.
 
-The implementation of the Crámer-Rao bound method can be essentially partitioned in four steps:
-
-\begin{enumerate}
-	
-	\item Formulate the observations vector
-	\item Calculate the Fisher Information Matrix (FIM)
-	\item Calculate the determinant of FIM 
-	\item Apply optimality criteria to draw conclusions
-	
-\end{enumerate}
-
-In this thesis, the number of used hydrophones per estimation is four, so all expressions will be presented for this case.
-
-Firstly, the observation vectors are formulated based on an initial time of arrival $t_0$, which is given by a synchrony mechanism integrated in the global communication system, and the time of arrival based on the vectors that connect the hydrophone positions, $r_i$, to the transmitter, $s$. For a more realistic approach, it is also considered an added noise component that can be approximated to a Gaussian distribution $n_i \sim \mathcal{N}(\mu,\,\sigma^{2})$. 
-
-The four observations vectors are then expressed as \ref{eq:obs-my1} to \ref{eq:obs-my4}.
+Firstly, the observation vectors are formulated based on an time of emission $t_0$, and the time of arrival based on the vectors that connect the hydrophone positions, $r_i$, to the transmitter, $s$. It is also considered an added noise component $e_i$, as defined in \ref{sec:premises}. The observations vectors are then expressed as (\ref{eq:obs-my}).
 
 \begin{eqnarray}
-	t_1 = t_0 + \frac{s - r_1}{c} + n_1 
-	\label{eq:obs-my1} \\
-	t_2 = t_0 + \frac{s - r_2}{c} + n_2
-	\label{eq:obs-my2} \\
-	t_3 = t_0 + \frac{s - r_3}{c} + n_3
-	\label{eq:obs-my3} \\
-	t_4 = t_0 + \frac{s - r_4}{c} + n_4 
-	\label{eq:obs-my4}
+	t_i = t_0 + \frac{s - r_i}{c} + n_i 
+	\label{eq:obs-my}
 \end{eqnarray}
 
-Then, addressing the second step, all conditions are set to calculate the FIM,  $I(d) \in \mathbb{R}^{3x3}$. In order to do so, if d$_{i}$ = $|| s - r_{i} ||$ is the distance between each sensor and the source, the gradient of the observations vector can be expressed as shown in \ref{eq:grad_fisher}.
+Then, all conditions are set to calculate the FIM,  $I(d) \in \mathbb{R}^{3x3}$. In order to do so, if d$_{i}$ = $|| s - r_{i} ||$ is the distance between each sensor and the source, the gradient of the observations vector can be expressed as shown in \ref{eq:grad_fisher}.
 
 \begin{eqnarray}
 	\nabla_{d}t(d) = \frac{1}{c} 
@@ -502,7 +206,7 @@ Additionally, the added noise component is present in the covariance matrix, rep
 	\label{eq:covariance}
 \end{eqnarray}
 
-Overall, the conditions to obtain the FIM matrix are established and, after some mathematical formulation, it can be expressed as \ref{eq:final-fisher}. This function can be validated by a similar study made on TOA based optimal positioning \cite{cramer-bruno}.
+Overall, the conditions to obtain the FIM matrix are established and, after some algebraic manipulations, it can be expressed as (\ref{eq:final-fisher}). This function can be validated by a similar study made on TOA based optimal positioning \cite{cramer-bruno}.
 
 \begin{eqnarray}
 	I(d) = \frac{1}{c^2} 
@@ -512,38 +216,27 @@ Overall, the conditions to obtain the FIM matrix are established and, after some
 	\label{eq:final-fisher}
 \end{eqnarray}
 
-The final step is to calculate the determinant and find its relation to the volume of the \textit{uncertainty ellipsoid}. As mentioned before, in \ref{sec:cramer}, the Fisher Information Matrix determinant returns a deterministic value that represents the quantity of information which can be obtained and, therefore, the objective is to maximize it by respecting the condition $argmax \; det(I(d))$.
+The final step is to calculate the determinant and find its relation to the volume of the \textit{uncertainty ellipsoid}. As mentioned in \ref{sec:cramer}, the determinant of the FIM returns a deterministic value that represents the quantity of information that can be obtained for a certain position, therefore, the objective is to maximize $det(I(d))$.
 
-\subsubsection{Optimality criteria}
-
-In order to evaluate the obtained values, several different optimality criteria can be applied. Considering similar applications in literature, the criterion that  the most relevant for the present case is the E-optimality, which minimizes the largest eigenvalue of the inverted FIM.
-
-The FIM can be associated with a physical meaning, more specifically an uncertainty volume that characterizes the variance that a specific configuration can achieve for an estimate. In an initial approach the ellipsoid was not considered and instead an uncertainty sphere was analyzed. The radius of the uncertainty sphere, $u_{sphere}$, is expressed as \ref{eq:det-sphere}, which relates the three ellipsoid axis into a single mean radius that originates a figure of the same volume.
+The FIM can be associated with a physical meaning, more specifically an uncertainty volume that characterizes the variance that a specific configuration can achieve for an estimate. In an initial approach, the ellipsoid was not considered and instead it was approximated to an uncertainty sphere with the same volume. The radius of the uncertainty sphere, $u_{sphere}$, is expressed as (\ref{eq:det-sphere}). In this situation, the optimization objective is to minimize the uncertainty radius.
 
 \begin{eqnarray}
 	& u_{sphere}(d) = \sqrt[2]{\sqrt[3]{det(I(d)^{-1})}}
 	\label{eq:det-sphere}
 \end{eqnarray}
 
-In this situation, the optimization objective is expressed as $argmin u_{sphere}(d)$, which indicates that the error that originates a certain uncertainty radius is minimal.
-
-In a further analysis, the uncertainty ellipsoid is calculated using \ref{eq:det-ellip}. The squared eigenvalues of the inverse of the FIM indicate the length of each of the three ellipsoid axis and the eigenvectors specify the direction of each axis. An eigenvector that is associated with the smaller eigenvalue indicates the direction in which there is less uncertainty and, equivalently, an eigenvector whose eigenvalue is the larger represents the direction in which there is the biggest uncertainty. Consequently, the goal in this case is to minimize the maximum squared eigenvalue of the FIM inverse, $argmin \; max(\sqrt{eigenvalue})$.
+In a further analysis, the uncertainty ellipsoid is calculated using (\ref{eq:det-ellip}). The squared eigenvalues of the inverse of the FIM indicate the length of each of the three ellipsoid axis and the eigenvectors specify the direction of each axis. An eigenvector that is associated with the smaller eigenvalue indicates the direction in which there is less uncertainty and, equivalently, an eigenvector whose eigenvalue is the larger represents the direction in which there is the biggest uncertainty. Consequently, the goal in this case is to minimize the uncertainty ellipsoid axis that corresponds to the maximum uncertainty.
 
 \begin{eqnarray}
 	& u_{ellipsoid}(d) = \sqrt[2]{eig(I(d)^{-1})}
 	\label{eq:det-ellip}
 \end{eqnarray}
 
-Besides the E-optimality, several more criteria can be used in order to evaluate the performance of a specific hydrophone configuration, using the Fisher Information Matrix. The most common alternatives would be:
-\begin{itemize}
-	\item A-optimality: minimizes the trace of the inverse of the FIM, therefore seeks the minimum average variance of the estimates.
-	\item D-optimality: minimizes the determinant of the inverse of the FIM, therefore the volume of the uncertainty sphere. However, this can be misleading since the information obtained for one direction can be much larger than the other directions, constituting a large FIM determinant which is not representative of the full estimation.
-\end{itemize}
+There are several optimality criteria that can be applied with the FIM in order to evaluate the estimation performance of a sensor configuration. Therefore, the selected metrics should be based on the intended application.
+%----------------------------------------------------------------------------
+%----------------------------------------------------------------------------
 
-%-------------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------------
-
-\subsection{Performance comparison between methods} \label{subsec:perform-compar-meth}
+\section{Performance comparison between methods} \label{subsec:perform-compar-meth}
 
 Upon presenting the theoretical details behind the three considered methods for evaluating configurations' performance, a further functional study will be presented through simulation results. 
 
@@ -573,140 +266,122 @@ Throughout the functional demonstrations, three different hydrophone configurati
 	\end{center}
 \end{table}
 
-
-For testing both estimators, a methodology was formulated in order to evaluate the accuracy that they can achieve in defined circumstances. This approach is a Monte Carlo algorithm which allows to reiterate the estimation process according to the number of positions that are intended to be tested for a specific configuration, as well as create a series of repetitive calculations that allow to deduce the estimation error and turn the overall process more robust. For this initial study, the following conditions are considered: 
-
-\begin{enumerate}[label=\alph*)]
-	%--------------------
-	\item \textbf{Sensor Configuration}  
-	
-	Each hydrophone configuration is analyzed individually. It is a parameter to be always defined and known from the begging of each simulation.
-	
-	%--------------------
-	\item \textbf{Reference axis}
-	
-	The origin of the reference axis is defined at the center of mass of the structure where the hydrophones are fixed, which in this case is the AUV.
-	
-	%--------------------
-	\item \textbf{Injected error} 
-	
-	In order to make the study more realistic, an $e_i$ error is added to the time differences of arrival, $ \Delta t_{ij}$. These errors are mutually independent and follow a Gaussian distribution with zero mean and a configurable variance of $\sigma^{2}$, i.e., $e_i \sim \mathcal{N}(0,\,\sigma^{2})$. 
-	
-	For the simulations performed in this project, a deviation of 5$^{\circ}$, or a window of $[-2.5^{\circ},2.5^{\circ}]$, in phase difference estimation of incoming singals was considered to be reasonable for an underwater navigation scenario. Therefore, since the specified period of the signal is $T = \frac{1}{24400}$ and one period corresponds to a 360$^{\circ}$ phase shift, then the 5$^{\circ}$ will be equivalent to $\frac{5^{\circ}}{360^{\circ}}*T$ which is approximately a deviation of $0.5\mu s$. Hence the considered standard deviation $\sigma$ of the error $e_i$ in the computed time differences of arrival is equal to $0.5\mu s$.
-	
-	Overall, the considered total time of arrival is equal to the measured time between the transmitter and the receiver through correlation, added by the computed time difference of arrival for a specific pair of hydrophones and the injected error $e_i$ in seconds.
-	
-	%--------------------
-	\item \textbf{Acoustic source position} 
-	
-	The considered positions for the acoustic source, $s$, are originally defined in spherical coordinates, $s_{sph}$. Thus the norm, $n$, corresponds to the source's range in meters, whereas the azimuth, $\phi$, and elevation, $\theta$, define the angle of arrival of the received signal in degrees. Additionally, when these positions are mentioned in Cartesian coordinates throughout the document, they will be referenced as $s_{cart}$.
-	
-	Recalling the definition of spherical coordinates, it is known that for elevations of -90$^{\circ}$ or 90$^{\circ}$, the azimuth angle is meaningless and should not be considered. Since this system is affected by a Gaussian error, then the estimated azimuth angle is expected to return large errors not only for the absolute mentioned elevation values but for a considerable interval around it, dependent on the injected deviation. For that reason, the elevation values are limited to an interval between -80$^{\circ}$ and 80$^{\circ}$ so that the evaluated metrics present a result that is not so reflective of the errors originated from this phenomenon.
-	
-	The positions to be estimated are contained in a matrix with a number of columns equal to the number of positions and three rows consisting of its spherical coordinates. The matrix is arranged so that for each defined norm, the elevation component covers the interval [-80$^{\circ}$ to 80$^{\circ}$] in steps of one and, for each elevation value, the azimuth component covers the interval [-180$^{\circ}$, 180$^{\circ}$] in steps of one, forming partial spheres around the reference axis' origin.
-	
-	%--------------------
-	\item \textbf{Propagation speed}
-	
-	In all performed simulations, the considered speed of sound is $1500 \; m/s$, which corresponds to the underwater propagation velocity of waves in typical conditions.
-	
-\end{enumerate}
-
-Having the conditions enumerated, the logic of the algorithm occurs as follows. For every defined position of the acoustic source, $s$, a function that consists on the estimator is called, receiving as input the $s$, the positions of the hydrophone configuration, $r_i$, and an injected error in the . It then returns the estimated position of the source in Cartesian coordinates, $[x,y,z]$, and in spherical coordinates, $[n, \phi, \theta]$. As the position $s$ in Cartesian corresponds to the real value that is intended to be estimated, we can also obtain the real spherical coordinates by directly converting $s$ using the Cartesian to spherical relations in \ref{eq:cart2sph}.
-
-\begin{eqnarray}
-	\begin{cases} 
-		n =  \sqrt{x^2 + y^2 + z^2}\\ 
-		\phi  = arctan \frac{y}{x}\\ 
-		\theta =  arctan \frac{\sqrt{x^2+y^2}}{z}
-	\end{cases}
-	\label{eq:cart2sph}
-\end{eqnarray}
-
-Consequently all conditions are met to analyze the achieved error in each coordinate by comparing the real position to the estimated values as \ref{eq:error1}, where the tested coordinates are $x, y, z, n, \phi$ and $\theta$.
-
-\begin{eqnarray}
-	&error_{coordinate} = |estimated_{coordinate} - real_{coordinate}|
-	\label{eq:error1}
-\end{eqnarray}
-
-The metrics used to evaluate the quality of the estimator were :
+In order to evaluate the performance of the configurations for the different methods, different criteria are considered, since the estimators and the FIM do not share the same evaluation metrics:
 
 \begin{itemize}
-	\item \textbf{Mean squared error} (MSE): Incorporates both the variance and the bias of the estimator, indicating its overall quality
+	\item \textbf{Evaluation criteria used for GBE and PWE}
 	
-	\item \textbf{Standard deviation of the error} ($\sigma$) : Indicates how disperse are the estimates from the expected value
+	To illustrate a scenario where these estimators are applicable, we can consider that a vehicle is moving towards an acoustic signal transmitter whose position is unknown. Imagining that the target is at a minimum of few meters, then the main focus is to achieve an optimal bearing estimation which provides a more direct path and saves resources. The range estimation serves as secondary measurement that indicates how near the vehicle is from the destination, so that it is possible to make control decisions such as moderate the navigation speed in the proximity of the target. For the reasons outlined, the study that follows presents a more thorough analysis of the azimuth and elevation errors. 
 	
-	\item \textbf{Minimum error ($min(e_i)$)} : Indicates the minimum error that is obtained by the estimator, thus the best absolute precision achieved
+	For testing both estimators, a methodology was formulated in order to evaluate the accuracy that they achieve in defined circumstances. This approach is a Monte Carlo algorithm which allows to reiterate the estimation process according to the number of positions that are intended to be tested for a specific configuration, as well as create a series of repetitive calculations that allow to deduce the estimation error and turn the overall process more robust.
+	%-------------
+	The algorithm can be described as follows. For every defined position of the acoustic source, $s$, a function, that consists on the estimator, is called receiving as input the $s$, the positions of the hydrophone configuration, $r_i$, and an injected error $e_i$ of $0.5 \mu s$, that affects the ToA as detailed in \ref{sec:premises}. It then returns the estimated position of the source in Cartesian coordinates, $s_{cart}(x,y,z)$, and in spherical coordinates, $s_{sph}(n, \phi, \theta)$. As the position $s$ in Cartesian corresponds to the real value that is intended to be estimated, we can also obtain the real spherical coordinates by directly converting $s$ using the Cartesian to spherical relations in (\ref{eq:cart2sph}).
+	
+	\begin{eqnarray}
+		\begin{cases} 
+			n =  \sqrt{x^2 + y^2 + z^2}\\ 
+			\phi  = arctan \frac{y}{x}\\ 
+			\theta =  arctan \frac{\sqrt{x^2+y^2}}{z}
+		\end{cases}
+		\label{eq:cart2sph}
+	\end{eqnarray}
+	
+	Consequently all conditions are met to analyze the achieved error in each coordinate by comparing the real position to the estimated values as (\ref{eq:error1}), where the observed coordinates are $n, \phi$ and $\theta$.
+	
+	\begin{eqnarray}
+		&error_{coordinate} = |estimated_{coordinate} - real_{coordinate}|
+		\label{eq:error1}
+	\end{eqnarray}
+	
+	\item \textbf{Evaluation criteria used with the FIM}
+	
+	Several different optimality criteria can be applied using the FIM. Considering similar applications in literature \cite{optimality-e-a-d}, the evaluated criteria in the present work are the A-optimality, D-optimality and E-optimality, which are defined as follows:
+	
+	\begin{itemize}
+		\item \textbf{A-optimality}: minimizes the trace of the inverse of the FIM, therefore seeks the minimum average variance of the estimates.
+		\item \textbf{D-optimality}: minimizes the determinant of the inverse of the FIM, therefore the volume of the uncertainty ellipsoid. However, this can be misleading since the uncertainty in one direction can be much larger than the other directions, constituting a large FIM determinant which is not representative of the full estimation.
+		\item \textbf{E-optimality}: minimizes the largest eigenvalue of the inverted FIM, i.e. the ellipsoid axis with largest uncertainty. This is considered to be the most relevant in the present case.
+	\end{itemize}
+	
+\end{itemize}
+
+Upon defining the general simulation conditions, there are two types of simulations that will be performed :
+\begin{itemize}
+	\item Type SS (Specific Simulation), which is presented in this subsection, that compares the obtained performance result for each presented method when using a single configuration to estimate a specific transmitter position.
+	\item Type BS (Broad Simulation) that tests multiple configurations for several positions with short and long ranges that form spheres around the origin of the coordinate axes.
+\end{itemize}
+
+\subsection{SS Analysis}
+
+For the SS simulation, configuration C is used and the estimated position is $s_{cart}(100,0,0)$. Figures \ref{fig:SS-estimA-C-100,0,0}, \ref{fig:SS-estimB-C-100,0,0} and \ref{fig:SS-fim-C-100,0,0} correspond to the estimate dispersion obtained for each of the previously presented methods. The green point in each plot represents the position that is being estimated. As indicated the first plot represents the side view, plane zx, and the third plot is the view from above, plane yx, which illustrate the norm error, the second plot represents the USBL front view, plane zy, which corresponds to the error in azimuth and elevation angle.
+
+As can be observed, the estimate dispersion obtained with GBE demonstrates a larger deviation in norm estimation than the other methods, of about $4m$. Additionally, it is observed in the front view an azimuth deviation of approximately $2.3^{\circ}$ and an elevation deviation of approximately $1.2^{\circ}$.
+
+The PWE presents the estimate dispersion along a spherical surface, as expected since the method computes an average range. The norm estimation presents no significant deviation and the azimuth and elevation estimates show a similar dispersion as GBE.
+
+The FIM plot presents the expected uncertainty axis obtained for the specific position estimation. From the three methods it presents the smallest uncertainty in all three coordinates, with a deviation of $0.21^{\circ}$ in azimuth and $0.16^{\circ}$ in elevation.
+
+\begin{figure}[!htbp]
+	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{figures/plot-compare-[100,0,0]-1279-1000s-estimA}}
+	\captionsetup{justification=centering,margin=2cm}
+	\caption{Estimate dispersion obtained with GBE for position $s_{cart}(100,0,0)$ using configuration C}
+	\label{fig:SS-estimA-C-100,0,0}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{figures/plot-compare-[100,0,0]-1279-1000s-pseudorange}}
+	\captionsetup{justification=centering,margin=2cm}
+	\caption{Estimate dispersion obtained with PWE for position $s_{cart}(100,0,0)$ using configuration C}
+	\label{fig:SS-estimB-C-100,0,0}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{figures/plot-fim-[100,0,0]-C}}
+	\captionsetup{justification=centering,margin=2cm}
+	\caption{Estimate dispersion obtained with FIM for position $s_{cart}(100,0,0)$ using configuration C}
+	\label{fig:SS-fim-C-100,0,0}
+\end{figure}
+
+Overall, for a position situated at a distance of $100m$ the PWE method achieves a estimate dispersion format similar to the FIM in terms of norm estimation and an approximately equivalent dispersion to the GBE in terms of azimuth and elevation deviation.
+
+\subsection{BS analysis}
+
+In the BS, the considered positions for the acoustic source, $s$, are originally defined in spherical coordinates, $s_{sph}$. These positions contained in a matrix with a number of columns equal to the number of positions and three rows consisting of its spherical coordinates. The matrix is arranged so that for each defined norm, the elevation component covers the interval [-90$^{\circ}$ , 90$^{\circ}$] in steps of one and, for each elevation value, the azimuth component covers the interval [-180$^{\circ}$ , 180$^{\circ}$] in steps of one, forming partial spheres around the reference axis' origin.
+
+Then for each method, configurations A, B and C are tested for positions forming spheres with radius equal to $1m$ and $1000m$, corresponding to the used norms. From each simulation using the estimators, the collected metrics are:
+ 
+\begin{itemize}
+	\item \textbf{Mean squared error} (MSE): Incorporates both the variance and the bias of the estimator;
+	
+	\item \textbf{Standard deviation of the error} ($\sigma$) : Indicates how disperse are the estimates from the expected value;
+	
+	\item \textbf{Maximum error} : Indicates the maximum error that is obtained by the estimator, thus the worst precision achieved.
 \end{itemize} 
 
-\subsubsection{Functional analyzes of Monte Carlo TDoA estimator}
-
-Since this Monte Carlo algorithm was developed for this specific application, then it is possible to test diverse parameters of the system in order to characterize it. Therefore, a series of detailed simulations were performed using the TDoA estimator to understand the behavior, capabilities and the impact of some design decisions on the overall accuracy.
-
-To illustrate a scenario where this estimator is applicable, we can consider that a vehicle is moving towards an acoustic signal transmitter whose position is unknown. Imagining that the target is at a considerable distance, then the main focus is to achieve an optimal bearing estimation which provides a more direct path and saves resources. The range estimation serves as secondary measurement that indicates how near the vehicle is from the destination, so that it is possible to make control decisions such as moderate the navigation speed in the proximity of the target. For the reasons outlined, the study that follows presents a more thorough analysis of the azimuth and elevation errors. 
-
-For the data visualization, two essential types of representation were developed :
+Since the Crámer-Rao lower bound does not contemplate the azimuth and elevation errors as an optimality criteria, then other metrics are used in this case, which are the D-optimality, E-optimality and A-optimality, explained in \ref{sucsec:FIM}. Therefore, from all the tested positions, the collected measurements are explained as follows: 
+\note{explain tables' cramer rao lwower bound metrics }
 
 \begin{itemize}
-	\item A 2D static representation of the error per position $s$. The errors to be tested are coordinates $x, y, z$, norm, azimuth angle or elevation angle.
-	
-	\item A 3D map of the obtained error. The x-axis holds the azimuth angle in degrees, the y-axis holds the elevation angle in degrees and the z-axis represents the measurement of a chosen parametric error. This allows to visualize, for a chosen configuration, how the estimation quality evolves in space.
-	
+	\item D-optimality
+	\begin{itemize}
+		\item Maximum determinant: corresponds to the biggest uncertainty sphere radius achieved by the configuration. Represents the estimate with lower accuracy among all estimated positions, thus a pessimistic case;
+		\item Standard deviation: corresponds to the standard deviation of the obtained determinants of the inverse of the FIM for all estimated positions. Reflects the variance of the estimates.
+	\end{itemize}
+	\item \textbf{ Maximum Eigenvalue of the inverse of the FIM}: considering the uncertainty ellipsoid, which presents three uncertainty axis with distinct magnitudes, this parameter reflects the maximum uncertainty that is achieved for each position
+	\begin{itemize}
+		\item Minimum: considering that each configuration obtains a maximum eigenvalue for each estimated position, this parameters corresponds to the position whose largest uncertainty is minimized.
+	\end{itemize}
+	\item \textbf{Trace of the inverse of the FIM}: reflects the sum of the magnitudes of the uncertainty axis for each estimated position
+	\begin{itemize}
+		\item Minimum: corresponds to the minimum of the uncertainty average variance, thus the positions that reveals a the lowest summed uncertainty magnitudes
+	\end{itemize}
 \end{itemize}
 
-For the first simulation, configuration A is tested for the acoustic source positions $s$  previously described, in a total of 58121, with a norm equal to 10 meters. Upon simulation, it is possible to observe that the geometric symmetrical nature of the configuration leads to estimation error patterns. Accordingly, it is possible to characterize the tendency of the azimuth and elevation errors according to the range of spherical coordinates angles. Table \ref{tab:configA-tendency} summarizes these relations, where the arrows indicates if the error tendency is ascendant $\nearrow$ or descendant $\searrow$.
 
-\begin{table}[!htbp] %use H to adjust
-	\begin{center}
-		\makebox[\textwidth]{
-			\begin{tabular}{ c | c c c}
-				%\hline
-				\toprule
-				\multicolumn{1}{c|}{} & Range & Azimuth error & Elevation error\\
-				\midrule
-				\multirow{4}{*}{Azimuth angle} 
-				& $-180^{\circ}$ to $-90^{\circ}$ & $\nearrow$  & $\searrow$   \\  
-				\cmidrule{2-4}
-				&$-90^{\circ}$ to $0^{\circ}$ & $\searrow$  & $\nearrow$ \\ 
-				\cmidrule{2-4}
-				& $0^{\circ}$ to $90^{\circ}$ & $\nearrow$  &  $\searrow$  \\
-				\cmidrule{2-4}
-				& $90^{\circ}$ to $180^{\circ}$ & $\searrow$  & $\nearrow$ \\
-				\midrule
-				\multirow{2}{*}{Elevation angle} 
-				&$-90^{\circ}$ to $0^{\circ}$ & exponential $\searrow$ & $\searrow$   \\ 
-				\cmidrule{2-4}
-				& $0^{\circ}$ to $90^{\circ}$ & exponential $\nearrow$  & $\nearrow$ \\
-				\bottomrule 
-		\end{tabular}}
-		\caption{Azimuth and elevation errors slope tendency for configuration A}
-		\label{tab:configA-tendency}
-	\end{center}
-\end{table}
 
-By analyzing the collected information, it is possible to deduce that since the configuration's geometric center is located along the x-axis, then for elevation angles increasingly closer to $0^{\circ}$ the errors have a tendency to decrease. Moreover, adding the fact that the depth of the baseline along the x-axis is shorter then the remaining, it results in a better azimuth estimation and a worst elevation estimation near an azimuth angle of $180^{\circ}$ or $0^{\circ}$. Overall, the maximum achieved errors are: for azimuth error $\approx$ $7.55^{\circ}$, for elevation error $\approx$ $1.41^{\circ}$ and for norm error $\approx$ 0.25m, which corresponds to 2.5\% of error in norm estimation.
+\note{introduce tables}
 
-For the same conditions, the maximum resulting $x, y$ and $z$ errors are: for $x$ $\approx$ $0.28m$, for $y$ $\approx$ $0.037m$ and for $z$ $\approx$ $0.038m$. It should be pointed out that there is a higher error in the $x$ coordinate, which corresponds to the direction of the shorter baseline that consequently originates a greater uncertainty.
-
-From this experiment, it was possible to collect the standard deviation and the minimum estimation error achieved for the azimuth and elevation angles, which are present further ahead in \ref{tab:azimuth-test1}. It should be noted that the chosen configuration A for the former analysis is by no means an optimal solution for the estimation. This particular layout was selected because it emphasizes several system responses to distinct configuration characteristics, allowing to understand how should them be adapt to achieve better results.
-
-In order to further analyze the influence of the hydrophones placement in the estimation and which design choices lead to better estimations, two more scenarios are considered to test different aspects:
-
-\begin{itemize}
-	\item \textbf{Influence of range in estimation}: In order to compare the range influence on the estimation, a second simulation intends to test the same configuration for a norm of 100 meters. The azimuth and elevation estimations do not demonstrate any visible changes in terms of range and the norm error increases for a maximum of $2.65m$, which still corresponds to approximately 2.6\% error from the original norm. However, the $x, y$ and $z$ estimation demonstrate an error increase of about 10 times, since a small deviation in angle can correspond to a large difference in Cartesian coordinates. Nonetheless, for increasing ranges these errors stay proportional, so the error percentage is similar in any range. This phenomenon is illustrated in \ref{fig:cart-range}, where the error in $x$ is represented for all the tested positions that form spheres with norms equal to $10 m$, $100 m$ and $1000 m$. As it is observed, the errors increase proportionally with the norm.
-	
-	\begin{figure}[!htbp]
-		\makebox[\textwidth][c]{\includegraphics[width=1\textwidth]{figures/plot-cartesian-range}}
-		\captionsetup{justification=centering,margin=2cm}
-		\caption{Evolution of error in Cartesian coordinates for increasing norm}
-		\label{fig:cart-range}
-	\end{figure}
-	
-	\item \textbf{Increasing the shorter baseline}: Since there are some issues that can be observed due to the short baseline along the x-axis, a third simulation serves to understand the influence of increasing this baseline in the estimation. Therefore, the baseline is increased by employing configuration B. After the simulation, the errors decreased visibly, which are indicated in \ref{tab:tdoa-estimator-abc}.
-\end{itemize}
-
-After analyzing a specific configuration which demonstrate various limitation due to its arrangement design, it is desirable to compare it with different hydrophone placements. Therefore, table \ref{tab:tdoa-estimator-abc} contain the achieved results of MSE, standard deviation and minimum error for azimuth and elevation estimation in degrees, using norms equal to 10 and 1000 $m$ for configurations A, B and C. Configuration A represents an almost flat structure, configuration B is a variation of A with an increased depth and configuration C resembles an AUV shape. By inspection it is possible to conclude that configuration B returns the lowest standard deviation and MSE, as it is also the one with the larger baselines between sensors.
+ table \ref{tab:tdoa-estimator-abc} contain the achieved results of MSE, standard deviation and minimum error for azimuth and elevation estimation in degrees, using norms equal to 10 and 1000 $m$ for configurations A, B and C. Configuration A represents an almost flat structure, configuration B is a variation of A with an increased depth and configuration C resembles an AUV shape. By inspection it is possible to conclude that configuration B returns the lowest standard deviation and MSE, as it is also the one with the larger baselines between sensors.
 
 \begin{table}[!htbp] %use H to adjust
 	\begin{center}
@@ -716,143 +391,27 @@ After analyzing a specific configuration which demonstrate various limitation du
 				\toprule
 				\multicolumn{3}{c|}{} & \multicolumn{2}{c|}{Azimuth} & \multicolumn{2}{c}{Elevation}  \\
 				\midrule
-				% \cline{2-9}
-				\multicolumn{1}{c|}{Configuration} & Norm & MSE & Standard Dev & Minimum & Standard Dev & Minimum \\
+				\multicolumn{1}{c|}{Configuration} & Norm & MSE & Standard Dev & Maximum & Standard Dev & Maximum \\
 				
 				\midrule
-				\multirow{2}{*}{A} &1 & 0.558 & 0.621 & 2.631$\times10^{-5}$ & 0.192 & 3.262$\times10^{-7}$\\
-				%\midrule
-				%\multirow{2}{*}{A} &10 & 0.544 & 0.605 & 8.743$\times10^{-7}$ & 0.186 & 3.103$\times10^{-6}$\\
-				&1000 & 0.542 & 0.599 &  8.378$\times10^{-6}$ & 0.185 & 5.059$\times10^{-6}$\\
+				\multirow{2}{*}{A} &1 & 0.767 & 0.841 & 10.102 & 0.259 & 1.954\\
+				&1000 & 0.759 & 0.751 &  9.243& 0.255 & 1.879\\
 				
 				\midrule	
-				\multirow{2}{*}{B} &1 & 0.164 & 0.147 &  2.383$\times10^{-6}$ & 0.052 & 1.387$\times10^{-6}$\\
-				%\multirow{2}{*}{B} &10 & 0.161 & 0.143 & 1.21$\times10^{-6}$ & 0.050 & 3.456$\times10^{-6}$\\
-				&1000 & 0.161 & 0.144 & 1.494$\times10^{-6}$  & 0.050 & 4.910$\times10^{-7}$\\
+				\multirow{2}{*}{B} &1 & 0.197 & 0.183 &  2.206 & 0.059 & 0.376\\
+				&1000 & 0.199 & 0.186 & 2.186 & 0.061 & 0.368\\
 				
 				\midrule			
-				\multirow{2}{*}{C} &1 & 0.201 & 0.184 &  2.635$\times10^{-6}$ & 0.061 & 5.772$\times10^{-6}$\\
-				%\multirow{2}{*}{C} &10 & 0.230 & 0.213 & 1.305$\times10^{-5}$  & 0.067 & 2.790$\times10^{-5}$\\
-				%	&100 & 0.2304 & 0.2119  & 4.3874$\times10^{-6}$\\
-				&1000 & 0.223 & 0.212 & 4.096$\times10^{-6}$  & 0.066 & 4.394$\times10^{-6}$\\
+				\multirow{2}{*}{C} 
+				&1 & 0.201 & 0.184 & 2.277  & 0.061 & 0.412 \\
+				&1000 & 0.232 & 0.215 & 2.334 & 0.071 & 0.438\\
 				\bottomrule 
 		\end{tabular}}
-		\caption{Obtained errors for configurations A,B and C by TDoA estimator}
+		\caption{Obtained errors for configurations A,B and C by GBE}
 		\label{tab:tdoa-estimator-abc}
 	\end{center}
 \end{table}
 
-Having explored the behavior of the estimator in specific conditions, there are still factors which were not discussed that may influence the system's performance or lead to an improvement. Therefore, four main ideas will be explored regarding the influence of the numeric quantization on the estimation accuracy, weather the absolute ToA is absolutely necessary for the position estimation, how is the estimates' dispersion for a specific position due to the injected error and the influence of increasing the baseline to the estimation accuracy.
-
-\paragraph{a) Influence of numeric quantization on accuracy}
-
-The first term to be analyzed is how much does the quantization of the calculations influence the obtained accuracy of the estimator. In order to analyze this, a simple adaptation was made to the numeric precision of the TDoA values that are input of the system. Instead of using the MATLAB precision of fifteen decimal places, the value was truncated to a specified number of decimal places, $\kappa$.
-Since the time differences of arrival have magnitudes around microseconds, then initially they are multiplied by $10^6$ to avoid missing information. Then the relation \ref{eq:trucate} is applied resulting in a truncated value with $\kappa$ decimal places. Finally after the truncation, the value is converted again to seconds to be used in the algorithm.
-
-\begin{eqnarray}
-	&_{truncated} = \frac{round(*2^{\kappa})}{2^{\kappa}};
-	\label{eq:trucate}
-\end{eqnarray}
-
-To evaluate the influence of the truncation in the estimation, configuration C is used to test a norm equal to 10. The original measurements are already represented previously. For a $\kappa$ of one decimal place, the azimuth standard deviation is 0.261 degrees, the elevation standard deviation is 0.087 degrees, the norm standard deviation is $0.014m$ and the MSE is 0.272. Overall, the estimation errors increase but, in practical terms, the truncation causes near to any difference in the estimation. 
-
-Since one decimal place does not bring too much discrepancy, the limit case is tested where zero decimal places are considered. In this case, the azimuth standard deviation is $0.416^{\circ}$, the elevation standard deviation is $0.136^{\circ}$, the norm standard deviation is $0.0209m$ and the MSE is 0.439. As observed, the estimations are more influenced, however they still do not compromise the reliability of the estimation.
-
-\paragraph{b) Impact of ToA measurement on position estimation}
-
-As previously mentioned, the estimator uses the approximation explained in \ref{subsubsec:toa-approx} which allows all hydrophones to use the same reference ToA added by a TDoA, representing the full distance between each hydrophone and the transmitter. However, for long range positions the ToA is consequently much larger in relation to the time differences of arrival. So, the hypothesis is that for these cases the ToA is irrelevant for the calculations and the TDoAs can be used alone to estimate the angle of arrival.
-
-In order to simulate this, the calculated reference time is substituted by $\frac{10^4 m}{1500 m/s}$, which corresponds to a distance of $10 km$. The results demonstrated no visible change in the error of the estimate. However, for distances bellow $100m$ the impact of this approximation starts to be noticed. Therefore, it is considered that the hypothesis is valid. 
-
-\paragraph{c) Analysis of estimates' dispersion due to injected error}
-
-So far, the errors that have been analyzed correspond to a random executed simulation, which is influenced by an injected error equivalent to $5^{\circ}$. If the exact same experiment is executed several times, although the returned values have the same magnitude, they are only similar and rarely the same. Therefore, if each estimation is repeated a defined number of times, then the estimates can be analyzed so that it is possible to extract a single mean value which translates the estimation error.
-
-In order to simulate this mechanism, an adaption was introduced in the previous algorithm. For each transmitter position $s$, the estimation is reiterated a specified number of times and, in each round, the azimuth and elevation errors are accumulated. After all samples are collected for a specific position, the azimuth/elevation deviation is calculated as the standard deviation of the accumulated azimuth/elevation errors and the azimuth/elevation errors are considered to be the mean of the accumulated azimuth/elevation errors. After the measurements are executed for every position in space, it is computed the overall azimuth and elevation errors and deviations which characterize the specific chosen configuration, as well as the final MSE.
-
-For exemplification purposes, configuration C was tested 100 consecutive times with no reiterations for each position, \ref{fig:plot-accum0}, and with 100 accumulated samples, \ref{fig:plot-accum100} in order to verify the dispersion of the obtained results. As it is observed, when the error is averaged with accumulated samples, there is a smaller discrepancy among the results.
-
-\begin{figure}[!htbp]
-	\makebox[\textwidth][c]{\includegraphics[width=0.9\textwidth]{figures/plot-accum0-dev0-100times}}
-	\captionsetup{justification=centering,margin=2cm}
-	\caption{Obtained error for a single configuration with no accumulated samples}
-	\label{fig:plot-accum0}
-\end{figure}
-
-\begin{figure}[!htbp]
-	\makebox[\textwidth][c]{\includegraphics[width=0.9\textwidth]{figures/plot-accum100-dev0-100times}}
-	\captionsetup{justification=centering,margin=2cm}
-	\caption{Obtained error for a single configuration with 100 accumulated samples}
-	\label{fig:plot-accum100}
-\end{figure}
-
-This approach allows to achieve more coherent results and to characterize the configurations in a more methodical manner.
-
-\paragraph{d) Influence of increasing the configuration baseline}
-
-Until this point, there are several mentions to the baseline of the used configuration and its numeric impact on the estimation performance. However, there are no conclusions about the optimal baseline that should be used. The goal of this test is to delineate the influence of increasing the hydrophones' baseline in the obtained error. 
-
-In order to execute this test, configuration C is used as well as the method previously explained that reiterates each estimation a defined number of times to achieve average dispersion values. To create an increasing baseline along the tests, in each iteration the $x$ coordinate of $r_{C1}$ increases $0.01 m$ in a total of 200 times, which makes up a displacement range between 0.1 and $2 m$. Each position generates 100 accumulated samples that result in a single measurement per configuration. 
-
-Plot \ref{fig:plot-baseline-increase-1} represents the collected errors for each of the described configurations, whose baseline is progressively increasing in a constant pace. As illustrated, the obtained errors decrease visibly in the first 100 tests, corresponding to a $r_{C1}$ position between 0.1 and $1 m$, becoming considerably constant for further distances.
-
-\begin{figure}[!htbp]
-	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{figures/plot-Hbaseline-dev001-100accum-100s-1}}
-	\captionsetup{justification=centering,margin=2cm}
-	\caption{Error evolution with increasing baseline for $r_{C1}$}
-	\label{fig:plot-baseline-increase-1}
-\end{figure}
-
-Additionally, the same experiment was done on hydrophone $r_{C2}$ of the same structure, since its position on the configuration gets a different exposure than $r_{C1}$ and a different outcome is expected. Having considered the same conditions as explained for the previous simulation, figure \ref{fig:plot-baseline-increase-2} illustrates the obtained results. It can be observed that the displacement of this specific hydrophone only causes an estimation improvement in the elevation deviation, it does not affect the estimation of the azimuth deviation and slightly increases the azimuth deviation. Therefore, an estimation improvement may not be achieved by distancing a random hydrophone, a study should be conducted for each particular configuration to determine which displacements lead to an enhancement.
-
-\begin{figure}[!htbp]
-	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{figures/plot-Hbaseline-dev001-100accum-100s-2}}
-	\captionsetup{justification=centering,margin=2cm}
-	\caption{Error evolution with increasing baseline for $r_{C2}$}
-	\label{fig:plot-baseline-increase-2}
-\end{figure}
-
-In conclusion, it is proved that increasing the baseline of a configuration in specific cases may result in a decrement of the overall estimation error. However, this only occurs for a maximum distance after which the error becomes constant. 
-
-\paragraph{e) Conclusions on TDoA based estimator}
-
-The present chapter focused on detailing the developed estimator, including the involved mechanisms and algorithm, a behavioral analysis and characterization based on simulated results. Therefore, by way of summary, some main conclusions can be taken:
-\begin{itemize}
-	\item The azimuth and elevation errors do not vary with the range of the transmitter's position, in contrast to errors in Cartesian coordinates which increase proportionally with the range;
-	
-	\item The ToA measurement is not essential for long range distances. So, in those cases there is no need for synchronization since a random large ToA can be used instead;
-	
-	\item A lower numeric precision in the calculations affects the obtained results, however since in the explored situations the errors are inherently small, the error increase does not have an impact on the system from a practical point of view;
-	
-	\item Increasing the baseline of a hydrophone configuration can result in a better estimation, until reaching a certain distance after which the error becomes constant. Therefore, when choosing an hydrophone layout which can be limited to the dimensions of a physical structure, it does not have to be sought the maximum baseline possible but the length that leads to the error becoming constant;
-	
-	\item Applying a reiteration process to create averaged errors for each configuration, creates results which are more consistent thus more capable of characterizing a specific process. Additionally, the random nature of the Monte Carlo approach is attenuated, resulting in more coherent results.
-	
-	\item The hydrophone configuration is a main factor on the estimation performance for any position in space. Although the characteristics that a configuration should meet to be optimal are still not clear, some aspects can be pointed out: 
-	
-	\begin{itemize}
-		\item It is mandatory to ensure a sensor layout which covers three dimensions, so it is possible to estimate coordinates in 3D;
-		\item The positions of the sensors must be linearly independent to allow the application of the least squares method;
-		\item It is fundamental to have an adequate baseline which can be determined with the tool previously explained;
-		\item Bearing in mind that the configuration may be employed in real scenarios, it is useful to create schematics which require achievable distances between hydrophones and respect logical shapes to install in vehicles such as AUVs.
-	\end{itemize}
-\end{itemize}
-
-\subsubsection{Functional analyzes of Monte Carlo plane wavefront estimator}
-
-In order to understand the basic behavior of the plane wavefront estimator, it was tested at first for the estimation of a single position. An injected error is considered according to the initial defined circumstances in \ref{subsec:perform-compar-meth}, which is added to the calculated ToA to each sensor. So, a series of 1000 iterations are performed to the estimation of position $s_{cart}(0,100,0)$ using configuration A and the obtained estimations are represented in \ref{fig:plot-wavefront-0,100,0-A}.
-
-\begin{figure}[!htbp]
-	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{figures/plot-wavefront-[0,100,0]-A}}
-	\captionsetup{justification=centering,margin=2cm}
-	\caption{Estimation of position $s_{cart}(0,100,0)$ using the plane wavefront estimator with configuration A}
-	\label{fig:plot-wavefront-0,100,0-A}
-\end{figure}
-
-As can be observed, the upper view reveals that the estimates are placed along a sphere surface, which corresponds to the expected result since the norm is calculated as the average ToA while the direction estimation is influenced by the error that affects the TDoAs. Additionally, the front view, which represents the view from the origin to the estimated position in the y-axis, reveals a narrow estimate cloud with larger error in azimuth. However, by inspection it is possible to conclude that this relation varies according to the position that is being estimated and is not a constant proportion.
-
-After analyzing this specific case, a second simulation intends to achieve a more comprehensive study on the performance sensor configurations. Therefore, using a specific configuration, all $s$ positions that form a sphere of defined norm were estimated a total of 1000 times, in order for the errors to be averaged, and the relevant data is retrieved, namely the standard deviation and minimum error of both azimuth and elevation estimations. The results are summarized in table \ref{tab:planewave-estimator-abc}, where configurations A, B and C are tested for norms equal to 10 and 1000 meters.
-
 \begin{table}[!htbp] %use H to adjust
 	\begin{center}
 		\makebox[\textwidth]{
@@ -862,78 +421,25 @@ After analyzing this specific case, a second simulation intends to achieve a mor
 				\multicolumn{3}{c|}{} & \multicolumn{2}{c|}{Azimuth} & \multicolumn{2}{c}{Elevation}  \\
 				\midrule
 				% \cline{2-9}
-				\multicolumn{1}{c|}{Configuration} & Norm & MSE & Standard Dev & Minimum & Standard Dev & Minimum \\
+				\multicolumn{1}{c|}{Configuration} & Norm & MSE & Standard Dev & Maximum & Standard Dev & Maximum \\
 				\midrule
 				\multirow{2}{*}{A} 
-				&1	& 0.346 & 0.151 & 0.234 & 0.143 & 0.191 \\
-				%&10 	 & 0.343 & 0.173 & 0.236 & 0.171 & 0.226 \\
-				&1000 & 0.331 & 0.178 & 0.233 & 0.176 & 0.230 \\
+				&1	& 9.547 & 15.054 & 169.741 & 3.228 & 16.542 \\
+				&1000 &  2.111 & 14.277 & 37.660 & 3.461 & 7.665 \\
 				\midrule	
 				\multirow{2}{*}{B} 
-				&1	& 0.322 & 0.160 & 0.224 & 0.159 & 0.212 \\
-				%&10 & 0.338 & 0.179 & 0.235 & 0.174 & 0.231 \\
-				&1000 & 0.332 & 0.173 & 0.234 & 0.170 & 0.222 \\
+				&1	& 2.233 & 1.054 & 8.546 & 0.690 & 3.708 \\
+				&1000 & 0.582 & 0.561 & 6.581  & 0.204 & 1.740 \\
 				\midrule			
 				\multirow{2}{*}{C} 
-				&1	& 0.410  &  0.241 & 0.322 & 0.167 & 0.235 \\
-				%&10 & 0.417 & 0.242 & 0.338 & 0.180 & 0.236 \\
-				&1000 & 0.410 & 0.242 & 0.322 & 0.170 & 0.231\\
+				&1	& 1.982  &  1.887 & 20.133 & 0.624 & 3.584 \\
+				&1000 & 0.726 & 0.642 & 9.855 & 0.218 & 2.029\\
 				\bottomrule 
 		\end{tabular}}
-		\caption{Obtained errors for configurations A,B and C using a plane wavefront estimator}
+		\caption{Obtained errors for configurations A,B and C using PWE}
 		\label{tab:planewave-estimator-abc}
 	\end{center}
 \end{table}
-
-
-
-\note{table interpretation}
-
-\subsubsection{Functional analyzes of Fisher Information Matrix}
-
-In order to demonstrate the functionality of the described method, a first simulation was conducted in which a chosen configuration is tested for various positions $s$, returning the uncertainty sphere radius, in meters, that is obtained for each position. Similarly to what was considered before in \ref{subsec:perform-compar-meth}, for each defined norm, the elevation component covers the interval [-90$^{\circ}$ to 90$^{\circ}$] in steps of one and, for each elevation value, the azimuth component covers the interval [-180$^{\circ}$, 180$^{\circ}$] in steps of one, forming partial spheres around the reference axis' origin. The simulation was conducted using configuration C previously defined.
-
-When estimating positions correspondent to a sphere of norm equal to $100m$, the obtained results are illustrated in figure \ref{fig:fim-100-C}, which show the uncertainty sphere radius for each of the $s$ positions, with respect to azimuth and elevation angles. The first plot represents the 3D map of each radius in relation to both angles, the second plot is a 2D view of the uncertainty with respect to the azimuth angle in degrees and the third plot is the 2D view of the uncertainty with respect to elevation angle in degrees.
-
-\begin{figure}[!htb]
-	\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{figures/plot-FIM-allpos-norm100-C}}
-	\captionsetup{justification=centering,margin=2cm}
-	\caption{Uncertainty radius obtained by configuration C for all sphere positions}
-	\label{fig:fim-100-C}
-\end{figure}
-
-In this specific case, it is noticeable that this configuration is capable of better estimations for low elevation angles and has an ascendant error for increasing elevation angles. Additionally, the uncertainty has a tendency to increase for azimuth angles around $-90^{\circ}$ and $90^{\circ}$. Overall, for a norm equal to $100 m$, the standard deviation of all estimations is $0.0029m$ and the best estimation occurred for position $s_{sph}(100,-180,3)$ in spherical coordinates, with an uncertainty radius of $0.0532m$.
-
-This tool also makes it possible to analyze the specific uncertainty ellipsoid of a position estimate, i.e. each of the eigenvectors of the FIM, for a specific configuration. Then, resorting tho the same configuration C, it is observed that for any estimated position, the eigenvector parallel to the direction of the angle of arrival always demonstrate the smaller uncertainty. This corresponds to what is expected since the injected error affects the TDoA which has a direct influence on the angle of arrival while the ToA is estimated using absolute distances. Additionally, for any estimated position it is also observed that, if it is considered a vector connecting the origin to the transmitter position, this vector forms angles with the eigenvectors that have an approximated uniform pattern: there is always two angles which are close to $90^{\circ}$, correspondent to errors in azimuth and elevation angles, and one angle that is close to $0^{\circ}$, correspondent to the norm error. 
-
-Figure \ref{fig:fim-eigvec-10,0,0-C} illustrates this concept for a estimation of position $s_{cart}(10,0,0)$. As indicated the first plot represents the side view, plane zx, and the third plot illustrates the view from above, plane yx, which illustrate to the norm error, the second plot represents the USBL front view, plane zy, which corresponds to the error in azimuth and elevation angle. 
-
-\begin{figure}[!htb]
-	\makebox[\textwidth][c]{\includegraphics[width=1\textwidth]{figures//plot-fim-[10,0,0]-C}}
-	\captionsetup{justification=centering,margin=2cm}
-	\caption{Eigenvectors obtained for configuration C when estimation position $s_{cart}(10,0,0)$ }
-	\label{fig:fim-eigvec-10,0,0-C}
-\end{figure}
-
-Finally, similarly to the previous methods a final simulation was ran on configurations A, B and C in order to evaluate their performance on the estimation of several defined positions along a sphere with norms of 10 and 1000 meters. Since the Crámer-Rao lower bound does not contemplate the azimuth and elevation errors as an optimality criteria, then other metrics are used in this case. Table  \ref{tab:fim-abc} contains the obtained data, including the criteria with the following meaning:  
-
-\begin{itemize}
-	\item \textbf{Determinant of the inverse of the FIM}: reflects the uncertainty sphere radius
-	\begin{itemize}
-			\item Minimum: corresponds to the smallest  uncertainty sphere radius achieved by the configuration. Represents the most accurate estimate among all estimated positions, thus an optimistic case;
-			\item Maximum: corresponds to the biggest uncertainty sphere radius achieved by the configuration. Represents the estimate with lower accuracy among all estimated positions, thus a pessimistic case;
-			\item Standard deviation: corresponds to the standard deviation of the obtained determinants of the inverse of the FIM for all estimated positions. Reflects the variance of the estimates.
-	\end{itemize}
-	\item \textbf{ Maximum Eigenvalue of the inverse of the FIM}: considering the uncertainty ellipsoid, which presents three uncertainty axis with distinct magnitudes, this parameter reflects the maximum uncertainty that is achieved for each position
-	\begin{itemize}
-			\item Minimum: considering that each configuration obtains a maximum eigenvalue for each estimated position, this parameters corresponds to the position whose largest uncertainty is minimized.
-	\end{itemize}
-	\item \textbf{Trace of the inverse of the FIM}: reflects the sum of the magnitudes of the uncertainty axis for each estimated position
-	\begin{itemize}
-			\item Minimum: corresponds to the minimum of the uncertainty average variance, thus the positions that reveals a the lowest summed uncertainty magnitudes
-	\end{itemize}
-\end{itemize}
-
 
 \begin{table}[!htbp] %use H to adjust
 	\begin{center}
@@ -970,14 +476,92 @@ Finally, similarly to the previous methods a final simulation was ran on configu
 	\end{center}
 \end{table}
 
+
+
+\note{take conclusions on the table results\\
+		   PWE demonstra mesma evolução de erro que CBE mas com maior amplitude nos maximos\\
+	   	   cramer rao demonstra valores mais pequenos - é a precisao maxima possivel atingir por certa configuração\\
+   	       resultados mostram maior incerteza em PWE para norma mais pequena como esperado\\
+          GBE tem resultados semelhantes}
+
+
 \note{conclude}
 
-\subsection{Final remarks}
 
-This section focuses on three selected methodologies that are capable of evaluating sensor configurations' performance based on multiple criteria. 
+\subsection{Further behavioral analysis}
 
-Firstly, a Monte Carlo estimator based on TDoA is presented, which is expected to demonstrate better results for short range estimation since the very precise computed TDoAs become more relevant in the calculation. However, due to the system's non linearity, the results may be different than the expected and it should be used taking that detail into account. 
+\note{analisar isto tudo}
 
-Secondly, a Monte Carlo estimator based on a plane wavefront is considered, which is expected to have better performance for long range estimation, since the assumed approximation affects the system less for long distances and it is derives linear results. However, in short range estimation this method is expected to express larger estimate error, due to the fact that the angle of arrival to each hydrophone is considerably different, so the plane wavefront should not be considered.
+Having explored the behavior of the estimator in specific conditions, there are still factors which were not discussed that may influence the system's performance or lead to an improvement. Therefore, four main ideas will be explored regarding the influence of the numeric quantization on the estimation accuracy, weather the absolute ToA is absolutely necessary for the position estimation, how is the estimates' dispersion for a specific position due to the injected error and the influence of increasing the baseline to the estimation accuracy.
 
-Lastly, the Crámer-Rao lower bound method is applied, which makes use of the Fisher Information Matrix. As the FIM reflects the quantity of information that a configuration is capable of acquiring in relation to a specific position, then it can be directly related to the accuracy of the estimation. This method assumes the use of any unbiased and efficient estimator, which makes it a more generic tool. Consequently, it is widely used in literature for sensor configuration's performance analysis and it is expected that it shows the most reliable results for this application. 
+\subsubsection{Impact of ToA measurement on position estimation}
+
+As previously mentioned, the estimator uses the approximation which allows all hydrophones to use the same reference ToA added by a TDoA, representing the total time it takes for a signal to travel between the transmitter and each hydrophone. However, for long range positions the ToA is consequently much larger in relation to the time differences of arrival. So, the hypothesis is that for these cases the ToA is irrelevant for the calculations and the TDoAs can be used alone to estimate the angle of arrival.
+
+In order to simulate this, the calculated reference time is substituted by $\frac{10^4 m}{1500 m/s}$, which corresponds to a distance of $10 km$. The results demonstrated no visible change in the error of the estimate. However, for distances bellow $100m$ the impact of this approximation starts to be noticed. Therefore, it is considered that the hypothesis is valid. 
+
+\subsubsection{Influence of increasing the configuration baseline}
+
+\note{definir conceito de baseline}
+
+Until this point, there are several mentions to the baseline of the used configuration and its numeric impact on the estimation performance. However, there are no conclusions about the optimal baseline that should be used. The goal of this test is to delineate the influence of increasing the hydrophones' baseline in the obtained error. 
+
+In order to execute this test, configuration C is used as well as the method previously explained that reiterates each estimation a defined number of times to achieve average dispersion values. To create an increasing baseline along the tests, in each iteration the $x$ coordinate of $r_{C1}$ increases $0.01 m$ in a total of 200 times, which makes up a displacement range between 0.1 and $2 m$. Each position generates 100 accumulated samples that result in a single measurement per configuration. 
+
+Plot \ref{fig:plot-baseline-increase-1} represents the collected errors for each of the described configurations, whose baseline is progressively increasing in a constant pace. As illustrated, the obtained errors decrease visibly in the first 100 tests, corresponding to a $r_{C1}$ position between 0.1 and $1 m$, becoming considerably constant for further distances.
+
+\begin{figure}[!htbp]
+	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{figures/plot-Hbaseline-dev001-100accum-100s-1}}
+	\captionsetup{justification=centering,margin=2cm}
+	\caption{Error evolution with increasing baseline for $r_{C1}$}
+	\label{fig:plot-baseline-increase-1}
+\end{figure}
+
+Additionally, the same experiment was done on hydrophone $r_{C2}$ of the same structure, since its position on the configuration gets a different exposure than $r_{C1}$ and a different outcome is expected. Having considered the same conditions as explained for the previous simulation, figure \ref{fig:plot-baseline-increase-2} illustrates the obtained results. It can be observed that the displacement of this specific hydrophone only causes an estimation improvement in the elevation deviation, it does not affect the estimation of the azimuth deviation and slightly increases the azimuth deviation. Therefore, an estimation improvement may not be achieved by distancing a random hydrophone, a study should be conducted for each particular configuration to determine which displacements lead to an enhancement.
+
+\begin{figure}[!htbp]
+	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{figures/plot-Hbaseline-dev001-100accum-100s-2}}
+	\captionsetup{justification=centering,margin=2cm}
+	\caption{Error evolution with increasing baseline for $r_{C2}$}
+	\label{fig:plot-baseline-increase-2}
+\end{figure}
+
+In conclusion, it is proved that increasing the baseline of a configuration in specific cases may result in a decrement of the overall estimation error. However, this only occurs for a maximum distance after which the error becomes constant. 
+
+\note{rever conclusions}
+
+\subsubsection{ Conclusions on behavioral analysis}
+
+The present chapter focused on detailing the developed estimator, including the involved mechanisms and algorithm, a behavioral analysis and characterization based on simulated results. Therefore, by way of summary, some main conclusions can be taken:
+\begin{itemize}
+	\item The azimuth and elevation errors do not vary with the range of the transmitter's position, in contrast to errors in Cartesian coordinates which increase proportionally with the range;
+	
+	\item The ToA measurement is not essential for long range distances. So, in those cases there is no need for synchronization since a random large ToA can be used instead;
+	
+	\item A lower numeric precision in the calculations affects the obtained results, however since in the explored situations the errors are inherently small, the error increase does not have an impact on the system from a practical point of view;
+	
+	\item Increasing the baseline of a hydrophone configuration can result in a better estimation, until reaching a certain distance after which the error becomes constant. Therefore, when choosing an hydrophone layout which can be limited to the dimensions of a physical structure, it does not have to be sought the maximum baseline possible but the length that leads to the error becoming constant;
+	
+	\item Applying a reiteration process to create averaged errors for each configuration, creates results which are more consistent thus more capable of characterizing a specific process. Additionally, the random nature of the Monte Carlo approach is attenuated, resulting in more coherent results.
+	
+	\item The hydrophone configuration is a main factor on the estimation performance for any position in space. Although the characteristics that a configuration should meet to be optimal are still not clear, some aspects can be pointed out: 
+	
+	\begin{itemize}
+		\item It is mandatory to ensure a sensor layout which covers three dimensions, so it is possible to estimate coordinates in 3D;
+		\item The positions of the sensors must be linearly independent to allow the application of the least squares method;
+		\item It is fundamental to have an adequate baseline which can be determined with the tool previously explained;
+		\item Bearing in mind that the configuration may be employed in real scenarios, it is useful to create schematics which require achievable distances between hydrophones and respect logical shapes to install in vehicles such as AUVs.
+	\end{itemize}
+\end{itemize}
+
+\section{Final remarks}
+
+This section focuses on three selected methodologies that are capable of evaluating sensor configurations' performance based on multiple criteria.
+
+From the presented methods, it is expected that for short range estimation, distances from few centimeters to few meters,  the GBE presents estimates that are more approximated to the real value than the PWE, since it uses the geometric relations between the hydrophone and the transmitter in order to estimate the position. Contrarily, for long range estimations, distances higher than a few meters, the PWE is expected to achieve lower estimation errors than the GBE, since it is a linear system and the approximation it considers does not affect the estimation.
+
+Lastly, as the FIM reflects the quantity of information that a configuration is capable of acquiring in relation to a specific position, then it can be directly related to the accuracy of the estimation. The Crámer-Rao lower bound, which is intrinsically linked to the FIM, assumes the use of any unbiased and efficient estimator, which makes it a more generic tool. Consequently, it is widely used in literature for sensor configuration's performance analysis. 
+
+In conclusion, due to the generality of the tool, the Crámer-Rao lower bound is considered the most reliable tool for this application.
+
+\note{mencionar behavioral analysis - ha singularidades nas configurações, deve ser estudado as melhores opções}

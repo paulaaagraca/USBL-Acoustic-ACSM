@@ -41,28 +41,31 @@ S.~Gezici, ``A survey on wireless position estimation,'' {\em {Wireless
   Personal Communications}}, vol.~44, no.~3, p.~263–282, 2008.
 \newblock Springer Science \& Business Media.
 
+\bibitem{crosscorr-76}
+C.~Knapp and C.~Glifford, ``The generalized correlation method for estimation
+  of time delay,'' {\em IEEE Transactions on Acoustics, Speech, and Signal
+  Processing}, vol.~24, no.~4, pp.~320--327, 1976.
+
 \bibitem{crosscorr}
 B.~M.~R. Bharathi and A.~R. Mohanty, ``{Underwater Sound Source Localization by
   EMD-Based Maximum Likelihood Method},'' {\em {Acoustics Australia}}, vol.~46,
   no.~2, pp.~193--203, 2018.
 
+\bibitem{triang-later}
+A.~Budiyono, L.~Chen, S.~Wang, K.~McDonald-Maier, and H.~Hu, ``Towards
+  autonomous localization and mapping of auvs: a survey,'' {\em International
+  Journal of Intelligent Unmanned Systems}, 2013.
+
 \bibitem{suvey-loc}
-V.~Chandrasekhar, W.~K. Seah, Y.~S. Choo, and H.~V. Ee, ``{Localization in
-  underwater sensor networks: survey and challenges},'' in {\em {WUWNet '06:
+V.~Chandrasekhar, W.~K. Seah, Y.~S. Choo, and H.~V. Ee, ``Localization in
+  underwater sensor networks - survey and challenges,'' in {\em {WUWNet '06:
   Proceedings of the 1st ACM international workshop on Underwater networks}},
   pp.~33--40, 2006.
 
-\bibitem{triangalgo}
-J.~Esteves, A.~Carvalho, and C.~Couto, ``{Generalized geometric triangulation
-  algorithm for mobile robot absolute self-localization},'' in {\em {2003 IEEE
-  International Symposium on Industrial Electronics}}, vol.~1, (Rio de Janeiro,
-  Brazil), pp.~346--351, 2003.
-
-\bibitem{trilat}
-A.~P. Pandian, T.~Senjyu, S.~M.~S. Islam, and H.~Wang, ``{Weighted
-  Trilateratiton and Centroid Combined Indoor Localization in Wifi Based Sensor
-  Network},'' in {\em {Proceeding of the International Conference on Computer
-  Networks, Big Data and IoT (ICCBI - 2018)}}, pp.~163--166, jul 2019.
+\bibitem{class-triang}
+V.~Pierlot and M.~V. Droogenbroeck, ``A new three object triangulation
+  algorithm for mobile robot positioning,'' {\em IEEE Transactions on
+  Robotics}, vol.~30, no.~3, pp.~566--577, 2014.
 
 \bibitem{arch_localiz}
 M.~Erol-Kantarci, H.~T. Mouftah, and S.~Oktug, ``{A Survey of Architectures and
@@ -143,6 +146,11 @@ J.~Valls, T.~Sansaloni, A.~Perez-Pascual, V.~Torres, and V.~Almenar, ``The use
   of cordic in software defined radios: A tutorial,'' {\em IEEE Communications
   Magazine}, vol.~44, no.~9, pp.~46--50, 2006.
 
+\bibitem{hilbert-def}
+A.~D. Poularikas, {\em Handbook of Formulas and Tables for Signal Processing},
+  ch.~The Hilbert Transform.
+\newblock CRC Press, 1999.
+
 \bibitem{hilbert-fpga}
 A.~A. Assef, B.~M. Ferreira, J.~M. Maia, and E.~T. Costa, ``Modeling and
   fpga-based implementation of an efficient and simple envelope detector using
@@ -159,5 +167,11 @@ B.~Ferreira, A.~Matos, and N.~Cruz, ``{Optimal positioning of autonomous marine
   vehicles for underwater acoustic source localization using TOA
   measurements},'' in {\em {2013 IEEE International Underwater Technology
   Symposium (UT)}}, pp.~1--7, IEEE, 2013.
+
+\bibitem{optimality-e-a-d}
+Y.~Zhang, Y.~Li, Y.~Zhang, and T.~Jiang, ``Underwater anchor-auv localization
+  geometries with an isogradient sound speed profile: A crlb-based optimality
+  analysis,'' {\em IEEE Transactions on Wireless Communications}, vol.~17,
+  no.~12, pp.~8228--8238, 2018.
 
 \end{thebibliography}

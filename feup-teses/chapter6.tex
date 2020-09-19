@@ -159,6 +159,8 @@ Additionally, it is possible to obtain the best configuration in terms of azimut
 
 \subsection{Line of sight definition} \label{subsec:lineofsight}
 
+\note{mudar para outra secção}
+
 As briefly explained before, when considering a set of hydrophones placed in the surface of an AUV, there will be blind regions for each of the hydrophones. Nonetheless, when an acoustic source is positioned in a blind region of an hydrophone, it still can receive a transmitted signal through reflections on path objects or reverberation in the AUV's surface. Since these signals would be distorted from the original, they could lead to misinformation after the processing if they were to be considered. For this reason, it is essential to exclusively consider configurations whose hydrophones have line of sight (LOS) to the transmitter. 
 
 In the present application, this feature is executed through function $line\_of\_sight$ of algorithm \ref{alg:alg2}, which outputs a vector containing all the hydrophones that have line of sight to the inputted transmitter position, $mean\_estimate$, from the considered set $matrix_{r_{i}}$. 
@@ -239,7 +241,7 @@ In summary, it is possible to deduce that there is a larger quantity of differen
 %- considerations of the line of sight (mathematical approximations) - line of sight has to be defined for the model considered; if format changes, it has to be remade
 %-------------------------------------------------------------------------
 
-\section{Comprehensive study of geometric configurations performance} \label{sec:analysis_config_performance}
+\section{Study of geometric configurations performance} \label{sec:analysis_config_performance}
 
 %Upon having full comprehension of the developed tool for determining the best configuration, it is interesting to compare its performance with widely used techniques. Therefore, the Crámer-Rao lower bound method was additionally implemented to do a systematic study on the performance of several hydrophone configurations.
 

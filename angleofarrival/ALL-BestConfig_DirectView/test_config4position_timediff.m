@@ -46,7 +46,7 @@ ri = [q   0   0    0    0    0   0    0    0  ;
       0   w   -w   0    0    e   -e   e    -e];
 %-------------------------------------------------------------------------- 
 
-s = [100;0;0]; %single source position for test
+s = [10;10;10]; %single source position for test
 
 [rownum,n_samples] = size(s); %number of samples to compute
 
@@ -99,8 +99,25 @@ for gen_test=1:10
 
                     for k=1:accum_samples
 
-                        [R,a,azimuth,elevation,norm] = testTOA_timediff(s(:,i), hconfig, max_dev);
+                       %-----------ESTIMATOR--------------------------------------------
+                        %----------------------------------------------------------------
+                         %----------------------------------------------------------------
+                          %----------------------------------------------------------------
+                           %----------------------------------------------------------------
+                           
+                        [R,a,azimuth,elevation,norm] = testTOA_pseudorange(s(:,i), hconfig, max_dev);
 
+                         %----------------------------------------------------------------
+                          %----------------------------------------------------------------
+                           %----------------------------------------------------------------
+                            %----------------------------------------------------------------
+                             %----------------------------------------------------------------
+                              %----------------------------------------------------------------
+                        
+                        errorx(k) = abs(R(1)-s(1));       %x coordinate
+                        errory(k) = abs(R(2)-s(2));       %y coordinate
+                        errorz(k) = abs(R(3)-s(3));       %z coordinate      
+                              
                         %----------ERROR OF INJECTED RANDOM DEVIATION----------------------
                         %difference between calculated and real azimuth
                         error_i_azimuth(k) = azimuth - real_azimuth*180/pi; % azimuth angle
@@ -119,7 +136,7 @@ for gen_test=1:10
                         
                         %-----------------------------------------------------------------------
                         %for a single source position, accumulate estimated samples
-                         ce = [1 2 4 9];
+                         ce = [1 2 7 9];
                         if gen_test == 1 && isequal(hconfig_ind,ce) && i == 1
                             R_estimations(:,k) = R;   %accumulate estimated R of 1 position (to be plotted)
                         end 
@@ -143,9 +160,15 @@ for gen_test=1:10
                     %elevation error for a single source position
                     error_elevation(cnt_comb) = mean(error_i_elevation);
                   
+                    error_x(cnt_comb) = mean(errorx);
+                    error_y(cnt_comb) = mean(errory);
+                    error_z(cnt_comb) = mean(errorz);
 
                     % Mean squared error (of a certain hydrophone configuration)
+                    %---spheric---------------------------------------------
                     mse_config(cnt_comb) = sqrt(error_azimuth(cnt_comb)^2 + error_elevation(cnt_comb)^2);
+                    %---cartesian---------------------------------------------
+                    %mse_config(cnt_comb) = sqrt(error_x(cnt_comb)^2 + error_y(cnt_comb)^2 + error_z(cnt_comb)^2);
                     if min_mse > mse_config(cnt_comb)
                         min_mse = mse_config(cnt_comb);
                         hconfig_best_mse = hconfig;
@@ -459,6 +482,7 @@ if plot_vec_Restimations == 1
         ylabel('z');
         hold on
         scatter(s_rott(1,1),s_rott(3,1),30,'g','filled')
+        title('Side view');
         axis equal
         
         subplot(1,3,2)
@@ -467,6 +491,7 @@ if plot_vec_Restimations == 1
         ylabel('z');
         hold on
         scatter(s_rott(2,1),s_rott(3,1),30,'g','filled')
+        title('Front view'); 
         axis equal
         
         subplot(1,3,3)
@@ -475,10 +500,11 @@ if plot_vec_Restimations == 1
         ylabel('y');
         hold on
         scatter(s_rott(1,1),s_rott(2,1),30,'g','filled')
+        title('Upper view'); 
         axis equal
         
-        %set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.3, 0.7, 0.5]);
-        %saveas(f_est,'plots/plot-accum-[100,0,0]-1249-1000s','jpg')
+        set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.3, 0.7, 0.5]);
+        saveas(f_est,'plots/plot-compare-[100,0,0]-1279-1000s','jpg')
         %------------
         
 %         for asd=1:3

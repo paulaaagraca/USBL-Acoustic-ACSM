@@ -9,7 +9,7 @@ clear
 plot_on = 0;
 plot_uncert_vec = 1;
 rotation = 1;
-plot_montecarlo_fisher = 1;
+plot_montecarlo_fisher = 0;
 
 %--------------------------------------------------------------------------
 %_____TESTING CONFIGURATIONS_______________________________________________
@@ -29,7 +29,7 @@ ri = [q   0   0    0    0    0   0    0    0;
       0   0   0    w    -w   e   e    -e   -e;
       0   w   -w   0    0    e   -e   e    -e];
 
-s=[0;1000;0]; %single source position for test
+s=[100;0;0]; %single source position for test
 
 h1 = ri(:,1); %h1 = nose hydrophone gives the 3rd dimension
 cnt_comb = 1;
@@ -322,7 +322,7 @@ if plot_uncert_vec == 1
                    [uncert_vec3_posr(3,1),uncert_vec3_negr(3,1)],'b')
              
              hold on
-             scatter3(s_rott(1,1),s_rott(2,1),s_rott(3,1),20,'b','filled') 
+             scatter3(s_rott(1,1),s_rott(2,1),s_rott(3,1),20,'g','filled') 
 
              %legend('uncert_1','uncert_2','uncert_3');  
              %title('Unertainty vectors around estimated position');
@@ -352,7 +352,7 @@ if plot_uncert_vec == 1
              end
          end   
          set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.3, 0.7, 0.5]);
-         saveas(f_rot_s,'plots/plot-fim-[10,0,10]-C','jpg')
+         %saveas(f_rot_s,'plots/plot-fim-[100,0,0]-C','jpg')
          
      end
 end
@@ -456,7 +456,7 @@ if plot_montecarlo_fisher == 1
              %legend('uncert_1','uncert_2','uncert_3');  
              %title('Unertainty vectors around estimated position');
         set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.3, 0.7, 0.5]);
-        saveas(f_est,'plots/plot-fisher-monte-overlaid-0,1000,0-C','jpg')
+       % saveas(f_est,'plots/plot-fisher-monte-overlaid-0,1000,0-C','jpg')
      end
 end
 %end

@@ -235,6 +235,9 @@ std_det = std(determinant_fisher); %standard deviation
 
 [min_trace,ind_min_trace] = min(trace_inf_A); %min trace of sphere
 
+[max_eig,ind_max_eig] = max(eigen_fisher); %min eig of sphere
+
+[max_trace,ind_max_trace] = max(trace_inf_A); %min trace of sphere
 
 
 if single_position == 0
