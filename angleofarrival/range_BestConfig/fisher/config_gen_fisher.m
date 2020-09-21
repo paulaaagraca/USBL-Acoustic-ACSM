@@ -52,7 +52,7 @@ ri_shift_tot = [ri ri_shift1 ri_shift2 ]; %ri_shift3
 
 %-------------------------------------------------------------------------- 
 %-------------------------------------------------------------------------- 
-s=[0;0;0]; %single source position for test
+s=[10;0;0]; %single source position for test
 
 cnt_comb = 1; %initialize counter of all hydrophone combinations
 h1 = [q; 0; 0]; %h1 = nose hydrophone gives the 3rd dimension

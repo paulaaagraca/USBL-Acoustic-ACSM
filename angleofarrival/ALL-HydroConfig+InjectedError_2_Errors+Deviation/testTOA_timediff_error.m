@@ -33,10 +33,10 @@ e = sqrt(2)/2 * w;
 % hydrophones configuration [r1 r2 r3 r4];
 % r1 -> front; r2 -> left; r3 -> right; r4 -> top;
 %__A__
-ri = [0.02  0.02   0      0;
-      0     0      0.1    -0.1;
-      0.1   -0.1   0      0];
-  
+% ri = [0.02  0.02   0      0;
+%       0     0      0.1    -0.1;
+%       0.1   -0.1   0      0];
+%   
 % % %__B__  
 % ri = [0.1  0.1   0      0;
 %       0     0      0.1    -0.1;
@@ -47,6 +47,18 @@ ri = [0.02  0.02   0      0;
 % ri = [0.1  0     0     0;
 %       0    0    -e     e;
 %       0    0.1  -e    -e];  
+
+
+%%%1502
+ri = [0.1  0.4   0.4   0.4;
+      0    0.1   -e    -e ;
+      0    0     e     -e];
+  
+%%%1248
+% ri = [0.1  0.2   0.2   0.2;
+%       0    0.1   -e    -e ;
+%       0    0     e     -e];
+
 
 % define range of azimuth
 t_azimuth_deg = -180:1:180;                 % azimuth values in degrees
@@ -78,7 +90,7 @@ count_sph = 1; % size of vector spherical +1
 %               - spherical coordinates in 'spherical'
 for n = 1:n_samples_norm
     for i = 1:n_samples_elevation
-            for k = 1:n_samples_azimuth
+         for k = 1:n_samples_azimuth
 
             % convert spherical to cartesian coordinates
             [x, y, z] = sph2cart(t_azimuth_rad(k), t_elevation_rad(i), norm(n));
@@ -97,6 +109,19 @@ end
 
 [rownum,n_samples] = size(s); %number of samples to compute
 
+cnt_as=0;
+asas = [];
+asasas = [];
+for as = 1:n_samples
+    if ((s(2,as)) < 0.1 && (s(2,as)) > 0.1)
+        if ((s(3,as)) < 0.1 && (s(3,as)) > 0.1)
+            cnt_as = cnt_as + 1 ;
+            asas(:,cnt_as) = s(:,as);
+            asasas(cnt_as) = [asasas as];
+        end
+    end
+end
+
 % Loop: For each source position in vector s, calculates the real cartesian
 % and spherical coordinates and subtracts them to the estimated values,
 % resulting in the absolute estimation errors 
@@ -110,7 +135,7 @@ for i=1:n_samples
     
     for k=1:10
         %call function to obtain estimated cartesian and spherical coordinates
-        [R,a,azimuth,elevation,norm] = testTOA_timediff(s(:,i), ri, 0.5e-6);
+        [R,a,azimuth,elevation,norm] = testTOA_pseudorange(s(:,i), ri, 0.5e-6);
 
             
         %calculate real cartesian coordinates
@@ -153,18 +178,19 @@ for i=1:n_samples
     deviation_elevation(i) = std(error_i_elevation);
 
     %absolute values of error
-    error_i_azimuth = abs(error_i_azimuth);
+    error_ip_azimuth = abs(error_i_azimuth);
     %azimuth error for a single source position
-    error_azimuth(i) = mean(error_i_azimuth);
+    error_azimuth(i) = mean(error_ip_azimuth);
 
     %absolute values of error
-    error_i_elevation = abs(error_i_elevation);
+    error_ip_elevation = abs(error_i_elevation);
     %elevation error for a single source position
-    error_elevation(i) = mean(error_i_elevation);
+    error_elevation(i) = mean(error_ip_elevation);
 
-    error_x(i) = mean(errorx);
-    error_y(i) = mean(errory);
-    error_z(i) = mean(errorz);
+    error_norm_i(i) = mean(error_norm);
+    error_x(i) = std(errorx);
+    error_y(i) = std(errory);
+    error_z(i) = std(errorz);
     
     if error_i_azimuth >10
         uyu=0;
@@ -178,7 +204,7 @@ end
 [max_z] = max(error_z);
 [max_azimuth] = max(error_azimuth);
 [max_elevation] = max(error_elevation);
-[max_norm] = max(error_norm);
+[max_norm] = max(error_norm_i);
 
 %maximum error
 [min_x] = min(error_x);
@@ -186,7 +212,7 @@ end
 [min_z] = min(error_z);
 [min_azimuth] = min(error_azimuth);
 [min_elevation] = min(error_elevation);
-[min_norm] = min(error_norm);
+[min_norm] = min(error_norm_i);
 
 %mean error
 mean_x = mean(error_x);
@@ -194,7 +220,7 @@ mean_y = mean(error_y);
 mean_z = mean(error_z);
 mean_azimuth = mean(error_azimuth);
 mean_elevation = mean(error_elevation);
-mean_norm = mean(error_norm);
+mean_norm = mean(error_norm_i);
 
 %standard deviation
 stdev_x = std(error_x);
@@ -202,21 +228,28 @@ stdev_y = std(error_y);
 stdev_z = std(error_z);
 stdev_azimuth = std(error_azimuth);
 stdev_elevation = std(error_elevation);
-stdev_norm = std(error_norm);
-
+stdev_norm = std(error_norm_i);
 
 [max_azimuth_averag, ind_max_azimuth_averag] = max(deviation_azimuth);
 [max_elevation_averag] = max(deviation_elevation);
 std_az_averag = std(deviation_azimuth);
 std_el_averag = std(deviation_elevation);
 
+%media do desvio padrao do erro
+mean_az_averag = mean(deviation_azimuth);
+mean_el_averag = mean(deviation_elevation);
+
+mean_x_averag = mean(error_x);
+mean_y_averag = mean(error_y);
+mean_z_averag = mean(error_z);
+
 std_x_averag = std(error_x);
 std_y_averag = std(error_y);
 std_z_averag = std(error_z);
 
 % Mean squared error (of mean error of azimuth and elevation)
-%mse = sqrt(std_az_averag^2 + std_el_averag^2);
-mse = sqrt(std_x_averag^2 + std_y_averag^2 + std_z_averag^2);
+mse = sqrt(mean_az_averag^2 + mean_el_averag^2);
+%mse = sqrt(std_x_averag^2 + std_y_averag^2 + std_z_averag^2);
 
 %***** PLOT OPTIONS *******************************************************
 %-----plot source 3D positions---------------------------------------------
@@ -276,7 +309,7 @@ if plot_error_spherical == 1
     ylabel('Magnitude of Error') 
     
     subplot(1,3,3)
-    plot(error_norm)    %error of norm
+    plot(error_norm_i)    %error of norm
     title('Norm Error (m)')
     xlabel('# of source position') 
     ylabel('Magnitude of Error')

@@ -7,7 +7,7 @@
 clear
 
 plot_on = 0;
-plot_uncert_vec = 1;
+plot_uncert_vec = 0;
 rotation = 1;
 plot_montecarlo_fisher = 0;
 
@@ -29,7 +29,7 @@ ri = [q   0   0    0    0    0   0    0    0;
       0   0   0    w    -w   e   e    -e   -e;
       0   w   -w   0    0    e   -e   e    -e];
 
-s=[100;0;0]; %single source position for test
+s=[10;10;10]; %single source position for test
 
 h1 = ri(:,1); %h1 = nose hydrophone gives the 3rd dimension
 cnt_comb = 1;
@@ -257,18 +257,22 @@ end
 
 %plot minimum radius for each configuration
 if plot_on ==1
-    figure
+    f_m = figure;
     plot(vec_min_det)
     hold on 
     plot(index_view,min_radius_view,'o')
+    %hold on
+    %plot(best_rad_ind,best_rad,'Marker','*','Color','g','MarkerSize',9)
     hold on
-    plot(best_rad_ind,best_rad,'Marker','*','Color','g','MarkerSize',9)
-    hold on
-    plot(best_rad_view_ind,best_rad_view,'Marker','*','Color','b','MarkerSize',9)
+    plot(best_rad_view_ind,best_rad_view,'Marker','*','Color','g','MarkerSize',9)
 
-    title('Minium volume per config');
-    xlabel('Config nº');
-    ylabel('Radius of sphere(m)');
+    title('Summed magunitude of ellipsoid ucertainty axis per configuration');
+    xlabel('Configuration number');
+    ylabel('Sum');
+    
+    %set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 1, 0.7, 0.6]);
+    
+    %saveas(f_m,'plots/plot-10,10,10-bestconfig-fim-a','jpg')
 end
 
 if plot_uncert_vec == 1

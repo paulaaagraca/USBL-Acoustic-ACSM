@@ -7,57 +7,54 @@
 \BOOKMARK [1][-]{section.1.2}{1.2 Objectives}{chapter.1}% 7
 \BOOKMARK [1][-]{section.1.3}{1.3 Document Structure}{chapter.1}% 8
 \BOOKMARK [0][-]{chapter.2}{2 State of the Art}{}% 9
-\BOOKMARK [1][-]{section.2.1}{2.1 Underwater acoustic channel}{chapter.2}% 10
-\BOOKMARK [2][-]{subsection.2.1.1}{2.1.1 Speed of sound}{section.2.1}% 11
+\BOOKMARK [1][-]{section.2.1}{2.1 Underwater Acoustic Channel}{chapter.2}% 10
+\BOOKMARK [2][-]{subsection.2.1.1}{2.1.1 Speed of Sound}{section.2.1}% 11
 \BOOKMARK [2][-]{subsection.2.1.2}{2.1.2 Multipath}{section.2.1}% 12
 \BOOKMARK [2][-]{subsection.2.1.3}{2.1.3 Doppler Effect}{section.2.1}% 13
-\BOOKMARK [2][-]{subsection.2.1.4}{2.1.4 Attenuation and signal-to-noise ratio}{section.2.1}% 14
-\BOOKMARK [1][-]{section.2.2}{2.2 Underwater localization estimation}{chapter.2}% 15
-\BOOKMARK [2][-]{subsection.2.2.1}{2.2.1 Range estimation}{section.2.2}% 16
-\BOOKMARK [2][-]{subsection.2.2.2}{2.2.2 Position estimation with reference nodes}{section.2.2}% 17
+\BOOKMARK [2][-]{subsection.2.1.4}{2.1.4 Attenuation and Signal-to-Noise Ratio}{section.2.1}% 14
+\BOOKMARK [1][-]{section.2.2}{2.2 Underwater Localization}{chapter.2}% 15
+\BOOKMARK [2][-]{subsection.2.2.1}{2.2.1 Range Estimation}{section.2.2}% 16
+\BOOKMARK [2][-]{subsection.2.2.2}{2.2.2 Estimation-Based Localization}{section.2.2}% 17
 \BOOKMARK [1][-]{section.2.3}{2.3 Underwater Acoustic Positioning Systems}{chapter.2}% 18
 \BOOKMARK [2][-]{subsection.2.3.1}{2.3.1 Long Baseline \(LBL\) and Short Baseline \(SBL\)}{section.2.3}% 19
 \BOOKMARK [2][-]{subsection.2.3.2}{2.3.2 Ultra-Short Baseline \(USBL\)}{section.2.3}% 20
 \BOOKMARK [1][-]{section.2.4}{2.4 Commercial Solutions}{chapter.2}% 21
-\BOOKMARK [1][-]{section.2.5}{2.5 Angle of arrival determination}{chapter.2}% 22
-\BOOKMARK [1][-]{section.2.6}{2.6 Optimization of sensor configurations}{chapter.2}% 23
-\BOOKMARK [2][-]{subsection.2.6.1}{2.6.1 Cr\341mer-Rao lower bound}{section.2.6}% 24
-\BOOKMARK [2][-]{subsection.2.6.2}{2.6.2 Optimal design and optimality criteria}{section.2.6}% 25
-\BOOKMARK [2][-]{subsection.2.6.3}{2.6.3 Particle Swarm Optimization}{section.2.6}% 26
-\BOOKMARK [0][-]{chapter.3}{3 Research Problem}{}% 27
-\BOOKMARK [1][-]{section.3.1}{3.1 Problem Statement}{chapter.3}% 28
-\BOOKMARK [1][-]{section.3.2}{3.2 Assumptions}{chapter.3}% 29
-\BOOKMARK [1][-]{section.3.3}{3.3 Hypothesis and Research Questions}{chapter.3}% 30
-\BOOKMARK [1][-]{section.3.4}{3.4 Validation Methods}{chapter.3}% 31
-\BOOKMARK [0][-]{chapter.4}{4 Digital signal processing component}{}% 32
-\BOOKMARK [1][-]{section.4.1}{4.1 HDL Module Architecture}{chapter.4}% 33
-\BOOKMARK [2][-]{subsection.4.1.1}{4.1.1 Module components}{section.4.1}% 34
-\BOOKMARK [2][-]{subsection.4.1.2}{4.1.2 Performance and resource analysis}{section.4.1}% 35
-\BOOKMARK [1][-]{section.4.2}{4.2 Inherent phenomena}{chapter.4}% 36
-\BOOKMARK [2][-]{subsection.4.2.1}{4.2.1 Phase Ambiguity}{section.4.2}% 37
-\BOOKMARK [2][-]{subsection.4.2.2}{4.2.2 Doppler Effect}{section.4.2}% 38
-\BOOKMARK [0][-]{chapter.5}{5 Sensor configuration performance evaluation}{}% 39
-\BOOKMARK [1][-]{section.5.1}{5.1 Geometry based position estimator}{chapter.5}% 40
-\BOOKMARK [1][-]{section.5.2}{5.2 Plane wavefront based position estimator}{chapter.5}% 41
-\BOOKMARK [1][-]{section.5.3}{5.3 Fisher Information Matrix}{chapter.5}% 42
-\BOOKMARK [1][-]{section.5.4}{5.4 Performance comparison between methods}{chapter.5}% 43
-\BOOKMARK [2][-]{subsection.5.4.1}{5.4.1 SS Analysis}{section.5.4}% 44
-\BOOKMARK [2][-]{subsection.5.4.2}{5.4.2 BS analysis}{section.5.4}% 45
-\BOOKMARK [2][-]{subsection.5.4.3}{5.4.3 Further behavioral analysis}{section.5.4}% 46
-\BOOKMARK [1][-]{section.5.5}{5.5 Final remarks}{chapter.5}% 47
-\BOOKMARK [0][-]{chapter.6}{6 Adaptive configuration selection method}{}% 48
-\BOOKMARK [1][-]{section.6.1}{6.1 Monte Carlo Approach}{chapter.6}% 49
-\BOOKMARK [2][-]{subsection.6.1.1}{6.1.1 Line of sight definition}{section.6.1}% 50
-\BOOKMARK [1][-]{section.6.2}{6.2 Study of geometric configurations performance}{chapter.6}% 51
-\BOOKMARK [2][-]{subsection.6.2.1}{6.2.1 Comparison with Cr\341mer-Rao lower bound}{section.6.2}% 52
-\BOOKMARK [1][-]{section.6.3}{6.3 Optimal solution based on range}{chapter.6}% 53
-\BOOKMARK [2][-]{subsection.6.3.1}{6.3.1 Simulation results}{section.6.3}% 54
-\BOOKMARK [2][-]{subsection.6.3.2}{6.3.2 FIM simulation}{section.6.3}% 55
-\BOOKMARK [1][-]{section.6.4}{6.4 Summary and Discussion}{chapter.6}% 56
-\BOOKMARK [0][-]{chapter.7}{7 Conclusions}{}% 57
-\BOOKMARK [1][-]{section.7.1}{7.1 Summary}{chapter.7}% 58
-\BOOKMARK [1][-]{section.7.2}{7.2 Contributions }{chapter.7}% 59
-\BOOKMARK [1][-]{section.7.3}{7.3 Future Work}{chapter.7}% 60
-\BOOKMARK [0][-]{appendix.A}{A Complementary Information}{}% 61
-\BOOKMARK [1][-]{section.A.1}{A.1 Hydrophone configurations numeration}{appendix.A}% 62
-\BOOKMARK [0][-]{section*.72}{References}{}% 63
+\BOOKMARK [1][-]{section.2.5}{2.5 Optimization of Sensor Configurations}{chapter.2}% 22
+\BOOKMARK [2][-]{subsection.2.5.1}{2.5.1 Cr\341mer-Rao Lower Bound}{section.2.5}% 23
+\BOOKMARK [2][-]{subsection.2.5.2}{2.5.2 Optimal Design and Optimality Criteria}{section.2.5}% 24
+\BOOKMARK [2][-]{subsection.2.5.3}{2.5.3 Particle Swarm Optimization}{section.2.5}% 25
+\BOOKMARK [0][-]{chapter.3}{3 Research Problem}{}% 26
+\BOOKMARK [1][-]{section.3.1}{3.1 Problem Statement}{chapter.3}% 27
+\BOOKMARK [1][-]{section.3.2}{3.2 Assumptions}{chapter.3}% 28
+\BOOKMARK [1][-]{section.3.3}{3.3 Hypothesis and Research Questions}{chapter.3}% 29
+\BOOKMARK [1][-]{section.3.4}{3.4 Validation Methods}{chapter.3}% 30
+\BOOKMARK [0][-]{chapter.4}{4 Digital Signal Processing }{}% 31
+\BOOKMARK [1][-]{section.4.1}{4.1 TDoA Estimation}{chapter.4}% 32
+\BOOKMARK [1][-]{section.4.2}{4.2 HDL Module Architecture}{chapter.4}% 33
+\BOOKMARK [2][-]{subsection.4.2.1}{4.2.1 Module Components}{section.4.2}% 34
+\BOOKMARK [2][-]{subsection.4.2.2}{4.2.2 Implementation Results}{section.4.2}% 35
+\BOOKMARK [1][-]{section.4.3}{4.3 Doppler Effect}{chapter.4}% 36
+\BOOKMARK [0][-]{chapter.5}{5 Sensor Configuration Performance Evaluation}{}% 37
+\BOOKMARK [1][-]{section.5.1}{5.1 Geometry based Position Estimator}{chapter.5}% 38
+\BOOKMARK [1][-]{section.5.2}{5.2 Plane Wavefront based Position Estimator}{chapter.5}% 39
+\BOOKMARK [1][-]{section.5.3}{5.3 Fisher Information Matrix}{chapter.5}% 40
+\BOOKMARK [1][-]{section.5.4}{5.4 Performance Comparison Between Methods}{chapter.5}% 41
+\BOOKMARK [2][-]{subsection.5.4.1}{5.4.1 SS Analysis}{section.5.4}% 42
+\BOOKMARK [2][-]{subsection.5.4.2}{5.4.2 BS Analysis}{section.5.4}% 43
+\BOOKMARK [2][-]{subsection.5.4.3}{5.4.3 Behavioral Analysis}{section.5.4}% 44
+\BOOKMARK [1][-]{section.5.5}{5.5 Final Remarks}{chapter.5}% 45
+\BOOKMARK [0][-]{chapter.6}{6 Adaptive Configuration Selection Method}{}% 46
+\BOOKMARK [1][-]{section.6.1}{6.1 Line of Sight Definition}{chapter.6}% 47
+\BOOKMARK [2][-]{subsection.6.1.1}{6.1.1 Practical Evaluation of the Line of Sight Regions}{section.6.1}% 48
+\BOOKMARK [1][-]{section.6.2}{6.2 Monte Carlo Approach}{chapter.6}% 49
+\BOOKMARK [1][-]{section.6.3}{6.3 Performance Comparison between Geometric Configurations }{chapter.6}% 50
+\BOOKMARK [2][-]{subsection.6.3.1}{6.3.1 SS Analysis}{section.6.3}% 51
+\BOOKMARK [2][-]{subsection.6.3.2}{6.3.2 BS Analysis}{section.6.3}% 52
+\BOOKMARK [1][-]{section.6.4}{6.4 Summary and Discussion}{chapter.6}% 53
+\BOOKMARK [0][-]{chapter.7}{7 Conclusions}{}% 54
+\BOOKMARK [1][-]{section.7.1}{7.1 Summary}{chapter.7}% 55
+\BOOKMARK [1][-]{section.7.2}{7.2 Contributions }{chapter.7}% 56
+\BOOKMARK [1][-]{section.7.3}{7.3 Future Work}{chapter.7}% 57
+\BOOKMARK [0][-]{appendix.A}{A Complementary Information}{}% 58
+\BOOKMARK [1][-]{section.A.1}{A.1 Hydrophone configurations numeration}{appendix.A}% 59
+\BOOKMARK [0][-]{section*.61}{References}{}% 60

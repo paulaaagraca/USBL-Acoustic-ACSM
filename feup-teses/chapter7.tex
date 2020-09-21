@@ -1,5 +1,7 @@
 \chapter{Conclusions}  \label{chap:conclusion}
 
+This chapter is a reflection of all the work developed throughout this dissertation. All the conclusions are laid out and a brief overview of the develop work is described. Then the main contributions are presented followed by various aspects that could be further developed and explored in order to improve and continue the present research work. 
+
 \section{Summary}
 
 As stated at the beginning, the overall aim of this research work was to develop a USBL system with characteristics that lead to an improvement on localization precision, both for short and long range.
@@ -10,31 +12,53 @@ Secondly, an adaptive configuration selection method was developed which is capa
 
 Additionally, as initially intended, the method was adjusted so that it was possible to conduct a comprehensive study on the configurations that demonstrated to be optimal for short and long range. It was concluded that using the FIM together with the preferred optimality criterion for this application, originated the most coherent results and allowed to elect the configurations that lead to an average higher precision.
 
-This evaluation tool can be applied to any method that is capable of defining performance metrics for the evaluation of a sensor configuration. In the present research work three options were investigated, consisting on an estimator based on the TDoA measurement, an estimator that assumes a plane wavefront and the Crámer-Rao lower bound that uses the Fisher Information Matrix. From these three options, it was concluded that the most reliable would be the third due to the independence on the chosen estimator and its wide use on literature.
+This evaluation tool can be applied to any method that is capable of defining performance metrics for the evaluation of a sensor configuration. In the present research work three options were investigated, consisting on an estimator based on the geometric relations between hydrophones and the transmitter, an estimator that assumes a plane wavefront and the Crámer-Rao lower bound that uses the Fisher Information Matrix. From these three options, it was concluded that the most reliable would be the third due to the independence on the chosen estimator and its wide use on literature.
+
+\begin{description}
+	\item[RQ1: ] \textit{What method should be adopted in order to efficiently compare the performance of hydrophone configurations?}
+	
+	In chapter \ref{chap:proposed_sys}, three different methods are contemplated as tools for evaluating hydrophone configurations performance. From the analysis, it is possible to understand that the GBE and PWE contain  particularities that influence the results, namely the non-linearity and the assumed plane wavefront approximation, respectively. Alternatively, the FIM linearizes the estimation by considering any efficient and unbiased estimator, making it a more general tool that is widely employed for such application. For this reason, in the present research work the FIM is recognized as the most efficient and reliable tool for evaluating sensor configurations.
+	
+	\item[RQ2: ] \textit{What decision metric(s) should be used to evaluate the optimal hydrophone configuration for a specific angle of arrival?}
+	
+	Throughout the presented work, the used metrics for the simulations vary among the methods, including the azimuth error, elevation error and the mean-squared error for the estimators and the A-, D- and E-optimality for the Crámer-Rao lower bound, contemplated in \ref{subsec:perform-compar-meth}. As the FIM is considered the most reliable tool to be used for configurations performance evaluation, then a closer look is taken into the optimality criteria in order to determine the most appropriate for localization estimation. As the A- and D-optimality can result in misleading conclusions, due to the disguise of data as previously explained in \ref{subsec:perform-compar-meth}, then the E-optimality is ultimately considered to be the most relevant.
+	
+	\item[RQ3: ]\textit{How should the system be developed in order to assure that the selected hydrophones always have line of sight to the transmitter?}
+	
+	The proposed system assumes that the USBL system integrates multiple hydrophones deployed in known position along a vehicle, detailed in \ref{sec:config-perf}. Therefore, it is possible to reconfigure the set of four active hydrophones depending on the estimated angle of arrival, so that it is assured to always use hydrophones with line of sight to the transmitter, as described in \ref{subsec:lineofsight}. However, upon the formulation of the system, a blind region is identified directly behind the vehicle, which considering its dimensions, corresponds to a non significant percentage of the space.
+	
+	\item[RQ4: ] \textit{Are there distinct best hydrophone configurations for short and long range estimation?}
+	
+	Upon the presentation of the developed method in \ref{sec:config-perf}, a dedicated set of simulations was performed in order to analyze the configurations performance based on the range of the acoustic transmitter instead of analyzing the angle of arrival of each individual considered position. Accordingly, recalling previous conclusions, the results obtained in \ref{subsec:bs-2} for the FIM using E-optimality reveal that configuration for short range configuration number 1248 achieves the higher estimation precision, whereas for long range, number 1502 is indicated as the best option from the considered possibilities.
+	
+\end{description}
+
+Having all the proposed research questions answered, then the main hypothesis is recalled: \textit{"Using a USBL system that reconfigures the hydrophone selection leads to an improvement on the underwater localization precision, allowing to always have a set of four active hydrophones with line of sight to the transmitter and makes it suitable for both short and long range estimation."}. From the presented results and main findings, it is possible to conclude that the developed mechanisms show promising results and  improve the localization estimation precision, validating the proposed research hypothesis.
 
 \section{Contributions }
 
 The main contributions of this dissertation are: 
 \begin{itemize}
-	\item A HDL system design with strict area constraints that receives signals from four different sensors and calculates the phase differences between them;
-	\item A comparative study on three methods that evaluate the performance of sensor configurations based on several different optimality criteria;
+	\item A digital signal processing module design with strict area constraints that receives signals from four different sensors and calculates the phase differences between them;
+	
+	\item A comparative study on three methods that evaluate the performance of sensor configurations based on several optimality criteria;
+	
 	\item The adaptive configuration selection method which is capable of determining the optimal sensor configuration, from a discrete set of hydrophones in fixed positions, that leads to highest localization precision, i.e. lowest estimation error.
 \end{itemize}
 
-%Additionally, a scientific article will be written and submitted to the OCEANS Conference that is occurring in May of 2021. 
 
 \section{Future Work}
 
-The developed work arose various innovative ideas and topics according to the state of the art on localization optimization methods. Therefore, there is the intent to produce a a scientific article on the subject to be submitted in the OCEANS Conference 2021.
-
-The adopted optimization techniques in the present work are the starting point of a topic which is not very explored in the current literature. Consequently, there are several areas that can be improved as follows:
+The developed work arose some innovative ideas and topics according to the state of the art on localization optimization methods.Consequently, there are several areas that can be further explored:
 
 \begin{itemize}
-	\item Implementing the developed algorithm for AoA estimation as a real-time system which can be used for decision making during underwater navigation;
 	
-	\item Using Machine Learning techniques in order to find the optimal hydrophone array configuration, to be positioned in an underwater vehicle;
+	\item Perform field experiments in order validate the developed adaptive configuration selection method;
+		
+	\item Implementing the developed algorithm for AoA estimation as a real-time system which can be used for real-time reconfiguration during underwater navigation;
 	
-	\item Integrating the estimator with a Kalman Filter or a Particle Swarm Optimization approach;
+	\item Using Machine Learning techniques in order to find the optimal hydrophone array configuration within a set spacial area, to be positioned in an underwater vehicle;
 	
-	\item Perform field experiments in order to examine if it is advantageous to select only the hydrophones with line of sight or if the errors obtained from propagation in the surface of the AUV are negligible;
+	\item Integrating the results in a Kalman Filter, which would mitigate singularities of the system.
+	
 \end{itemize}

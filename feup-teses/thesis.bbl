@@ -7,8 +7,8 @@ J.~Liang, ``Fifteen percent of ocean floor now mapped,'' Jun 2019.
   [Accessed Oct. 28, 2019].
 
 \bibitem{survey-tech-chall}
-H.~P. Tan, R.~Diamant, W.~K.~G. Seah, and M.~Waldmeyer, ``{A survey of
-  techniques and challenges in underwater localization},'' {\em {Ocean
+H.~P. Tan, R.~Diamant, W.~K.~G. Seah, and M.~Waldmeyer, ``{A Survey of
+  Techniques and Challenges in Underwater Localization},'' {\em {Ocean
   Engineering}}, vol.~38, no.~1, pp.~1663--1676, 2011.
 
 \bibitem{ocean-acoust}
@@ -35,6 +35,11 @@ J.~M. F.~M. {a}es, ``{Improving Time of Arrival Estimation Using Encoded
 D.~E. Chaitanya, C.~V. Sridevi, and G.~S.~B. Rao, ``{Path loss analysis of
   Underwater communication systems},'' in {\em {IEEE Technology Students'
   Symposium}}, pp.~65--70, IEEE, 2011.
+
+\bibitem{und-localiz-survey}
+X.~Su, I.~Ullah, X.~Liu, and D.~Choi, ``A review of underwater localization
+  techniques, algorithms, and challenges,'' {\em Journal of Sensors},
+  vol.~2020, 2020.
 
 \bibitem{wirelesscomm}
 S.~Gezici, ``A survey on wireless position estimation,'' {\em {Wireless
@@ -73,6 +78,11 @@ M.~Erol-Kantarci, H.~T. Mouftah, and S.~Oktug, ``{A Survey of Architectures and
   {IEEE Communications Surveys \& Tutorials}}, vol.~13, no.~3, pp.~487--502,
   2011.
 
+\bibitem{leassquare-lbl}
+J.~Zhang, Y.~Han, C.~Zheng, and D.~Sun, ``Underwater target localization using
+  long baseline positioning system,'' {\em Applied Acoustics}, vol.~111,
+  pp.~129--134, 2016.
+
 \bibitem{sbl}
 X.~You, Y.~Wu, M.~Zhu, X.~Li, and L.~Zhang, ``{Low Complexity Short Baseline
   Localization Algorithm Based on Taylor Expansion},'' in {\em {2019 IEEE
@@ -90,34 +100,47 @@ D.~Sun, J.~Ding, C.~Zheng, and W.~Huang, ``{An Underwater Acoustic Positioning
   2019.
 
 \bibitem{evologics1}
-E.~GmbH, ``{Underwater USBL Positioning Systems},'' 2018.
+{EvoLogics GmbH}, ``{Underwater USBL Positioning Systems},'' 2018.
 \newblock [Online] Available: https://evologics.de/usbl. [Accessed Jan. 26,
   2020].
 
 \bibitem{evologics2}
-E.~GmbH, ``{S2C Technology},'' 2018.
+{EvoLogics GmbH}, ``{S2C Technology},'' 2018.
 \newblock [Online]. Available: https://evologics.de/s2c-technology [Accessed
   Jan. 26, 2020].
 
 \bibitem{evologics3}
-E.~GmbH, ``{18/34 communication and positioning devices},'' 2018.
+{EvoLogics GmbH}, ``{18/34 communication and positioning devices},'' 2018.
 \newblock [Online]. Available: https://evologics.de/acoustic-modem/18-34
   [Accessed Jan. 26, 2020].
 
 \bibitem{evologics4}
-E.~GmbH, ``{S2C R 12/24 USBL communication and positioning device},'' 2018.
+{EvoLogics GmbH}, ``{S2C R 12/24 USBL communication and positioning device},''
+  2018.
 \newblock [Online]. Available:
   https://evologics.de/acoustic-modem/12-24/usbl-serie [Accessed Jan. 26,
   2020].
 
 \bibitem{sonardyne1}
-Sonardyne, ``{MICRO-RANGER 2 SHALLOW WATER USBL SYSTEM},'' 2020.
+{Sonardyne}, ``{Micro-Ranger 2 Shallow Water USBL System},'' 2020.
 \newblock [Online]. Available:
   https://www.sonardyne.com/product/micro-ranger-2-shallow-water-usbl-system/
   [Accessed Feb. 3, 2020].
 
+\bibitem{sonardyne2}
+{Sonardyne}, ``{Mini-Ranger 2 Shallow Water USBL System},'' 2020.
+\newblock [Online]. Available:
+  https://www.sonardyne.com/product/underwater-positioning-mini-ranger-2/
+  [Accessed Feb. 3, 2020].
+
+\bibitem{applied-easytrak}
+{Applied Acoustics}, ``{Easytrak Alpha USBL System, Model 2665},'' 2020.
+\newblock [Online]. Available:
+  https://appliedacoustics.com/wp-content/uploads/2019/10/Easytrak-Alpha-2665-Technical-Specification.pdf/
+  [Accessed May 3, 2020].
+
 \bibitem{hipap_hardw}
-K.~Maritime, ``{HiPAP - HIGH PRECISION ACOUSTIC POSITIONING},'' 2016.
+{Kongsberg Maritime}, ``{HiPAP - High Precision Acoustic Positioning},'' 2016.
 \newblock [Online]. Available:
   https://www.kongsberg.com/maritime/products/Acoustics-Positioning-and-Communication/acoustic-positioning-systems/hipap-models/
   [Accessed May 2, 2020].
@@ -131,14 +154,29 @@ A.~N. Bishop, B.~Fidan, B.~D.~O. Anderson, K.~Do{\u{g}}an{\c{c}}ay, and P.~N.
 E.~Rady, M.~M. E.~A. El-Monsef, and M.~M. Seyam, ``Relationships among several
   optimality criteria,'' {\em Interstat}, vol.~15, no.~6, pp.~1--11, 2009.
 
+\bibitem{d-opt-mislead}
+S.~Xu and K.~Do{\u{g}}an{\c{c}}ay, ``Optimal sensor placement for 3-d
+  angle-of-arrival target localization,'' {\em IEEE Transactions on Aerospace
+  and Electronic Systems}, vol.~53, no.~3, pp.~1196--1211, 2017.
+
+\bibitem{d-opt}
+D.~Moreno-Salinas, A.~Pascoal, and J.~Aranda, ``Optimal sensor placement for
+  acoustic underwater target positioning with range-only measurements,'' {\em
+  IEEE Journal of Oceanic Engineering}, vol.~41, no.~3, pp.~620--643, 2016.
+
+\bibitem{pso-surv}
+Y.~Zhang, S.~Wang, and G.~Ji, ``A comprehensive survey on particle swarm
+  optimization algorithm and its applications,'' {\em Mathematical Problems in
+  Engineering}, vol.~2015, 2015.
+
 \bibitem{particle-swarm-opt}
 C.~Tholen, T.~A. El-Mihoub, L.~Nolle, O.~Ralle, and R.~Rofallski, ``Optimal
   receiver configuration of short-baseline localisation systems using particle
   swarm optimisation.,'' in {\em ECMS}, pp.~25--31, 2020.
 
 \bibitem{afonso-thesis}
-A.~M. Bonito, ``{Acoustic system for ground truth underwater positioning in
-  DEEC’s test tank},'' Master's thesis, {Faculty of Engineering of the
+A.~M. Bonito, ``{Acoustic System for Ground Truth Underwater Positioning in
+  DEEC’s Test Tank},'' Master's thesis, {Faculty of Engineering of the
   University of Porto}, Porto, jul 2019.
 
 \bibitem{cordic-def}
@@ -157,15 +195,25 @@ A.~A. Assef, B.~M. Ferreira, J.~M. Maia, and E.~T. Costa, ``Modeling and
   a hilbert transform fir filter for ultrasound imaging applications,'' {\em
   Research on Biomedical Engineering}, vol.~34, no.~1, pp.~87--92, 2018.
 
+\bibitem{xilinx-board}
+{XILINX}, ``{Zynq-7000 SoC Data Sheet: Overview},'' 2018.
+\newblock [Online]. Available: Available:
+  https://www.xilinx.com/support/documentation/data\_sheets/ds190-Zynq-7000-Overview.pdf/
+  [Accessed Set 15, 2020].
+
+\bibitem{doppler-eq}
+V.~C. Chen, {\em The Micro-Doppler Effect in Radar}.
+\newblock Artech House, 2019.
+
 \bibitem{estim-plane-wavefront}
 J.~Reis, M.~Morgado, P.~Batista, P.~Oliveira, and C.~Silvestre, ``Design and
   experimental validation of a usbl underwater acoustic positioning system,''
   {\em Sensors}, vol.~16, no.~9, p.~1491, 2016.
 
 \bibitem{cramer-bruno}
-B.~Ferreira, A.~Matos, and N.~Cruz, ``{Optimal positioning of autonomous marine
-  vehicles for underwater acoustic source localization using TOA
-  measurements},'' in {\em {2013 IEEE International Underwater Technology
+B.~Ferreira, A.~Matos, and N.~Cruz, ``{Optimal Positioning of Autonomous Marine
+  Vehicles for Underwater Acoustic Source Localization using TOA
+  Measurements},'' in {\em {2013 IEEE International Underwater Technology
   Symposium (UT)}}, pp.~1--7, IEEE, 2013.
 
 \bibitem{optimality-e-a-d}

@@ -361,7 +361,7 @@ if plot_mse_deviation == 1
     
     set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.3, 0.7, 0.5]);
     
-    %saveas(f2,'plots/plot-[100,0,0]-1000s-errors','jpg')
+    %saveas(f2,'plots/plot-[10,10,10]-1000s-errors-pseudo','jpg')
 
 end
 
@@ -387,7 +387,7 @@ if plot_dev_overlaid == 1
     xlabel('Configuration Number');
     ylabel('Deviation (deg)');
     
-    %saveas(f1,'plots/plot-[-10,-10,-10]-1000s-both','jpg')
+    %saveas(f1,'plots/plot-[10,10,10]-1000s-both-pseudo','jpg')
 
 end
     
@@ -504,7 +504,7 @@ if plot_vec_Restimations == 1
         axis equal
         
         set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.3, 0.7, 0.5]);
-        saveas(f_est,'plots/plot-compare-[100,0,0]-1279-1000s','jpg')
+        %saveas(f_est,'plots/plot-compare-[100,0,0]-1279-1000s','jpg')
         %------------
         
 %         for asd=1:3

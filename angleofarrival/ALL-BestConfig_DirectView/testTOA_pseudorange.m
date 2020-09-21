@@ -28,7 +28,7 @@ t0 = 0;
 
     % USBL's position
     s = [0 0 0]';
-
+    
     % Times of arrival
     ti = zeros(4,1);
     for i=1:4
@@ -36,7 +36,7 @@ t0 = 0;
     end
     
     % Solution
-    rho = mean(ti-ones(4,1)*t0)*cs;
+    rho =mean(ti-ones(4,1)*t0)*cs;
     S = [ri(:,1)'-ri(:,2)';
          ri(:,1)'-ri(:,3)';
          ri(:,1)'-ri(:,4)'];
@@ -48,6 +48,7 @@ t0 = 0;
     
     d = d/norm(d);
     X = rho*d;
+    
     
    
     %convert cartesian coordinates to spherical

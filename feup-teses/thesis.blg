@@ -2,6 +2,7 @@ This is BibTeX, Version 0.99d (TeX Live 2019)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: thesis.aux
 A level-1 auxiliary file: abstract.aux
+A level-1 auxiliary file: acknows.aux
 A level-1 auxiliary file: quote.aux
 A level-1 auxiliary file: abbrevs.aux
 A level-1 auxiliary file: chapter1.aux
@@ -14,46 +15,44 @@ A level-1 auxiliary file: chapter7.aux
 A level-1 auxiliary file: appendix1.aux
 The style file: ieeetr.bst
 Database file #1: myrefs.bib
-Warning--I didn't find a database entry for "eq:cc-def-estim"
-You've used 33 entries,
+You've used 42 entries,
             1876 wiz_defined-function locations,
-            678 strings with 9497 characters,
-and the built_in function-call counts, 8685 in all, are:
-= -- 872
-> -- 318
+            721 strings with 10999 characters,
+and the built_in function-call counts, 10642 in all, are:
+= -- 1069
+> -- 392
 < -- 0
-+ -- 121
-- -- 88
-* -- 591
-:= -- 1218
-add.period$ -- 42
-call.type$ -- 33
-change.case$ -- 33
++ -- 150
+- -- 108
+* -- 715
+:= -- 1497
+add.period$ -- 55
+call.type$ -- 42
+change.case$ -- 41
 chr.to.int$ -- 0
-cite$ -- 33
-duplicate$ -- 438
-empty$ -- 842
-format.name$ -- 88
-if$ -- 2159
+cite$ -- 42
+duplicate$ -- 530
+empty$ -- 1043
+format.name$ -- 108
+if$ -- 2641
 int.to.chr$ -- 0
-int.to.str$ -- 33
-missing$ -- 25
-newline$ -- 111
-num.names$ -- 33
-pop$ -- 114
+int.to.str$ -- 42
+missing$ -- 32
+newline$ -- 142
+num.names$ -- 42
+pop$ -- 151
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 322
+skip$ -- 380
 stack$ -- 0
-substring$ -- 528
-swap$ -- 184
+substring$ -- 632
+swap$ -- 216
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 85
-width$ -- 35
-write$ -- 338
-(There was 1 warning)
+while$ -- 103
+width$ -- 44
+write$ -- 424

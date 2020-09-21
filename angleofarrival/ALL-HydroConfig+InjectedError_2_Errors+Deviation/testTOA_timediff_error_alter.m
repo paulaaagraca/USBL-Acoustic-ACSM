@@ -45,7 +45,17 @@ ri = [0.02  0.02   0      0;
 %__C__  
 % ri = [0.1  0     0     0;
 %       0    0    -e     e;
-%       0    0.1  -e    -e];  
+%       0    0.1  -e    -e];
+
+% %%1502
+% ri = [0.1  0.4   0.4   0.4;
+%       0    0.1   -e    -e ;
+%       0    0     e     -e];
+%   
+% %%%1248
+% ri = [0.1  0.2   0.2   0.2;
+%       0    0.1   -e    -e ;
+%       0    0     e     -e];
 
 % define range of azimuth
 t_azimuth_deg = -180:1:180;                 % azimuth values in degrees
@@ -62,7 +72,7 @@ t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 
 %--------------------------------------------------------------------------
 
-norm = [1000]; % norm values to be tested (row)
+norm = [1]; % norm values to be tested (row)
 
 count = 1;     % size of vector s +1
 count_sph = 1; % size of vector spherical +1
@@ -102,7 +112,7 @@ end
 for i=1:n_samples
     
     %call function to obtain estimated cartesian and spherical coordinates
-    [R,a,azimuth,elevation,norm] = testTOA_timediff(s(:,i), ri, 0.5e-6);
+    [R,a,azimuth,elevation,norm] = testTOA_pseudorange(s(:,i), ri, 0.5e-6);
     
     %calculate real cartesian coordinates
     real_r = s(:,i)-a;
@@ -127,18 +137,18 @@ for i=1:n_samples
     end
     
     
-    if (error_azimuth(i) > 60)
-        if azimuth > 0 && qw < 0
-             diff_a = 180-abs(qw);
-             diff_azimuth = 180 - azimuth;
-             error_azimuth(i) = diff_azimuth + diff_a;
-        end
-         if qw > 0 && azimuth < 0
-             diff_azimuth = 180-abs(azimuth);
-             diff_a = 180 - qw;
-             error_azimuth(i) = diff_azimuth + diff_a;
-        end
-    end
+%     if (error_azimuth(i) > 60)
+%         if azimuth > 0 && qw < 0
+%              diff_a = 180-abs(qw);
+%              diff_azimuth = 180 - azimuth;
+%              error_azimuth(i) = diff_azimuth + diff_a;
+%         end
+%          if qw > 0 && azimuth < 0
+%              diff_azimuth = 180-abs(azimuth);
+%              diff_a = 180 - qw;
+%              error_azimuth(i) = diff_azimuth + diff_a;
+%         end
+%     end
     
 end
 
@@ -147,8 +157,8 @@ end
 [max_x] = max(errorx);
 [max_y] = max(errory);
 [max_z] = max(errorz);
-[max_azimuth] = max(error_azimuth);
-[max_elevation] = max(error_elevation);
+[max_azimuth,ind_max_azimuth] = max(error_azimuth);
+[max_elevation,ind_max_elevation] = max(error_elevation);
 [max_norm] = max(error_norm);
 
 %maximum error
@@ -176,7 +186,7 @@ stdev_elevation = std(error_elevation);
 stdev_norm = std(error_norm);
 
 % Mean squared error (of mean error of azimuth and elevation)
-%mse = sqrt(mean_azimuth^2 + mean_elevation^2);
+mse = sqrt(mean_azimuth^2 + mean_elevation^2);
 mse = sqrt(stdev_x^2 + stdev_y^2 + stdev_z^2);
 
 %***** PLOT OPTIONS *******************************************************

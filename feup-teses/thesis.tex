@@ -34,6 +34,7 @@
 \usepackage{upgreek}	%cap over letter in math
 \usepackage{relsize}		%bigger math symbols
 
+\setdescription{itemsep=6pt, parsep=0pt,labelsep=0pt, labelwidth=1.3cm, leftmargin=\labelwidth}
 
 \usepackage{booktabs}
 \setlength\defaultaddspace{1ex}
@@ -49,9 +50,9 @@
 %\usepackage[mieic,final,onpaper]{feupteses}
 
 %% MIEEC options --------------_------------_------------_-------------
-\usepackage[mieec]{feupteses}
+%\usepackage[mieec]{feupteses}
 %\usepackage[mieec,juri]{feupteses}
-%\usepackage[mieec,final]{feupteses}
+\usepackage[mieec,final]{feupteses}
 %-----------_------------_------------_-------------_------------_-------
 
 %% For other degrees
@@ -99,7 +100,7 @@
 \copyrightnotice{Paula Alexandra Agra Graça, 2020}
 
 \supervisor{Supervisor}{Jos\'{e} Carlos Alves}
-\supervisor{Co-supervisor}{Bruno Ferreira}
+\supervisor{Co-supervisor}{Bruno Miguel Ferreira}
 
 
 %% Uncomment committee stuff in the final version if used
@@ -124,7 +125,7 @@
 % remove unnecessary \include{} commands
 \begin{Prolog}
   \include{abstract} % the abstract
-  %\include{acknows}  % the acknowledgments
+  \include{acknows}  % the acknowledgments
   \include{quote}    % initial quotation if desired
   \cleardoublepage
   \pdfbookmark[0]{Table of Contents}{contents}

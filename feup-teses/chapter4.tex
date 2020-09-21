@@ -6,16 +6,21 @@ This chapter intends to clarify the problem addressed by the present dissertatio
 \section{Problem Statement} \label{sec:prob-state}
 
 The Ultra-Short Baseline system is among the most deployed positioning methods using underwater acoustics. There is a vast knowledge of its function and capabilities, therefore its implementation does not constitute a technological innovation nowadays. 
-In the considered scenario, previously mentioned in chapter \ref{chap:intro}, an AUV is taking part on a long-term underwater mission in which it periodically sends known signals to the surface with a pinger. In such case, the mule AUV needs to be provided with an USBL system to receive the signal and estimate the position of the other AUV to navigate near it. The simplified communication system is illustrated in figure \ref{fig:auv_scene}. 
-
-\note{GROW illustration}
+In the considered scenario, previously mentioned in chapter \ref{chap:intro}, an AUV is taking part on a long-term underwater mission in which it periodically sends known signals to the surface with a pinger. In such case, the mule AUV needs to be provided with an USBL system to receive the signal and estimate the position of the other AUV to navigate near it. The simplified communication system is illustrated in figure \ref{fig:grow}. 
 
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figures/proposed-solution}
-	\caption{Communication System}
-	\label{fig:auv_scene}
+	\includegraphics[width=0.9\textwidth]{figures/GROW}
+	\caption{Context of the GROW project}
+	\label{fig:grow}
 \end{figure}
+
+%\begin{figure}[!htbp]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{figures/proposed-solution}
+%	\caption{Communication System}
+%	\label{fig:auv_scene}
+%\end{figure}
 
 This partial USBL system was developed in previous dissertations and research work, which can be better understood in \cite{afonso-thesis}. Briefly, the system consists on a transducer of four hydrophones forming a 3D array deployed on the mule AUV. The distance between AUVs is given by the cross-correlation between the received and expected signals. Since the operation frequency range is around tens of kilohertz, which minimizes the attenuation of sound, the time difference of arrival has to be refined by analyzing the relative phase differences between hydrophones.
 
@@ -38,18 +43,15 @@ This research work relies on a set of premises that were considered throughout t
 
 \paragraph{Number of sensors} For the estimation of the position in 3D space, a multilateration approach was used, as explained in \ref{subsubsec:lateration}. Therefore, a minimum of 4 hydrophones are needed so that it is possible to define the position of the transmitter. Using only two sensors, two possibility spheres are formed around these sensors whose intersection originates a circle that contains the location possible solutions. By adding a third sensor, this circle is intersected by another sphere which originates only two location possibilities. Finally, a fourth sensor is added to exactly differentiate which is the accurate location solution.
 
-\paragraph{Synchronism} The system integrates a synchronization mechanism that allows to know the time of emission of an acoustic signal and  Hence it is possible to compute the ToA of the signal which indicates the range between the transmitter and the receiver.
+\paragraph{Synchronism} The system integrates a synchronization mechanism that allows to know the time of emission of an acoustic signal, hence it is possible to compute the ToA of the signal which indicates the range between the transmitter and the receiver.
 
 \paragraph{Noise characteristics} The system assumes an injected error $e_i$ added to the time differences of arrival, $ \Delta t_{ij}$. These errors are mutually independent and follow a Gaussian distribution with zero mean and a configurable variance of $\sigma^{2}$, i.e., $e_i \sim \mathcal{N}(0,\,\sigma^{2})$. 
 
-For the simulations performed in this project, a deviation of 5$^{\circ}$, or a window of $[-2.5^{\circ},2.5^{\circ}]$, in phase difference estimation of incoming signals was considered to be reasonable for an underwater navigation scenario. Therefore, since the specified period of the signals is $T = \frac{1}{24400}$, then the 5$^{\circ}$ will be equivalent to $\frac{5^{\circ}}{360^{\circ}}*T$ which is approximately a deviation of $0.5\mu s$. Hence the considered standard deviation $\sigma$ of the error $e_i$ in the computed time differences of arrival is equal to $0.5\mu s$.
-
-\paragraph{Numeric quantization} The digital signal processing system uses a finite quantization resolution with 7 decimal places for the phase difference. Since the added noise expressed in degrees is an integer, which is $10^7$ times larger than the system resolution, then the numeric quantization is not significant in the present work.
+For the simulations performed in this project, a deviation of 5$^{\circ}$, or a window of $[-2.5^{\circ},2.5^{\circ}]$, in phase difference estimation of incoming signals was considered to be reasonable for an underwater navigation scenario. This value is based on the observation that the process implemented to calculate the phase difference, using acoustic signals recorded in controlled laboratory environment, produced a stable value within an interval of 2 degrees. Therefore, since the specified period of the signals is $T = \frac{1}{24400}$, then the 5$^{\circ}$ will be equivalent to $\frac{5^{\circ}}{360^{\circ}}*T$ which is approximately a deviation of $0.5\mu s$. Hence the considered standard deviation $\sigma$ to characterize the error $e_i$ in the computed time differences of arrival is equal to $0.5\mu s$.
 
 \paragraph{Reference axis} The origin of the reference axis is defined at the center of the structure where the hydrophones are fixed, which in this case is the AUV.
 
-\paragraph{Propagation speed} The considered speed of sound is 1500 m/s, which corresponds
-to the underwater propagation velocity of waves in typical conditions.
+\paragraph{Propagation speed} The considered speed of sound is 1500 m/s, which corresponds to the underwater propagation velocity of waves in typical conditions.
 
 %------------------------------------------------------------------------------------
 \section{Hypothesis and Research Questions} \label{sec:hypoth-rq}
@@ -63,17 +65,15 @@ This dissertation intends to complement previous research work and answer to a c
 Attending the proposed hypothesis, the topics that are intended to be explored and discussed in this thesis's work can be summarized in the following research questions:
 
 %Research Questions
-\begin{itemize}
-
-	\item \textbf{RQ1: }\textit{What method should be adopted in order to efficiently compare the performance of hydrophone configurations?}
+\begin{description}
+	\item[RQ1: ] \textit{What method should be adopted in order to efficiently compare the performance of hydrophone configurations?}
 	
-	\item \textbf{RQ2: }\textit{What decision metric(s) should be used to evaluate the optimal hydrophone configuration for a specific angle of arrival?}
+	\item[RQ2: ] \textit{What decision metric(s) should be used to evaluate the optimal hydrophone configuration for a specific angle of arrival?}
 	
-	\item \textbf{RQ3: }\textit{How should the system be developed in order to assure that the selected hydrophones always have line of sight to the transmitter?}
+	\item[RQ3: ]\textit{How should the system be developed in order to assure that the selected hydrophones always have line of sight to the transmitter?}
 	
-	\item \textbf{RQ4: }\textit{Are there distinct best hydrophone configurations for short and long range estimation?}
-	
-\end{itemize}
+	\item[RQ4: ] \textit{Are there distinct best hydrophone configurations for short and long range estimation?}
+\end{description}
 
 These questions summarize the main topic points which are explored in the scope of this thesis and are the essential inquiries that it intends to answer.
 

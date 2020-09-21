@@ -1,4 +1,4 @@
-function [X,s,azimuth,elevation,rho] = testTOA_pseudorange(p,ri,max_dev)
+function [X,s,azimuth,elevation,r] = testTOA_pseudorange(p,ri,max_dev)
 Xv = [];
 rho = [];
 %for j=1:10000
@@ -29,6 +29,8 @@ t0 = 0;
     % USBL's position
     s = [0 0 0]';
 
+for j=1:100  
+    
     % Times of arrival
     ti = zeros(4,1);
     for i=1:4
@@ -36,7 +38,7 @@ t0 = 0;
     end
     
     % Solution
-    rho = mean(ti-ones(4,1)*t0)*cs;
+    rho =[rho, mean(ti-ones(4,1)*t0)*cs];
     S = [ri(:,1)'-ri(:,2)';
          ri(:,1)'-ri(:,3)';
          ri(:,1)'-ri(:,4)'];
@@ -47,9 +49,15 @@ t0 = 0;
     d = cs*(S'*S)^-1*S'*delta;
     
     d = d/norm(d);
-    X = rho*d;
+    X = rho(j)*d;
+    Xv = [Xv, X];
     
-   
+end
+X=[];
+X(1,1) = mean(Xv(1,:));
+X(2,1) = mean(Xv(2,:));
+X(3,1) = mean(Xv(3,:));
+
     %convert cartesian coordinates to spherical
     [azimuth,elevation,r] = cart2sph(X(1),X(2),X(3));
     %convert radians to degrees

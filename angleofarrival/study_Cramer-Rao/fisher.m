@@ -1,4 +1,4 @@
-%function [max_det, min_det, std_det, pos_max_det, pos_min_det,eig_value,eig_vector] = fisher(ri,s)
+function [max_det, min_det, std_det, pos_max_det, pos_min_det,eig_value,eig_vector] = fisher(ri,s)
 %--------------------------------------------------------------------------
 % Description: For a certain sensors configuration and a known acoustic
 % source positions matrix, it is calculated the Fisher Information Matrix 
@@ -10,15 +10,15 @@
 %--------------------------------------------------------------------------
 % Author : Paula Graça (paula.graca@fe.up.pt), June 2020
 %--------------------------------------------------------------------------
-clear
+%clear
 
 %------options-------------------------------------------------------------
 plot_FIMdet_3view = 0; %plot fisher matrix determinant vs the azimuth and elevation
 plot_FIMdet = 0; %plot fisher matrix determinant vs the azimuth and elevation
 plot_eigen = 0;  %plot maximum eigen value for each position
-not_function = 1;%use script not as a function(note: if 1,comment first line, 
+not_function = 0;%use script not as a function(note: if 1,comment first line, 
                                                          % uncomment 'clear')
-single_position = 0; %use single testing source position
+single_position = 1; %use single testing source position
 %--------------------------------------------------------------------------
 
 % Sound speed
@@ -44,7 +44,9 @@ if not_function == 1
 %__C__  
 ri = [0.1  0     0     0;
       0    0    -e     e;
-      0    0.1  -e    -e];  
+      0    0.1  -e    -e];
+  
+
 end
 %--------------------------------------------------------------------------
 %_____POSITIONS ARRAY TO BE TESTED_________________________________________
