@@ -36,4 +36,17 @@ max_x=max(errorx);
 max_y=max(errory);
 max_z=max(errorz);
 
+%minimum deviations
+
+min_x=min(errorx);
+min_y=min(errory);
+min_z=min(errorz);
+
+
+%std deviations
+
+std_x=std(errorx);
+std_y=std(errory);
+std_z=std(errorz);
+
 
