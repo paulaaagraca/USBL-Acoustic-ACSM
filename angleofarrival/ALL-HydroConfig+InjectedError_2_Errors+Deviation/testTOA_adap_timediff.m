@@ -173,6 +173,6 @@ elevation = elevation*180/pi;
 
 %--------------------------------------------------------------------------
 % unit vector of estimated position
-R_unit = R/r;
+%R_unit = R/r;
 
 end
