@@ -105,7 +105,7 @@ for gen_test=1:10
                           %----------------------------------------------------------------
                            %----------------------------------------------------------------
                            
-                        [R,a,azimuth,elevation,norm] = testTOA_pseudorange(s(:,i), hconfig, max_dev);
+                        [R,a,azimuth,elevation,norm] = testTOA_timediff(s(:,i), hconfig, max_dev);
 
                          %----------------------------------------------------------------
                           %----------------------------------------------------------------
@@ -504,7 +504,7 @@ if plot_vec_Restimations == 1
         axis equal
         
         set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.3, 0.7, 0.5]);
-        %saveas(f_est,'plots/plot-compare-[100,0,0]-1279-1000s','jpg')
+        %saveas(f_est,'plots/plot-compare-[100,100,100]-1279-1000s-pseudo.jpg','jpg')
         %------------
         
 %         for asd=1:3

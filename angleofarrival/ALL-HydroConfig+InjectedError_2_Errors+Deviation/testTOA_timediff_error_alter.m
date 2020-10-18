@@ -47,11 +47,11 @@ ri = [0.02  0.02   0      0;
 %       0    0    -e     e;
 %       0    0.1  -e    -e];
 
-% %%1502
-% ri = [0.1  0.4   0.4   0.4;
-%       0    0.1   -e    -e ;
-%       0    0     e     -e];
-%   
+%%1502
+ri = [0.1  0.4   0.4   0.4;
+      0    0.1   -e    -e ;
+      0    0     e     -e];
+  
 % %%%1248
 % ri = [0.1  0.2   0.2   0.2;
 %       0    0.1   -e    -e ;
@@ -72,7 +72,7 @@ t_elevation_rad = t_elevation_deg *(pi/180); % elevation values in radians
 
 %--------------------------------------------------------------------------
 
-norm = [1]; % norm values to be tested (row)
+norm = [1000]; % norm values to be tested (row)
 
 count = 1;     % size of vector s +1
 count_sph = 1; % size of vector spherical +1
@@ -112,7 +112,7 @@ end
 for i=1:n_samples
     
     %call function to obtain estimated cartesian and spherical coordinates
-    [R,a,azimuth,elevation,norm] = testTOA_pseudorange(s(:,i), ri, 0.5e-6);
+    [R,a,azimuth,elevation,norm] = testTOA_timediff(s(:,i), ri, 0.5e-6);
     
     %calculate real cartesian coordinates
     real_r = s(:,i)-a;

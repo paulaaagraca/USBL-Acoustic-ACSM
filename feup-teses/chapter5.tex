@@ -125,7 +125,7 @@ The estimator considers a USBL system composed by four sensors whose positions a
 \label{eq:toa-planewave}
 \end{eqnarray}
 
-Due to the considered approximation to the plane wavefront, it is possible to calculate the range estimation, $\rho$, as a mean all propagation times multiplied by the sound speed, $c_s$, as in equation (\ref{eq:range-planewave}). The $N$ represents the number of hydrophones.
+Due to the considered approximation to the plane wavefront, it is possible to estimate the range, $\rho$, as a mean all propagation times multiplied by the sound speed, $c_s$, as in equation (\ref{eq:range-planewave}). The $N$ represents the number of hydrophones.
 
 \begin{eqnarray}
 & \rho = c_s\ \frac{1}{N} \displaystyle\sum_{i=1}^{N} t_{i} - t_0
@@ -225,7 +225,7 @@ The FIM can be associated with a physical meaning, more specifically an uncertai
 	\label{eq:det-sphere}
 \end{eqnarray}
 
-In a further analysis, the uncertainty ellipsoid is calculated using (\ref{eq:det-ellip}). The squared eigenvalues of the inverse of the FIM indicate the length of each of the three ellipsoid axis and the eigenvectors specify the direction of each axis. An eigenvector that is associated with the smaller eigenvalue indicates the direction in which there is less uncertainty and, equivalently, an eigenvector whose eigenvalue is the larger represents the direction in which there is the biggest uncertainty. Consequently, the goal in this case is to minimize the uncertainty ellipsoid axis that corresponds to the maximum uncertainty.
+In a further analysis, the length of the axis of the uncertainty ellipsoid are calculated using (\ref{eq:det-ellip}). The squared eigenvalues of the inverse of the FIM indicate the length of each of the three ellipsoid axis and the eigenvectors specify the direction of each axis. An eigenvector that is associated with the smaller eigenvalue indicates the direction in which there is less uncertainty and, equivalently, an eigenvector whose eigenvalue is the larger represents the direction in which there is the biggest uncertainty. Consequently, the goal in this case is to minimize the uncertainty ellipsoid axis that corresponds to the maximum uncertainty.
 
 \begin{eqnarray}
 	& u_{ellipsoid}(d) = \sqrt[2]{eig(I(d)^{-1})}
@@ -261,7 +261,7 @@ Throughout the functional demonstrations, three different hydrophone configurati
 			& 0.1 & -0.1  & 0 & 0 & 0.1 & -0.1  & 0 & 0 & 0 & 0.1 & -0.0707  & -0.0707\\
 			\bottomrule 
 		\end{tabular}
-		\caption{Hydrophone configurations used for accuracy tests}
+		\caption{Hydrophone configurations used for precision tests}
 		\label{tab:configs_test1}
 	\end{center}
 \end{table}
@@ -273,7 +273,7 @@ In order to evaluate the performance of the configurations for the different met
 	
 	To illustrate a scenario where these estimators are applicable, we can consider that a vehicle is moving towards an acoustic signal transmitter whose position is unknown. Imagining that the target is at a minimum of few meters, then the main focus is to achieve an optimal bearing estimation which provides a more direct path and saves resources. The range estimation serves as secondary measurement that indicates how near the vehicle is from the destination, so that it is possible to make control decisions such as moderate the navigation speed in the proximity of the target. For the reasons outlined, the study that follows presents a more thorough analysis of the azimuth and elevation errors. 
 	
-	For testing both estimators, a methodology was formulated in order to evaluate the accuracy that they achieve in defined circumstances. This approach is a Monte Carlo algorithm which allows to reiterate the estimation process according to the number of positions that are intended to be tested for a specific configuration, as well as create a series of repetitive calculations that allow to deduce the estimation error and turn the overall process more robust.
+	For testing both estimators, a methodology was formulated in order to evaluate the precision that they achieve in defined circumstances. This approach is a Monte Carlo algorithm which allows to reiterate the estimation process according to the number of positions that are intended to be tested for a specific configuration, as well as create a series of repetitive calculations that allow to deduce the estimation error and turn the overall process more robust.
 	%-------------
 	The algorithm can be described as follows. For every defined position of the acoustic source, $s$, a function, that consists on the estimator, is called receiving as input the $s$, the positions of the hydrophone configuration, $r_i$, and an injected error $e_i$ of $0.5 \mu s$, that affects the ToA as detailed in \ref{sec:premises}. It then returns the estimated position of the source in Cartesian coordinates, $s_{cart}(x,y,z)$, and in spherical coordinates, $s_{sph}(n, \phi, \theta)$. As the position $s$ in Cartesian corresponds to the real value that is intended to be estimated, we can also obtain the real spherical coordinates by directly converting $s$ using the Cartesian to spherical relations in (\ref{eq:cart2sph}).
 	
@@ -319,26 +319,27 @@ For the SS simulation, configuration C is used and the estimated position is $s_
 
 As can be observed, the estimate dispersion obtained with GBE demonstrates a larger deviation in norm estimation than the other methods, of about $4m$. Additionally, it is observed in the front view an azimuth deviation of approximately $2.3^{\circ}$ and an elevation deviation of approximately $1.2^{\circ}$.
 
-The PWE presents the estimate dispersion along a spherical surface, as expected since the method computes an average range. The norm estimation presents no significant deviation and the azimuth and elevation estimates show a similar dispersion as GBE.
-
-The FIM plot presents the expected uncertainty axis obtained for the specific position estimation. From the three methods it presents the smallest uncertainty in all three coordinates, with a deviation of $0.21^{\circ}$ in azimuth and $0.16^{\circ}$ in elevation.
-
 \begin{figure}[!htbp]
-	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{figures/plot-compare-[100,0,0]-1279-1000s-estimA}}
+	\makebox[\textwidth][c]{\includegraphics[width=1.4\textwidth]{figures/plot-compare-[100,0,0]-1279-1000s-estimA}}
 	\captionsetup{justification=centering,margin=2cm}
 	\caption{Estimate dispersion obtained with GBE for position $s_{cart}(100,0,0)$ using configuration C}
 	\label{fig:SS-estimA-C-100,0,0}
 \end{figure}
 
+The PWE presents the estimate dispersion along a spherical surface, as expected since the method computes an average range. The norm estimation presents no significant deviation and the azimuth and elevation estimates show a similar dispersion as GBE.
+
 \begin{figure}[!htbp]
-	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{figures/plot-compare-[100,0,0]-1279-1000s-pseudorange}}
+	\makebox[\textwidth][c]{\includegraphics[width=1.4\textwidth]{figures/plot-compare-[100,0,0]-1279-1000s-pseudorange}}
 	\captionsetup{justification=centering,margin=2cm}
 	\caption{Estimate dispersion obtained with PWE for position $s_{cart}(100,0,0)$ using configuration C}
 	\label{fig:SS-estimB-C-100,0,0}
 \end{figure}
 
+The FIM plot presents the expected uncertainty axis obtained for the specific position estimation. From the three methods it presents the smallest uncertainty in all three coordinates, with a deviation of $0.21^{\circ}$ in azimuth and $0.16^{\circ}$ in elevation.
+
+
 \begin{figure}[!htbp]
-	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{figures/plot-fim-[100,0,0]-C}}
+	\makebox[\textwidth][c]{\includegraphics[width=1.4\textwidth]{figures/plot-fim-[100,0,0]-C}}
 	\captionsetup{justification=centering,margin=2cm}
 	\caption{Estimate dispersion obtained with FIM for position $s_{cart}(100,0,0)$ using configuration C}
 	\label{fig:SS-fim-C-100,0,0}
@@ -467,7 +468,7 @@ Tables  \ref{tab:tdoa-estimator-abc}, \ref{tab:planewave-estimator-abc} and \ref
 	\end{center}
 \end{table}
 
-By inspection, it is possible to observe that for both the GBE and PWE, the maximum deviations are considerably distant from the standard deviation, which correspond to positions in space with elevation values around $-90^{\circ}$ and $90^{\circ}$ where it is achieved the worse estimation precision. Furthermore, while the minimum deviations in both estimators are similar, the PWE reveals much larger maximum errors since there are regions of space for which its localization accuracy is much lower. 
+By inspection, it is possible to observe that for both the GBE and PWE, the maximum deviations are considerably distant from the standard deviation, which correspond to positions in space with elevation values around $-90^{\circ}$ and $90^{\circ}$ where it is achieved the worse estimation precision. Furthermore, while the minimum deviations in both estimators are similar, the PWE reveals much larger maximum errors since there are regions of space for which its localization precision is much lower. 
 
 Regarding the PWE, it should also be noted that the obtained standard deviations for short range of $1m$ are visibly higher than for long range of $1000m$, as expected since the approximation to the plane wavefront is only valid for long distances.
 
@@ -475,7 +476,7 @@ Finally, as the Crámer-Rao lower bound contemplates the best possible estimatio
 
 \subsection{Behavioral Analysis}
 
-Having analyzed the performance of the studied methods, there are still two factors that can be explored in order to further understand its impact on the estimation accuracy.  The first idea explores the impact of the the ToA measurement on the position estimation and the second studies the influence of an increasing baseline of the geometric configuration on the estimation accuracy.
+Having analyzed the performance of the studied methods, there are still two factors that can be explored in order to further understand its impact on the estimation precision.  The first idea explores the impact of the the ToA measurement on the position estimation and the second studies the influence of an increasing baseline of the geometric configuration on the estimation precision.
 
 \subsubsection{Impact of ToA measurement on position estimation}
 
@@ -536,6 +537,6 @@ This section focuses on three selected methodologies that are capable of evaluat
 
 From the presented methods, it is expected that for short range estimation, distances from few centimeters to few meters,  the GBE presents estimates that are more approximated to the real value than the PWE, since it uses the geometric relations between the hydrophone and the transmitter in order to estimate the position. Contrarily, for long range estimations, distances higher than a few meters, the PWE is expected to achieve lower estimation errors than the GBE, since it is a linear system and the approximation it considers does not affect the estimation.
 
-Lastly, as the FIM reflects the quantity of information that a configuration is capable of acquiring in relation to a specific position, then it can be directly related to the accuracy of the estimation. The Crámer-Rao lower bound, which is intrinsically linked to the FIM, assumes the use of any unbiased and efficient estimator, which makes it a more generic tool. Consequently, it is widely used in literature for sensor configuration's performance analysis. 
+Lastly, as the FIM reflects the quantity of information that a configuration is capable of acquiring in relation to a specific position, then it can be directly related to the precision of the estimation. The Crámer-Rao lower bound, which is intrinsically linked to the FIM, assumes the use of any unbiased and efficient estimator, which makes it a more generic tool. Consequently, it is widely used in literature for sensor configuration's performance analysis. 
 
 In conclusion, due to the generality of the tool, the FIM is considered the most efficient tool for this application (\textbf{RQ1}). 

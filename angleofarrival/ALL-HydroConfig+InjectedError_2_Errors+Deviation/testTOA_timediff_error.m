@@ -13,7 +13,7 @@ clear
 %---test options-----------------------------------------------------------
 plot_position_cloud = 0;    % plot 3D source positions
 plot_error_cartesian = 0;   % plot error in cartesian coordinates
-plot_error_spherical = 0;   % plot error in spherical coordinates
+plot_error_spherical = 1;   % plot error in spherical coordinates
 plot_error3d_azimuth = 0;   % plot error of azimuth per azimuth(x) and elevation(y)
 plot_error3d_elevation = 0; % plot error of elevation per azimuth(x) and elevation(y)
 %--------------------------------------------------------------------------
@@ -135,7 +135,7 @@ for i=1:n_samples
     
     for k=1:10
         %call function to obtain estimated cartesian and spherical coordinates
-        [R,a,azimuth,elevation,norm] = testTOA_pseudorange(s(:,i), ri, 0.5e-6);
+        [R,a,azimuth,elevation,norm] = testTOA_timediff(s(:,i), ri, 0.5e-6);
 
             
         %calculate real cartesian coordinates

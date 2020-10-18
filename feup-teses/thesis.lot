@@ -1,22 +1,21 @@
 \babel@toc {english}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Overview of commercial solutions\relax }}{19}{table.caption.18}% 
+\contentsline {table}{\numberline {2.1}{\ignorespaces Overview of commercial solutions\relax }}{23}{table.caption.24}% 
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Hilbert filter control unit settings for each processed sample with $c_a = 0.23932$ and $c_b = 0.62610$\relax }}{35}{table.caption.30}% 
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Hydrophone configurations used for precision tests\relax }}{46}{table.caption.33}% 
+\contentsline {table}{\numberline {4.2}{\ignorespaces Obtained errors for configurations A,B and C by GBE\relax }}{51}{table.caption.37}% 
+\contentsline {table}{\numberline {4.3}{\ignorespaces Obtained errors for configurations A,B and C using PWE\relax }}{51}{table.caption.38}% 
+\contentsline {table}{\numberline {4.4}{\ignorespaces Obtained errors for configurations A,B and C by Cr\IeC {\'a}mer-Rao lower bound\relax }}{51}{table.caption.39}% 
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Hydrophones with line of sight for several $s$ positions\relax }}{62}{table.caption.47}% 
+\contentsline {table}{\numberline {5.2}{\ignorespaces Position coordinates for the implementation using 9 hydrophones\relax }}{63}{table.caption.48}% 
+\contentsline {table}{\numberline {5.3}{\ignorespaces Additional coordinates for an implementation with 25 hydrophones\relax }}{72}{table.caption.55}% 
+\contentsline {table}{\numberline {5.4}{\ignorespaces Results of Monte Carlo simulation for range based estimation using GBE\relax }}{74}{table.caption.58}% 
+\contentsline {table}{\numberline {5.5}{\ignorespaces Results of Monte Carlo simulation for range based estimation using PWE\relax }}{74}{table.caption.59}% 
+\contentsline {table}{\numberline {5.6}{\ignorespaces Results of FIM simulation for range based estimation\relax }}{75}{table.caption.60}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Hilbert filter control unit settings for each processed sample with $c_a = 0.23932$ and $c_b = 0.62610$\relax }}{37}{table.caption.30}% 
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Hydrophone configurations used for accuracy tests\relax }}{48}{table.caption.33}% 
-\contentsline {table}{\numberline {5.2}{\ignorespaces Obtained errors for configurations A,B and C by GBE\relax }}{52}{table.caption.37}% 
-\contentsline {table}{\numberline {5.3}{\ignorespaces Obtained errors for configurations A,B and C using PWE\relax }}{53}{table.caption.38}% 
-\contentsline {table}{\numberline {5.4}{\ignorespaces Obtained errors for configurations A,B and C by Cr\IeC {\'a}mer-Rao lower bound\relax }}{53}{table.caption.39}% 
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces Hydrophones with line of sight for several $s$ positions\relax }}{64}{table.caption.47}% 
-\contentsline {table}{\numberline {6.2}{\ignorespaces Position coordinates for the implementation using 9 hydrophones\relax }}{65}{table.caption.48}% 
-\contentsline {table}{\numberline {6.3}{\ignorespaces Additional coordinates for an implementation with 25 hydrophones\relax }}{73}{table.caption.55}% 
-\contentsline {table}{\numberline {6.4}{\ignorespaces Results of Monte Carlo simulation for range based estimation using GBE\relax }}{75}{table.caption.58}% 
-\contentsline {table}{\numberline {6.5}{\ignorespaces Results of Monte Carlo simulation for range based estimation using PWE\relax }}{75}{table.caption.59}% 
-\contentsline {table}{\numberline {6.6}{\ignorespaces Results of FIM simulation for range based estimation\relax }}{77}{table.caption.60}% 
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces Configurations for the Monte Carlo approach with 9 employed hydrophones\relax }}{83}{table.A.1}% 
+\contentsline {table}{\numberline {A.1}{\ignorespaces Configurations for the Monte Carlo approach with 9 employed hydrophones\relax }}{81}{table.A.1}% 

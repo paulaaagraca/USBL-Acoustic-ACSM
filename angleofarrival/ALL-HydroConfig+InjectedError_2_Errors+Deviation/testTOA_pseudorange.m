@@ -29,7 +29,7 @@ t0 = 0;
     % USBL's position
     s = [0 0 0]';
 
-for j=1:100  
+for j=1:1  
     
     % Times of arrival
     ti = zeros(4,1);

@@ -1,4 +1,4 @@
-%function [best_rad_view_ind,diff_radius_myvsfisher] = config_gen_fisher(s, ind_best_config)
+cle%function [best_rad_view_ind,diff_radius_myvsfisher] = config_gen_fisher(s, ind_best_config)
 %--------------------------------------------------------------------------
 % Description: 
 %--------------------------------------------------------------------------

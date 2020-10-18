@@ -2,80 +2,79 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}% 
 \contentsline {section}{\numberline {1.1}Context and Motivation}{1}{section.1.1}% 
 \contentsline {section}{\numberline {1.2}Objectives}{2}{section.1.2}% 
-\contentsline {section}{\numberline {1.3}Document Structure}{2}{section.1.3}% 
-\contentsline {chapter}{\numberline {2}State of the Art}{5}{chapter.2}% 
-\contentsline {section}{\numberline {2.1}Underwater Acoustic Channel}{5}{section.2.1}% 
-\contentsline {subsection}{\numberline {2.1.1}Speed of Sound}{6}{subsection.2.1.1}% 
-\contentsline {subsection}{\numberline {2.1.2}Multipath}{6}{subsection.2.1.2}% 
-\contentsline {paragraph}{Shallow water paths}{7}{section*.9}% 
-\contentsline {paragraph}{Deep water paths}{8}{section*.11}% 
-\contentsline {subsection}{\numberline {2.1.3}Doppler Effect}{8}{subsection.2.1.3}% 
-\contentsline {subsection}{\numberline {2.1.4}Attenuation and Signal-to-Noise Ratio}{9}{subsection.2.1.4}% 
-\contentsline {section}{\numberline {2.2}Underwater Localization}{10}{section.2.2}% 
-\contentsline {subsection}{\numberline {2.2.1}Range Estimation}{10}{subsection.2.2.1}% 
-\contentsline {subsubsection}{\numberline {2.2.1.1}Received Signal Strength Indicator}{10}{subsubsection.2.2.1.1}% 
-\contentsline {subsubsection}{\numberline {2.2.1.2}Time Delay Estimation}{11}{subsubsection.2.2.1.2}% 
-\contentsline {paragraph}{Time of Arrival}{11}{section*.12}% 
-\contentsline {paragraph}{Time of Flight}{11}{section*.13}% 
-\contentsline {paragraph}{Time Difference of Arrival}{11}{section*.14}% 
-\contentsline {subsection}{\numberline {2.2.2}Estimation-Based Localization}{13}{subsection.2.2.2}% 
-\contentsline {subsubsection}{\numberline {2.2.2.1}Triangulation}{13}{subsubsection.2.2.2.1}% 
-\contentsline {subsubsection}{\numberline {2.2.2.2}Lateration}{14}{subsubsection.2.2.2.2}% 
-\contentsline {section}{\numberline {2.3}Underwater Acoustic Positioning Systems}{15}{section.2.3}% 
-\contentsline {subsection}{\numberline {2.3.1}Long Baseline (LBL) and Short Baseline (SBL)}{15}{subsection.2.3.1}% 
-\contentsline {subsection}{\numberline {2.3.2}Ultra-Short Baseline (USBL)}{17}{subsection.2.3.2}% 
-\contentsline {section}{\numberline {2.4}Commercial Solutions}{18}{section.2.4}% 
-\contentsline {section}{\numberline {2.5}Optimization of Sensor Configurations}{19}{section.2.5}% 
-\contentsline {subsection}{\numberline {2.5.1}Cr\IeC {\'a}mer-Rao Lower Bound}{20}{subsection.2.5.1}% 
-\contentsline {subsection}{\numberline {2.5.2}Optimal Design and Optimality Criteria}{21}{subsection.2.5.2}% 
-\contentsline {subsubsection}{\numberline {2.5.2.1}A-optimality}{22}{subsubsection.2.5.2.1}% 
-\contentsline {subsubsection}{\numberline {2.5.2.2}D-optimality}{22}{subsubsection.2.5.2.2}% 
-\contentsline {subsubsection}{\numberline {2.5.2.3}E-optimality}{22}{subsubsection.2.5.2.3}% 
-\contentsline {subsection}{\numberline {2.5.3}Particle Swarm Optimization}{23}{subsection.2.5.3}% 
-\contentsline {chapter}{\numberline {3}Research Problem}{25}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}Problem Statement}{25}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}Assumptions}{27}{section.3.2}% 
-\contentsline {paragraph}{Number of sensors}{27}{section*.20}% 
-\contentsline {paragraph}{Synchronism}{27}{section*.21}% 
-\contentsline {paragraph}{Noise characteristics}{27}{section*.22}% 
-\contentsline {paragraph}{Reference axis}{28}{section*.23}% 
-\contentsline {paragraph}{Propagation speed}{28}{section*.24}% 
-\contentsline {section}{\numberline {3.3}Hypothesis and Research Questions}{28}{section.3.3}% 
-\contentsline {section}{\numberline {3.4}Validation Methods}{28}{section.3.4}% 
-\contentsline {chapter}{\numberline {4}Digital Signal Processing }{31}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}TDoA Estimation}{31}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}HDL Module Architecture}{33}{section.4.2}% 
-\contentsline {subsection}{\numberline {4.2.1}Module Components}{34}{subsection.4.2.1}% 
-\contentsline {subsubsection}{\numberline {4.2.1.1}Hilbert Filter}{35}{subsubsection.4.2.1.1}% 
-\contentsline {subsubsection}{\numberline {4.2.1.2}CORDIC}{37}{subsubsection.4.2.1.2}% 
-\contentsline {subsubsection}{\numberline {4.2.1.3}Phase Difference}{38}{subsubsection.4.2.1.3}% 
-\contentsline {subsubsection}{\numberline {4.2.1.4}Mean Phase}{38}{subsubsection.4.2.1.4}% 
-\contentsline {subsection}{\numberline {4.2.2}Implementation Results}{38}{subsection.4.2.2}% 
-\contentsline {section}{\numberline {4.3}Doppler Effect}{38}{section.4.3}% 
-\contentsline {chapter}{\numberline {5}Sensor Configuration Performance Evaluation}{41}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Geometry based Position Estimator}{42}{section.5.1}% 
-\contentsline {section}{\numberline {5.2}Plane Wavefront based Position Estimator}{44}{section.5.2}% 
-\contentsline {section}{\numberline {5.3}Fisher Information Matrix}{46}{section.5.3}% 
-\contentsline {section}{\numberline {5.4}Performance Comparison Between Methods}{48}{section.5.4}% 
-\contentsline {subsection}{\numberline {5.4.1}SS Analysis}{50}{subsection.5.4.1}% 
-\contentsline {subsection}{\numberline {5.4.2}BS Analysis}{50}{subsection.5.4.2}% 
-\contentsline {subsection}{\numberline {5.4.3}Behavioral Analysis}{54}{subsection.5.4.3}% 
-\contentsline {subsubsection}{\numberline {5.4.3.1}Impact of ToA measurement on position estimation}{54}{subsubsection.5.4.3.1}% 
-\contentsline {subsubsection}{\numberline {5.4.3.2}Influence of increasing the configuration baseline}{54}{subsubsection.5.4.3.2}% 
-\contentsline {subsubsection}{\numberline {5.4.3.3} Conclusions on behavioral analysis}{55}{subsubsection.5.4.3.3}% 
-\contentsline {section}{\numberline {5.5}Final Remarks}{56}{section.5.5}% 
-\contentsline {chapter}{\numberline {6}Adaptive Configuration Selection Method}{59}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}Line of Sight Definition}{59}{section.6.1}% 
-\contentsline {subsection}{\numberline {6.1.1}Practical Evaluation of the Line of Sight Regions}{62}{subsection.6.1.1}% 
-\contentsline {section}{\numberline {6.2}Monte Carlo Approach}{64}{section.6.2}% 
-\contentsline {section}{\numberline {6.3}Performance Comparison between Geometric Configurations }{68}{section.6.3}% 
-\contentsline {subsection}{\numberline {6.3.1}SS Analysis}{68}{subsection.6.3.1}% 
-\contentsline {subsection}{\numberline {6.3.2}BS Analysis}{73}{subsection.6.3.2}% 
-\contentsline {section}{\numberline {6.4}Summary and Discussion}{78}{section.6.4}% 
-\contentsline {chapter}{\numberline {7}Conclusions}{79}{chapter.7}% 
-\contentsline {section}{\numberline {7.1}Summary}{79}{section.7.1}% 
-\contentsline {section}{\numberline {7.2}Contributions }{81}{section.7.2}% 
-\contentsline {section}{\numberline {7.3}Future Work}{81}{section.7.3}% 
-\contentsline {chapter}{\numberline {A}Complementary Information}{83}{appendix.A}% 
-\contentsline {section}{\numberline {A.1}Hydrophone configurations numeration}{83}{section.A.1}% 
-\contentsline {chapter}{References}{87}{section*.61}% 
+\contentsline {section}{\numberline {1.3}Research Problem}{2}{section.1.3}% 
+\contentsline {subsection}{\numberline {1.3.1}Assumptions}{4}{subsection.1.3.1}% 
+\contentsline {paragraph}{Number of sensors}{4}{section*.9}% 
+\contentsline {paragraph}{Synchronism}{5}{section*.10}% 
+\contentsline {paragraph}{Noise characteristics}{5}{section*.11}% 
+\contentsline {paragraph}{Reference axis}{5}{section*.12}% 
+\contentsline {paragraph}{Propagation speed}{5}{section*.13}% 
+\contentsline {subsection}{\numberline {1.3.2}Hypothesis and Research Questions}{5}{subsection.1.3.2}% 
+\contentsline {subsection}{\numberline {1.3.3}Validation Methods}{6}{subsection.1.3.3}% 
+\contentsline {section}{\numberline {1.4}Document Structure}{6}{section.1.4}% 
+\contentsline {chapter}{\numberline {2}State of the Art}{9}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Underwater Acoustic Channel}{9}{section.2.1}% 
+\contentsline {subsection}{\numberline {2.1.1}Speed of Sound}{10}{subsection.2.1.1}% 
+\contentsline {subsection}{\numberline {2.1.2}Multipath}{10}{subsection.2.1.2}% 
+\contentsline {paragraph}{Shallow water paths}{11}{section*.15}% 
+\contentsline {paragraph}{Deep water paths}{12}{section*.17}% 
+\contentsline {subsection}{\numberline {2.1.3}Doppler Effect}{12}{subsection.2.1.3}% 
+\contentsline {subsection}{\numberline {2.1.4}Attenuation and Signal-to-Noise Ratio}{13}{subsection.2.1.4}% 
+\contentsline {section}{\numberline {2.2}Underwater Localization}{14}{section.2.2}% 
+\contentsline {subsection}{\numberline {2.2.1}Range Estimation}{14}{subsection.2.2.1}% 
+\contentsline {subsubsection}{\numberline {2.2.1.1}Received Signal Strength Indicator}{14}{subsubsection.2.2.1.1}% 
+\contentsline {subsubsection}{\numberline {2.2.1.2}Time Delay Estimation}{15}{subsubsection.2.2.1.2}% 
+\contentsline {paragraph}{Time of Arrival}{15}{section*.18}% 
+\contentsline {paragraph}{Time of Flight}{15}{section*.19}% 
+\contentsline {paragraph}{Time Difference of Arrival}{15}{section*.20}% 
+\contentsline {subsection}{\numberline {2.2.2}Estimation-Based Localization}{17}{subsection.2.2.2}% 
+\contentsline {subsubsection}{\numberline {2.2.2.1}Triangulation}{17}{subsubsection.2.2.2.1}% 
+\contentsline {subsubsection}{\numberline {2.2.2.2}Lateration}{18}{subsubsection.2.2.2.2}% 
+\contentsline {section}{\numberline {2.3}Underwater Acoustic Positioning Systems}{19}{section.2.3}% 
+\contentsline {subsection}{\numberline {2.3.1}Long Baseline (LBL) and Short Baseline (SBL)}{19}{subsection.2.3.1}% 
+\contentsline {subsection}{\numberline {2.3.2}Ultra-Short Baseline (USBL)}{21}{subsection.2.3.2}% 
+\contentsline {section}{\numberline {2.4}Commercial Solutions}{22}{section.2.4}% 
+\contentsline {section}{\numberline {2.5}Optimization of Sensor Configurations}{23}{section.2.5}% 
+\contentsline {subsection}{\numberline {2.5.1}Cr\IeC {\'a}mer-Rao Lower Bound}{24}{subsection.2.5.1}% 
+\contentsline {subsection}{\numberline {2.5.2}Optimal Design and Optimality Criteria}{25}{subsection.2.5.2}% 
+\contentsline {subsubsection}{\numberline {2.5.2.1}A-optimality}{26}{subsubsection.2.5.2.1}% 
+\contentsline {subsubsection}{\numberline {2.5.2.2}D-optimality}{26}{subsubsection.2.5.2.2}% 
+\contentsline {subsubsection}{\numberline {2.5.2.3}E-optimality}{26}{subsubsection.2.5.2.3}% 
+\contentsline {subsection}{\numberline {2.5.3}Particle Swarm Optimization}{27}{subsection.2.5.3}% 
+\contentsline {chapter}{\numberline {3}Digital Signal Processing }{29}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}TDoA Estimation}{29}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}HDL Module Architecture}{31}{section.3.2}% 
+\contentsline {subsection}{\numberline {3.2.1}Module Components}{32}{subsection.3.2.1}% 
+\contentsline {subsubsection}{\numberline {3.2.1.1}Hilbert Filter}{33}{subsubsection.3.2.1.1}% 
+\contentsline {subsubsection}{\numberline {3.2.1.2}CORDIC}{35}{subsubsection.3.2.1.2}% 
+\contentsline {subsubsection}{\numberline {3.2.1.3}Phase Difference}{36}{subsubsection.3.2.1.3}% 
+\contentsline {subsubsection}{\numberline {3.2.1.4}Mean Phase}{36}{subsubsection.3.2.1.4}% 
+\contentsline {subsection}{\numberline {3.2.2}Implementation Results}{36}{subsection.3.2.2}% 
+\contentsline {section}{\numberline {3.3}Doppler Effect}{36}{section.3.3}% 
+\contentsline {chapter}{\numberline {4}Sensor Configuration Performance Evaluation}{39}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Geometry based Position Estimator}{40}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}Plane Wavefront based Position Estimator}{42}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}Fisher Information Matrix}{44}{section.4.3}% 
+\contentsline {section}{\numberline {4.4}Performance Comparison Between Methods}{46}{section.4.4}% 
+\contentsline {subsection}{\numberline {4.4.1}SS Analysis}{48}{subsection.4.4.1}% 
+\contentsline {subsection}{\numberline {4.4.2}BS Analysis}{50}{subsection.4.4.2}% 
+\contentsline {subsection}{\numberline {4.4.3}Behavioral Analysis}{52}{subsection.4.4.3}% 
+\contentsline {subsubsection}{\numberline {4.4.3.1}Impact of ToA measurement on position estimation}{52}{subsubsection.4.4.3.1}% 
+\contentsline {subsubsection}{\numberline {4.4.3.2}Influence of increasing the configuration baseline}{52}{subsubsection.4.4.3.2}% 
+\contentsline {subsubsection}{\numberline {4.4.3.3} Conclusions on behavioral analysis}{54}{subsubsection.4.4.3.3}% 
+\contentsline {section}{\numberline {4.5}Final Remarks}{54}{section.4.5}% 
+\contentsline {chapter}{\numberline {5}Adaptive Configuration Selection Method}{57}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Line of Sight Definition}{57}{section.5.1}% 
+\contentsline {subsection}{\numberline {5.1.1}Practical Evaluation of the Line of Sight Regions}{60}{subsection.5.1.1}% 
+\contentsline {section}{\numberline {5.2}Monte Carlo Approach}{62}{section.5.2}% 
+\contentsline {section}{\numberline {5.3}Performance Comparison between Geometric Configurations }{66}{section.5.3}% 
+\contentsline {subsection}{\numberline {5.3.1}SS Analysis}{66}{subsection.5.3.1}% 
+\contentsline {subsection}{\numberline {5.3.2}BS Analysis}{71}{subsection.5.3.2}% 
+\contentsline {section}{\numberline {5.4}Summary and Discussion}{76}{section.5.4}% 
+\contentsline {chapter}{\numberline {6}Conclusions}{77}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Summary}{77}{section.6.1}% 
+\contentsline {section}{\numberline {6.2}Contributions }{79}{section.6.2}% 
+\contentsline {section}{\numberline {6.3}Future Work}{79}{section.6.3}% 
+\contentsline {chapter}{\numberline {A}Complementary Information}{81}{appendix.A}% 
+\contentsline {section}{\numberline {A.1}Hydrophone configurations numeration}{81}{section.A.1}% 
+\contentsline {chapter}{References}{85}{section*.61}% 

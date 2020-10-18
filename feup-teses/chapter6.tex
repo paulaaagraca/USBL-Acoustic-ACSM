@@ -241,7 +241,7 @@ In order to turn this mechanism more robust and solve the first issue, it is con
 		\STATE {\texttt{**************************}}
 		\STATE
 		\STATE $line\_of\_sight(mean\_estimate, matrix_{r_{i}})$
-		\COMMENT{returns which hydrophones have line of sight to the target}
+		\COMMENT{returns which hydrophones have line of sight to the transmitter}
 		\STATE
 		\STATE \texttt{$reit\_mse = reit\_mse + mse$ }
 		\STATE \texttt{$reit\_dev\_azimuth = reit\_error\_azimuth + deviation\_azimuth$ } 
@@ -318,7 +318,7 @@ When running this experiment for the GBE, plot \ref{fig:errors-101010} is obtain
 \end{figure}
 
 \begin{figure}[!htbp]
-	\makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{figures/plot-[10,10,10]-1000s-both}}
+	\makebox[\textwidth][c]{\includegraphics[width=1\textwidth]{figures/plot-[10,10,10]-1000s-both}}
 	\captionsetup{justification=centering,margin=2cm}
 	\caption{Overlaid azimuth and elevation deviations for all configurations when estimating position $s_{cart}(10,10,10)$ using the GBE}
 	\label{fig:both-101010}
@@ -333,8 +333,8 @@ Alternatively, the same experiment was done using the PWE. The results of the si
 	\label{fig:errors-101010-pseudo}
 \end{figure}
 
-\begin{figure}[!htbp]
-	\makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{figures/plot-[10,10,10]-1000s-both-pseudo}}
+\begin{figure}[!h]
+	\makebox[\textwidth][c]{\includegraphics[width=1\textwidth]{figures/plot-[10,10,10]-1000s-both-pseudo}}
 	\captionsetup{justification=centering,margin=2cm}
 	\caption{Overlaid azimuth and elevation deviations when estimating position $s_{cart}(10,10,10)$ using the PWE}
 	\label{fig:both-101010-pseudo}
@@ -351,7 +351,7 @@ Finally, the same experiment was performed using the Crámer-Rao lower bound wit
 
 Upon investigating a specific position, several more individual positions were tested so that it would be possible to understand the behavior of the developed tool and generalize some of its characteristics. The main conclusions are summarized as follows:
 \begin{itemize}
-	\item Configurations that achieve the overall minimum errors tend integrate the LOS hydrophones that attain among the larger distances between them, i.e. larger baseline;
+	\item Configurations that achieve the overall minimum errors tend to integrate the LOS hydrophones that attain among the larger distances between them, i.e. larger baseline;
 	
 	\item Transmitter positions that return a higher number of LOS hydrophones, have more possible configurations to choose from and therefore can be more optimized, presenting the lowest errors;
 	
@@ -467,7 +467,7 @@ Firstly, simulations are performed for the GBE and the collected data is summari
 	\end{center}
 \end{table}
 
-The overall results do not exhibit a specific configuration to be the clear best in short or long range for the chosen parameters. For performance based on azimuth, configuration number 792 shows best results for norms between 1 and 10 meters. However, for longer range the results do not tend to a specific configuration, alternating between essentially three alternatives. Regarding performance based on elevation, configuration 220 is indicated as the best for short range of 1 and 3 meters, while for longer ranges going from 10 to 10000 meters, configuration 260 is the clear nominated. As can be observed in the illustration, these are structurally similar. When evaluating azimuth and elevation accuracy simultaneously or MSE, the results are not clear and many configurations are alternated, where number 827 stands out as the most frequently indicated. Overall, for an increasing norm there is no significant variation on the error magnitude, as expected.
+The overall results do not exhibit a specific configuration to be the clear best in short or long range for the chosen parameters. For performance based on azimuth, configuration number 792 shows best results for norms between 1 and 10 meters. However, for longer range the results do not tend to a specific configuration, alternating between essentially three alternatives. Regarding performance based on elevation, configuration 220 is indicated as the best for short range of 1 and 3 meters, while for longer ranges going from 10 to 10000 meters, configuration 260 is the clear nominated. As can be observed in the illustration, these are structurally similar. When evaluating azimuth and elevation precision simultaneously or MSE, the results are not clear and many configurations are alternated, where number 827 stands out as the most frequently indicated. Overall, for an increasing norm there is no significant variation on the error magnitude, as expected.
 
 Upon analyzing the GBE, a second experiment is run using the PWE. The collected data is summarized in table \ref{tab:montecarlo-best-all-pwe}.
 
@@ -536,7 +536,7 @@ For the third experiment, the Crámer-Rao lower bound is used and the collected 
 			\midrule
 			\multirow{1}{*}{50} & 1502 & 0.303 & 1503 & 0.022 & 1426 & 0.061   \\
 			\midrule
-			\multirow{1}{*}{100} & 1502 & 0.061 & 1503 & 0.034 & 1426 & 0.242 \\
+			\multirow{1}{*}{100} & 1502 & 0.606 & 1503 & 0.034 & 1426 & 0.242 \\
 			\midrule
 			\multirow{1}{*}{200} & 1502 & 1.212 & 1503 & 0.054 & 1426 & 0.968  \\
 			\midrule
@@ -555,16 +555,16 @@ For the third experiment, the Crámer-Rao lower bound is used and the collected 
 By inspection, it is possible to observe that for each criterion there is a clear trend for the selected best configurations for short and long range, contrarily to most metrics of the previous results for GBE and PWE. Therefore, in terms of E-optimality configuration, an approximately constant error of 0.6\% is visible, where number 1248 shows the best performance for short range between 1 and 3 meters, while for long range from 10 to 10000 meters configuration 1502 is indicated. For D-optimality, a single configuration, number 1503, was considered the best for all defined ranges, which corresponds to an hydrophone placement that maximizes the baseline as illustrated in \ref{fig:config-images}. Finally, in terms of A-optimality configuration number 600 is indicated for norm equal to 1 meters and, for the remaining ranges, number 1426 is chosen as the best option.
 
 As mentioned before, the FIM method is considered the most reliable method, as it does not depend on the selected estimator, and the results it presents demonstrate the most coherent configuration selection since it is a deterministic approach.
-It should be noticed that for all obtained results configuration number 1426 is coincident between the PWE and the FIM simulations, which leads to believe that it comprises favorable characteristics to an increased localization accuracy. However, as the E-optimality optimizes a more relevant optimization criteria, it is expected that configuration number 1502 demonstrates even better results. 
+It should be noticed that for all obtained results configuration number 1426 is coincident between the PWE and the FIM simulations, which leads to believe that it comprises favorable characteristics to an increased localization precision. However, as the E-optimality optimizes a more relevant optimization criteria, it is expected that configuration number 1502 demonstrates even better results. 
 
 
 \section{Summary and Discussion}
 
-This chapter focuses on presenting the formulated adaptive configuration selection method, whose goal is to establish the sensor configuration that leads to the best estimation precision for a specific target position. After analyzing the results, it has proven to provide improved estimation accuracy by always selecting a configuration with line of sight to the target that achieves the lower estimation error. 
+This chapter focuses on presenting the formulated adaptive configuration selection method, whose goal is to establish the sensor configuration that leads to the best estimation precision for a specific target position. After analyzing the results, it has proven to provide improved estimation precision by always selecting a configuration with line of sight to the target that achieves the lower estimation error. 
 
 An adaptation to this method is also explored in \ref{subsec:bs-2}, whose goal is to select the sensor configuration that achieves the average best estimation for any target position along a sphere of defined norm. This allows to define optimal configurations based on the range, as demonstrated through simulations. As observed previously, the results of the Crámer-Rao lower bound demonstrate distinct optimal configurations for each optimality criteria in both short and long range. 
 
-This mechanism could be applied to a data muling scenario, as established in chapter \ref{chap:intro}. If a discrete set of hydrophones are deployed in an mule AUV, then it is possible to adapt the selected configuration depending on the perceived angle of arrival in real-time. This would allow to always use the configuration that leads to the lower estimation error and thus improve the localization accuracy. 
+This mechanism could be applied to a data muling scenario, as established in chapter \ref{chap:intro}. If a discrete set of hydrophones are deployed in an mule AUV, then it is possible to adapt the selected configuration depending on the perceived angle of arrival in real-time. This would allow to always use the configuration that leads to the lower estimation error and thus improve the localization precision. 
 
 Additionally, in a scenario where it is only relevant to have an average best estimation for both short and long range positions, then two configurations could be selected to be deployed. From the simulation results, considering the E-optimality as the most relevant criterion for this application, we can deduce that, for short range estimation, configuration number 1248 would be optimal, whereas, for long range, number 1502 would be preferred (\textbf{RQ4}).
 

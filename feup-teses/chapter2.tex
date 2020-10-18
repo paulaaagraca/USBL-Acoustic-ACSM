@@ -187,17 +187,21 @@ Considering two distanced hydrophones in the same environment and an acoustic si
 
 In order to determine the time delay, $\tau$, between signals, the cross-correlation function can be calculated as (\ref{eq:cc-def}). The estimate of the time delay between two signals, $\tau$, is given by $arg max_{\ t\in R^+} Rx_1x_2(\tau)$, which represents the maximum correlation value and it is the main outcome of Time Delay Estimation. 
 
-\begin{eqnarray}
-&R_{x_1x_2}(\tau) = E[x_1(t) \ x_2(t- \tau)]
+\begin{equation}
+	\mbox{\large\( %
+	R_{x_1x_2}(\tau) = E[x_1(t) \ x_2(t- \tau)]
+	\)} %
 \label{eq:cc-def}
-\end{eqnarray}
+\end{equation}
 
 However, since the observation time is finite then function $R_{x_1x_2}$ can only be estimated, originating equation (\ref{eq:cc-def-estim}) where $T$ expresses the observation interval.
 
-\begin{eqnarray}
-&\widehat R_{x_1x_2}(\tau) = \frac{1}{T - \tau} \ \mathlarger{\int_{\tau}^{T} x_1(t)x_2(t - \tau)} dt
+\begin{equation}
+	\mbox{\large\( %
+	\widehat R_{x_1x_2}(\tau) = \frac{1}{T - \tau} \ \mathlarger{\int_{\tau}^{T} x_1(t)x_2(t - \tau)} dt
+	\)} %
 \label{eq:cc-def-estim}
-\end{eqnarray}
+\end{equation}
 	
 There are two main variations of CC \cite{crosscorr}, which are the slow cross-correlation in the  time domain, as before mentioned, and the fast cross-correlation in the frequency domain, which is based on the Fast Fourier Transform as it locates the peak by analyzing frequency similarities between the signals. 
 	
@@ -208,12 +212,20 @@ After presenting the cross-correlation method, it is easier to understand the Ge
 
 Then the GCC between $x_1(t)$ and $x_2(t)$ is given by (\ref{eq:gcc3}), where the $G_{x_1x_2}(f)$ represents the cross power spectrum between the filter inputs. 
 
-\begin{eqnarray}
-	& R_{y_1y_2}(\tau) = \int_{-\infty}^{\infty} \psi(f) G_{x_1x_2}(f)\ e^{i2\pi f\tau} df
-	\label{eq:gcc3}\\
-	& \psi(f) = H_1(f)H_2^*(f)
-	\label{eq:gcc4}	
-\end{eqnarray}
+\begin{equation}
+	\mbox{\large\( %
+	R_{y_1y_2}(\tau) = \int_{-\infty}^{\infty} \psi(f) G_{x_1x_2}(f)\ e^{i2\pi f\tau} df
+	\)} %
+	\label{eq:gcc3}
+\end{equation}
+
+
+\begin{equation}% 
+	\mbox{\large\( %
+		\psi(f) = H_1(f)H_2^*(f) %
+		\)} %
+		\label{eq:gcc4}	
+\end{equation}
 
 The function $\psi(f)$ (\ref{eq:gcc4}), with $*$ denoting the complex conjugate, represents the prefilter and it is essentially the distinctive parameter that originate different methods of cross-correlation, since it should depend on different environments and properties, as SNR. The CC technique uses a prefilter $\psi(f)$ equal to 1, being the simplest method of its kind.
 
@@ -222,10 +234,17 @@ The function $\psi(f)$ (\ref{eq:gcc4}), with $*$ denoting the complex conjugate,
 
 The Maximum Likelihood (ML) method is a variation of Cross-Correlation which uses the prefilter $\psi(f)$ represented mathematically by (\ref{eq:ml1}), where $\gamma_{12}(f)$ is a function of spectrum of cross-correlation $G_{x1x2}(f)$ and spectrum of auto-correlations $G_{x1x1}(f)$, $G_{x2x2}(f)$ as expressed in (\ref{eq:ml2}) \cite{crosscorr}.
 
+\begin{equation}
+	\mbox{\Large\( %
+\psi(f) = \frac{|\gamma_{12}(f)|^2}{|G_{x1x2}(f)|[1-|\gamma_{12}(f)|^2]}
+	\)} %
+\label{eq:ml1} 
+\end{equation}
+
 \begin{eqnarray}
-& \psi(f) = \frac{|\gamma_{12}(f)|^2}{|G_{x1x2}(f)|[1-|\gamma_{12}(f)|^2]}
-\label{eq:ml1} \\
-& |\gamma_{12}(f)|^2 = \frac{|G_{x1x2}(f)|^2}{G_{x1x11}(f) . G_{x1x11}(f)]}
+	\mbox{\Large\( %
+	|\gamma_{12}(f)|^2 = \frac{|G_{x1x2}(f)|^2}{G_{x1x11}(f) . G_{x1x11}(f)]}
+	\)} %
 \label{eq:ml2} 
 \end{eqnarray}
 
@@ -311,7 +330,7 @@ Long Baseline systems use a positioning method with large distances between base
 
 Short Baseline systems are characterized by having distances around $20m$ to $50m$ between baseline stations \cite{survey-tech-chall} and uses transponders usually placed in a moving platform, assuring fixed relative position between them. A typical SBL configuration is represented in illustration b) of \ref{fig:lblsblusbl} \cite{leassquare-lbl}.
 
-For both LBL and SBL, a complete localization procedure starts with the vehicle sending an acoustic signal which is received by the transponders. Thereafter the transponders transmit a response and, by analyzing the Time of Flight of the communication,it is possible to determine the distance between the vehicle and each transponder. Then the relative position of the vehicle is determined through trilateration. Considering $t_{i}$ the propagation time of the signal from the vehicle to the \textit{i}th transponder, $c_s$ the speed of sound and ($x_{b_{i}}$, $y_{b_{i}}$, $z_{b_{i}}$) as the coordinate position of the transponder, then equation (\ref{eq:sbl}) \cite{sbl} expresses the position of the vehicle. Additionally, if the transponders have known geographic positions, it is possible to infer the vehicle's absolute geographic position. 
+For both LBL and SBL, a complete localization procedure starts with the vehicle sending an acoustic signal which is received by the transponders. Thereafter, the transponders transmit a response and, by analyzing the Time of Flight of the communication, it is possible to determine the distance between the vehicle and each transponder. Then the relative position of the vehicle is determined through trilateration. Considering $t_{i}$ the propagation time of the signal from the vehicle to the \textit{i}th transponder, $c_s$ the speed of sound and ($x_{b_{i}}$, $y_{b_{i}}$, $z_{b_{i}}$) as the coordinate position of the transponder, then equation (\ref{eq:sbl}) \cite{sbl} expresses the position of the vehicle. Additionally, if the transponders have known geographic positions, it is possible to infer the vehicle's absolute geographic position. 
 
 \begin{eqnarray}
 	&\sqrt{ (x_{b_{i}}-x)^2 + (y_{b_{i}}-y)^2 + (z_{b_{i}}-z)^2 } = c_s\ *\ t_{i}
@@ -350,7 +369,7 @@ The \textit{d} represents the distance between hydrophones, $\psi_{12}$ and $\ps
 	\label{fig:usblgeo}
 \end{figure}
 
-This is a broadly used technique due to its convenient set up, which allows to have predefined measurements in the order of tens of centimeters and does not require the deployment of support infrastructures in the intended navigation area of the target AUV. However, since the USBL is based on bearing determination it needs high accuracy in order to achieve efficient localization estimations.. 
+This is a broadly used technique due to its convenient set up, which allows to have predefined measurements in the order of tens of centimeters and does not require the deployment of support infrastructures in the intended navigation area of the target AUV. However, since the USBL is based on bearing determination it needs high accuracy in order to achieve efficient localization estimations.
 
 
 %\subsection{Inverted Systems}
